@@ -1,0 +1,415 @@
+---
+title: "test1"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r db-connection}
+get_db_conn <-
+  function(db_name = "sdad",
+           db_host = "localhost",
+           db_port = "5434",
+           db_user = Sys.getenv("db_usr"),
+           db_pass = Sys.getenv("db_pwd")) {
+    RPostgreSQL::dbConnect(
+      drv = RPostgreSQL::PostgreSQL(),
+      dbname = db_name,
+      host = db_host,
+      port = db_port,
+      user = db_user,
+      password = db_pass
+    )
+  }
+con <- get_db_conn()
+```
+
+
+
+```{r columns-tables-ids}
+library(glue)
+# deed columns to test
+PI <- glue_sql("property_indicator")
+C1 <- glue_sql("pri_cat_code")
+SA <- glue_sql("sale_amount")
+SD <- glue_sql("sale_date_yyyymmdd")
+TT <- glue_sql("transaction_type")
+SC <- glue_sql("sale_code")
+C2 <- glue_sql("deed_sec_cat_codes_2x10")
+YB <- glue_sql("year_built")
+YE <- glue_sql("effective_year_built")
+BS <- glue_sql("building_square_feet")
+VS <- glue_sql("living_square_feet")
+GS <- glue_sql("gross_square_feet")
+LA <- glue_sql("acres")
+LS <- glue_sql("land_square_footage")
+BD <- glue_sql("bedrooms")
+TB <- glue_sql("total_baths")
+RY <- glue_sql("recording_year")
+BK <- glue_sql("blockce")
+QB <- glue_sql("qtr_baths")
+HB <- glue_sql("half_baths")
+FB <- glue_sql("full_baths")
+BF <- glue_sql("building_square_feet")
+LF <- glue_sql("living_square_feet")
+GF <- glue_sql("gross_square_feet")
+
+TBL1 <- glue_sql("corelogic_usda.corelogic_usda_deed_2020_06_27_blockce")
+TBL2 <- glue_sql("corelogic_usda.corelogic_usda_deed_2020_06_27_sale")
+TBL3 <- glue_sql("corelogic_usda.corelogic_usda_deed_2020_06_27_prop")
+TBL4 <- glue_sql("corelogic_usda.corelogic_usda_deed_2020_06_27_bldg")
+TBL5 <- glue_sql("corelogic_usda.corelogic_usda_current_tax_2020_06_27_max_baths")
+
+# JOIN IDs
+JN_ID1 <- glue_sql("fips")
+JN_ID2 <- glue_sql("pcl_id_iris_formatted")
+JN_ID3 <- glue_sql("recording_year")
+JN_ID4 <- glue_sql("fips_code")
+JN_ID5 <- glue_sql("p_id_iris_frmtd")
+```
+
+```{r build-query}
+# JOIN STATEMENTS
+JN_TBL1_TBL2 <- glue_sql(TBL1, " JOIN ", TBL2, " ON ",
+                         TBL1, ".", JN_ID1, " = ", TBL2, ".", JN_ID1, " AND ", 
+                         TBL1, ".", JN_ID2, " = ", TBL2, ".", JN_ID2)
+JN_TBL1_TBL3 <- glue_sql(" JOIN ", TBL3, " ON ",
+                         TBL1, ".", JN_ID1, " = ", TBL3, ".", JN_ID1, " AND ", 
+                         TBL1, ".", JN_ID2, " = ", TBL3, ".", JN_ID2, " AND ",
+                         TBL2, ".", JN_ID3, " = ", TBL3, ".", JN_ID3)
+JN_TBL1_TBL4 <- glue_sql(" JOIN ", TBL4, " ON ",
+                         TBL1, ".", JN_ID1, " = ", TBL4, ".", JN_ID1, " AND ", 
+                         TBL1, ".", JN_ID2, " = ", TBL4, ".", JN_ID2, " AND ",
+                         TBL3, ".", JN_ID3, " = ", TBL4, ".", JN_ID3)
+JN_TBL1_TBL5 <- glue_sql(" JOIN ", TBL5, " ON ",
+                         TBL1, ".", JN_ID1, " = ", TBL5, ".", JN_ID4, " AND ", 
+                         TBL1, ".", JN_ID2, " = ", TBL5, ".", JN_ID5)
+
+JN_TBL1_TBL2_TBL3_TBL4 <- glue_sql("(((", JN_TBL1_TBL2, ")", JN_TBL1_TBL3, ")", JN_TBL1_TBL4, ")", JN_TBL1_TBL5)
+
+ST <- "5101%"
+FP <- "51013"
+
+Q1 <- glue_sql(
+  "SELECT
+  {TBL1}.{JN_ID1},
+  {TBL2}.{RY},
+  'SA,SD,TT|SC,C2,LA|LS,YB|YE,BF|LF|GF,BD,TB|QB|HB|FB' vars, 
+  COUNT(*) have_all
+  -- {TBL1}.{JN_ID2},
+  -- {TBL1}.{BK},
+  -- {TBL2}.{SA},
+  -- {TBL2}.{SC},
+  -- {TBL2}.{SD},
+  -- {TBL2}.{TT},
+  -- {TBL2}.{C1},
+  -- {TBL2}.{C2},
+  -- {TBL3}.{AC},
+  -- {TBL3}.{LS},
+  -- {TBL3}.{PI},
+  -- {TBL4}.{YB},
+  -- {TBL4}.{YE},
+  -- {TBL4}.{BD},
+  -- {TBL4}.{TB}
+  FROM {JN_TBL1_TBL2_TBL3_TBL4}
+  WHERE
+  {TBL1}.{JN_ID1} LIKE {ST}
+  -- Single Family Residence / Townhouse
+  AND {TBL3}.{PI} = '10'
+  -- Arms Length Transaction
+  AND {TBL2}.{C1} = 'A'
+  -- Recording Year
+  AND {TBL2}.{RY} IN (2012,2013,2104,2015,2016,2017,2018,2019)
+  -- Sale Amount
+  AND {TBL2}.{SA} <> '\"\"'
+  -- Sale date
+  AND {TBL2}.{SD} <> '\"\"'
+  -- Transaction Categories
+  AND ({TBL2}.{TT} <> '' OR {TBL2}.{SC} <> '\"\"')
+  AND {TBL2}.{C2} <> '\"\"'
+  -- Land Size
+  AND ({TBL3}.{LA} <> '\"\"' OR {TBL3}.{LS} <> '\"\"')
+  -- Year Built
+  AND ({TBL4}.{YB} <> '\"\"' OR {TBL4}.{YE} <> '\"\"')
+  -- House Size
+  AND ({TBL4}.{BF} <> '\"\"' OR {TBL4}.{LF} <> '\"\"' OR {TBL4}.{GF} <> '\"\"')
+  -- Bedrooms
+  AND {TBL4}.{BD} <> '\"\"'
+  -- Bathrooms
+  AND ({TBL4}.{TB} <> '\"\"' OR {TBL5}.{QB} IS NOT NULL OR {TBL5}.{HB} IS NOT NULL OR {TBL5}.{FB} IS NOT NULL)
+  GROUP BY
+  {TBL1}.{JN_ID1},
+  {TBL2}.{RY}
+  ORDER BY
+  {TBL1}.{JN_ID1},
+  {TBL2}.{RY}",
+  .con = con
+)
+```
+
+```{r run-query}
+library(RPostgreSQL)
+
+R1 <- dbGetQuery(con, Q1)
+
+```
+
+
+```{sql connection=con}
+SELECT a.fips, a.pcl_id_iris_formatted, a.blockce,
+        b.sale_amount, b.sale_code, b.sale_date_yyyymmdd sale_date, b.recording_year, b.transaction_type, b.pri_cat_code, b.deed_sec_cat_codes_2x10,
+        c.acres, c.land_square_footage, c.property_indicator,
+        d.year_built, d.effective_year_built, d.bedrooms, d.total_baths
+ FROM 
+       ((corelogic_usda.corelogic_usda_deed_2020_06_27_blockce a
+         JOIN corelogic_usda.corelogic_usda_deed_2020_06_27_sale b ON a.fips = b.fips AND a.pcl_id_iris_formatted = b.pcl_id_iris_formatted)
+           JOIN corelogic_usda.corelogic_usda_deed_2020_06_27_prop c ON a.fips = c.fips AND a.pcl_id_iris_formatted = c.pcl_id_iris_formatted)
+             JOIN corelogic_usda.corelogic_usda_deed_2020_06_27_bldg d ON a.fips = d.fips AND a.pcl_id_iris_formatted = d.pcl_id_iris_formatted
+             
+SELECT *
+FROM corelogic_usda.corelogic_usda_deed_2020_06_27_sale sale
+JOIN corelogic_usda.corelogic_usda_deed_2020_06_27_prop prop
+  ON sale.fips = prop.fips
+ AND sale.pcl_id_iris_formatted = prop.pcl_id_iris_formatted
+ AND sale.recording_year = prop.recording_year
+```
+
+
+
+
+```{sql connection=con, output.var = "SA,SD,TT,SCorC1,C2,LAorLS,BDorBA"}
+SELECT LEFT(blockce, 5) fipsco, recording_year, 'SA,SD,TT,SCorC1,C2,LAorLS,BDorBA' vars, count(*) have_all
+ FROM (
+ SELECT a.fips, a.pcl_id_iris_formatted, a.blockce,
+        b.sale_amount, b.sale_code, b.sale_date_yyyymmdd sale_date, b.recording_year, b.transaction_type, b.pri_cat_code, b.deed_sec_cat_codes_2x10,
+        c.acres, c.land_square_footage, c.property_indicator,
+        d.year_built, d.effective_year_built, d.bedrooms, d.total_baths
+ FROM 
+       ((corelogic_usda.corelogic_usda_deed_2020_06_27_blockce a
+         JOIN corelogic_usda.corelogic_usda_deed_2020_06_27_sale b ON a.fips = b.fips AND a.pcl_id_iris_formatted = b.pcl_id_iris_formatted)
+           JOIN corelogic_usda.corelogic_usda_deed_2020_06_27_prop c ON a.fips = c.fips AND a.pcl_id_iris_formatted = c.pcl_id_iris_formatted)
+             JOIN corelogic_usda.corelogic_usda_deed_2020_06_27_bldg d ON a.fips = d.fips AND a.pcl_id_iris_formatted = d.pcl_id_iris_formatted
+
+ WHERE (a.fips LIKE '51%' OR a.fips LIKE '19%')
+  AND (
+       (b.recording_year = 2017 AND c.recording_year = 2017 AND d.recording_year = 2017)
+       OR
+       (b.recording_year = 2016 AND c.recording_year = 2016 AND d.recording_year = 2016)
+       OR
+       (b.recording_year = 2015 AND c.recording_year = 2015 AND d.recording_year = 2015)
+       OR
+       (b.recording_year = 2014 AND c.recording_year = 2014 AND d.recording_year = 2014)
+       OR
+       (b.recording_year = 2013 AND c.recording_year = 2014 AND d.recording_year = 2013)
+      )
+  -- AND c.recording_year = 2016
+  -- AND d.recording_year = 2016
+ ) t
+ WHERE property_indicator = '"10"' AND pri_cat_code = '"A"' AND sale_amount != '""' AND sale_date != '""' AND transaction_type != '""' AND (pri_cat_code != '""' OR sale_code != '""') AND deed_sec_cat_codes_2x10 != '""'
+   AND (acres != '' OR land_square_footage != '') AND property_indicator != '""' AND (bedrooms != '""' OR total_baths != '""')
+ GROUP BY LEFT(blockce, 5), recording_year
+ ORDER BY LEFT(blockce, 5), recording_year
+```
+
+```{sql connection=con, output.var = "counties"}
+SELECT "GEOID" as geoid, "NAME" as name FROM corelogic_usda.counties WHERE "GEOID" LIKE '51%' OR "GEOID" LIKE '19%'
+```
+
+
+```{r}
+library(data.table)
+dt1 <- setDT(get('SA,SD,TT,SCorC1,C2,LAorLS,BDorBA'))
+dt2 <- setDT(counties)
+dt3 <- merge(dt2, dt1, by.x = "geoid", by.y = "fipsco", all.x = TRUE)
+#dt4 <- dt3[!is.na(recording_year),]
+
+
+wd <- dcast(dt3, name + geoid + vars ~ recording_year, value.var = "have_all")
+wd$vars <- 'SA,SD,TT,SCorC1,C2,LAorLS,BDorBA'
+wd$"NA" <- NULL
+```
+
+```{sql connection=con, output.var = "SA,SD,TT,SC,C1,C2,LA,LS,BD,BA"}
+SELECT LEFT(blockce, 5) fipsco, recording_year, 'SA,SD,TT,SC,C1,C2,LA,LS,BD,BA' vars, count(*) have_all
+FROM (
+SELECT a.fips, a.pcl_id_iris_formatted, a.blockce,
+       b.sale_amount, b.sale_code, b.sale_date_yyyymmdd sale_date, b.recording_year, b.transaction_type, b.pri_cat_code, b.deed_sec_cat_codes_2x10,
+       c.acres, c.land_square_footage, c.property_indicator,
+       d.year_built, d.effective_year_built, d.bedrooms, d.total_baths
+FROM ((corelogic_usda.corelogic_usda_deed_2020_06_27_blockce a
+        JOIN corelogic_usda.corelogic_usda_deed_2020_06_27_sale b ON a.fips = b.fips AND a.pcl_id_iris_formatted = b.pcl_id_iris_formatted)
+          JOIN corelogic_usda.corelogic_usda_deed_2020_06_27_prop c ON a.fips = c.fips AND a.pcl_id_iris_formatted = c.pcl_id_iris_formatted)
+            JOIN corelogic_usda.corelogic_usda_deed_2020_06_27_bldg d ON a.fips = d.fips AND a.pcl_id_iris_formatted = d.pcl_id_iris_formatted
+WHERE (a.fips LIKE '51%' OR a.fips LIKE '19%')
+ AND (
+      (b.recording_year = 2017 AND c.recording_year = 2017 AND d.recording_year = 2017) 
+      OR
+      (b.recording_year = 2016 AND c.recording_year = 2016 AND d.recording_year = 2016) 
+      OR
+      (b.recording_year = 2015 AND c.recording_year = 2015 AND d.recording_year = 2015)
+      OR
+      (b.recording_year = 2014 AND c.recording_year = 2014 AND d.recording_year = 2014)
+      OR
+      (b.recording_year = 2013 AND c.recording_year = 2014 AND d.recording_year = 2013)
+     )
+ -- AND c.recording_year = 2016
+ -- AND d.recording_year = 2016
+) t
+WHERE property_indicator = '"10"' AND pri_cat_code = '"A"' AND sale_amount != '""' AND sale_date != '""' AND transaction_type != '""' AND pri_cat_code != '""' AND sale_code != '""' AND deed_sec_cat_codes_2x10 != '""'
+  AND acres != '' AND land_square_footage != '' AND property_indicator != '""' AND bedrooms != '""' AND total_baths != '""'
+GROUP BY LEFT(blockce, 5), recording_year
+ORDER BY LEFT(blockce, 5), recording_year
+```
+
+```{r}
+library(data.table)
+dt1 <- setDT(get('SA,SD,TT,SC,C1,C2,LA,LS,BD,BA'))
+dt2 <- setDT(counties)
+dt3 <- merge(dt2, dt1, by.x = "geoid", by.y = "fipsco", all.x = TRUE)
+
+
+wd2 <- dcast(dt3, name + geoid + vars ~ recording_year, value.var = "have_all")
+wd2$vars <- 'SA,SD,TT,SC,C1,C2,LA,LS,BD,BA'
+wd2$"NA" <- NULL
+```
+
+```{sql connection=con, output.var = "SA,SD,TT,SCorC1,C2,LAorLS,BD,BA"}
+SELECT LEFT(blockce, 5) fipsco, recording_year, 'SA,SD,TT,SCorC1,C2,LAorLS,BD,BA' vars, count(*) have_all
+FROM (
+SELECT a.fips, a.pcl_id_iris_formatted, a.blockce,
+       b.sale_amount, b.sale_code, b.sale_date_yyyymmdd sale_date, b.recording_year, b.transaction_type, b.pri_cat_code, b.deed_sec_cat_codes_2x10,
+       c.acres, c.land_square_footage, c.property_indicator,
+       d.year_built, d.effective_year_built, d.bedrooms, d.total_baths
+FROM ((corelogic_usda.corelogic_usda_deed_2020_06_27_blockce a
+        JOIN corelogic_usda.corelogic_usda_deed_2020_06_27_sale b ON a.fips = b.fips AND a.pcl_id_iris_formatted = b.pcl_id_iris_formatted)
+          JOIN corelogic_usda.corelogic_usda_deed_2020_06_27_prop c ON a.fips = c.fips AND a.pcl_id_iris_formatted = c.pcl_id_iris_formatted)
+            JOIN corelogic_usda.corelogic_usda_deed_2020_06_27_bldg d ON a.fips = d.fips AND a.pcl_id_iris_formatted = d.pcl_id_iris_formatted
+WHERE (a.fips LIKE '51%' OR a.fips LIKE '19%')
+ AND (
+      (b.recording_year = 2017 AND c.recording_year = 2017 AND d.recording_year = 2017) 
+      OR
+      (b.recording_year = 2016 AND c.recording_year = 2016 AND d.recording_year = 2016) 
+      OR
+      (b.recording_year = 2015 AND c.recording_year = 2015 AND d.recording_year = 2015)
+      OR
+      (b.recording_year = 2014 AND c.recording_year = 2014 AND d.recording_year = 2014)
+      OR
+      (b.recording_year = 2013 AND c.recording_year = 2014 AND d.recording_year = 2013)
+     )
+ -- AND c.recording_year = 2016
+ -- AND d.recording_year = 2016
+) t
+WHERE property_indicator = '"10"' AND pri_cat_code = '"A"' AND sale_amount != '""' AND sale_date != '""' AND transaction_type != '""' AND (pri_cat_code != '""' OR sale_code != '""') AND deed_sec_cat_codes_2x10 != '""'
+  AND (acres != '' OR land_square_footage != '') AND property_indicator != '""' AND bedrooms != '""' AND total_baths != '""'
+GROUP BY LEFT(blockce, 5), recording_year
+ORDER BY LEFT(blockce, 5), recording_year
+```
+
+```{r}
+library(data.table)
+dt1 <- setDT(get('SA,SD,TT,SCorC1,C2,LAorLS,BD,BA'))
+dt2 <- setDT(counties)
+dt3 <- merge(dt2, dt1, by.x = "geoid", by.y = "fipsco", all.y = TRUE)
+
+
+wd3 <- dcast(dt3, name + geoid + vars ~ recording_year, value.var = "have_all")
+wd3$vars <- 'SA,SD,TT,SCorC1,C2,LAorLS,BD,BA'
+wd3$"NA" <- NULL
+```
+
+```{r}
+res <- rbindlist(list(wd, wd3))
+res$"NA" <- NULL
+setorder(res, name, vars)
+res
+```
+
+```{sql connection=con, output.var='tot_cnts'}
+SELECT LEFT(blockce, 5) fips, recording_year, count(*) tot
+FROM (
+SELECT a.fips, a.pcl_id_iris_formatted, a.blockce,
+       b.sale_amount, b.sale_code, b.sale_date_yyyymmdd sale_date, b.recording_year, b.transaction_type, b.pri_cat_code, b.deed_sec_cat_codes_2x10,
+       c.acres, c.land_square_footage, c.property_indicator,
+       d.year_built, d.effective_year_built, d.bedrooms, d.total_baths
+FROM ((corelogic_usda.corelogic_usda_deed_2020_06_27_blockce a
+        JOIN corelogic_usda.corelogic_usda_deed_2020_06_27_sale b ON a.fips = b.fips AND a.pcl_id_iris_formatted = b.pcl_id_iris_formatted)
+          JOIN corelogic_usda.corelogic_usda_deed_2020_06_27_prop c ON a.fips = c.fips AND a.pcl_id_iris_formatted = c.pcl_id_iris_formatted)
+            JOIN corelogic_usda.corelogic_usda_deed_2020_06_27_bldg d ON a.fips = d.fips AND a.pcl_id_iris_formatted = d.pcl_id_iris_formatted
+WHERE (a.fips LIKE '51%' OR a.fips LIKE '19%')
+ AND (
+      (b.recording_year = 2017 AND c.recording_year = 2017 AND d.recording_year = 2017) 
+      OR
+      (b.recording_year = 2016 AND c.recording_year = 2016 AND d.recording_year = 2016) 
+      OR
+      (b.recording_year = 2015 AND c.recording_year = 2015 AND d.recording_year = 2015)
+      OR
+      (b.recording_year = 2014 AND c.recording_year = 2014 AND d.recording_year = 2014)
+      OR
+      (b.recording_year = 2013 AND c.recording_year = 2014 AND d.recording_year = 2013)
+     )
+ -- AND c.recording_year = 2016
+ -- AND d.recording_year = 2016
+) t
+WHERE property_indicator = '"10"' AND pri_cat_code = '"A"'
+GROUP BY LEFT(blockce, 5), recording_year
+ORDER BY LEFT(blockce, 5), recording_year
+```
+
+```{r}
+dt <- setDT(tot_cnts)
+tot_sales <- dcast(dt, fips ~ recording_year, value.var = "tot")
+setnames(tot_sales, c("2013", "2014", "2015", "2016", "2017"), c("sales2013", "sales2014", "sales2015", "sales2016", "sales2017"))
+tot_sales
+```
+
+```{r}
+fin <- merge(res, tot_sales, by.x = "geoid", by.y = "fips", all.x = TRUE)
+fin[, pct2013 := round(get("2013")/sales2013, 2)]
+fin[, pct2014 := round(get("2014")/sales2014, 2)]
+fin[, pct2015 := round(get("2015")/sales2015, 2)]
+fin[, pct2016 := round(get("2016")/sales2016, 2)]
+fin[, pct2017 := round(get("2017")/sales2017, 2)]
+
+setcolorder(fin, neworder = c("geoid", "name", "vars", "2013", "sales2013", "pct2013", "2014", "sales2014", "pct2014", "2015", "sales2015", "pct2015", "2016", "sales2016", "pct2016", "2017", "sales2017", "pct2017"))
+
+setnames(fin, c("geoid", "name", "vars", "2013", "sales2013", "pct2013", "2014", "sales2014", "pct2014", "2015", "sales2015", "pct2015", "2016", "sales2016", "pct2016", "2017", "sales2017", "pct2017"), c("geoid", "name", "vars", "allvar13", "sales13", "pct13", "allvar14", "sales14", "pct14", "allvar15", "sales15", "pct15", "allvar16", "sales16", "pct16", "allvar17", "sales17", "pct17"))
+
+fin
+```
+
+```{r}
+RPostgreSQL::dbWriteTable(con, name = c("corelogic_usda", "variable_combinations"), value = fin, overwrite = TRUE, row.names = FALSE)
+```
+
+
+```{r}
+# library(DT)
+# 
+# dt <- DT::datatable(fin,
+#               rownames = FALSE,
+#               caption = 'Table 1: This is a simple caption for the table.')
+# 
+# library(pixiedust)
+# dust(fin)%>%
+#   sprinkle_colnames(name = "County Name",
+#                             geoid = "County FIPS") %>%
+#           sprinkle(rotate_degree = -45,
+#                    height = 70,
+#                    height_units = "pt",
+#                    part = "head") %>%
+#           sprinkle(pad = 3) %>%
+#           medley_bw() %>%
+#           print(asis = FALSE) %>%
+#           shiny::HTML()
+# 
+# library(kableExtra)
+# kbl(fin) %>%
+#   kable_paper("striped", full_width = F) %>%
+#   row_spec(0, hline_after = T, extra_css = "transform-origin: 0 80; transform:rotate(-90deg); height: 200px;") %>% 
+#   save_kable(file = "table1.html", self_contained = T)
+
+
+```
+
