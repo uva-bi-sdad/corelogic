@@ -1,0 +1,1245 @@
+starting worker pid=95055 on localhost:11255 at 08:39:52.543
+starting worker pid=95056 on localhost:11255 at 08:39:52.591
+starting worker pid=95057 on localhost:11255 at 08:39:52.638
+starting worker pid=95058 on localhost:11255 at 08:39:52.685
+starting worker pid=95059 on localhost:11255 at 08:39:52.733
+starting worker pid=95060 on localhost:11255 at 08:39:52.781
+starting worker pid=95061 on localhost:11255 at 08:39:52.829
+starting worker pid=95062 on localhost:11255 at 08:39:52.877
+starting worker pid=95063 on localhost:11255 at 08:39:52.926
+starting worker pid=95069 on localhost:11255 at 08:39:52.974
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xac"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xab"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xag"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xae"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xaf"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xak"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xah"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xaj"
+[1][1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xai"
+ "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xad"
+|--------------------------------------------------|
+|=|--------------------------------------------------|
+||--------------------------------------------------|
+|=|--------------------------------------------------|
+|==|--------------------------------------------------|
+||--------------------------------------------------|
+|======|--------------------------------------------------|
+|==========|--------------------------------------------------|
+|=========|--------------------------------------------------|
+|===========================|--------------------------------------------------|
+|======================================================================================================================================================================================================================================================================================================================================================================================|
+=========|
+=========|
+=======|
+=[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xac"
+[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xak"
+====[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xad"
+======[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xab"
+========================|
+==|
+=====|
+=|
+=|
+=|
+[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xae"
+[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xag"
+[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xah"
+[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xaf"
+[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xai"
+[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xaj"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xal"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xam"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xan"
+|--------------------------------------------------|
+|====[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xao"
+==[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xap"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xaq"
+========|--------------------------------------------------|
+|=====|--------------------------------------------------|
+|=============[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xar"
+===========[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xas"
+=|--------------------------------------------------|
+|=======[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xat"
+=====|--------------------------------------------------|
+|==============================================|--------------------------------------------------|
+|[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xau"
+==================================================|--------------------------------------------------|
+|===========================|--------------------------------------------------|
+|===|--------------------------------------------------|
+|===========================================|
+==============================|--------------------------------------------------|
+|================[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xal"
+=======|
+=======================================[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xam"
+==================================|
+==================|
+========|
+====[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xao"
+==========[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xap"
+===[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xan"
+=================================================================================|
+=====|
+=========[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xaq"
+=|
+==|
+==[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xas"
+==[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xar"
+=[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xat"
+===|
+[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xau"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xav"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xaw"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xax"
+|--------------------------------------------------|
+|======[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xay"
+=======|--------------------------------------------------|
+|==============|--------------------------------------------------|
+|====================================[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xaz"
+==|--------------------------------------------------|
+|===========[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xba"
+=====[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbb"
+====================================================|
+=[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbc"
+==========|--------------------------------------------------|
+|========[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xav"
+========|--------------------------------------------------|
+|=====[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbd"
+=====[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbe"
+==========|
+======|--------------------------------------------------|
+|==================[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xaw"
+=============|
+=======|--------------------------------------------------|
+|==============[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xax"
+=========================|--------------------------------------------------|
+|=====|--------------------------------------------------|
+|=================================================================================================|
+=============================[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xay"
+=============================|
+=========|
+===============================================|
+=[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xaz"
+=======[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xba"
+==[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbb"
+==|
+========|
+[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbc"
+[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbe"
+=|
+[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbd"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbf"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbg"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbh"
+|--------------------------------------------------|
+|===|--------------------------------------------------|
+|==|--------------------------------------------------|
+|=======================================================================================================================|
+========|
+====[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbf"
+=[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbi"
+[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbh"
+=============|
+[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbg"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbj"
+|--------------------------------------------------|
+|==[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbk"
+|--------------------------------------------------|
+|====================================|--------------------------------------------------|
+|=[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbl"
+============[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbm"
+====================|--------------------------------------------------|
+|================[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbn"
+====================================|
+===|--------------------------------------------------|
+|======|--------------------------------------------------|
+|=========[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbi"
+==========================|
+===================[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbj"
+==============================================|
+===========================================[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbo"
+======[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbk"
+===========|
+=====|
+==[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbm"
+=|
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbp"
+[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbn"
+[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbl"
+|--------------------------------------------------|
+|========|--------------------------------------------------|
+|===================================[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbq"
+=======================================|--------------------------------------------------|
+|=[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbr"
+=========================|
+==|
+===|--------------------------------------------------|
+|====[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbo"
+===[1]= "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbp"
+=======================================================|
+[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbq"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbs"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbt"
+=============|--------------------------------------------------|
+|=====================|
+=====|--------------------------------------------------|
+|=[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbr"
+==========================================================================|
+====[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbs"
+==[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbu"
+====|
+[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbt"
+|--------------------------------------------------|
+|==========================================[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbv"
+========|
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbw"
+[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbu"
+|--------------------------------------------------|
+|===|--------------------------------------------------|
+|=========================================================[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbx"
+=======================================|
+=|
+[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbv"
+[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbw"
+|--------------------------------------------------|
+|==================================================|
+[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbx"
+starting worker pid=103441 on localhost:11255 at 08:53:08.919
+starting worker pid=103442 on localhost:11255 at 08:53:08.934
+starting worker pid=103443 on localhost:11255 at 08:53:08.947
+starting worker pid=103444 on localhost:11255 at 08:53:08.960
+starting worker pid=103445 on localhost:11255 at 08:53:08.973
+starting worker pid=103446 on localhost:11255 at 08:53:08.986
+starting worker pid=103450 on localhost:11255 at 08:53:08.999
+starting worker pid=103452 on localhost:11255 at 08:53:09.011
+starting worker pid=103453 on localhost:11255 at 08:53:09.024
+starting worker pid=103458 on localhost:11255 at 08:53:09.036
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbz"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcb"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcc"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xca"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcf"
+[1][1][1][1][1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xce" "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xby" "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcd" "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcg" "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xch"
+
+
+
+
+|--------------------------------------------------|
+|=|--------------------------------------------------|
+||--------------------------------------------------|
+|=|--------------------------------------------------|
+|======|--------------------------------------------------|
+|==|--------------------------------------------------|
+|===|--------------------------------------------------|
+|=====|--------------------------------------------------|
+|==|--------------------------------------------------|
+|=====|--------------------------------------------------|
+|===================================================================================================================================================================================================================================================================================================================================================================================================================================|
+===========|
+================|
+===|
+=====|
+=|
+[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcg"
+=|
+=[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xce"
+===[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xch"
+==[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcd"
+[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcf"
+==[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xbz"
+=|
+=[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xca"
+===[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xby"
+=|
+=====|
+[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcb"
+[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcc"
+[1] TRUE
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xci"
+[1] TRUE
+[1] TRUE
+[1] TRUE
+[1] TRUE
+[1] TRUE
+|--------------------------------------------------|
+|==========================[1] TRUE
+=[1] TRUE
+===[1] TRUE
+===[1] TRUE
+=================|
+[1] "writing /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xci"
+[1] TRUE
+starting worker pid=104547 on localhost:11255 at 08:57:19.200
+starting worker pid=104548 on localhost:11255 at 08:57:19.212
+starting worker pid=104549 on localhost:11255 at 08:57:19.222
+starting worker pid=104550 on localhost:11255 at 08:57:19.232
+starting worker pid=104551 on localhost:11255 at 08:57:19.242
+starting worker pid=104552 on localhost:11255 at 08:57:19.251
+starting worker pid=104553 on localhost:11255 at 08:57:19.260
+starting worker pid=104554 on localhost:11255 at 08:57:19.269
+starting worker pid=104555 on localhost:11255 at 08:57:19.277
+starting worker pid=104556 on localhost:11255 at 08:57:19.286
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xck"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcj"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcl"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcn"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcm"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcp"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xco"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcq"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcr"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcs"
+|--------------------------------------------------|
+||--------------------------------------------------|
+|====|--------------------------------------------------|
+|=|--------------------------------------------------|
+|===|--------------------------------------------------|
+|==|--------------------------------------------------|
+|====|--------------------------------------------------|
+|==|--------------------------------------------------|
+|======|--------------------------------------------------|
+|==========================================|--------------------------------------------------|
+|=========================================================================================================================================================================================================================================================================================================================================================================================================|
+=================|
+========|
+===|
+===|
+=|
+=|
+===|
+=====|
+==|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcp"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xct"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcq"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcu"
+|--------------------------------------------------|
+|===|--------------------------------------------------|
+|==========================================================================================|
+=======|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcn"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcv"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcr"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcw"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcm"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcx"
+|--------------------------------------------------|
+|==[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xck"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcy"
+====|--------------------------------------------------|
+|=============|--------------------------------------------------|
+|=========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcs"
+=[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcz"
+==================================|--------------------------------------------------|
+|=====[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcl"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xda"
+=======[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xco"
+=[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdb"
+=======================================|--------------------------------------------------|
+|============|--------------------------------------------------|
+|=============================|--------------------------------------------------|
+|================|
+============================================================|
+========|
+=======================================|
+============================================================|
+==|
+=========|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcu"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdc"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcj"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdd"
+|--------------------------------------------------|
+|==============|--------------------------------------------------|
+|=======================================================================|
+===============|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcv"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xde"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcz"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdf"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xda"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdg"
+|--------------------------------------------------|
+|==[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcw"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdh"
+==[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcx"
+=[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdi"
+====|--------------------------------------------------|
+|========|--------------------------------------------------|
+|==========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xct"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdj"
+=========|--------------------------------------------------|
+||--------------------------------------------------|
+|===============[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xcy"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdk"
+===[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdb"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdl"
+=======================================================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdc"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdm"
+==============================|--------------------------------------------------|
+|============|--------------------------------------------------|
+|=|--------------------------------------------------|
+|=================================================================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdd"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdn"
+================|--------------------------------------------------|
+|=================================|
+==================================================|
+===|
+=========================|--------------------------------------------------|
+|=======================|
+===========================|
+==========================|
+=============================================|
+=|
+==============|
+====================|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdf"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdo"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdi"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdp"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdl"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdq"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdh"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdr"
+|--------------------------------------------------|
+|====|--------------------------------------------------|
+|============|--------------------------------------------------|
+|=====================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xde"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xds"
+====|--------------------------------------------------|
+|==============================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdn"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdt"
+=====================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdg"
+=[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdu"
+============|--------------------------------------------------|
+|================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdj"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdv"
+==============[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdm"
+===|--------------------------------------------------|
+|==========|--------------------------------------------------|
+|========================|
+===============================|--------------------------------------------------|
+|========================|
+=======================|
+==========|
+====[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdk"
+===================================================================================================|
+=============|
+====================|
+====|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdp"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdq"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdo"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdr"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdv"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xds"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdu"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdt"
+starting worker pid=111425 on localhost:11255 at 09:04:40.562
+starting worker pid=111426 on localhost:11255 at 09:04:40.579
+starting worker pid=111427 on localhost:11255 at 09:04:40.596
+starting worker pid=111428 on localhost:11255 at 09:04:40.612
+starting worker pid=111429 on localhost:11255 at 09:04:40.629
+starting worker pid=111430 on localhost:11255 at 09:04:40.645
+starting worker pid=111431 on localhost:11255 at 09:04:40.662
+starting worker pid=111432 on localhost:11255 at 09:04:40.679
+starting worker pid=111433 on localhost:11255 at 09:04:40.696
+starting worker pid=111434 on localhost:11255 at 09:04:40.711
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdx"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xea"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdw"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xeb"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdy"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdz"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xee"
+[1][1][1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xef"
+ "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xec" "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xed"
+
+|--------------------------------------------------|
+||--------------------------------------------------|
+|=|--------------------------------------------------|
+||--------------------------------------------------|
+||--------------------------------------------------|
+||--------------------------------------------------|
+||--------------------------------------------------|
+||--------------------------------------------------|
+|=========|--------------------------------------------------|
+|=====|--------------------------------------------------|
+|=====================================================================================================================================================================================================================================================================================================================================================================================================================|
+======================================|
+====|
+==============|
+=========|
+=|
+=======|
+===|
+===|
+=|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdw"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xeg"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xea"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xeh"
+|--------------------------------------------------|
+|====[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdx"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xei"
+=============|--------------------------------------------------|
+|=[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdz"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xej"
+========================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xeb"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xek"
+====|--------------------------------------------------|
+|=========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xed"
+=[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xel"
+=====[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xdy"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xem"
+=========================================|
+========|--------------------------------------------------|
+|=======|--------------------------------------------------|
+|===========|--------------------------------------------------|
+|=======================================|
+==========|--------------------------------------------------|
+|=========================================|
+=============================================================================================================|
+================|
+====|
+==[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xec"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xen"
+=|
+|--------------------------------------------------|
+|==================================================|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xek"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xeo"
+|--------------------------------------------------|
+|=========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xej"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xep"
+=====================|--------------------------------------------------|
+|==========================================|
+====[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xel"
+=[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xeq"
+===================|--------------------------------------------------|
+|=======|
+====[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xeh"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xer"
+========================|--------------------------------------------------|
+|=========================================|
+============================|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xem"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xes"
+|--------------------------------------------------|
+|==================================================|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xeq"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xet"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xee"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xeu"
+|--------------------------------------------------|
+|====|--------------------------------------------------|
+|=============[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xei"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xev"
+=============================================================|--------------------------------------------------|
+|===========================|
+========|
+====[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xer"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xew"
+========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xep"
+=[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xex"
+=============|--------------------------------------------------|
+|==========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xeo"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xey"
+=========|--------------------------------------------------|
+|====|
+======================|--------------------------------------------------|
+|======================================================================================|
+==================|
+=========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xen"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xez"
+===|
+|--------------------------------------------------|
+|=======================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xes"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfa"
+========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xev"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfb"
+=======[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xeu"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfc"
+======|--------------------------------------------------|
+|=======|--------------------------------------------------|
+|=========|
+=============[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xet"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfd"
+========|--------------------------------------------------|
+|========================================================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xew"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfe"
+====|--------------------------------------------------|
+|===================================|
+=[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xey"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xff"
+============================|
+========|--------------------------------------------------|
+|=========|--------------------------------------------------|
+|===========================|
+=========================================================|
+=============[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xez"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfg"
+==============================|
+=|
+|--------------------------------------------------|
+|==========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xex"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfh"
+=====================|--------------------------------------------------|
+|========================================|
+=============================|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfb"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfi"
+|--------------------------------------------------|
+|==================================================|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfa"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfj"
+|--------------------------------------------------|
+|=========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfc"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfk"
+========================|--------------------------------------------------|
+|=============================================|
+=====[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfg"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfl"
+=======|--------------------------------------------------|
+|================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfd"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfm"
+======|
+=========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfe"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfn"
+=====|--------------------------------------------------|
+|==|--------------------------------------------------|
+|=====================================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xff"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfo"
+===============================|
+==========|--------------------------------------------------|
+|==============================================|
+=========================================|
+=======|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xeg"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfp"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfk"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfq"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfl"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfr"
+|--------------------------------------------------|
+|======|--------------------------------------------------|
+|================================|--------------------------------------------------|
+|==========================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfm"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfs"
+==========================|--------------------------------------------------|
+|===========================|
+===[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfn"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xft"
+==============|--------------------------------------------------|
+|==============================|
+=================================|
+===================================================|
+==|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfq"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfu"
+|--------------------------------------------------|
+|=========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfh"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfv"
+==============[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xft"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfw"
+===[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfr"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfx"
+=======[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfs"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfi"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfy"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfz"
+==|--------------------------------------------------|
+||--------------------------------------------------|
+|=================|--------------------------------------------------|
+|====================|--------------------------------------------------|
+|===============|
+==========|--------------------------------------------------|
+|================================================================================================================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfo"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xga"
+==================|--------------------------------------------------|
+|============|
+=============|
+=========================|
+====================================|
+======[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfu"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgb"
+====================|
+===========|
+|--------------------------------------------------|
+|==================================================|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfx"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgc"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfj"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgd"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfy"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xge"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfv"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgf"
+|--------------------------------------------------|
+|==|--------------------------------------------------|
+|===|--------------------------------------------------|
+|================|--------------------------------------------------|
+|===========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xef"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgg"
+============================================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfz"
+=[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgh"
+===============|--------------------------------------------------|
+|====================|--------------------------------------------------|
+|================================================================================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xga"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgi"
+=========|
+================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfw"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgj"
+=|
+===============|
+==|--------------------------------------------------|
+|==========|--------------------------------------------------|
+|========================================|
+===================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgb"
+=[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgk"
+====================================|
+==========================================|
+==========|--------------------------------------------------|
+|======|
+=======|
+============================================|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgc"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgl"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgd"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgm"
+|--------------------------------------------------|
+|=====|--------------------------------------------------|
+|======================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgg"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgn"
+=============================|--------------------------------------------------|
+|===============================================|
+===================================|
+============|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgf"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgo"
+|--------------------------------------------------|
+|===================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgh"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgp"
+==========|--------------------------------------------------|
+|================================================|
+==========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgm"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgq"
+===========|--------------------------------------------------|
+|===|
+==================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xge"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgr"
+===========|--------------------------------------------------|
+|================================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgi"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgs"
+=====================================|
+=|
+|--------------------------------------------------|
+|==================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgl"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgt"
+=======|--------------------------------------------------|
+|===========================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgn"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgu"
+================|
+=========|--------------------------------------------------|
+|==========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgo"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgv"
+=============|--------------------------------------------------|
+|=================================================================================|
+========|
+===========|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgr"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgw"
+|--------------------------------------------------|
+|==================================================|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgj"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgx"
+|--------------------------------------------------|
+|==================================================|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgs"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgy"
+|--------------------------------------------------|
+|==================================================|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgq"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgz"
+|--------------------------------------------------|
+|==================================================|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgt"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xha"
+|--------------------------------------------------|
+|==================================================|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgy"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhb"
+|--------------------------------------------------|
+|================================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgp"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhc"
+|--------------------------------------------------|
+|======================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgz"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhd"
+==================|--------------------------------------------------|
+|=|
+==========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgk"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhe"
+=========|--------------------------------------------------|
+|==[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xha"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhf"
+================|--------------------------------------------------|
+|=========================================================================|
+===================|
+====================================|
+============|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgw"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhg"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgv"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhh"
+|--------------------------------------------------|
+|=|--------------------------------------------------|
+|=======================================================================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhb"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhi"
+=[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgx"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhj"
+====|
+====|--------------------------------------------------|
+|===========|--------------------------------------------------|
+|===========================================|
+=========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhd"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhk"
+=======================|--------------------------------------------------|
+|============================================|
+=====[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhc"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhl"
+=======|--------------------------------------------------|
+|========================|
+==========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhf"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhm"
+======[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhe"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhn"
+=======|--------------------------------------------------|
+|========|--------------------------------------------------|
+|===========================================================================|
+========|
+========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhg"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xho"
+=======|--------------------------------------------------|
+|=====[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhh"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhp"
+=====|
+================|--------------------------------------------------|
+|========================================|
+==============|
+=========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhk"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhq"
+======|--------------------------------------------------|
+|=====================================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xfp"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhr"
+=====================|
+=============|--------------------------------------------------|
+|=================|
+=[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhn"
+======================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhl"
+========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xgu"
+=====[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhm"
+=====|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhj"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhp"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xho"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhq"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhr"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhi"
+starting worker pid=131730 on localhost:11255 at 09:26:38.001
+starting worker pid=131731 on localhost:11255 at 09:26:38.016
+starting worker pid=131732 on localhost:11255 at 09:26:38.027
+starting worker pid=131733 on localhost:11255 at 09:26:38.037
+starting worker pid=131734 on localhost:11255 at 09:26:38.046
+starting worker pid=131735 on localhost:11255 at 09:26:38.054
+starting worker pid=131736 on localhost:11255 at 09:26:38.064
+starting worker pid=131737 on localhost:11255 at 09:26:38.072
+starting worker pid=131742 on localhost:11255 at 09:26:38.081
+starting worker pid=131743 on localhost:11255 at 09:26:38.090
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhs"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xht"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhz"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhu"
+[1][1][1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xia"
+ "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhw"
+ "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhv"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhx"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhy"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xib"
+|--------------------------------------------------|
+||--------------------------------------------------|
+|=|--------------------------------------------------|
+||--------------------------------------------------|
+|=|--------------------------------------------------|
+|===========|--------------------------------------------------|
+|=|--------------------------------------------------|
+||--------------------------------------------------|
+|==============|--------------------------------------------------|
+|=======|--------------------------------------------------|
+|=======================================================================================================================================================================================================================================================================================================================================================================================================================================|
+=========|
+========|
+====|
+==========|
+==|
+===|
+===|
+==|
+=|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhz"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xic"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhv"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xid"
+|--------------------------------------------------|
+|==|--------------------------------------------------|
+|=========================================================================================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhy"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xie"
+====[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhw"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xif"
+==|
+===|
+|--------------------------------------------------|
+|========|--------------------------------------------------|
+|============================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhx"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xig"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xia"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xih"
+=========================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhu"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xii"
+====[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xhs"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xij"
+===[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xht"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xik"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xib"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xil"
+=============|--------------------------------------------------|
+|=====|--------------------------------------------------|
+|================|
+=================|--------------------------------------------------|
+|==========|
+===|--------------------------------------------------|
+||--------------------------------------------------|
+|=====|--------------------------------------------------|
+|=======================================================================================================================================================================================================================|
+==|
+===================================|
+=======|
+===|
+=|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xid"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xim"
+|--------------------------------------------------|
+|================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xic"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xin"
+=====================|--------------------------------------------------|
+|===========================|
+=======[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xih"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xio"
+==[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xie"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xip"
+=========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xif"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xiq"
+======|--------------------------------------------------|
+|===|--------------------------------------------------|
+|============================|
+=====|--------------------------------------------------|
+|=========================================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xil"
+=[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xir"
+==[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xii"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xis"
+================================================|--------------------------------------------------|
+|========|--------------------------------------------------|
+|=================|
+========================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xim"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xit"
+==|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xik"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xiu"
+==[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xig"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xiv"
+========================|
+============|--------------------------------------------------|
+|===|--------------------------------------------------|
+|================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xij"
+=[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xiw"
+============|--------------------------------------------------|
+|================================================================|
+===============|
+======|--------------------------------------------------|
+|=========================================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xin"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xix"
+=============================================|
+=========|
+============|--------------------------------------------------|
+|=====|
+==================================|
+=====================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xio"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xiy"
+=======[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xip"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xiz"
+====|
+|--------------------------------------------------|
+|=====|--------------------------------------------------|
+|============================================================================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xiq"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xja"
+================|
+===|
+|--------------------------------------------------|
+|====================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xit"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjb"
+====[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xis"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjc"
+=====[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xiu"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjd"
+==[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xir"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xje"
+===[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xiw"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjf"
+==|--------------------------------------------------|
+|=======|--------------------------------------------------|
+||--------------------------------------------------|
+|=====|--------------------------------------------------|
+|===|--------------------------------------------------|
+|=================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xiv"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjg"
+====================================|
+==================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xix"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjh"
+============|--------------------------------------------------|
+|=================================================================================|--------------------------------------------------|
+|==========================================================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xiz"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xji"
+===[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xiy"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjj"
+==================================================================|
+=====|
+==|
+====|
+=========|
+======|--------------------------------------------------|
+|===|--------------------------------------------------|
+|=================================|
+======================================|
+==============================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xja"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjk"
+=========================|
+===|
+|--------------------------------------------------|
+|=====[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xje"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjl"
+=========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjb"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjm"
+============|--------------------------------------------------|
+|=========|--------------------------------------------------|
+|===============================================================|
+=================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjd"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjn"
+==========================|--------------------------------------------------|
+|======|
+==========|
+=======================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjf"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjo"
+===================|--------------------------------------------------|
+|=|
+================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjl"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjp"
+====[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjm"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjq"
+=============|--------------------------------------------------|
+|========|--------------------------------------------------|
+|=======================================|
+============[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjk"
+=[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjr"
+=======[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjn"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjs"
+=============================|--------------------------------------------------|
+|======|--------------------------------------------------|
+|========================|
+============|
+============================================================================|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjc"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjt"
+===|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjg"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xju"
+|--------------------------------------------------|
+|=============|--------------------------------------------------|
+|==============[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjp"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjv"
+================|--------------------------------------------------|
+|===========================================================|
+========================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjo"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjw"
+====|
+============|--------------------------------------------------|
+|=======================|
+=[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjq"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjx"
+============[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjr"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjy"
+====|--------------------------------------------------|
+|==================|--------------------------------------------------|
+|=============================|
+===============================================================|
+========|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjv"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjz"
+|--------------------------------------------------|
+|==================================================|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xji"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xka"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjw"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkb"
+|--------------------------------------------------|
+|=========|--------------------------------------------------|
+|========================================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjy"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkc"
+===[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjj"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkd"
+==============[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjs"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xke"
+====|--------------------------------------------------|
+|=============|--------------------------------------------------|
+|==============|--------------------------------------------------|
+|===============|
+========================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjz"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkf"
+======================|
+====|--------------------------------------------------|
+|========================================================================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjx"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkg"
+=======================|--------------------------------------------------|
+|===|
+=================|
+==============|
+========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xka"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkh"
+===============|--------------------------------------------------|
+|=================================|
+==========================================|
+===========|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkb"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xki"
+|--------------------------------------------------|
+|========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xju"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkj"
+=====|--------------------------------------------------|
+|===================================================================================|
+====|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xki"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkk"
+|--------------------------------------------------|
+|=====[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkd"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkl"
+===[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkh"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkm"
+==========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjt"
+|--------------------------------------------------|
+|===[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkf"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xko"
+===[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkn"
+===|--------------------------------------------------|
+|======[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xke"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkp"
+====|--------------------------------------------------|
+|=[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkc"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkq"
+=============|--------------------------------------------------|
+|========|--------------------------------------------------|
+|====================================|--------------------------------------------------|
+|====================================================================================================================================|
+========================================================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkj"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkr"
+=====|
+=======================|
+===============|
+=======|
+=====|
+|--------------------------------------------------|
+|===============================|
+===============================|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkg"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xks"
+|--------------------------------------------------|
+|===============[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkp"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkt"
+=======[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkk"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xku"
+=====|--------------------------------------------------|
+|======|--------------------------------------------------|
+|============[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkq"
+=[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkv"
+====[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkn"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkw"
+=============[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkl"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkx"
+===|--------------------------------------------------|
+|====|--------------------------------------------------|
+|==[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xjh"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xky"
+=================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkm"
+=[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkz"
+========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xko"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xla"
+===========[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkr"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xlb"
+=======|--------------------------------------------------|
+|========|--------------------------------------------------|
+|=|--------------------------------------------------|
+|==========|--------------------------------------------------|
+|=======================================================|
+====================================|--------------------------------------------------|
+|=======================================================================|
+==============================================================|
+===============================|
+=====================================================|
+=====|
+==========================================|
+======|
+=|
+===|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkv"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xlc"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xks"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xld"
+|--------------------------------------------------|
+|=====|--------------------------------------------------|
+|=======================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkx"
+=[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xle"
+==============|--------------------------------------------------|
+|========================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xku"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xlf"
+==================|--------------------------------------------------|
+|=============[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xla"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xlg"
+================[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xlb"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xlh"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkz"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xli"
+|--------------------------------------------------|
+|[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkw"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xlj"
+=====[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xkt"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xlk"
+===============|--------------------------------------------------|
+|==============|
+=|--------------------------------------------------|
+|===|--------------------------------------------------|
+|=====[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xky"
+======|--------------------------------------------------|
+|=================================================================================|
+============================================================================================================|
+=====|
+=========|
+=======================|
+===========================|
+=============================|
+=====|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xlk"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xld"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xlc"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xlg"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xlf"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xle"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xlj"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xlh"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/xli"
