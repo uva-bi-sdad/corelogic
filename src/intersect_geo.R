@@ -24,6 +24,23 @@ map <- tigris::blocks(state_abbrev) %>%
 map <- st_read("data/geo/RUS_CC_Shapefiles_April2020/CC 2013_2019_83 04272020.shp") %>%
   sf::st_transform(4326)
 
+
+states <- tigris::states()
+va <- states[states$STATEFP=="51",] %>%
+  sf::st_transform(4326)
+map_va <- map[map$STATE=="VA",]
+
+counties_va <- unique(strsplit(paste(map_va$FIPS, collapse = ", "), ", ")[[1]])
+
+library(ggplot2)
+ggplot() +
+  geom_sf(data = va) +
+  geom_sf(data = map_va)
+
+plot(va[,c("DIVISION")])
+plot(map_va[,c("STATUS")], add=T)
+
+
 st_map <- tigris::counties(state = "VA") %>%
   sf::st_transform(4326)
 

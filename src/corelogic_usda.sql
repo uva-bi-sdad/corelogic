@@ -1,3 +1,5 @@
+CREATE INDEX fips_pcl_idx ON corelogic_usda.testtable2 (fips, pcl_id_iris_formatted);
+
 -- deed id table
 SELECT DISTINCT fips, pcl_id_iris_formatted
 INTO corelogic_usda.corelogic_usda_deed_2020_06_27_id
@@ -25,9 +27,9 @@ REFERENCES corelogic_usda.corelogic_usda_deed_2020_06_27_id(fips, pcl_id_iris_fo
 -- add prop index
 CREATE INDEX prop_fk_idx ON corelogic_usda.corelogic_usda_deed_2020_06_27_prop (fips, pcl_id_iris_formatted);
 
-ALTER TABLE corelogic_usda.corelogic_usda_deed_2020_06_27_prop ADD COLUMN recording_year INTEGER;
+ALTER TABLE corelogic_usda.corelogic_usda_deed_2020_06_27_prop ADD COLUMN sale_year INTEGER;
 
-UPDATE corelogic_usda.corelogic_usda_deed_2020_06_27_prop SET recording_year = cast(LEFT(recording_date_yyyymmdd, 4) AS INTEGER);
+UPDATE corelogic_usda.corelogic_usda_deed_2020_06_27_prop SET sale_year = cast(LEFT(sale_date_yyyymmdd, 4) AS INTEGER);
 
 CREATE INDEX deed_prop_recyr_idx ON corelogic_usda.corelogic_usda_deed_2020_06_27_prop (recording_year);
 
@@ -60,9 +62,9 @@ CREATE INDEX deed_bldg_recyr_idx ON corelogic_usda.corelogic_usda_deed_2020_06_2
 -- deed addr table
 DROP TABLE IF EXISTS corelogic_usda.corelogic_usda_deed_2020_06_27_addr;
 
-SELECT DISTINCT fips, pcl_id_iris_formatted, situs_house_number_prefix, situs_house_number, situs_house_number_suffix, situs_direction, 
-  situs_street_name, situs_mode, situs_quadrant, situs_apartment_unit, situs_city, situs_state, situs_zip_code, situs_carrier_code, 
-  mailing_house_number_prefix, mailing_house_number, mailing_house_number_suffix, mailing_direction, mailing_street_name, mailing_mode, 
+SELECT DISTINCT fips, pcl_id_iris_formatted, situs_house_number_prefix, situs_house_number, situs_house_number_suffix, situs_direction,
+  situs_street_name, situs_mode, situs_quadrant, situs_apartment_unit, situs_city, situs_state, situs_zip_code, situs_carrier_code,
+  mailing_house_number_prefix, mailing_house_number, mailing_house_number_suffix, mailing_direction, mailing_street_name, mailing_mode,
   mailing_quadrant, mailing_apartment_unit, mailing_property_city, mailing_property_state, mailing_property_address_zip_code,
   mailing_carrier_code, recording_date_yyyymmdd
 INTO corelogic_usda.corelogic_usda_deed_2020_06_27_addr
