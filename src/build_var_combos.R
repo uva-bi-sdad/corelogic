@@ -1,10 +1,11 @@
 library(glue)
 library(RPostgreSQL)
+library(data.table)
 
 get_db_conn <-
   function(db_name = "sdad",
-           db_host = "localhost",
-           db_port = "5434",
+           db_host = "postgis1",
+           db_port = "5432",
            db_user = Sys.getenv("db_usr"),
            db_pass = Sys.getenv("db_pwd")) {
     RPostgreSQL::dbConnect(
@@ -141,4 +142,165 @@ R1 <- dbGetQuery(con, Q1)
 
 # GET COUNTY NAMES
 counties <- dbGetQuery(con, "SELECT \"GEOID\" as geoid, \"NAME\" as name FROM corelogic_usda.counties WHERE \"GEOID\" LIKE '51%' OR \"GEOID\" LIKE '19%'")
+
+
+"
+geoid_cnty,
+p_id_iris_frmtd,
+sale_date,
+sale_price,
+sale_code,
+transaction_type,
+bldg_code,
+building_square_feet,
+living_square_feet,
+year_built,
+effective_year_built,
+bedrooms,
+full_baths,
+\"1qtr_baths\",
+\"3qtr_baths\",
+\"half_baths\",
+total_baths,
+address,
+property_indicator,
+zoning,
+acres,
+land_square_footage,
+property_centroid_longitude,
+property_centroid_latitude,
+geometry,
+pri_cat_code,
+BIP,
+CC,
+RC,
+TCF,
+TCI
+"
+
+# With or without pri_cat_code
+q1 <-
+"
+SELECT
+  geoid_cnty,
+  sale_yr,
+  pri_cat_code_req,
+  have_all
+FROM
+(
+SELECT
+  geoid_cnty,
+  LEFT(sale_date, 4) sale_yr,
+  'TRUE' pri_cat_code_req,
+  count(*) have_all
+FROM
+  corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog
+WHERE
+  (geoid_cnty LIKE '51%' OR geoid_cnty LIKE '19%')
+AND
+  property_indicator = '10'
+AND
+  transaction_type != '9'
+AND
+  sale_date IS NOT NULL
+AND
+  sale_price IS NOT NULL
+AND
+  (building_square_feet IS NOT NULL OR living_square_feet IS NOT NULL)
+AND
+ (acres IS NOT NULL OR land_square_footage IS NOT NULL)
+AND
+ (year_built IS NOT NULL OR effective_year_built IS NOT NULL)
+AND
+ (full_baths IS NOT NULL OR \"1qtr_baths\" IS NOT NULL OR \"3qtr_baths\" IS NOT NULL OR half_baths IS NOT NULL OR total_baths IS NOT NULL)
+AND
+  pri_cat_code IS NOT NULL
+AND
+  LEFT(sale_date, 4) IN ('2006', '2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018')
+GROUP BY
+  geoid_cnty,
+  LEFT(sale_date, 4)
+
+UNION ALL
+
+SELECT
+  geoid_cnty,
+  LEFT(sale_date, 4) sale_yr,
+  'FALSE' pri_cat_code_req,
+  count(*) have_all
+FROM
+  corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog
+WHERE
+  (geoid_cnty LIKE '51%' OR geoid_cnty LIKE '19%')
+AND
+   property_indicator = '10'
+AND
+  transaction_type != '9'
+AND
+  sale_date IS NOT NULL
+AND
+  sale_price IS NOT NULL
+AND
+  (building_square_feet IS NOT NULL OR living_square_feet IS NOT NULL)
+AND
+ (acres IS NOT NULL OR land_square_footage IS NOT NULL)
+AND
+ (year_built IS NOT NULL OR effective_year_built IS NOT NULL)
+AND
+ (full_baths IS NOT NULL OR \"1qtr_baths\" IS NOT NULL OR \"3qtr_baths\" IS NOT NULL OR half_baths IS NOT NULL OR total_baths IS NOT NULL)
+AND
+  LEFT(sale_date, 4) IN ('2006', '2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018')
+GROUP BY
+  geoid_cnty,
+  LEFT(sale_date, 4)
+) t
+GROUP BY
+  geoid_cnty,
+  sale_yr,
+  pri_cat_code_req,
+  have_all
+ORDER BY
+  geoid_cnty,
+  sale_yr,
+  pri_cat_code_req,
+  have_all
+"
+
+con <- get_db_conn()
+res <- setDT(dbGetQuery(con, q1))
+dbDisconnect(con)
+
+have_all <- dcast(res, geoid_cnty + pri_cat_code_req ~ sale_yr, value.var = "have_all")
+
+counties <- setDT(tigris::counties())[, .(geoid_st = STATEFP, geoid_cnty = GEOID, name_cnty = NAMELSAD)]
+have_all_names <- merge(have_all, counties, by = "geoid_cnty")
+setcolorder(have_all_names, c("geoid_st", "geoid_cnty", "name_cnty", "pri_cat_code_req", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018"))
+
+
+library(reactable)
+reactable(
+  have_all_names,
+  filterable = FALSE,
+  searchable = FALSE,
+  rownames = FALSE,
+  #showPageSizeOptions = TRUE,
+  #pageSizeOptions = c(10, 50, 100),
+  #defaultPageSize = 10,
+  pagination = FALSE,
+  height = 800,
+  #defaultSorted = list(Species = "asc", Petal.Length = "desc"),
+  defaultColDef = colDef(
+    # cell = function(value) format(value, nsmall = 0),
+    style = "font-size: 12px;",
+    align = "left",
+    minWidth = 70,
+    headerStyle = list(background = "#f7f7f8", fontSize = "12px"),
+    sortNALast = TRUE
+  ),
+  bordered = TRUE,
+  striped = TRUE,
+  highlight = TRUE
+  # ,
+  # groupBy = "Field.Name"
+)
 

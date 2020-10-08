@@ -257,4 +257,20 @@ COPY (select * from corelogic_usda.broadband_variables_tax_2020_06_27_unq where 
 
 
 
+-- add broadband_variables_tax primary key
+ALTER TABLE corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd, sale_date);
+-- add index on transaction type
+CREATE INDEX broadband_variables_prog_tax_tt ON corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog (transaction_type);
+-- add index on property indicator
+CREATE INDEX broadband_variables_prog_tax_pi ON corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog (property_indicator);
 
+
+
+ALTER TABLE corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog
+ADD COLUMN geoid_blk text;
+
+UPDATE corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog a
+SET geoid_blk = b.geoid_blk
+FROM corelogic_usda.sales_with_blk b
+WHERE a.geoid_cnty = b.geoid_cnty
+  AND a.p_id_iris_frmtd = b.p_id_iris_frmtd;

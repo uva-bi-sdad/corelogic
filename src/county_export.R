@@ -1,11 +1,14 @@
 library(RPostgreSQL)
 library(xlsx)
+library(zip)
+library(data.table)
+library(magrittr)
 
 
 get_db_conn <-
   function(db_name = "sdad",
-           db_host = "localhost",
-           db_port = "5434",
+           db_host = "postgis1",
+           db_port = "5432",
            db_user = Sys.getenv("db_usr"),
            db_pass = Sys.getenv("db_pwd")) {
     RPostgreSQL::dbConnect(
@@ -19,9 +22,12 @@ get_db_conn <-
   }
 con <- get_db_conn()
 
-counties <- dbGetQuery(con, "select * from corelogic_usda.counties where \"GEOID\" like '51%'")
+counties <- merge(setDT(tigris::states()), setDT(tigris::counties()), by = "STATEFP") %>%
+  .[, .(abbrv_st = STUSPS, name_co = NAMELSAD, geoid_co = GEOID.y)]
 
-for (i in 1:nrow(counties[1:3,])) {
+counties <- counties[abbrv_st=="VA",]
+
+for (i in 1:nrow(counties)) {
   qry <-
     paste0("SELECT
     geoid_cnty,
@@ -47,19 +53,41 @@ for (i in 1:nrow(counties[1:3,])) {
     land_square_footage,
     property_centroid_longitude,
     property_centroid_latitude,
-    pri_cat_code
+    pri_cat_code,
+    \"BIP\",
+    \"CC\",
+    \"RC\",
+    \"TCF\",
+    \"TCI\"
   FROM
-    corelogic_usda.broadband_variables_tax_2020_06_27_unq
-  WHERE geoid_cnty = '", counties[i,]$GEOID,"'
+    corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog
+  WHERE geoid_cnty = '", counties[i,]$geoid_co,"'
     AND property_indicator='10'")
 
   rows <- dbGetQuery(con, qry)
-  write.csv(rows, paste0("data/county_data/", counties[i,]$NAME, "_", counties[i,]$GEOID, ".csv"))
+  file_name <- paste0(counties[i,]$abbrv_st,
+                      "_",
+                      counties[i,]$geoid_co,
+                      "_",
+                      gsub(" ", "_", counties[i,]$name_co))
+  csv_path <- paste0("data/county_data/",
+                    file_name,
+                    ".csv")
+  # xlsx_path <- paste0("data/county_data/",
+  #                    file_name,
+  #                    ".xlsx")
+  zip_path <- paste0("data/county_data/",
+                     file_name,
+                     ".zip")
+  write.csv(rows, csv_path)
+  # write.xlsx(rows, xlsx_path)
+  zip(zip_path, csv_path)
+  unlink(csv_path)
 }
 
 dbDisconnect(con)
 
-#write.xlsx(rows, "data/prop1006037.xlsx")
+
 
 
 
