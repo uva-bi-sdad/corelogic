@@ -25,7 +25,7 @@ con <- get_db_conn()
 counties <- merge(setDT(tigris::states()), setDT(tigris::counties()), by = "STATEFP") %>%
   .[, .(abbrv_st = STUSPS, name_co = NAMELSAD, geoid_co = GEOID.y)]
 
-counties <- counties[abbrv_st=="VA",]
+counties <- counties[abbrv_st=="IN",]
 
 for (i in 1:nrow(counties)) {
   qry <-
@@ -70,13 +70,13 @@ for (i in 1:nrow(counties)) {
                       counties[i,]$geoid_co,
                       "_",
                       gsub(" ", "_", counties[i,]$name_co))
-  csv_path <- paste0("data/county_data/",
+  csv_path <- paste0("src/www/county_data/",
                     file_name,
                     ".csv")
   # xlsx_path <- paste0("data/county_data/",
   #                    file_name,
   #                    ".xlsx")
-  zip_path <- paste0("data/county_data/",
+  zip_path <- paste0("src/www/county_data/",
                      file_name,
                      ".zip")
   write.csv(rows, csv_path)

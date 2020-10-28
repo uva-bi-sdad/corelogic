@@ -274,3 +274,8 @@ SET geoid_blk = b.geoid_blk
 FROM corelogic_usda.sales_with_blk b
 WHERE a.geoid_cnty = b.geoid_cnty
   AND a.p_id_iris_frmtd = b.p_id_iris_frmtd;
+
+
+
+
+
