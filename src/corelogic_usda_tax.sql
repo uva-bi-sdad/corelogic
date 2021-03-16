@@ -357,5 +357,3 @@ WHERE living_sq_ft is not null and living_sq_ft > 4500 AND property_indicator = 
 
 
 
-
-

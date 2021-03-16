@@ -196,8 +196,8 @@ SELECT
 FROM
   corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog
 WHERE
-  (geoid_cnty LIKE '51%' OR geoid_cnty LIKE '19%')
-AND
+--  (geoid_cnty LIKE '51%' OR geoid_cnty LIKE '19%')
+-- AND
   property_indicator = '10'
 AND
   transaction_type != '9'
@@ -231,8 +231,8 @@ SELECT
 FROM
   corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog
 WHERE
-  (geoid_cnty LIKE '51%' OR geoid_cnty LIKE '19%')
-AND
+--  (geoid_cnty LIKE '51%' OR geoid_cnty LIKE '19%')
+-- AND
    property_indicator = '10'
 AND
   transaction_type != '9'
@@ -278,31 +278,58 @@ counties <- setDT(tigris::counties())[, .(geoid_st = STATEFP, geoid_cnty = GEOID
 have_all_names <- merge(have_all, counties, by = "geoid_cnty")
 setcolorder(have_all_names, c("geoid_st", "geoid_cnty", "name_cnty", "pri_cat_code_req", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018"))
 
+saveRDS(have_all_names, "data/working/corelogic_have_all_vars.RDS")
 
-library(reactable)
-reactable(
-  have_all_names,
-  filterable = FALSE,
-  searchable = FALSE,
-  rownames = FALSE,
-  #showPageSizeOptions = TRUE,
-  #pageSizeOptions = c(10, 50, 100),
-  #defaultPageSize = 10,
-  pagination = FALSE,
-  height = 800,
-  #defaultSorted = list(Species = "asc", Petal.Length = "desc"),
-  defaultColDef = colDef(
-    # cell = function(value) format(value, nsmall = 0),
-    style = "font-size: 12px;",
-    align = "left",
-    minWidth = 70,
-    headerStyle = list(background = "#f7f7f8", fontSize = "12px"),
-    sortNALast = TRUE
-  ),
-  bordered = TRUE,
-  striped = TRUE,
-  highlight = TRUE
-  # ,
-  # groupBy = "Field.Name"
-)
 
+have_all_names <- readRDS("data/working/corelogic_have_all_vars.RDS")
+
+q2 <- "SELECT  geoid_cnty,  LEFT(sale_date, 4) sale_yr,  count(*) all_sales FROM  corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog WHERE    property_indicator = '10'
+  AND   transaction_type != '9' AND LEFT(sale_date, 4) IN ('2006', '2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018') GROUP BY   geoid_cnty,   LEFT(sale_date, 4) ORDER BY   geoid_cnty,   LEFT(sale_date, 4)"
+
+con <- get_db_conn()
+res2 <- setDT(dbGetQuery(con, q2))
+dbDisconnect(con)
+
+all_sales <- dcast(res2, geoid_cnty ~ sale_yr, value.var = "all_sales")
+
+all_all <- merge(have_all_names, all_sales, by = c("geoid_cnty"))
+
+
+for (c in c('2006', '2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018')) {
+  t <- paste0(c, ".x")
+  b <- paste0(c, ".y")
+  all_all[, eval(c) := paste0(get(t), " (", round(100 * (get(t) / get(b)), 2), "%)")]
+}
+
+corelogic_have_all_vars_fnl <- all_all[, .(geoid_cnty, name_cnty, pri_cat_code_req, `2006`, `2007`, `2008`, `2009`, `2010`, `2011`, `2012`, `2013`, `2014`, `2015`, `2016`, `2017`, `2018`)]
+saveRDS(corelogic_have_all_vars_fnl, "data/working/corelogic_have_all_vars_fnl.RDS")
+
+# library(reactable)
+# reactable(
+#   have_all_names,
+#   filterable = FALSE,
+#   searchable = FALSE,
+#   rownames = FALSE,
+#   #showPageSizeOptions = TRUE,
+#   #pageSizeOptions = c(10, 50, 100),
+#   #defaultPageSize = 10,
+#   pagination = FALSE,
+#   height = 800,
+#   #defaultSorted = list(Species = "asc", Petal.Length = "desc"),
+#   defaultColDef = colDef(
+#     # cell = function(value) format(value, nsmall = 0),
+#     style = "font-size: 12px;",
+#     align = "left",
+#     minWidth = 70,
+#     headerStyle = list(background = "#f7f7f8", fontSize = "12px"),
+#     sortNALast = TRUE
+#   ),
+#   bordered = TRUE,
+#   striped = TRUE,
+#   highlight = TRUE
+#   # ,
+#   # groupBy = "Field.Name"
+# )
+
+library(dataplumbr)
+loc.lat_lon2geo_areas(lat = '30.206450', lon = '-85.818760')

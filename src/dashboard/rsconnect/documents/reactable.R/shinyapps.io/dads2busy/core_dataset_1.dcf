@@ -1,0 +1,13 @@
+name: core_dataset_1
+title: core_dataset_1
+username:
+account: dads2busy
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3084045
+bundleId: 3788854
+url: https://dspgtools.shinyapps.io/core_dataset_1/
+when: 1603822770.22242
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: big files.R|build_var_combos.R|build_var_combos.Rmd|corelogic_sdad.R|corelogic_usda_2.sql|corelogic_usda_tax.sql|corelogic_usda.R|corelogic_usda.Rmd|corelogic_usda.sql|county_export.R|intersect_geo.R|parallel_import.R|parlog|auth_test/app.R
