@@ -395,3 +395,93 @@ starting worker pid=122591 on localhost:11874 at 16:45:10.080
 [1] "writing data/working//sales_with_blk_55.RDS"
 [1] "writing data/working//sales_with_blk_56.RDS"
 [1] "writing data/working//sales_with_blk_53.RDS"
+starting worker pid=305 on localhost:11627 at 13:46:27.565
+starting worker pid=312 on localhost:11627 at 13:46:27.590
+starting worker pid=315 on localhost:11627 at 13:46:27.606
+starting worker pid=318 on localhost:11627 at 13:46:27.622
+starting worker pid=321 on localhost:11627 at 13:46:27.638
+starting worker pid=325 on localhost:11627 at 13:46:27.654
+starting worker pid=328 on localhost:11627 at 13:46:27.670
+starting worker pid=331 on localhost:11627 at 13:46:27.685
+starting worker pid=334 on localhost:11627 at 13:46:27.701
+starting worker pid=337 on localhost:11627 at 13:46:27.716
+starting worker pid=4911 on localhost:11627 at 13:57:50.041
+starting worker pid=4914 on localhost:11627 at 13:57:50.069
+starting worker pid=4917 on localhost:11627 at 13:57:50.088
+starting worker pid=4920 on localhost:11627 at 13:57:50.105
+starting worker pid=4923 on localhost:11627 at 13:57:50.121
+starting worker pid=4926 on localhost:11627 at 13:57:50.137
+starting worker pid=4929 on localhost:11627 at 13:57:50.153
+starting worker pid=4932 on localhost:11627 at 13:57:50.170
+starting worker pid=4935 on localhost:11627 at 13:57:50.186
+starting worker pid=4938 on localhost:11627 at 13:57:50.203
+starting worker pid=5448 on localhost:11627 at 13:59:10.081
+starting worker pid=5451 on localhost:11627 at 13:59:10.101
+starting worker pid=5454 on localhost:11627 at 13:59:10.118
+starting worker pid=5457 on localhost:11627 at 13:59:10.137
+starting worker pid=5460 on localhost:11627 at 13:59:10.154
+starting worker pid=5463 on localhost:11627 at 13:59:10.171
+starting worker pid=5466 on localhost:11627 at 13:59:10.188
+starting worker pid=5469 on localhost:11627 at 13:59:10.204
+starting worker pid=5472 on localhost:11627 at 13:59:10.220
+starting worker pid=5475 on localhost:11627 at 13:59:10.236
+[1] "reading data/splits/ab"
+[1] "reading data/splits/ac"
+|--------------------------------------------------|
+|======================|--------------------------------------------------|
+|===================================================|
+===========================|
+starting worker pid=6263 on localhost:11627 at 14:01:13.413
+starting worker pid=6266 on localhost:11627 at 14:01:13.434
+starting worker pid=6269 on localhost:11627 at 14:01:13.451
+starting worker pid=6272 on localhost:11627 at 14:01:13.468
+starting worker pid=6275 on localhost:11627 at 14:01:13.487
+starting worker pid=6278 on localhost:11627 at 14:01:13.505
+starting worker pid=6281 on localhost:11627 at 14:01:13.523
+starting worker pid=6284 on localhost:11627 at 14:01:13.542
+starting worker pid=6289 on localhost:11627 at 14:01:13.562
+starting worker pid=6292 on localhost:11627 at 14:01:13.579
+[1] "reading data/splits/ac"
+[1] "reading data/splits/ab"
+|--------------------------------------------------|
+|=====================|--------------------------------------------------|
+|=====================================================|
+==========================|
+Warning in for (i in seq_along(specs)) { :
+  closing unused connection 13 (<-localhost:11627)
+Warning in for (i in seq_along(specs)) { :
+  closing unused connection 12 (<-localhost:11627)
+Warning in for (i in seq_along(specs)) { :
+  closing unused connection 11 (<-localhost:11627)
+Warning in for (i in seq_along(specs)) { :
+  closing unused connection 10 (<-localhost:11627)
+Warning in for (i in seq_along(specs)) { :
+  closing unused connection 9 (<-localhost:11627)
+Warning in for (i in seq_along(specs)) { :
+  closing unused connection 8 (<-localhost:11627)
+Warning in for (i in seq_along(specs)) { :
+  closing unused connection 7 (<-localhost:11627)
+Warning in for (i in seq_along(specs)) { :
+  closing unused connection 6 (<-localhost:11627)
+Warning in for (i in seq_along(specs)) { :
+  closing unused connection 5 (<-localhost:11627)
+Warning in for (i in seq_along(specs)) { :
+  closing unused connection 4 (<-localhost:11627)
+starting worker pid=11456 on localhost:11029 at 14:14:32.685
+starting worker pid=11460 on localhost:11029 at 14:14:32.707
+starting worker pid=11463 on localhost:11029 at 14:14:32.726
+starting worker pid=11466 on localhost:11029 at 14:14:32.744
+starting worker pid=11469 on localhost:11029 at 14:14:32.761
+starting worker pid=11472 on localhost:11029 at 14:14:32.780
+starting worker pid=11475 on localhost:11029 at 14:14:32.798
+starting worker pid=11478 on localhost:11029 at 14:14:32.816
+starting worker pid=11481 on localhost:11029 at 14:14:32.834
+starting worker pid=11484 on localhost:11029 at 14:14:32.852
+[1] "reading data/splits/ac"
+[1] "reading data/splits/ab"
+|--------------------------------------------------|
+|==============|--------------------------------------------------|
+|==============================================================|
+========================|
+[1] "TRUE written data/splits/ac"
+[1] "TRUE written data/splits/ab"

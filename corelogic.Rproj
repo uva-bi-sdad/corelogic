@@ -14,3 +14,7 @@ LaTeX: pdfLaTeX
 
 AutoAppendNewline: Yes
 StripTrailingWhitespace: Yes
+
+PythonType: system
+PythonVersion: 3.9.0
+PythonPath: /usr/local/bin/python3.9

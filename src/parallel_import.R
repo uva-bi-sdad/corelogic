@@ -51,7 +51,7 @@ doParallel::registerDoParallel(cl)
 res <- foreach(i = 201:297) %dopar% {
   con <- get_db_conn()
   print(paste("reading", file_paths[i]))
-  dt <- data.table::fread(file_paths[i], colClasses = "character")
+  dt <- data.table::fread(file_paths[i], colClasses = "character", header = FALSE)
   colnames(dt) <- db_col_names
   dt[, sale_amount := as.numeric(sale_amount)]
   dt[, tax_amount := as.numeric(tax_amount)]

@@ -274,3 +274,88 @@ SET geoid_blk = b.geoid_blk
 FROM corelogic_usda.sales_with_blk b
 WHERE a.geoid_cnty = b.geoid_cnty
   AND a.p_id_iris_frmtd = b.p_id_iris_frmtd;
+
+
+
+ALTER TABLE corelogic_usda.corelogic_usda_current_tax_2020_06_27_addr
+ADD COLUMN situs_address text;
+
+UPDATE corelogic_usda.corelogic_usda_current_tax_2020_06_27_addr
+ SET situs_address = trim(
+                      replace(
+                        replace(
+                          coalesce(situs_house_number_prefix, '') || ' ' ||
+                          coalesce(situs_house_number, '') || ' ' ||
+                          coalesce(situs_direction, '') || ' ' ||
+                          coalesce(situs_street_name, '') || ' ' ||
+                          coalesce(situs_mode, '') || ' ' ||
+                          coalesce(situs_quadrant, '') || ' ' ||
+                          coalesce(situs_city, '') || ' ' ||
+                          coalesce(situs_state, '') || ' ' ||
+                          coalesce(situs_zip_code, ''),
+                        '  ', ' '),
+                      '  ', ' ')
+                    )
+ WHERE situs_house_number IS NOT NULL;
+
+
+
+ UPDATE corelogic_usda.corelogic_usda_current_tax_2020_06_27_addr addr
+  SET addr.situs_house_number = NULL
+  WHERE trim(addr.situs_house_number) = ''
+
+SELECT geoid_cnty, p_id_iris_frmtd, MAX(situs_address)
+INTO corelogic_usda.temp_situs_address
+FROM corelogic_usda.corelogic_usda_current_tax_2020_06_27_addr
+GROUP BY geoid_cnty, p_id_iris_frmtd
+
+
+ALTER TABLE corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog
+ADD COLUMN situs_address text;
+
+UPDATE corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog a
+SET situs_address = b.max
+FROM corelogic_usda.temp_situs_address b
+WHERE a.geoid_cnty = b.geoid_cnty
+  AND a.p_id_iris_frmtd = b.p_id_iris_frmtd;
+
+ALTER TABLE corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog
+ADD COLUMN living_sq_ft numeric;
+
+UPDATE corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog
+SET living_sq_ft = cast(living_square_feet as numeric);
+
+
+
+
+SELECT n_live_tup
+  FROM pg_stat_all_tables
+ WHERE relname = 'broadband_variables_tax_2020_06_27_unq_prog';
+
+ SELECT count(*) FROM corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog TABLESAMPLE SYSTEM(0.1) WHERE living_sq_ft is not null;
+
+
+ SELECT AVG(living_sq_ft) mean, stddev_samp(living_sq_ft) sd FROM (SELECT living_sq_ft FROM corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog TABLESAM
+ PLE SYSTEM(0.01) WHERE living_sq_ft is not null AND property_indicator = '10' AND transaction_type != '9') t;
+
+SELECT AVG(living_sq_ft) mean
+FROM corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog
+WHERE living_sq_ft is not null AND property_indicator = '10' AND transaction_type != '9';
+
+-- Median
+SELECT PERCENTILE_DISC(0.5) WITHIN GROUP(ORDER BY living_sq_ft) FROM corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog;
+
+
+SELECT COUNT(*) FROM corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog WHERE living_sq_ft is not null AND property_indicator = '10' AND transaction_type != '9';
+
+
+SELECT COUNT(*)/49474564
+FROM corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog
+WHERE living_sq_ft is not null and living_sq_ft > 4500 AND property_indicator = '10' AND transaction_type != '9';
+
+
+
+
+
+
+

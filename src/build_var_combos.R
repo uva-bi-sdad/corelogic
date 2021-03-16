@@ -4,8 +4,8 @@ library(data.table)
 
 get_db_conn <-
   function(db_name = "sdad",
-           db_host = "postgis1",
-           db_port = "5432",
+           db_host = "localhost",
+           db_port = "5434",
            db_user = Sys.getenv("db_usr"),
            db_pass = Sys.getenv("db_pwd")) {
     RPostgreSQL::dbConnect(
@@ -271,6 +271,8 @@ res <- setDT(dbGetQuery(con, q1))
 dbDisconnect(con)
 
 have_all <- dcast(res, geoid_cnty + pri_cat_code_req ~ sale_yr, value.var = "have_all")
+
+saveRDS(have_all, "data/working/corelogic_have_all_vars.RDS")
 
 counties <- setDT(tigris::counties())[, .(geoid_st = STATEFP, geoid_cnty = GEOID, name_cnty = NAMELSAD)]
 have_all_names <- merge(have_all, counties, by = "geoid_cnty")
