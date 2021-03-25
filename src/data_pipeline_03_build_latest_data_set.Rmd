@@ -20,6 +20,7 @@ con <- get_db_conn()
 ```
 
 ## Create Unique ID Table
+
 ```{sql connection=con}
 SELECT DISTINCT geoid_cnty, p_id_iris_frmtd
 INTO corelogic_usda.current_tax_200627_unique_id
@@ -29,7 +30,6 @@ AND p_id_iris_frmtd IS NOT NULL;
 
 ALTER TABLE corelogic_usda.current_tax_200627_unique_id ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);
 ```
-
 
 ```{r}
 build_latest_query <- function(col_name) {
@@ -156,8 +156,8 @@ build_latest_query("property_centroid_longitude")
 build_latest_query("property_centroid_latitude")
 ```
 
-
 ## Create Table of All Latest Information
+
 ```{sql connection=con}
 SELECT a.geoid_cnty, a.p_id_iris_frmtd,
       acres, land_square_footage, bldg_code, building_square_feet, living_square_feet,
@@ -212,11 +212,13 @@ SELECT a.geoid_cnty, a.p_id_iris_frmtd,
    ON a.geoid_cnty = w.geoid_cnty AND a.p_id_iris_frmtd = w.p_id_iris_frmtd
  LEFT JOIN corelogic_usda.current_tax_200627_latest_property_centroid_latitude x
    ON a.geoid_cnty = x.geoid_cnty AND a.p_id_iris_frmtd = x.p_id_iris_frmtd
+ WHERE s.sale_date IS NOT NULL;
+
+ALTER TABLE corelogic_usda.current_tax_200627_latest_all ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);
 ```
 
+## Not USED - Attempt to create psql function to get latest item
 
-
-## Attempt to create psql function to get latest item
 ```{sql connection=con}
 create or replace function get_latest (
   col varchar
@@ -242,4 +244,3 @@ begin
     AND %I IS NOT NULL', col);
 end;$$
 ```
-

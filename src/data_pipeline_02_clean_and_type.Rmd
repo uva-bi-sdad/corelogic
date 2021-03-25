@@ -19,6 +19,7 @@ con <- get_db_conn()
 ```
 
 #### Function for testing if a string value is a valid date
+
 ```{sql connection=con, output.var="qry_res"}
 create or replace function is_date(s varchar) 
 returns boolean as $$
@@ -32,6 +33,7 @@ returns boolean as $$
 ```
 
 #### Function for cleaning character strings (in this case only removing double quotes). If string is empty after cleaning, returns null.
+
 ```{sql connection=con, output.var="qry_res"}
 create or replace function clean_char(s varchar) 
 returns varchar as $cleaned$
@@ -45,6 +47,7 @@ returns varchar as $cleaned$
 ```
 
 ## Create new table of desired columns with correct data types
+
 ```{sql connection=con}
 CREATE TABLE corelogic_usda.current_tax_200627_typed
 (
@@ -88,6 +91,7 @@ CREATE TABLE corelogic_usda.current_tax_200627_typed
 ```
 
 ## Clean and set column data types and insert into new typed table
+
 ```{sql connection=con}
   INSERT INTO corelogic_usda.current_tax_200627_typed
   SELECT
@@ -163,8 +167,8 @@ CREATE TABLE corelogic_usda.current_tax_200627_typed
 ```
 
 # Add Index
+
 ```{sql connection=con}
 DROP INDEX IF EXISTS current_tax_200627_typed_geoid_cnty_p_id_iris_frmtd_idx;
 CREATE INDEX current_tax_200627_typed_geoid_cnty_p_id_iris_frmtd_idx ON corelogic_usda.current_tax_200627_typed (geoid_cnty, p_id_iris_frmtd);
 ```
-
