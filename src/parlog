@@ -1,487 +1,468 @@
-starting worker pid=76372 on localhost:11707 at 13:54:54.827
-starting worker pid=76374 on localhost:11707 at 13:54:55.077
-starting worker pid=76375 on localhost:11707 at 13:54:55.326
-starting worker pid=76376 on localhost:11707 at 13:54:55.575
-starting worker pid=76377 on localhost:11707 at 13:54:55.831
-starting worker pid=76378 on localhost:11707 at 13:54:56.082
-starting worker pid=117038 on localhost:11824 at 15:56:39.112
-starting worker pid=117039 on localhost:11824 at 15:56:39.131
-starting worker pid=117040 on localhost:11824 at 15:56:39.150
-starting worker pid=117041 on localhost:11824 at 15:56:39.169
-starting worker pid=117042 on localhost:11824 at 15:56:39.187
-starting worker pid=117043 on localhost:11824 at 15:56:39.207
-starting worker pid=117071 on localhost:11824 at 15:57:12.286
-starting worker pid=117072 on localhost:11824 at 15:57:12.304
-starting worker pid=117073 on localhost:11824 at 15:57:12.322
-starting worker pid=117074 on localhost:11824 at 15:57:12.342
-starting worker pid=117075 on localhost:11824 at 15:57:12.363
-starting worker pid=117076 on localhost:11824 at 15:57:12.387
-[1] "getting 17 rows"
-[1] "getting 27 rows"
-[1] "getting 27 blocks"
-[1] "getting 27 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 17 blocks"
-[1] "saving 27 results"
-[1] "getting 17 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "saving 17 results"
-starting worker pid=117647 on localhost:11824 at 16:01:59.261
-starting worker pid=117648 on localhost:11824 at 16:01:59.285
-starting worker pid=117649 on localhost:11824 at 16:01:59.307
-starting worker pid=117650 on localhost:11824 at 16:01:59.327
-starting worker pid=117651 on localhost:11824 at 16:01:59.350
-starting worker pid=117652 on localhost:11824 at 16:01:59.371
-[1] "getting 24 rows"
-[1] "getting 50 rows"
-[1] "getting 37 rows"
-[1] "getting 33 rows"
-[1] "getting 44 rows"
-[1] "getting 16 rows"
-[1] "getting 50 blocks"
-[1] "getting 44 blocks"
-[1] "getting 09 rows"
-[1] "getting 50 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 33 blocks"
-[1] "getting 10 rows"
-[1] "saving 50 results"
-[1] "getting 16 blocks"
-[1] "getting 09 blocks"
-[1] "getting 10 blocks"
-[1] "getting 10 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 09 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 16 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "saving 10 results"
-[1] "saving 09 results"
-[1] "saving 16 results"
-[1] "getting 24 blocks"
-[1] "getting 24 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 37 blocks"
-[1] "getting 37 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "saving 24 results"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "saving 37 results"
-starting worker pid=118356 on localhost:11824 at 16:10:00.072
-starting worker pid=118357 on localhost:11824 at 16:10:00.293
-starting worker pid=118358 on localhost:11824 at 16:10:00.313
-starting worker pid=118359 on localhost:11824 at 16:10:00.334
-starting worker pid=118360 on localhost:11824 at 16:10:00.355
-starting worker pid=118361 on localhost:11824 at 16:10:00.374
-[1] "getting 06 rows"
-[1] "getting 55 rows"
-[1] "getting 31 rows"
-[1] "getting 34 rows"
-[1] "getting 35 rows"
-[1] "getting 41 rows"
-[1] "getting 35 blocks"
-[1] "getting 31 blocks"
-[1] "getting 35 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 31 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "saving 35 results"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 42 rows"
-[1] "getting 41 blocks"
-[1] "getting 55 blocks"
-[1] "saving 31 results"
-[1] "getting 53 rows"
-[1] "getting 41 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 55 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 34 blocks"
-[1] "getting 34 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "saving 41 results"
-[1] "getting 22 rows"
-[1] "saving 55 results"
-[1] "getting 13 rows"
-[1] "getting 22 blocks"
-[1] "getting 53 blocks"
-[1] "getting 22 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 53 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 42 blocks"
-[1] "saving 22 results"
-[1] "saving 34 results"
-[1] "saving 53 results"
-[1] "getting 13 blocks"
-[1] "getting 13 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 06 blocks"
-[1] "getting 06 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "saving 13 results"
-[1] "saving 06 results"
-starting worker pid=119782 on localhost:11824 at 16:22:21.198
-starting worker pid=119783 on localhost:11824 at 16:22:21.223
-starting worker pid=119784 on localhost:11824 at 16:22:21.247
-starting worker pid=119785 on localhost:11824 at 16:22:21.270
-starting worker pid=119786 on localhost:11824 at 16:22:21.292
-starting worker pid=119787 on localhost:11824 at 16:22:21.316
-[1] "getting 45 rows"
-[1] "getting 39 rows"
-[1] "getting 08 rows"
-[1] "getting 01 rows"
-[1] "getting 48 rows"
-[1] "getting 49 rows"
-[1] "getting 49 blocks"
-[1] "getting 49 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 01 blocks"
-[1] "saving 49 results"
-[1] "getting 40 rows"
-[1] "getting 45 blocks"
-[1] "getting 08 blocks"
-[1] "getting 40 blocks"
-[1] "getting 01 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 45 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 39 blocks"
-[1] "getting 08 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "saving 01 results"
-[1] "getting 40 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 48 blocks"
-[1] "getting 47 rows"
-[1] "getting 56 rows"
-[1] "saving 45 results"
-[1] "getting 56 blocks"
-[1] "saving 08 results"
-[1] "getting 15 rows"
-[1] "getting 38 rows"
-[1] "getting 15 blocks"
-[1] "saving 40 results"
-[1] "getting 38 blocks"
-[1] "getting 21 rows"
-[1] "getting 66 rows"
-[1] "getting 39 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 66 blocks"
-[1] "getting 56 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 66 interesection"
-[1] "getting 23 rows"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "saving 56 results"
-[1] "getting 47 blocks"
-[1] "getting 21 blocks"
-[1] "getting 38 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 36 rows"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 23 blocks"
-[1] "saving 38 results"
-[1] "getting 32 rows"
-[1] "getting 23 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 32 blocks"
-[1] "saving 23 results"
-[1] "getting 02 rows"
-[1] "getting 32 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 21 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 02 blocks"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 47 interesection"
-[1] "getting 02 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "saving 02 results"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 26 rows"
-[1] "saving 32 results"
-[1] "getting 05 rows"
-[1] "saving 21 results"
-[1] "getting 28 rows"
-[1] "getting 36 blocks"
-[1] "getting 28 blocks"
-[1] "getting 05 blocks"
-[1] "saving 39 results"
-[1] "getting 26 blocks"
-[1] "getting 29 rows"
-[1] "getting 28 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 29 blocks"
-[1] "saving 28 results"
-[1] "getting 05 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 30 rows"
-[1] "getting 30 blocks"
-[1] "getting 36 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "saving 47 results"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 26 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 20 rows"
-[1] "saving 05 results"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 18 rows"
-[1] "getting 20 blocks"
-[1] "getting 30 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 29 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 18 blocks"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "saving 30 results"
-[1] "getting 46 rows"
-[1] "getting 46 blocks"
-[1] "getting 20 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "saving 26 results"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "saving 29 results"
-[1] "getting 46 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 18 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "saving 46 results"
-[1] "getting 25 rows"
-[1] "getting 11 rows"
-[1] "getting 19 rows"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 11 blocks"
-[1] "getting 04 rows"
-[1] "saving 20 results"
-[1] "getting 19 blocks"
-[1] "getting 25 blocks"
-[1] "saving 18 results"
-[1] "saving 36 results"
-[1] "getting 25 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "getting 19 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "saving 19 results"
-[1] "saving 25 results"
-[1] "getting 04 blocks"
-[1] "getting 04 interesection"
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-although coordinates are longitude/latitude, st_intersects assumes that they are planar
-[1] "saving 04 results"
-starting worker pid=122586 on localhost:11874 at 16:45:09.767
-starting worker pid=122587 on localhost:11874 at 16:45:09.789
-starting worker pid=122588 on localhost:11874 at 16:45:09.810
-starting worker pid=122589 on localhost:11874 at 16:45:09.831
-starting worker pid=122590 on localhost:11874 at 16:45:09.853
-starting worker pid=122591 on localhost:11874 at 16:45:10.080
-[1] "reading data/working//sales_with_blk_02.RDS"
-[1] "reading data/working//sales_with_blk_04.RDS"
-[1] "reading data/working//sales_with_blk_05.RDS"
-[1] "reading data/working//sales_with_blk_06.RDS"
-[1] "reading data/working//sales_with_blk_08.RDS"
-[1] "reading data/working//sales_with_blk_09.RDS"
-[1] "writing data/working//sales_with_blk_02.RDS"
-[1] "writing data/working//sales_with_blk_09.RDS"
-[1] "reading data/working//sales_with_blk_10.RDS"
-[1] "writing data/working//sales_with_blk_05.RDS"
-[1] "writing data/working//sales_with_blk_10.RDS"
-[1] "reading data/working//sales_with_blk_12.RDS"
-[1] "reading data/working//sales_with_blk_13.RDS"
-[1] "writing data/working//sales_with_blk_08.RDS"
-[1] "writing data/working//sales_with_blk_04.RDS"
-[1] "reading data/working//sales_with_blk_16.RDS"
-[1] "writing data/working//sales_with_blk_16.RDS"
-[1] "reading data/working//sales_with_blk_17.RDS"
-[1] "writing data/working//sales_with_blk_13.RDS"
-[1] "reading data/working//sales_with_blk_18.RDS"
-[1] "writing data/working//sales_with_blk_18.RDS"
-[1] "writing data/working//sales_with_blk_17.RDS"
-[1] "writing data/working//sales_with_blk_06.RDS"
-[1] "reading data/working//sales_with_blk_19.RDS"
-[1] "reading data/working//sales_with_blk_20.RDS"
-[1] "writing data/working//sales_with_blk_20.RDS"
-[1] "writing data/working//sales_with_blk_19.RDS"
-[1] "reading data/working//sales_with_blk_21.RDS"
-[1] "reading data/working//sales_with_blk_22.RDS"
-[1] "reading data/working//sales_with_blk_23.RDS"
-[1] "writing data/working//sales_with_blk_22.RDS"
-[1] "writing data/working//sales_with_blk_21.RDS"
-[1] "writing data/working//sales_with_blk_23.RDS"
-[1] "reading data/working//sales_with_blk_24.RDS"
-[1] "reading data/working//sales_with_blk_25.RDS"
-[1] "reading data/working//sales_with_blk_26.RDS"
-[1] "writing data/working//sales_with_blk_24.RDS"
-[1] "writing data/working//sales_with_blk_25.RDS"
-[1] "writing data/working//sales_with_blk_12.RDS"
-[1] "reading data/working//sales_with_blk_27.RDS"
-[1] "writing data/working//sales_with_blk_26.RDS"
-[1] "reading data/working//sales_with_blk_28.RDS"
-[1] "writing data/working//sales_with_blk_28.RDS"
-[1] "reading data/working//sales_with_blk_29.RDS"
-[1] "reading data/working//sales_with_blk_30.RDS"
-[1] "writing data/working//sales_with_blk_30.RDS"
-[1] "writing data/working//sales_with_blk_27.RDS"
-[1] "reading data/working//sales_with_blk_31.RDS"
-[1] "writing data/working//sales_with_blk_29.RDS"
-[1] "writing data/working//sales_with_blk_31.RDS"
-[1] "reading data/working//sales_with_blk_32.RDS"
-[1] "reading data/working//sales_with_blk_34.RDS"
-[1] "reading data/working//sales_with_blk_35.RDS"
-[1] "writing data/working//sales_with_blk_35.RDS"
-[1] "reading data/working//sales_with_blk_36.RDS"
-[1] "writing data/working//sales_with_blk_32.RDS"
-[1] "reading data/working//sales_with_blk_37.RDS"
-[1] "writing data/working//sales_with_blk_34.RDS"
-[1] "writing data/working//sales_with_blk_37.RDS"
-[1] "reading data/working//sales_with_blk_38.RDS"
-[1] "writing data/working//sales_with_blk_36.RDS"
-[1] "writing data/working//sales_with_blk_38.RDS"
-[1] "reading data/working//sales_with_blk_39.RDS"
-[1] "writing data/working//sales_with_blk_39.RDS"
-[1] "reading data/working//sales_with_blk_40.RDS"
-[1] "reading data/working//sales_with_blk_41.RDS"
-[1] "writing data/working//sales_with_blk_41.RDS"
-[1] "writing data/working//sales_with_blk_40.RDS"
-[1] "reading data/working//sales_with_blk_45.RDS"
-[1] "writing data/working//sales_with_blk_45.RDS"
-[1] "reading data/working//sales_with_blk_46.RDS"
-[1] "reading data/working//sales_with_blk_47.RDS"
-[1] "writing data/working//sales_with_blk_46.RDS"
-[1] "reading data/working//sales_with_blk_49.RDS"
-[1] "reading data/working//sales_with_blk_50.RDS"
-[1] "writing data/working//sales_with_blk_50.RDS"
-[1] "writing data/working//sales_with_blk_47.RDS"
-[1] "reading data/working//sales_with_blk_51.RDS"
-[1] "writing data/working//sales_with_blk_49.RDS"
-[1] "reading data/working//sales_with_blk_53.RDS"
-[1] "reading data/working//sales_with_blk_54.RDS"
-[1] "reading data/working//sales_with_blk_55.RDS"
-[1] "writing data/working//sales_with_blk_51.RDS"
-[1] "writing data/working//sales_with_blk_54.RDS"
-[1] "reading data/working//sales_with_blk_56.RDS"
-[1] "writing data/working//sales_with_blk_55.RDS"
-[1] "writing data/working//sales_with_blk_56.RDS"
-[1] "writing data/working//sales_with_blk_53.RDS"
-starting worker pid=305 on localhost:11627 at 13:46:27.565
-starting worker pid=312 on localhost:11627 at 13:46:27.590
-starting worker pid=315 on localhost:11627 at 13:46:27.606
-starting worker pid=318 on localhost:11627 at 13:46:27.622
-starting worker pid=321 on localhost:11627 at 13:46:27.638
-starting worker pid=325 on localhost:11627 at 13:46:27.654
-starting worker pid=328 on localhost:11627 at 13:46:27.670
-starting worker pid=331 on localhost:11627 at 13:46:27.685
-starting worker pid=334 on localhost:11627 at 13:46:27.701
-starting worker pid=337 on localhost:11627 at 13:46:27.716
-starting worker pid=4911 on localhost:11627 at 13:57:50.041
-starting worker pid=4914 on localhost:11627 at 13:57:50.069
-starting worker pid=4917 on localhost:11627 at 13:57:50.088
-starting worker pid=4920 on localhost:11627 at 13:57:50.105
-starting worker pid=4923 on localhost:11627 at 13:57:50.121
-starting worker pid=4926 on localhost:11627 at 13:57:50.137
-starting worker pid=4929 on localhost:11627 at 13:57:50.153
-starting worker pid=4932 on localhost:11627 at 13:57:50.170
-starting worker pid=4935 on localhost:11627 at 13:57:50.186
-starting worker pid=4938 on localhost:11627 at 13:57:50.203
-starting worker pid=5448 on localhost:11627 at 13:59:10.081
-starting worker pid=5451 on localhost:11627 at 13:59:10.101
-starting worker pid=5454 on localhost:11627 at 13:59:10.118
-starting worker pid=5457 on localhost:11627 at 13:59:10.137
-starting worker pid=5460 on localhost:11627 at 13:59:10.154
-starting worker pid=5463 on localhost:11627 at 13:59:10.171
-starting worker pid=5466 on localhost:11627 at 13:59:10.188
-starting worker pid=5469 on localhost:11627 at 13:59:10.204
-starting worker pid=5472 on localhost:11627 at 13:59:10.220
-starting worker pid=5475 on localhost:11627 at 13:59:10.236
-[1] "reading data/splits/ab"
-[1] "reading data/splits/ac"
+starting worker pid=31052 on localhost:11342 at 16:55:15.141
+starting worker pid=31053 on localhost:11342 at 16:55:15.256
+starting worker pid=31054 on localhost:11342 at 16:55:15.362
+starting worker pid=31055 on localhost:11342 at 16:55:15.466
+starting worker pid=31056 on localhost:11342 at 16:55:15.571
+starting worker pid=31057 on localhost:11342 at 16:55:15.676
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ab"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ac"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/af"
+[1][1][1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ae"
+ "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ad" "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ag"
+
+starting worker pid=5429 on localhost:11924 at 12:16:53.400
+starting worker pid=5430 on localhost:11924 at 12:16:53.431
+starting worker pid=5431 on localhost:11924 at 12:16:53.448
+starting worker pid=5432 on localhost:11924 at 12:16:53.465
+starting worker pid=5433 on localhost:11924 at 12:16:53.482
+starting worker pid=5434 on localhost:11924 at 12:16:53.500
+[1][1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ab"
+ "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ac"
 |--------------------------------------------------|
-|======================|--------------------------------------------------|
-|===================================================|
-===========================|
-starting worker pid=6263 on localhost:11627 at 14:01:13.413
-starting worker pid=6266 on localhost:11627 at 14:01:13.434
-starting worker pid=6269 on localhost:11627 at 14:01:13.451
-starting worker pid=6272 on localhost:11627 at 14:01:13.468
-starting worker pid=6275 on localhost:11627 at 14:01:13.487
-starting worker pid=6278 on localhost:11627 at 14:01:13.505
-starting worker pid=6281 on localhost:11627 at 14:01:13.523
-starting worker pid=6284 on localhost:11627 at 14:01:13.542
-starting worker pid=6289 on localhost:11627 at 14:01:13.562
-starting worker pid=6292 on localhost:11627 at 14:01:13.579
-[1] "reading data/splits/ac"
-[1] "reading data/splits/ab"
+||--------------------------------------------------|
+|==================================================================================================|
+==|
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ab"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ac"
 |--------------------------------------------------|
-|=====================|--------------------------------------------------|
-|=====================================================|
-==========================|
-Warning in for (i in seq_along(specs)) { :
-  closing unused connection 13 (<-localhost:11627)
-Warning in for (i in seq_along(specs)) { :
-  closing unused connection 12 (<-localhost:11627)
-Warning in for (i in seq_along(specs)) { :
-  closing unused connection 11 (<-localhost:11627)
-Warning in for (i in seq_along(specs)) { :
-  closing unused connection 10 (<-localhost:11627)
-Warning in for (i in seq_along(specs)) { :
-  closing unused connection 9 (<-localhost:11627)
-Warning in for (i in seq_along(specs)) { :
-  closing unused connection 8 (<-localhost:11627)
-Warning in for (i in seq_along(specs)) { :
-  closing unused connection 7 (<-localhost:11627)
-Warning in for (i in seq_along(specs)) { :
-  closing unused connection 6 (<-localhost:11627)
-Warning in for (i in seq_along(specs)) { :
-  closing unused connection 5 (<-localhost:11627)
-Warning in for (i in seq_along(specs)) { :
-  closing unused connection 4 (<-localhost:11627)
-starting worker pid=11456 on localhost:11029 at 14:14:32.685
-starting worker pid=11460 on localhost:11029 at 14:14:32.707
-starting worker pid=11463 on localhost:11029 at 14:14:32.726
-starting worker pid=11466 on localhost:11029 at 14:14:32.744
-starting worker pid=11469 on localhost:11029 at 14:14:32.761
-starting worker pid=11472 on localhost:11029 at 14:14:32.780
-starting worker pid=11475 on localhost:11029 at 14:14:32.798
-starting worker pid=11478 on localhost:11029 at 14:14:32.816
-starting worker pid=11481 on localhost:11029 at 14:14:32.834
-starting worker pid=11484 on localhost:11029 at 14:14:32.852
-[1] "reading data/splits/ac"
-[1] "reading data/splits/ab"
-|--------------------------------------------------|
-|==============|--------------------------------------------------|
-|==============================================================|
-========================|
-[1] "TRUE written data/splits/ac"
-[1] "TRUE written data/splits/ab"
+|======|--------------------------------------------------|
+|===================================================================================|
+===========|
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ab"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ac"
+starting worker pid=6077 on localhost:11924 at 12:24:06.996
+starting worker pid=6078 on localhost:11924 at 12:24:07.054
+starting worker pid=6079 on localhost:11924 at 12:24:07.111
+starting worker pid=6080 on localhost:11924 at 12:24:07.165
+starting worker pid=6081 on localhost:11924 at 12:24:07.217
+starting worker pid=6082 on localhost:11924 at 12:24:07.265
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/af"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ad"
+[1][1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ah"
+ "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ae"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ag"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ai"
+starting worker pid=11033 on localhost:11728 at 13:13:07.305
+starting worker pid=11034 on localhost:11728 at 13:13:07.402
+starting worker pid=11035 on localhost:11728 at 13:13:07.484
+starting worker pid=11036 on localhost:11728 at 13:13:07.561
+starting worker pid=11037 on localhost:11728 at 13:13:07.635
+starting worker pid=11039 on localhost:11728 at 13:13:07.709
+starting worker pid=18164 on localhost:11699 at 14:23:27.276
+starting worker pid=18165 on localhost:11699 at 14:23:27.276
+starting worker pid=18168 on localhost:11699 at 14:23:27.276
+starting worker pid=18166 on localhost:11699 at 14:23:27.288
+starting worker pid=18167 on localhost:11699 at 14:23:27.288
+starting worker pid=18169 on localhost:11699 at 14:23:27.294
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/af"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ad"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ae"
+starting worker pid=18595 on localhost:11699 at 14:26:52.552
+starting worker pid=18593 on localhost:11699 at 14:26:52.553
+starting worker pid=18590 on localhost:11699 at 14:26:52.553
+starting worker pid=18592 on localhost:11699 at 14:26:52.553
+starting worker pid=18591 on localhost:11699 at 14:26:52.563
+starting worker pid=18594 on localhost:11699 at 14:26:52.563
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ad"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/af"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ae"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ad"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ae"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/af"
+starting worker pid=19147 on localhost:11699 at 14:30:48.335
+starting worker pid=19146 on localhost:11699 at 14:30:48.336
+starting worker pid=19151 on localhost:11699 at 14:30:48.336
+starting worker pid=19148 on localhost:11699 at 14:30:48.343
+starting worker pid=19149 on localhost:11699 at 14:30:48.343
+starting worker pid=19150 on localhost:11699 at 14:30:48.344
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ak"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ai"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ah"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/al"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ag"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/aj"
+starting worker pid=10065 on localhost:11303 at 14:52:32.990
+starting worker pid=10060 on localhost:11303 at 14:52:32.991
+starting worker pid=10063 on localhost:11303 at 14:52:32.994
+starting worker pid=10064 on localhost:11303 at 14:52:32.999
+starting worker pid=10061 on localhost:11303 at 14:52:33.000
+starting worker pid=10062 on localhost:11303 at 14:52:33.000
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/aj"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ak"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ah"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ag"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/al"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ai"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ah"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/aj"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/al"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ag"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ak"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ai"
+starting worker pid=11819 on localhost:11303 at 15:00:55.525
+starting worker pid=11818 on localhost:11303 at 15:00:55.525
+starting worker pid=11823 on localhost:11303 at 15:00:55.530
+starting worker pid=11821 on localhost:11303 at 15:00:55.530
+starting worker pid=11822 on localhost:11303 at 15:00:55.535
+starting worker pid=11820 on localhost:11303 at 15:00:55.535
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/aq"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/an"
+[1][1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ap"
+ "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ao"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ar"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/am"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ao"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ap"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/an"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/aq"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ar"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/am"
+starting worker pid=15306 on localhost:11303 at 15:20:00.386
+starting worker pid=15309 on localhost:11303 at 15:20:00.386
+starting worker pid=15305 on localhost:11303 at 15:20:00.391
+starting worker pid=15307 on localhost:11303 at 15:20:00.392
+starting worker pid=15310 on localhost:11303 at 15:20:00.396
+starting worker pid=15308 on localhost:11303 at 15:20:00.396
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/aw"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/as"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/at"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/au"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/av"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ax"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/au"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ay"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/as"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/az"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/aw"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ba"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/at"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bb"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ax"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bc"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/av"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ba"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ay"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/az"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bb"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bc"
+Warning message:
+In data.table::fread(file_paths[i], colClasses = "character", header = FALSE,  :
+  Stopped early on line 590265. Expected 191 fields but found 381. Consider fill=TRUE and comment.char=. First discarded non-empty line: <<"08041"|"3600000135"|"1"|"36000-00-135"|"3600000135"|""|"36000-00-135"|""|"63-00-16"|""|"0046022041"|""|"39"|"63"|"16"|""|""|""|"137"|"1135"|""|"Y"|"A-35"|"10"|"HANOVER SCHOOL NO 28"|"08041HA002"|""|"F5"|"167"|"SQUIRREL CREEK ESTATES FIL 2"|""|"18960"|""|""|""|"HOLMAN"|"RD"|""|""|"COLORADO SPRINGS"|"CO"|"809289654"|"R002"|"38.654099"|"-104.473231"|"38.650794"|"-104.473547"|""|"DE"|"ANGEL OFELIA U"|""|""|"O"|""|""|""|""|""|"18960"|""|""|""|"HOLMAN"|"RD"|""|""|"COLORADO SPRINGS"|"CO"|"809289654"|">>
+starting worker pid=16612 on localhost:11303 at 15:25:56.634
+starting worker pid=16611 on localhost:11303 at 15:25:56.634
+starting worker pid=16608 on localhost:11303 at 15:25:56.639
+starting worker pid=16607 on localhost:11303 at 15:25:56.639
+starting worker pid=16610 on localhost:11303 at 15:25:56.643
+starting worker pid=16609 on localhost:11303 at 15:25:56.643
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bh"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/be"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bg"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bi"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bd"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bf"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bf"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bj"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bi"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bk"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/be"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bl"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bh"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bm"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bg"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bn"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bd"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bo"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bk"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bp"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bl"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bq"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bj"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/br"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bm"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bs"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bn"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bt"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bo"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bu"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bp"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bv"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bq"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bw"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/br"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bx"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bs"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/by"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bt"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bz"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bu"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ca"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bv"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cb"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bx"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cc"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bw"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cd"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/by"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ce"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/bz"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cf"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ca"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cg"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cb"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ch"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cc"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cd"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ce"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cf"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cg"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ch"
+starting worker pid=137766 on localhost:11153 at 10:56:59.697
+starting worker pid=137768 on localhost:11153 at 10:56:59.697
+starting worker pid=137763 on localhost:11153 at 10:56:59.697
+starting worker pid=137767 on localhost:11153 at 10:56:59.730
+starting worker pid=137765 on localhost:11153 at 10:56:59.731
+starting worker pid=137764 on localhost:11153 at 10:56:59.739
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cl"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ck"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cj"
+[1][1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cm"
+ "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ci"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cn"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cm"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/co"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ci"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cp"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cj"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cq"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cl"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cr"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ck"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cs"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cn"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ct"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cp"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cu"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/co"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cv"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cq"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cw"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cr"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cx"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cs"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cy"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ct"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cz"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cu"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/da"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cv"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/db"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cx"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dc"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cw"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dd"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cy"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/de"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/cz"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/df"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/da"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dg"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dc"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dh"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/db"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/di"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dd"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dj"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/df"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dk"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dg"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dl"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dh"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dm"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/de"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dn"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/di"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/do"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dj"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dp"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dl"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dq"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dm"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dr"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dk"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ds"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/do"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dt"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dn"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/du"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dp"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dv"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dr"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dw"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dq"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dx"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ds"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dy"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dt"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dz"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dv"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ea"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dw"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/eb"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dx"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ec"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/du"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ed"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dy"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ee"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/dz"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ef"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ea"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/eg"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/eb"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/eh"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ec"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ei"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ed"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ej"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ee"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ek"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/eg"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/el"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/eh"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/em"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ef"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/en"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ei"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/eo"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ej"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ep"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/el"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/eq"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/en"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/er"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/em"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/es"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ek"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/et"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ep"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/eu"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/eo"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ev"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/eq"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ew"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/er"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ex"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/et"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ey"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/es"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ez"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/eu"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fa"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ev"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fb"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ew"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fc"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ex"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fd"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ey"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fe"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ez"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ff"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fb"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fg"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fa"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fh"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fd"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fi"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fc"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fj"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ff"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fk"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fe"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fl"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fg"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fm"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fh"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fn"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fi"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fo"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fk"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fp"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fj"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fq"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fm"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fr"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fo"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fs"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fn"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ft"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fp"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fl"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fr"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fq"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ft"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fs"
+starting worker pid=5830 on localhost:11222 at 12:45:53.689
+starting worker pid=5828 on localhost:11222 at 12:45:53.747
+starting worker pid=5829 on localhost:11222 at 12:45:53.818
+starting worker pid=5827 on localhost:11222 at 12:45:53.869
+starting worker pid=5831 on localhost:11222 at 12:45:53.978
+starting worker pid=5826 on localhost:11222 at 12:45:53.979
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fv"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fw"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fy"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fz"
+[1][1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fu"
+ "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fx"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fw"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ga"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fy"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gb"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fz"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gc"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fx"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gd"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fu"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ge"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/fv"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gf"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ga"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gg"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gd"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gh"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gb"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gi"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/ge"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gj"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gc"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gk"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gf"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gl"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gj"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gm"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gi"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gn"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gg"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/go"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gk"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gp"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gh"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gq"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gl"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gr"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gm"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gs"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gn"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gt"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gq"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gu"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gp"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gv"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gr"
+[1] "reading /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gw"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gs"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/go"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gt"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gw"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gv"
+[1] "TRUE written /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/splits/gu"

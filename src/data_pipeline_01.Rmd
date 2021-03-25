@@ -1,0 +1,113 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# Process Large Data File
+
+## Load libraries and functions
+
+```{r}
+source("R/functions.R")
+library(data.table)
+library(dataplumbr)
+library(foreach)
+library(doParallel)
+library(DBI)
+```
+
+## Set variables
+
+#### Files and directories
+
+```{r}
+file_dir <- "/project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files"
+file_name <- "Corelogic_USDA_Current_Tax_2020_06_27.txt"
+file_path <- file.path(file_dir, file_name)
+```
+
+#### Database
+
+```{r}
+schema_name <- "corelogic_usda"
+table_name <- "current_tax_200627_raw"
+```
+
+## Use system-level commands to split large file
+
+#### Set System-Level (bash) Environmental Variables
+
+System-level environmental variables are set to enable their use by command line functions
+
+```{r}
+Sys.setenv(file_dir=file_dir)
+Sys.setenv(file_path=file_path)
+```
+
+#### Create directory for split files
+
+```{bash}
+mkdir $file_dir/splits/
+rm -r $file_dir/splits/*
+```
+
+#### Split large file by number of lines per file
+
+Use system split function to create files not too large to be handled for import into R. In this case we are creating files with a maximum of 1,000,000 lines each
+
+```{bash}
+split -l1000000 $file_path $file_dir/splits/
+```
+
+## Read and prepare first split file
+
+#### Get first split file path and read with data.table
+
+```{r}
+file_paths <- list.files(path = file.path(file_dir, "splits"), full.names = T)
+first_split_file <- file_paths[1]
+tbl <- fread(first_split_file, colClasses = "character", select = 1:188, quote = "")
+```
+
+#### Standardize column names for the database
+
+```{r}
+db_col_names <- dataplumbr::name.standard_col_names(colnames(tbl)) %>%
+  stringr::str_replace("^_", "") %>%
+  stringr::str_replace("_$", "")
+colnames(tbl) <- db_col_names
+```
+
+## Write data to new database table
+
+```{r}
+con <- get_db_conn()
+dbWriteTable(con, c(schema_name, table_name), tbl, overwrite = T, row.names = F)
+dbDisconnect(con)
+
+rm(tbl)
+```
+
+## Read remaining split files and upload to database
+
+```{r}
+# core_num <- parallel::detectCores() - 2
+cl <- makeCluster(6, outfile = "src/parlog")
+doParallel::registerDoParallel(cl)
+
+# num_files <- length(file_paths)
+
+res <- foreach(i = 151:179) %dopar% {
+  con <- get_db_conn()
+  print(paste("reading", file_paths[i]))
+  dt <- data.table::fread(file_paths[i], colClasses = "character", header = FALSE, select = 1:188, quote = "")
+  colnames(dt) <- db_col_names
+  db_res <- RPostgreSQL::dbWriteTable(con, c(schema_name, table_name), dt, append = TRUE, row.names = FALSE)
+  print(paste(db_res, "written", file_paths[i]))
+  DBI::dbDisconnect(con)
+  rm(dt)
+}
+
+parallel::stopCluster(cl)
+```
+

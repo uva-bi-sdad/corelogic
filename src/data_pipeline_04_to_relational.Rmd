@@ -1,0 +1,177 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## Load libraries and functions
+
+```{r}
+source("../R/functions.R")
+library(data.table)
+library(dataplumbr)
+library(foreach)
+library(doParallel)
+library(DBI)
+```
+
+```{r}
+con <- get_db_conn()
+```
+
+### Create id table (the "one" table in a "one-to-many" set of tables)
+```{sql connection=con, output.var="qry_res"}
+DROP TABLE IF EXISTS corelogic_usda.current_tax_2020_06_27_id;
+
+SELECT DISTINCT fips_code AS geoid_cnty, p_id_iris_frmtd
+INTO corelogic_usda.current_tax_2020_06_27_id
+FROM corelogic_usda.current_tax_2020_06_27_raw
+WHERE fips_code != '' AND fips_code IS NOT NULL AND p_id_iris_frmtd != '' AND p_id_iris_frmtd IS NOT NULL;
+
+ALTER TABLE corelogic_usda.current_tax_2020_06_27_id ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);
+```
+
+### Create property information table
+```{sql connection=con}
+-- create current_tax property table
+DROP TABLE IF EXISTS corelogic_usda.current_tax_2020_06_27_prop;
+
+SELECT DISTINCT fips_code geoid_cnty, p_id_iris_frmtd, property_indicator, zoning, municipality_name, municipality_code,
+  acres, land_square_footage, sale_date, property_centroid_longitude, property_centroid_latitude
+INTO corelogic_usda.current_tax_2020_06_27_prop
+FROM corelogic_usda.current_tax_2020_06_27_raw
+WHERE fips_code != '' AND fips_code IS NOT NULL
+  AND p_id_iris_frmtd != '' AND p_id_iris_frmtd IS NOT NULL
+  AND sale_date IS NOT NULL
+  AND sale_price IS NOT NULL;
+
+-- add prop foreign key
+ALTER TABLE corelogic_usda.current_tax_2020_06_27_prop
+ADD CONSTRAINT current_tax_id_prop_fk
+FOREIGN KEY (geoid_cnty, p_id_iris_frmtd)
+REFERENCES corelogic_usda.current_tax_2020_06_27_id(geoid_cnty, p_id_iris_frmtd);
+
+-- add index on foreign key
+DROP INDEX IF EXISTS current_tax_prop_fk_idx;
+CREATE INDEX current_tax_prop_fk_idx ON corelogic_usda.current_tax_2020_06_27_prop (geoid_cnty, p_id_iris_frmtd);
+
+-- add sale_date index
+DROP INDEX IF EXISTS current_tax_prop_sale_date_idx;
+CREATE INDEX current_tax_prop_sale_date_idx ON corelogic_usda.current_tax_2020_06_27_prop (sale_date);
+```
+
+### Create building information table
+```{sql connection=con}
+-- create current_tax building table
+DROP TABLE IF EXISTS corelogic_usda.current_tax_2020_06_27_bldg;
+
+SELECT DISTINCT fips_code geoid_cnty, p_id_iris_frmtd, sale_date, bldg_code, building_square_feet, living_square_feet, year_built, effective_year_built,
+  bedrooms, full_baths, "1qtr_baths", "3qtr_baths", half_baths, total_baths
+INTO corelogic_usda.current_tax_2020_06_27_bldg
+FROM corelogic_usda.current_tax_2020_06_27_raw
+WHERE fips_code != '' AND fips_code IS NOT NULL
+  AND p_id_iris_frmtd != '' AND p_id_iris_frmtd IS NOT NULL
+  AND sale_date IS NOT NULL
+  AND sale_price IS NOT NULL;
+
+-- add bldg foreign key
+ALTER TABLE corelogic_usda.current_tax_2020_06_27_bldg
+ADD CONSTRAINT current_tax_bldg_id_fk
+FOREIGN KEY (geoid_cnty, p_id_iris_frmtd)
+REFERENCES corelogic_usda.current_tax_2020_06_27_id(geoid_cnty, p_id_iris_frmtd);
+
+-- add bldg index on foreign key
+DROP INDEX IF EXISTS current_tax_bldg_fk_idx;
+CREATE INDEX current_tax_bldg_fk_idx ON corelogic_usda.current_tax_2020_06_27_bldg (geoid_cnty, p_id_iris_frmtd);
+
+-- add sale_date index
+DROP INDEX IF EXISTS current_tax_bldg_sale_date_idx;
+CREATE INDEX current_tax_bldg_sale_date_idx ON corelogic_usda.current_tax_2020_06_27_bldg (sale_date);
+```
+
+### Create address information table
+```{sql connection=con}
+-- create current_tax address table
+DROP TABLE IF EXISTS corelogic_usda.current_tax_2020_06_27_addr;
+
+SELECT DISTINCT fips_code geoid_cnty, p_id_iris_frmtd, sale_date, situs_address, situs_zip_code, mail_address, mail_zip_code
+INTO corelogic_usda.current_tax_2020_06_27_addr
+FROM corelogic_usda.current_tax_2020_06_27
+WHERE fips_code != '' AND fips_code IS NOT NULL
+  AND p_id_iris_frmtd != '' AND p_id_iris_frmtd IS NOT NULL
+  AND sale_date IS NOT NULL
+  AND sale_price IS NOT NULL;
+
+-- add addr foreign key
+ALTER TABLE corelogic_usda.current_tax_2020_06_27_addr
+ADD CONSTRAINT current_tax_addr_id_fk
+FOREIGN KEY (geoid_cnty, p_id_iris_frmtd)
+REFERENCES corelogic_usda.current_tax_2020_06_27_id(geoid_cnty, p_id_iris_frmtd);
+
+-- add addr index on foreign key
+DROP INDEX IF EXISTS current_tax_addr_fk_idx;
+CREATE INDEX current_tax_addr_fk_idx ON corelogic_usda.current_tax_2020_06_27_addr (geoid_cnty, p_id_iris_frmtd);
+
+-- add sale_date index
+DROP INDEX IF EXISTS current_tax_addr_sale_date_idx;
+CREATE INDEX current_tax_addr_sale_date_idx ON corelogic_usda.current_tax_2020_06_27_addr (sale_date);
+
+```
+
+### Create sale information table
+```{sql connection=con}
+-- create current_tax sale table
+DROP TABLE IF EXISTS corelogic_usda.current_tax_2020_06_27_sale;
+
+SELECT DISTINCT fips_code geoid_cnty, p_id_iris_frmtd, sale_code, sale_price, sale_date, recording_date, transaction_type
+INTO corelogic_usda.current_tax_2020_06_27_sale
+FROM corelogic_usda.current_tax_2020_06_27
+WHERE fips_code != '' AND fips_code IS NOT NULL
+  AND p_id_iris_frmtd != '' AND p_id_iris_frmtd IS NOT NULL
+  AND sale_date IS NOT NULL
+  AND sale_price IS NOT NULL;
+
+-- add sale foreign key
+ALTER TABLE corelogic_usda.current_tax_2020_06_27_sale
+ADD CONSTRAINT current_tax_sale_id_fk
+FOREIGN KEY (geoid_cnty, p_id_iris_frmtd)
+REFERENCES corelogic_usda.current_tax_2020_06_27_id(geoid_cnty, p_id_iris_frmtd);
+
+-- add sale index on foreign key
+DROP INDEX IF EXISTS current_tax_sale_fk_idx;
+CREATE INDEX current_tax_sale_fk_idx ON corelogic_usda.current_tax_2020_06_27_sale (geoid_cnty, p_id_iris_frmtd);
+
+-- add sale_date index
+DROP INDEX IF EXISTS current_tax_sale_sale_date_idx;
+CREATE INDEX current_tax_sale_sale_date_idx ON corelogic_usda.current_tax_2020_06_27_sale (sale_date);
+```
+
+### Create tax information table
+```{sql connection=con}
+-- create current_tax tax table
+DROP TABLE IF EXISTS corelogic_usda.current_tax_2020_06_27_tax;
+
+SELECT DISTINCT fips_code geoid_cnty, p_id_iris_frmtd, sale_date, tax_amount, tax_year, assessed_year, total_value_calculated, land_value_calculated,
+  improvement_value_calculated
+INTO corelogic_usda.current_tax_2020_06_27_tax
+FROM corelogic_usda.current_tax_2020_06_27
+WHERE fips_code != '' AND fips_code IS NOT NULL
+  AND p_id_iris_frmtd != '' AND p_id_iris_frmtd IS NOT NULL
+  AND sale_date IS NOT NULL
+  AND sale_price IS NOT NULL;
+
+-- add tax foreign key
+ALTER TABLE corelogic_usda.current_tax_2020_06_27_tax
+ADD CONSTRAINT current_tax_tax_id_fk
+FOREIGN KEY (geoid_cnty, p_id_iris_frmtd)
+REFERENCES corelogic_usda.current_tax_2020_06_27_id(geoid_cnty, p_id_iris_frmtd);
+
+-- add tax index on foreign key
+DROP INDEX IF EXISTS current_tax_tax_fk_idx;
+CREATE INDEX current_tax_tax_fk_idx ON corelogic_usda.current_tax_2020_06_27_tax (geoid_cnty, p_id_iris_frmtd);
+
+-- add sale_date index
+DROP INDEX IF EXISTS current_tax_tax_sale_date_idx;
+CREATE INDEX current_tax_tax_sale_date_idx ON corelogic_usda.current_tax_2020_06_27_tax (sale_date);
+```
+
+
