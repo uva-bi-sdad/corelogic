@@ -1,0 +1,13 @@
+name: corelogic_var_combos
+title: corelogic_var_combos
+username:
+account: dads2busy
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2879689
+bundleId: 3670457
+url: https://dspgtools.shinyapps.io/corelogic_var_combos/
+when: 1601045103.54205
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: corelogic_usda_2.sql|corelogic_usda.sql|test1.Rmd|test1.sql

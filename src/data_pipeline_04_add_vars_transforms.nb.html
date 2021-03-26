@@ -120,6 +120,76 @@ pre code {
 }
 </style>
 
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
 
 <!-- tabsets -->
 
@@ -195,6 +265,35 @@ pre code {
 
 
 
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">The Dataset Creation Pipeline</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="data_pipeline_01.html">Notebook</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
 <div id="header">
 
 <div class="btn-group pull-right float-right">
@@ -219,7 +318,7 @@ pre code {
 <h2>Load libraries and functions</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc291cmNlKFwiLi4vUi9mdW5jdGlvbnMuUlwiKVxubGlicmFyeShkYXRhLnRhYmxlKVxubGlicmFyeShkYXRhcGx1bWJyKVxubGlicmFyeShmb3JlYWNoKVxubGlicmFyeShkb1BhcmFsbGVsKVxubGlicmFyeShEQkkpXG5saWJyYXJ5KGdsdWUpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjpbInNvdXJjZShcIi4uL1IvZnVuY3Rpb25zLlJcIikiLCJsaWJyYXJ5KGRhdGEudGFibGUpIiwibGlicmFyeShkYXRhcGx1bWJyKSIsImxpYnJhcnkoZm9yZWFjaCkiLCJsaWJyYXJ5KGRvUGFyYWxsZWwpIiwibGlicmFyeShEQkkpIiwibGlicmFyeShnbHVlKSJdfQ== -->
 <pre class="r"><code>source(&quot;../R/functions.R&quot;)
 library(data.table)
 library(dataplumbr)
@@ -232,7 +331,7 @@ library(glue)</code></pre>
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29uIDwtIGdldF9kYl9jb25uKClcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiY29uIDwtIGdldF9kYl9jb25uKCkifQ== -->
 <pre class="r"><code>con &lt;- get_db_conn()</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
@@ -249,8 +348,8 @@ library(glue)</code></pre>
 <p>Using the Fannie Mae and Freddie Mac Uniform Appraisal Dataset Specification to calculate total bathrooms. 3/4 baths count as full baths, 1/4 baths are dropped, half bath is .1 of full bath, so 1 x full bath &amp; 1 x 3/4 bath &amp; 1 x half bath = 2.1 baths (2 full baths, 1 half bath).</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgc3FsXG5TRUxFQ1QgKixcbiAgICAgICBEQVRFX1BBUlQoJ3llYXInLCBzYWxlX2RhdGUpOjpJTlRFR0VSIEFTIHNhbGVfeWVhcixcbiAgICAgICBOVUxMSUYoY29hbGVzY2UoZnVsbF9iYXRocywgMCkgKyBjb2FsZXNjZSh0aHJxdHJfYmF0aHMsIDApICsgKC4xICogY29hbGVzY2UoaGFsZl9iYXRocywgMCkpLCAwKSBBUyBiYXRoc19hcHByYWlzZWRcbklOVE8gY29yZWxvZ2ljX3VzZGEuY3VycmVudF90YXhfMjAwNjI3X2xhdGVzdF9hbGxfYWRkX3ZhcnNcbkZST00gY29yZWxvZ2ljX3VzZGEuY3VycmVudF90YXhfMjAwNjI3X2xhdGVzdF9hbGw7XG5cbkFMVEVSIFRBQkxFIGNvcmVsb2dpY191c2RhLmN1cnJlbnRfdGF4XzIwMDYyN19sYXRlc3RfYWxsX2FkZF92YXJzIEFERCBQUklNQVJZIEtFWSAoZ2VvaWRfY250eSwgcF9pZF9pcmlzX2ZybXRkKTtcbmBgYCJ9 -->
-<pre class="sql"><code>SELECT *,
+<!-- rnb-source-begin eyJkYXRhIjpbIlNFTEVDVCAqLCIsIiAgICAgICBEQVRFX1BBUlQoJ3llYXInLCBzYWxlX2RhdGUpOjpJTlRFR0VSIEFTIHNhbGVfeWVhciwiLCIgICAgICAgTlVMTElGKGNvYWxlc2NlKGZ1bGxfYmF0aHMsIDApICsgY29hbGVzY2UodGhycXRyX2JhdGhzLCAwKSArICguMSAqIGNvYWxlc2NlKGhhbGZfYmF0aHMsIDApKSwgMCkgQVMgYmF0aHNfYXBwcmFpc2VkIiwiSU5UTyBjb3JlbG9naWNfdXNkYS5jdXJyZW50X3RheF8yMDA2MjdfbGF0ZXN0X2FsbF9hZGRfdmFycyIsIkZST00gY29yZWxvZ2ljX3VzZGEuY3VycmVudF90YXhfMjAwNjI3X2xhdGVzdF9hbGw7IiwiIiwiQUxURVIgVEFCTEUgY29yZWxvZ2ljX3VzZGEuY3VycmVudF90YXhfMjAwNjI3X2xhdGVzdF9hbGxfYWRkX3ZhcnMgQUREIFBSSU1BUlkgS0VZIChnZW9pZF9jbnR5LCBwX2lkX2lyaXNfZnJtdGQpOyJdfQ== -->
+<pre class="r"><code>SELECT *,
        DATE_PART(&#39;year&#39;, sale_date)::INTEGER AS sale_year,
        NULLIF(coalesce(full_baths, 0) + coalesce(thrqtr_baths, 0) + (.1 * coalesce(half_baths, 0)), 0) AS baths_appraised
 INTO corelogic_usda.current_tax_200627_latest_all_add_vars
@@ -261,102 +360,21 @@ ALTER TABLE corelogic_usda.current_tax_200627_latest_all_add_vars ADD PRIMARY KE
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
-</div>
-<div id="create-census-block-variable-geoid_blockce" class="section level2">
-<h2>Create CENSUS block variable, geoid_blockce</h2>
-<p>By adding a geoid that goes down to the census block level, we can associate demographic data collected by the Census with each property.</p>
 <div id="first-fix-longitude-and-latitude-column-names" class="section level3">
 <h3>First, Fix Longitude and Latitude Column Names!</h3>
 <p>The column names are switched in this dataset! Longitude is latitude and vice versa.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgc3FsXG5BTFRFUiBUQUJMRSBjb3JlbG9naWNfdXNkYS5jdXJyZW50X3RheF8yMDA2MjdfbGF0ZXN0X2FsbF9hZGRfdmFycyBSRU5BTUUgQ09MVU1OIHByb3BlcnR5X2NlbnRyb2lkX2xvbmdpdHVkZSBUTyBwcm9wZXJ0eV9jZW50cm9pZF9sYXRpdHVkZV87XG5BTFRFUiBUQUJMRSBjb3JlbG9naWNfdXNkYS5jdXJyZW50X3RheF8yMDA2MjdfbGF0ZXN0X2FsbF9hZGRfdmFycyBSRU5BTUUgQ09MVU1OIHByb3BlcnR5X2NlbnRyb2lkX2xhdGl0dWRlIFRPIHByb3BlcnR5X2NlbnRyb2lkX2xvbmdpdHVkZTtcbkFMVEVSIFRBQkxFIGNvcmVsb2dpY191c2RhLmN1cnJlbnRfdGF4XzIwMDYyN19sYXRlc3RfYWxsX2FkZF92YXJzIFJFTkFNRSBDT0xVTU4gcHJvcGVydHlfY2VudHJvaWRfbGF0aXR1ZGVfIFRPIHByb3BlcnR5X2NlbnRyb2lkX2xhdGl0dWRlO1xuXG5gYGAifQ== -->
-<pre class="sql"><code>ALTER TABLE corelogic_usda.current_tax_200627_latest_all_add_vars RENAME COLUMN property_centroid_longitude TO property_centroid_latitude_;
+<!-- rnb-source-begin eyJkYXRhIjpbIkFMVEVSIFRBQkxFIGNvcmVsb2dpY191c2RhLmN1cnJlbnRfdGF4XzIwMDYyN19sYXRlc3RfYWxsX2FkZF92YXJzIFJFTkFNRSBDT0xVTU4gcHJvcGVydHlfY2VudHJvaWRfbG9uZ2l0dWRlIFRPIHByb3BlcnR5X2NlbnRyb2lkX2xhdGl0dWRlXzsiLCJBTFRFUiBUQUJMRSBjb3JlbG9naWNfdXNkYS5jdXJyZW50X3RheF8yMDA2MjdfbGF0ZXN0X2FsbF9hZGRfdmFycyBSRU5BTUUgQ09MVU1OIHByb3BlcnR5X2NlbnRyb2lkX2xhdGl0dWRlIFRPIHByb3BlcnR5X2NlbnRyb2lkX2xvbmdpdHVkZTsiLCJBTFRFUiBUQUJMRSBjb3JlbG9naWNfdXNkYS5jdXJyZW50X3RheF8yMDA2MjdfbGF0ZXN0X2FsbF9hZGRfdmFycyBSRU5BTUUgQ09MVU1OIHByb3BlcnR5X2NlbnRyb2lkX2xhdGl0dWRlXyBUTyBwcm9wZXJ0eV9jZW50cm9pZF9sYXRpdHVkZTsiXX0= -->
+<pre class="r"><code>ALTER TABLE corelogic_usda.current_tax_200627_latest_all_add_vars RENAME COLUMN property_centroid_longitude TO property_centroid_latitude_;
 ALTER TABLE corelogic_usda.current_tax_200627_latest_all_add_vars RENAME COLUMN property_centroid_latitude TO property_centroid_longitude;
-ALTER TABLE corelogic_usda.current_tax_200627_latest_all_add_vars RENAME COLUMN property_centroid_latitude_ TO property_centroid_latitude;
-</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="get-blocks" class="section level3">
-<h3>Get blocks</h3>
-<p>THIS ALL NEEDS TO BE UPDATED</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2V0X2Jsb2NrcyA8LSBmdW5jdGlvbihnZW9pZF9zdCA9IFwiNTFcIikge1xuICBzcWwgPC0gcGFzdGUwKFwic2VsZWN0IGdlb2lkX2NudHksIHBfaWRfaXJpc19mcm10ZCwgZ2VvbWV0cnlcbiAgICAgICAgICAgICAgIGZyb20gY29yZWxvZ2ljX3VzZGEuYnJvYWRiYW5kX3ZhcmlhYmxlc190YXhfMjAyMF8wNl8yN191bnFfcHJvZ1xuICAgICAgICAgICAgICAgd2hlcmUgcHJvcGVydHlfY2VudHJvaWRfbG9uZ2l0dWRlIElTIE5PVCBOVUxMIEFORCBnZW9pZF9jbnR5IExJS0UgJ1wiLCBnZW9pZF9zdCxcIiUnXCIpXG4gIGNvbiA8LSBnZXRfZGJfY29ubigpXG4gIHByaW50KHBhc3RlKFwiZ2V0dGluZ1wiLCBnZW9pZF9zdCwgXCJyb3dzXCIpKVxuICBkYl9yb3dzX2JsayA8LSBzdF9yZWFkKGNvbiwgcXVlcnkgPSBzcWwpXG4gIERCSTo6ZGJEaXNjb25uZWN0KGNvbilcbiAgYmxrX21hcF9wYXRoIDwtIHBhc3RlMChcIi9ob21lL2FkczdmZy9zZGFkL3Byb2plY3RzX2RhdGEvdXNkYS9iYi9vcmlnaW5hbC9jZW5zdXNibG9ja3MvYmxvY2tzX1RJR0VSMjAxOF9zZl9SRFMvdGxfMjAxOF9cIiwgZ2VvaWRfc3QsIFwiX3RhYmJsb2NrMTAuUkRTXCIpXG4gIHByaW50KHBhc3RlKFwiZ2V0dGluZ1wiLCBnZW9pZF9zdCwgXCJibG9ja3NcIikpXG4gIGJsa19tYXAgPC0gcmVhZFJEUyhibGtfbWFwX3BhdGgpICU+JVxuICAgIHNmOjpzdF90cmFuc2Zvcm0oNDMyNilcbiAgcHJpbnQocGFzdGUoXCJnZXR0aW5nXCIsIGdlb2lkX3N0LCBcImludGVyZXNlY3Rpb25cIikpXG4gIGludCA8LSBzZjo6c3RfaW50ZXJzZWN0cyhkYl9yb3dzX2JsaywgYmxrX21hcClcbiAgaW50MiA8LSBhcy5pbnRlZ2VyKGFzLmNoYXJhY3RlcihpbnQpKVxuICBkYl9yb3dzX2JsayRnZW9pZF9ibGsgPC0gYXMuY2hhcmFjdGVyKGJsa19tYXAkR0VPSUQxMFt1bmxpc3QoaW50MildKVxuICBwcmludChwYXN0ZShcInNhdmluZ1wiLCBnZW9pZF9zdCwgXCJyZXN1bHRzXCIpKVxuICBmaWxlX3BhdGggPC0gcGFzdGUwKFwiZGF0YS93b3JraW5nL3NhbGVzX3dpdGhfYmxrX1wiLCBnZW9pZF9zdCwgXCIuUkRTXCIpXG4gIHNhdmVSRFMoZGJfcm93c19ibGssIGZpbGVfcGF0aClcbiAgcm0oYmxrX21hcClcbn1cblxuZ2VvaWRzX3N0IDwtIHRpZ3Jpczo6c3RhdGVzKClcbmdlb2lkc19zdCRnZW9tZXRyeSA8LSBOVUxMXG5nZW9pZHNfc3QgPC0gZ2VvaWRzX3N0WyFnZW9pZHNfc3QkR0VPSUQgJWluJSBjKFwiNzhcIiwgXCI2OVwiLCBcIjYwXCIsIFwiNzJcIiwgXCIxMlwiLCBcIjUxXCIsIFwiNTRcIiksIGMoXCJHRU9JRFwiKV1cblxubGlicmFyeShkb1BhcmFsbGVsKVxuXG5jbCA8LSBtYWtlRm9ya0NsdXN0ZXIoNiwgb3V0ZmlsZSA9IFwic3JjL3BhcmxvZ1wiKVxuZG9QYXJhbGxlbDo6cmVnaXN0ZXJEb1BhcmFsbGVsKGNsKVxuXG5nZW9pZHNfc3RfdGVzdCA8LSBnZW9pZHNfc3RbMjE6NDldXG5yZXMgPC0gZm9yZWFjaChpID0gMTpsZW5ndGgoZ2VvaWRzX3N0X3Rlc3QpKSAlZG9wYXIlIHtcbiAgZ2V0X2Jsb2NrcyhnZW9pZHNfc3RfdGVzdFtpXSlcbn1cblxucGFyYWxsZWw6OnN0b3BDbHVzdGVyKGNsKVxuXG5cbmZpbGVfcGF0aHMgPC0gbGlzdC5maWxlcyhcImRhdGEvd29ya2luZy9cIiwgcGF0dGVybiA9IFwic2FsZXNfd2l0aF9ibGsqXCIsIGZ1bGwubmFtZXMgPSBUUlVFKVxuY29uIDwtIGdldF9kYl9jb25uKClcbmRhdCA8LSByZWFkUkRTKGZpbGVfcGF0aHNbMV0pXG5zZjo6ZGJXcml0ZVRhYmxlKGNvbiwgYyhcImNvcmVsb2dpY191c2RhXCIsIFwic2FsZXNfd2l0aF9ibGtcIiksIGRhdClcbnJtKGRhdClcbkRCSTo6ZGJEaXNjb25uZWN0KGNvbilcblxubGlicmFyeShkb1BhcmFsbGVsKVxubGlicmFyeShzZilcbmxpYnJhcnkoUlBvc3RncmVTUUwpXG5saWJyYXJ5KGRhdGEudGFibGUpXG5cbmNsIDwtIG1ha2VGb3JrQ2x1c3Rlcig2LCBvdXRmaWxlID0gXCJzcmMvcGFybG9nXCIpXG5kb1BhcmFsbGVsOjpyZWdpc3RlckRvUGFyYWxsZWwoY2wpXG5cbmZpbGVfcGF0aHNfMiA8LSBmaWxlX3BhdGhzWzI6NDVdXG5yZXMgPC0gZm9yZWFjaChpID0gMTpsZW5ndGgoZmlsZV9wYXRoc18yKSkgJWRvcGFyJSB7XG4gIGNvbiA8LSBnZXRfZGJfY29ubigpXG4gIHByaW50KHBhc3RlKFwicmVhZGluZ1wiLCBmaWxlX3BhdGhzXzJbaV0pKVxuICBkYXQgPC0gcmVhZFJEUyhmaWxlX3BhdGhzXzJbaV0pXG4gIHByaW50KHBhc3RlKFwid3JpdGluZ1wiLCBmaWxlX3BhdGhzXzJbaV0pKVxuICBzZjo6ZGJXcml0ZVRhYmxlKGNvbiwgYyhcImNvcmVsb2dpY191c2RhXCIsIFwic2FsZXNfd2l0aF9ibGtcIiksIGRhdCwgYXBwZW5kID0gVFJVRSlcbiAgcm0oZGF0KVxuICBEQkk6OmRiRGlzY29ubmVjdChjb24pXG59XG5cbnBhcmFsbGVsOjpzdG9wQ2x1c3RlcihjbClcbmBgYCJ9 -->
-<pre class="r"><code>get_blocks &lt;- function(geoid_st = &quot;51&quot;) {
-  sql &lt;- paste0(&quot;select geoid_cnty, p_id_iris_frmtd, geometry
-               from corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog
-               where property_centroid_longitude IS NOT NULL AND geoid_cnty LIKE &#39;&quot;, geoid_st,&quot;%&#39;&quot;)
-  con &lt;- get_db_conn()
-  print(paste(&quot;getting&quot;, geoid_st, &quot;rows&quot;))
-  db_rows_blk &lt;- st_read(con, query = sql)
-  DBI::dbDisconnect(con)
-  blk_map_path &lt;- paste0(&quot;/home/ads7fg/sdad/projects_data/usda/bb/original/censusblocks/blocks_TIGER2018_sf_RDS/tl_2018_&quot;, geoid_st, &quot;_tabblock10.RDS&quot;)
-  print(paste(&quot;getting&quot;, geoid_st, &quot;blocks&quot;))
-  blk_map &lt;- readRDS(blk_map_path) %&gt;%
-    sf::st_transform(4326)
-  print(paste(&quot;getting&quot;, geoid_st, &quot;interesection&quot;))
-  int &lt;- sf::st_intersects(db_rows_blk, blk_map)
-  int2 &lt;- as.integer(as.character(int))
-  db_rows_blk$geoid_blk &lt;- as.character(blk_map$GEOID10[unlist(int2)])
-  print(paste(&quot;saving&quot;, geoid_st, &quot;results&quot;))
-  file_path &lt;- paste0(&quot;data/working/sales_with_blk_&quot;, geoid_st, &quot;.RDS&quot;)
-  saveRDS(db_rows_blk, file_path)
-  rm(blk_map)
-}
-
-geoids_st &lt;- tigris::states()
-geoids_st$geometry &lt;- NULL
-geoids_st &lt;- geoids_st[!geoids_st$GEOID %in% c(&quot;78&quot;, &quot;69&quot;, &quot;60&quot;, &quot;72&quot;, &quot;12&quot;, &quot;51&quot;, &quot;54&quot;), c(&quot;GEOID&quot;)]
-
-library(doParallel)
-
-cl &lt;- makeForkCluster(6, outfile = &quot;src/parlog&quot;)
-doParallel::registerDoParallel(cl)
-
-geoids_st_test &lt;- geoids_st[21:49]
-res &lt;- foreach(i = 1:length(geoids_st_test)) %dopar% {
-  get_blocks(geoids_st_test[i])
-}
-
-parallel::stopCluster(cl)
-
-
-file_paths &lt;- list.files(&quot;data/working/&quot;, pattern = &quot;sales_with_blk*&quot;, full.names = TRUE)
-con &lt;- get_db_conn()
-dat &lt;- readRDS(file_paths[1])
-sf::dbWriteTable(con, c(&quot;corelogic_usda&quot;, &quot;sales_with_blk&quot;), dat)
-rm(dat)
-DBI::dbDisconnect(con)
-
-library(doParallel)
-library(sf)
-library(RPostgreSQL)
-library(data.table)
-
-cl &lt;- makeForkCluster(6, outfile = &quot;src/parlog&quot;)
-doParallel::registerDoParallel(cl)
-
-file_paths_2 &lt;- file_paths[2:45]
-res &lt;- foreach(i = 1:length(file_paths_2)) %dopar% {
-  con &lt;- get_db_conn()
-  print(paste(&quot;reading&quot;, file_paths_2[i]))
-  dat &lt;- readRDS(file_paths_2[i])
-  print(paste(&quot;writing&quot;, file_paths_2[i]))
-  sf::dbWriteTable(con, c(&quot;corelogic_usda&quot;, &quot;sales_with_blk&quot;), dat, append = TRUE)
-  rm(dat)
-  DBI::dbDisconnect(con)
-}
-
-parallel::stopCluster(cl)</code></pre>
+ALTER TABLE corelogic_usda.current_tax_200627_latest_all_add_vars RENAME COLUMN property_centroid_latitude_ TO property_centroid_latitude;</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyMgTG9hZCBsaWJyYXJpZXMgYW5kIGZ1bmN0aW9ucwoKYGBge3J9CnNvdXJjZSgiLi4vUi9mdW5jdGlvbnMuUiIpCmxpYnJhcnkoZGF0YS50YWJsZSkKbGlicmFyeShkYXRhcGx1bWJyKQpsaWJyYXJ5KGZvcmVhY2gpCmxpYnJhcnkoZG9QYXJhbGxlbCkKbGlicmFyeShEQkkpCmxpYnJhcnkoZ2x1ZSkKYGBgCgpgYGB7cn0KY29uIDwtIGdldF9kYl9jb25uKCkKYGBgCgojIyBDcmVhdGUgYmF0aHNfYXBwcmFpc2VkIGFuZCBzYWxlX3llYXIKCiMjIyMgU2FsZSBZZWFyCgpQbGFubmVkIGFuYWx5c2VzIGluY2x1ZGUgYW5hbHlzaXMgYnkgeWVhciBvZiBzYWxlLiBDcmVhdGluZyBhIHNlcGFyYXRlIGluZGV4ZWQgY29sdW1uIGZvciB5ZWFyIHNob3VsZCBiZSBmYXN0ZXIgdGhhbiByZXBlYXRlZGx5IHVzaW5nIERBVEVQQVJUKCd5ZWFyJywgc2FsZV9kYXRlKS4KCiMjIyMgQmF0aHJvb21zCgpVc2luZyB0aGUgRmFubmllIE1hZSBhbmQgRnJlZGRpZSBNYWMgVW5pZm9ybSBBcHByYWlzYWwgRGF0YXNldCBTcGVjaWZpY2F0aW9uIHRvIGNhbGN1bGF0ZSB0b3RhbCBiYXRocm9vbXMuIDMvNCBiYXRocyBjb3VudCBhcyBmdWxsIGJhdGhzLCAxLzQgYmF0aHMgYXJlIGRyb3BwZWQsIGhhbGYgYmF0aCBpcyAuMSBvZiBmdWxsIGJhdGgsIHNvIDEgeCBmdWxsIGJhdGggJiAxIHggMy80IGJhdGggJiAxIHggaGFsZiBiYXRoID0gMi4xIGJhdGhzICgyIGZ1bGwgYmF0aHMsIDEgaGFsZiBiYXRoKS4KCmBgYHtzcWwgY29ubmVjdGlvbj1jb259ClNFTEVDVCAqLAogICAgICAgREFURV9QQVJUKCd5ZWFyJywgc2FsZV9kYXRlKTo6SU5URUdFUiBBUyBzYWxlX3llYXIsCiAgICAgICBOVUxMSUYoY29hbGVzY2UoZnVsbF9iYXRocywgMCkgKyBjb2FsZXNjZSh0aHJxdHJfYmF0aHMsIDApICsgKC4xICogY29hbGVzY2UoaGFsZl9iYXRocywgMCkpLCAwKSBBUyBiYXRoc19hcHByYWlzZWQKSU5UTyBjb3JlbG9naWNfdXNkYS5jdXJyZW50X3RheF8yMDA2MjdfbGF0ZXN0X2FsbF9hZGRfdmFycwpGUk9NIGNvcmVsb2dpY191c2RhLmN1cnJlbnRfdGF4XzIwMDYyN19sYXRlc3RfYWxsOwoKQUxURVIgVEFCTEUgY29yZWxvZ2ljX3VzZGEuY3VycmVudF90YXhfMjAwNjI3X2xhdGVzdF9hbGxfYWRkX3ZhcnMgQUREIFBSSU1BUlkgS0VZIChnZW9pZF9jbnR5LCBwX2lkX2lyaXNfZnJtdGQpOwpgYGAKCiMjIENyZWF0ZSBDRU5TVVMgYmxvY2sgdmFyaWFibGUsIGdlb2lkX2Jsb2NrY2UKCkJ5IGFkZGluZyBhIGdlb2lkIHRoYXQgZ29lcyBkb3duIHRvIHRoZSBjZW5zdXMgYmxvY2sgbGV2ZWwsIHdlIGNhbiBhc3NvY2lhdGUgZGVtb2dyYXBoaWMgZGF0YSBjb2xsZWN0ZWQgYnkgdGhlIENlbnN1cyB3aXRoIGVhY2ggcHJvcGVydHkuCgojIyMgRmlyc3QsIEZpeCBMb25naXR1ZGUgYW5kIExhdGl0dWRlIENvbHVtbiBOYW1lcyEKClRoZSBjb2x1bW4gbmFtZXMgYXJlIHN3aXRjaGVkIGluIHRoaXMgZGF0YXNldCEgTG9uZ2l0dWRlIGlzIGxhdGl0dWRlIGFuZCB2aWNlIHZlcnNhLgoKYGBge3NxbCBjb25uZWN0aW9uPWNvbn0KQUxURVIgVEFCTEUgY29yZWxvZ2ljX3VzZGEuY3VycmVudF90YXhfMjAwNjI3X2xhdGVzdF9hbGxfYWRkX3ZhcnMgUkVOQU1FIENPTFVNTiBwcm9wZXJ0eV9jZW50cm9pZF9sb25naXR1ZGUgVE8gcHJvcGVydHlfY2VudHJvaWRfbGF0aXR1ZGVfOwpBTFRFUiBUQUJMRSBjb3JlbG9naWNfdXNkYS5jdXJyZW50X3RheF8yMDA2MjdfbGF0ZXN0X2FsbF9hZGRfdmFycyBSRU5BTUUgQ09MVU1OIHByb3BlcnR5X2NlbnRyb2lkX2xhdGl0dWRlIFRPIHByb3BlcnR5X2NlbnRyb2lkX2xvbmdpdHVkZTsKQUxURVIgVEFCTEUgY29yZWxvZ2ljX3VzZGEuY3VycmVudF90YXhfMjAwNjI3X2xhdGVzdF9hbGxfYWRkX3ZhcnMgUkVOQU1FIENPTFVNTiBwcm9wZXJ0eV9jZW50cm9pZF9sYXRpdHVkZV8gVE8gcHJvcGVydHlfY2VudHJvaWRfbGF0aXR1ZGU7CgpgYGAKCiMjIyBHZXQgYmxvY2tzCgpUSElTIEFMTCBORUVEUyBUTyBCRSBVUERBVEVECgpgYGB7cn0KZ2V0X2Jsb2NrcyA8LSBmdW5jdGlvbihnZW9pZF9zdCA9ICI1MSIpIHsKICBzcWwgPC0gcGFzdGUwKCJzZWxlY3QgZ2VvaWRfY250eSwgcF9pZF9pcmlzX2ZybXRkLCBnZW9tZXRyeQogICAgICAgICAgICAgICBmcm9tIGNvcmVsb2dpY191c2RhLmJyb2FkYmFuZF92YXJpYWJsZXNfdGF4XzIwMjBfMDZfMjdfdW5xX3Byb2cKICAgICAgICAgICAgICAgd2hlcmUgcHJvcGVydHlfY2VudHJvaWRfbG9uZ2l0dWRlIElTIE5PVCBOVUxMIEFORCBnZW9pZF9jbnR5IExJS0UgJyIsIGdlb2lkX3N0LCIlJyIpCiAgY29uIDwtIGdldF9kYl9jb25uKCkKICBwcmludChwYXN0ZSgiZ2V0dGluZyIsIGdlb2lkX3N0LCAicm93cyIpKQogIGRiX3Jvd3NfYmxrIDwtIHN0X3JlYWQoY29uLCBxdWVyeSA9IHNxbCkKICBEQkk6OmRiRGlzY29ubmVjdChjb24pCiAgYmxrX21hcF9wYXRoIDwtIHBhc3RlMCgiL2hvbWUvYWRzN2ZnL3NkYWQvcHJvamVjdHNfZGF0YS91c2RhL2JiL29yaWdpbmFsL2NlbnN1c2Jsb2Nrcy9ibG9ja3NfVElHRVIyMDE4X3NmX1JEUy90bF8yMDE4XyIsIGdlb2lkX3N0LCAiX3RhYmJsb2NrMTAuUkRTIikKICBwcmludChwYXN0ZSgiZ2V0dGluZyIsIGdlb2lkX3N0LCAiYmxvY2tzIikpCiAgYmxrX21hcCA8LSByZWFkUkRTKGJsa19tYXBfcGF0aCkgJT4lCiAgICBzZjo6c3RfdHJhbnNmb3JtKDQzMjYpCiAgcHJpbnQocGFzdGUoImdldHRpbmciLCBnZW9pZF9zdCwgImludGVyZXNlY3Rpb24iKSkKICBpbnQgPC0gc2Y6OnN0X2ludGVyc2VjdHMoZGJfcm93c19ibGssIGJsa19tYXApCiAgaW50MiA8LSBhcy5pbnRlZ2VyKGFzLmNoYXJhY3RlcihpbnQpKQogIGRiX3Jvd3NfYmxrJGdlb2lkX2JsayA8LSBhcy5jaGFyYWN0ZXIoYmxrX21hcCRHRU9JRDEwW3VubGlzdChpbnQyKV0pCiAgcHJpbnQocGFzdGUoInNhdmluZyIsIGdlb2lkX3N0LCAicmVzdWx0cyIpKQogIGZpbGVfcGF0aCA8LSBwYXN0ZTAoImRhdGEvd29ya2luZy9zYWxlc193aXRoX2Jsa18iLCBnZW9pZF9zdCwgIi5SRFMiKQogIHNhdmVSRFMoZGJfcm93c19ibGssIGZpbGVfcGF0aCkKICBybShibGtfbWFwKQp9CgpnZW9pZHNfc3QgPC0gdGlncmlzOjpzdGF0ZXMoKQpnZW9pZHNfc3QkZ2VvbWV0cnkgPC0gTlVMTApnZW9pZHNfc3QgPC0gZ2VvaWRzX3N0WyFnZW9pZHNfc3QkR0VPSUQgJWluJSBjKCI3OCIsICI2OSIsICI2MCIsICI3MiIsICIxMiIsICI1MSIsICI1NCIpLCBjKCJHRU9JRCIpXQoKbGlicmFyeShkb1BhcmFsbGVsKQoKY2wgPC0gbWFrZUZvcmtDbHVzdGVyKDYsIG91dGZpbGUgPSAic3JjL3BhcmxvZyIpCmRvUGFyYWxsZWw6OnJlZ2lzdGVyRG9QYXJhbGxlbChjbCkKCmdlb2lkc19zdF90ZXN0IDwtIGdlb2lkc19zdFsyMTo0OV0KcmVzIDwtIGZvcmVhY2goaSA9IDE6bGVuZ3RoKGdlb2lkc19zdF90ZXN0KSkgJWRvcGFyJSB7CiAgZ2V0X2Jsb2NrcyhnZW9pZHNfc3RfdGVzdFtpXSkKfQoKcGFyYWxsZWw6OnN0b3BDbHVzdGVyKGNsKQoKCmZpbGVfcGF0aHMgPC0gbGlzdC5maWxlcygiZGF0YS93b3JraW5nLyIsIHBhdHRlcm4gPSAic2FsZXNfd2l0aF9ibGsqIiwgZnVsbC5uYW1lcyA9IFRSVUUpCmNvbiA8LSBnZXRfZGJfY29ubigpCmRhdCA8LSByZWFkUkRTKGZpbGVfcGF0aHNbMV0pCnNmOjpkYldyaXRlVGFibGUoY29uLCBjKCJjb3JlbG9naWNfdXNkYSIsICJzYWxlc193aXRoX2JsayIpLCBkYXQpCnJtKGRhdCkKREJJOjpkYkRpc2Nvbm5lY3QoY29uKQoKbGlicmFyeShkb1BhcmFsbGVsKQpsaWJyYXJ5KHNmKQpsaWJyYXJ5KFJQb3N0Z3JlU1FMKQpsaWJyYXJ5KGRhdGEudGFibGUpCgpjbCA8LSBtYWtlRm9ya0NsdXN0ZXIoNiwgb3V0ZmlsZSA9ICJzcmMvcGFybG9nIikKZG9QYXJhbGxlbDo6cmVnaXN0ZXJEb1BhcmFsbGVsKGNsKQoKZmlsZV9wYXRoc18yIDwtIGZpbGVfcGF0aHNbMjo0NV0KcmVzIDwtIGZvcmVhY2goaSA9IDE6bGVuZ3RoKGZpbGVfcGF0aHNfMikpICVkb3BhciUgewogIGNvbiA8LSBnZXRfZGJfY29ubigpCiAgcHJpbnQocGFzdGUoInJlYWRpbmciLCBmaWxlX3BhdGhzXzJbaV0pKQogIGRhdCA8LSByZWFkUkRTKGZpbGVfcGF0aHNfMltpXSkKICBwcmludChwYXN0ZSgid3JpdGluZyIsIGZpbGVfcGF0aHNfMltpXSkpCiAgc2Y6OmRiV3JpdGVUYWJsZShjb24sIGMoImNvcmVsb2dpY191c2RhIiwgInNhbGVzX3dpdGhfYmxrIiksIGRhdCwgYXBwZW5kID0gVFJVRSkKICBybShkYXQpCiAgREJJOjpkYkRpc2Nvbm5lY3QoY29uKQp9CgpwYXJhbGxlbDo6c3RvcENsdXN0ZXIoY2wpCmBgYAo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyMgTG9hZCBsaWJyYXJpZXMgYW5kIGZ1bmN0aW9ucwoKYGBge3IsIGV2YWw9RkFMU0V9CnNvdXJjZSgiLi4vUi9mdW5jdGlvbnMuUiIpCmxpYnJhcnkoZGF0YS50YWJsZSkKbGlicmFyeShkYXRhcGx1bWJyKQpsaWJyYXJ5KGZvcmVhY2gpCmxpYnJhcnkoZG9QYXJhbGxlbCkKbGlicmFyeShEQkkpCmxpYnJhcnkoZ2x1ZSkKYGBgCgpgYGB7ciwgZXZhbD1GQUxTRX0KY29uIDwtIGdldF9kYl9jb25uKCkKYGBgCgojIyBDcmVhdGUgYmF0aHNfYXBwcmFpc2VkIGFuZCBzYWxlX3llYXIKCiMjIyMgU2FsZSBZZWFyCgpQbGFubmVkIGFuYWx5c2VzIGluY2x1ZGUgYW5hbHlzaXMgYnkgeWVhciBvZiBzYWxlLiBDcmVhdGluZyBhIHNlcGFyYXRlIGluZGV4ZWQgY29sdW1uIGZvciB5ZWFyIHNob3VsZCBiZSBmYXN0ZXIgdGhhbiByZXBlYXRlZGx5IHVzaW5nIERBVEVQQVJUKCd5ZWFyJywgc2FsZV9kYXRlKS4KCiMjIyMgQmF0aHJvb21zCgpVc2luZyB0aGUgRmFubmllIE1hZSBhbmQgRnJlZGRpZSBNYWMgVW5pZm9ybSBBcHByYWlzYWwgRGF0YXNldCBTcGVjaWZpY2F0aW9uIHRvIGNhbGN1bGF0ZSB0b3RhbCBiYXRocm9vbXMuIDMvNCBiYXRocyBjb3VudCBhcyBmdWxsIGJhdGhzLCAxLzQgYmF0aHMgYXJlIGRyb3BwZWQsIGhhbGYgYmF0aCBpcyAuMSBvZiBmdWxsIGJhdGgsIHNvIDEgeCBmdWxsIGJhdGggJiAxIHggMy80IGJhdGggJiAxIHggaGFsZiBiYXRoID0gMi4xIGJhdGhzICgyIGZ1bGwgYmF0aHMsIDEgaGFsZiBiYXRoKS4KCmBgYHtzcWwgY29ubmVjdGlvbj1jb24sIGV2YWw9RkFMU0V9ClNFTEVDVCAqLAogICAgICAgREFURV9QQVJUKCd5ZWFyJywgc2FsZV9kYXRlKTo6SU5URUdFUiBBUyBzYWxlX3llYXIsCiAgICAgICBOVUxMSUYoY29hbGVzY2UoZnVsbF9iYXRocywgMCkgKyBjb2FsZXNjZSh0aHJxdHJfYmF0aHMsIDApICsgKC4xICogY29hbGVzY2UoaGFsZl9iYXRocywgMCkpLCAwKSBBUyBiYXRoc19hcHByYWlzZWQKSU5UTyBjb3JlbG9naWNfdXNkYS5jdXJyZW50X3RheF8yMDA2MjdfbGF0ZXN0X2FsbF9hZGRfdmFycwpGUk9NIGNvcmVsb2dpY191c2RhLmN1cnJlbnRfdGF4XzIwMDYyN19sYXRlc3RfYWxsOwoKQUxURVIgVEFCTEUgY29yZWxvZ2ljX3VzZGEuY3VycmVudF90YXhfMjAwNjI3X2xhdGVzdF9hbGxfYWRkX3ZhcnMgQUREIFBSSU1BUlkgS0VZIChnZW9pZF9jbnR5LCBwX2lkX2lyaXNfZnJtdGQpOwpgYGAKCiMjIyBGaXJzdCwgRml4IExvbmdpdHVkZSBhbmQgTGF0aXR1ZGUgQ29sdW1uIE5hbWVzIQoKVGhlIGNvbHVtbiBuYW1lcyBhcmUgc3dpdGNoZWQgaW4gdGhpcyBkYXRhc2V0ISBMb25naXR1ZGUgaXMgbGF0aXR1ZGUgYW5kIHZpY2UgdmVyc2EuCgpgYGB7c3FsIGNvbm5lY3Rpb249Y29uLCBldmFsPUZBTFNFfQpBTFRFUiBUQUJMRSBjb3JlbG9naWNfdXNkYS5jdXJyZW50X3RheF8yMDA2MjdfbGF0ZXN0X2FsbF9hZGRfdmFycyBSRU5BTUUgQ09MVU1OIHByb3BlcnR5X2NlbnRyb2lkX2xvbmdpdHVkZSBUTyBwcm9wZXJ0eV9jZW50cm9pZF9sYXRpdHVkZV87CkFMVEVSIFRBQkxFIGNvcmVsb2dpY191c2RhLmN1cnJlbnRfdGF4XzIwMDYyN19sYXRlc3RfYWxsX2FkZF92YXJzIFJFTkFNRSBDT0xVTU4gcHJvcGVydHlfY2VudHJvaWRfbGF0aXR1ZGUgVE8gcHJvcGVydHlfY2VudHJvaWRfbG9uZ2l0dWRlOwpBTFRFUiBUQUJMRSBjb3JlbG9naWNfdXNkYS5jdXJyZW50X3RheF8yMDA2MjdfbGF0ZXN0X2FsbF9hZGRfdmFycyBSRU5BTUUgQ09MVU1OIHByb3BlcnR5X2NlbnRyb2lkX2xhdGl0dWRlXyBUTyBwcm9wZXJ0eV9jZW50cm9pZF9sYXRpdHVkZTsKCmBgYAo=</div>
 
 
 

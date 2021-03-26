@@ -1,0 +1,13 @@
+name: corelogic
+title: corelogic
+username:
+account: dads2busy
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2888214
+bundleId: 3670446
+url: https://dspgtools.shinyapps.io/corelogic/
+when: 1601044960.13999
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: corelogic_usda_2.sql|corelogic_usda.sql|test1.Rmd|test1.sql

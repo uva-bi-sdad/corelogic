@@ -1,15 +1,23 @@
 ---
-title: "R Notebook"
-output: html_notebook
+title: "Split and Parallel Import Large Data File"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
 ---
 
-# Split and Parallel Import Large Data File
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  eval=FALSE
+)
+```
 
 Import of 174GB file: Corelogic_USDA_Current_Tax_2020_06_27.txt
 
 ## Load libraries and functions
 
-```{r}
+```{r, eval=FALSE}
+# {r}
 source("R/functions.R")
 library(data.table)
 library(dataplumbr)
@@ -23,6 +31,7 @@ library(DBI)
 #### Files and directories
 
 ```{r}
+# {r}
 file_dir <- "/project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files"
 file_name <- "Corelogic_USDA_Current_Tax_2020_06_27.txt"
 file_path <- file.path(file_dir, file_name)
@@ -31,6 +40,7 @@ file_path <- file.path(file_dir, file_name)
 #### Database
 
 ```{r}
+# {r}
 schema_name <- "corelogic_usda"
 table_name <- "current_tax_200627_raw"
 ```
@@ -42,13 +52,15 @@ table_name <- "current_tax_200627_raw"
 System-level environmental variables are set to enable their use by command line functions
 
 ```{r}
+# {r}
 Sys.setenv(file_dir=file_dir)
 Sys.setenv(file_path=file_path)
 ```
 
-#### Create directory for split files
+#### Create directory for split files from the terminal
 
 ```{bash}
+# {bash}
 mkdir $file_dir/splits/
 rm -r $file_dir/splits/*
 ```
@@ -58,6 +70,7 @@ rm -r $file_dir/splits/*
 Use system split function to create files not too large to be handled for import into R. In this case we are creating files with a maximum of 1,000,000 lines each
 
 ```{bash}
+# {bash} * Might run in terminal depending on size
 split -l1000000 $file_path $file_dir/splits/
 ```
 
@@ -66,6 +79,7 @@ split -l1000000 $file_path $file_dir/splits/
 #### Get first split file path and read with data.table
 
 ```{r}
+# {r}
 file_paths <- list.files(path = file.path(file_dir, "splits"), full.names = T)
 first_split_file <- file_paths[1]
 tbl <- fread(first_split_file, colClasses = "character", select = 1:188, quote = "")
@@ -74,6 +88,7 @@ tbl <- fread(first_split_file, colClasses = "character", select = 1:188, quote =
 #### Standardize column names for the database
 
 ```{r}
+# {r}
 db_col_names <- dataplumbr::name.standard_col_names(colnames(tbl)) %>%
   stringr::str_replace("^_", "") %>%
   stringr::str_replace("_$", "")
@@ -83,6 +98,7 @@ colnames(tbl) <- db_col_names
 ## Write data to new database table
 
 ```{r}
+# {r}
 con <- get_db_conn()
 dbWriteTable(con, c(schema_name, table_name), tbl, overwrite = T, row.names = F)
 dbDisconnect(con)
@@ -93,6 +109,7 @@ rm(tbl)
 ## Read remaining split files and upload to database
 
 ```{r}
+# {r}
 # core_num <- parallel::detectCores() - 2
 cl <- makeCluster(6, outfile = "src/parlog")
 doParallel::registerDoParallel(cl)

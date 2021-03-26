@@ -1,0 +1,29 @@
+name: "my-website"
+output_dir: "../docs"
+exclude: ["*.nb.html", "*.R", "*.RDS", "*.csv", "*.CSV", "*.dcf", "parlog", "old", "dashboard"]
+navbar:
+  title: "The Dataset Creation Pipeline"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Import (Parallel)"
+      href: data_pipeline_01.html
+    - text: "Fix Types"
+      href: data_pipeline_02_clean_and_type.html
+    - text: "Latest Only"
+      href: data_pipeline_03_build_latest_data_set.html
+    - text: "Add Variables"
+      menu:
+        - text: By Transforming Other Columns
+          href: data_pipeline_04_add_vars_transforms.html
+        - text: By Adding External Data
+          href: data_pipeline_05_add_vars_external.html
+        - text: By Adding Geography
+          href: data_pipeline_05_add_vars_external_2.html
+    - text: "Filter"
+      href: data_pipeline_07_filter_records.html
+    - text: "Profile"
+      menu:
+        - text: "Individual Variables"
+          href: data_pipeline_08_profile_variables.html
+        - text: "Related Variables"

@@ -120,6 +120,76 @@ pre code {
 }
 </style>
 
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
 
 <!-- tabsets -->
 
@@ -195,6 +265,35 @@ pre code {
 
 
 
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">The Dataset Creation Pipeline</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="data_pipeline_01.html">Notebook</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
 <div id="header">
 
 <div class="btn-group pull-right float-right">
@@ -220,11 +319,28 @@ pre code {
 <p>By adding a geoid that goes down to the census block level, we can associate demographic data collected by the Census with each property.</p>
 <div id="get-blocks" class="section level3">
 <h3>Get blocks</h3>
-<p>THIS ALL NEEDS TO BE UPDATED</p>
+<p>THIS ALL NEEDS TO BE UPDATED - DO INTERSECT IN POSTGIS?</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2V0X2Jsb2NrcyA8LSBmdW5jdGlvbihnZW9pZF9zdCA9IFwiNTFcIikgeyBzcWwgPC0gcGFzdGUwKFwic2VsZWN0IGdlb2lkX2NudHksIHBfaWRfaXJpc19mcm10ZCwgZ2VvbWV0cnkgZnJvbSBjb3JlbG9naWNfdXNkYS5icm9hZGJhbmRfdmFyaWFibGVzX3RheF8yMDIwXzA2XzI3X3VucV9wcm9nIHdoZXJlIHByb3BlcnR5X2NlbnRyb2lkX2xvbmdpdHVkZSBJUyBOT1QgTlVMTCBBTkQgZ2VvaWRfY250eSBMSUtFICdcIiwgZ2VvaWRfc3QsXCIlJ1wiKSBjb24gPC0gZ2V0X2RiX2Nvbm4oKSBwcmludChwYXN0ZShcImdldHRpbmdcIiwgZ2VvaWRfc3QsIFwicm93c1wiKSkgZGJfcm93c19ibGsgPC0gc3RfcmVhZChjb24sIHF1ZXJ5ID0gc3FsKSBEQkk6OmRiRGlzY29ubmVjdChjb24pIGJsa19tYXBfcGF0aCA8LSBwYXN0ZTAoXCIvaG9tZS9hZHM3Zmcvc2RhZC9wcm9qZWN0c19kYXRhL3VzZGEvYmIvb3JpZ2luYWwvY2Vuc3VzYmxvY2tzL2Jsb2Nrc19USUdFUjIwMThfc2ZfUkRTL3RsXzIwMThfXCIsIGdlb2lkX3N0LCBcInRhYmJsb2NrMTAuUkRTXCIpIHByaW50KHBhc3RlKFwiZ2V0dGluZ1wiLCBnZW9pZF9zdCwgXCJibG9ja3NcIikpIGJsa19tYXAgPC0gcmVhZFJEUyhibGtfbWFwX3BhdGgpICU+JSBzZjo6c3RfdHJhbnNmb3JtKDQzMjYpIHByaW50KHBhc3RlKFwiZ2V0dGluZ1wiLCBnZW9pZF9zdCwgXCJpbnRlcmVzZWN0aW9uXCIpKSBpbnQgPC0gc2Y6OnN0X2ludGVyc2VjdHMoZGJfcm93c19ibGssIGJsa19tYXApIGludDIgPC0gYXMuaW50ZWdlcihhcy5jaGFyYWN0ZXIoaW50KSkgZGJfcm93c19ibGskZ2VvaWRfYmxrIDwtIGFzLmNoYXJhY3RlcihibGtfbWFwJEdFT0lEMTBbdW5saXN0KGludDIpXSkgcHJpbnQocGFzdGUoXCJzYXZpbmdcIiwgZ2VvaWRfc3QsIFwicmVzdWx0c1wiKSkgZmlsZV9wYXRoIDwtIHBhc3RlMChcImRhdGEvd29ya2luZy9zYWxlc193aXRoX2Jsa1wiLCBnZW9pZF9zdCwgXCIuUkRTXCIpIHNhdmVSRFMoZGJfcm93c19ibGssIGZpbGVfcGF0aCkgcm0oYmxrX21hcCkgfVxuXG5nZW9pZHNfc3QgPC0gdGlncmlzOjpzdGF0ZXMoKSBnZW9pZHNfc3QkZ2VvbWV0cnkgPC0gTlVMTCBnZW9pZHNfc3QgPC0gZ2VvaWRzX3N0WyFnZW9pZHNfc3QkR0VPSUQgJWluJSBjKFwiNzhcIiwgXCI2OVwiLCBcIjYwXCIsIFwiNzJcIiwgXCIxMlwiLCBcIjUxXCIsIFwiNTRcIiksIGMoXCJHRU9JRFwiKV1cblxubGlicmFyeShkb1BhcmFsbGVsKVxuXG5jbCA8LSBtYWtlRm9ya0NsdXN0ZXIoNiwgb3V0ZmlsZSA9IFwic3JjL3BhcmxvZ1wiKSBkb1BhcmFsbGVsOjpyZWdpc3RlckRvUGFyYWxsZWwoY2wpXG5cbmdlb2lkc19zdF90ZXN0IDwtIGdlb2lkc19zdFsyMTo0OV0gcmVzIDwtIGZvcmVhY2goaSA9IDE6bGVuZ3RoKGdlb2lkc19zdF90ZXN0KSkgJWRvcGFyJSB7IGdldF9ibG9ja3MoZ2VvaWRzX3N0X3Rlc3RbaV0pIH1cblxucGFyYWxsZWw6OnN0b3BDbHVzdGVyKGNsKVxuXG5maWxlX3BhdGhzIDwtIGxpc3QuZmlsZXMoXCJkYXRhL3dvcmtpbmcvXCIsIHBhdHRlcm4gPSBcInNhbGVzX3dpdGhfYmxrKlwiLCBmdWxsLm5hbWVzID0gVFJVRSkgY29uIDwtIGdldF9kYl9jb25uKCkgZGF0IDwtIHJlYWRSRFMoZmlsZV9wYXRoc1sxXSkgc2Y6OmRiV3JpdGVUYWJsZShjb24sIGMoXCJjb3JlbG9naWNfdXNkYVwiLCBcInNhbGVzX3dpdGhfYmxrXCIpLCBkYXQpIHJtKGRhdCkgREJJOjpkYkRpc2Nvbm5lY3QoY29uKVxuXG5saWJyYXJ5KGRvUGFyYWxsZWwpIGxpYnJhcnkoc2YpIGxpYnJhcnkoUlBvc3RncmVTUUwpIGxpYnJhcnkoZGF0YS50YWJsZSlcblxuY2wgPC0gbWFrZUZvcmtDbHVzdGVyKDYsIG91dGZpbGUgPSBcInNyYy9wYXJsb2dcIikgZG9QYXJhbGxlbDo6cmVnaXN0ZXJEb1BhcmFsbGVsKGNsKVxuXG5maWxlX3BhdGhzXzIgPC0gZmlsZV9wYXRoc1syOjQ1XSByZXMgPC0gZm9yZWFjaChpID0gMTpsZW5ndGgoZmlsZV9wYXRoc18yKSkgJWRvcGFyJSB7IGNvbiA8LSBnZXRfZGJfY29ubigpIHByaW50KHBhc3RlKFwicmVhZGluZ1wiLCBmaWxlX3BhdGhzXzJbaV0pKSBkYXQgPC0gcmVhZFJEUyhmaWxlX3BhdGhzXzJbaV0pIHByaW50KHBhc3RlKFwid3JpdGluZ1wiLCBmaWxlX3BhdGhzXzJbaV0pKSBzZjo6ZGJXcml0ZVRhYmxlKGNvbiwgYyhcImNvcmVsb2dpY191c2RhXCIsIFwic2FsZXNfd2l0aF9ibGtcIiksIGRhdCwgYXBwZW5kID0gVFJVRSkgcm0oZGF0KSBEQkk6OmRiRGlzY29ubmVjdChjb24pIH1cblxucGFyYWxsZWw6OnN0b3BDbHVzdGVyKGNsKVxuYGBgIn0= -->
-<pre class="r"><code>get_blocks &lt;- function(geoid_st = &quot;51&quot;) { sql &lt;- paste0(&quot;select geoid_cnty, p_id_iris_frmtd, geometry from corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog where property_centroid_longitude IS NOT NULL AND geoid_cnty LIKE &#39;&quot;, geoid_st,&quot;%&#39;&quot;) con &lt;- get_db_conn() print(paste(&quot;getting&quot;, geoid_st, &quot;rows&quot;)) db_rows_blk &lt;- st_read(con, query = sql) DBI::dbDisconnect(con) blk_map_path &lt;- paste0(&quot;/home/ads7fg/sdad/projects_data/usda/bb/original/censusblocks/blocks_TIGER2018_sf_RDS/tl_2018_&quot;, geoid_st, &quot;tabblock10.RDS&quot;) print(paste(&quot;getting&quot;, geoid_st, &quot;blocks&quot;)) blk_map &lt;- readRDS(blk_map_path) %&gt;% sf::st_transform(4326) print(paste(&quot;getting&quot;, geoid_st, &quot;interesection&quot;)) int &lt;- sf::st_intersects(db_rows_blk, blk_map) int2 &lt;- as.integer(as.character(int)) db_rows_blk$geoid_blk &lt;- as.character(blk_map$GEOID10[unlist(int2)]) print(paste(&quot;saving&quot;, geoid_st, &quot;results&quot;)) file_path &lt;- paste0(&quot;data/working/sales_with_blk&quot;, geoid_st, &quot;.RDS&quot;) saveRDS(db_rows_blk, file_path) rm(blk_map) }
+<!-- rnb-source-begin eyJkYXRhIjpbImdldF9ibG9ja3MgPC0gZnVuY3Rpb24oZ2VvaWRfc3QgPSBcIjUxXCIpIHsgIiwiICBzcWwgPC0gcGFzdGUwKFwic2VsZWN0IGdlb2lkX2NudHksIHBfaWRfaXJpc19mcm10ZCwgZ2VvbWV0cnkgZnJvbSBjb3JlbG9naWNfdXNkYS5icm9hZGJhbmRfdmFyaWFibGVzX3RheF8yMDIwXzA2XzI3X3VucV9wcm9nIHdoZXJlIHByb3BlcnR5X2NlbnRyb2lkX2xvbmdpdHVkZSBJUyBOT1QgTlVMTCBBTkQgZ2VvaWRfY250eSBMSUtFICdcIiwgZ2VvaWRfc3QsXCIlJ1wiKSAiLCIgICIsIiAgY29uIDwtIGdldF9kYl9jb25uKCkgcHJpbnQocGFzdGUoXCJnZXR0aW5nXCIsIGdlb2lkX3N0LCBcInJvd3NcIikpICIsIiAgIiwiICBkYl9yb3dzX2JsayA8LSBzdF9yZWFkKGNvbiwgcXVlcnkgPSBzcWwpIERCSTo6ZGJEaXNjb25uZWN0KGNvbikgIiwiICAiLCIgIGJsa19tYXBfcGF0aCA8LSBwYXN0ZTAoXCIvaG9tZS9hZHM3Zmcvc2RhZC9wcm9qZWN0c19kYXRhL3VzZGEvYmIvb3JpZ2luYWwvY2Vuc3VzYmxvY2tzL2Jsb2Nrc19USUdFUjIwMThfc2ZfUkRTL3RsXzIwMThfXCIsIGdlb2lkX3N0LCBcInRhYmJsb2NrMTAuUkRTXCIpIHByaW50KHBhc3RlKFwiZ2V0dGluZ1wiLCBnZW9pZF9zdCwgXCJibG9ja3NcIikpICIsIiAgIiwiICBibGtfbWFwIDwtIHJlYWRSRFMoYmxrX21hcF9wYXRoKSAlPiUgc2Y6OnN0X3RyYW5zZm9ybSg0MzI2KSBwcmludChwYXN0ZShcImdldHRpbmdcIiwgZ2VvaWRfc3QsIFwiaW50ZXJlc2VjdGlvblwiKSkgIiwiICAiLCIgIGludCA8LSBzZjo6c3RfaW50ZXJzZWN0cyhkYl9yb3dzX2JsaywgYmxrX21hcCkgIiwiICAiLCIgIGludDIgPC0gYXMuaW50ZWdlcihhcy5jaGFyYWN0ZXIoaW50KSkgZGJfcm93c19ibGskZ2VvaWRfYmxrIDwtIGFzLmNoYXJhY3RlcihibGtfbWFwJEdFT0lEMTBbdW5saXN0KGludDIpXSkgcHJpbnQocGFzdGUoXCJzYXZpbmdcIiwgZ2VvaWRfc3QsIFwicmVzdWx0c1wiKSkgIiwiICAiLCIgIGZpbGVfcGF0aCA8LSBwYXN0ZTAoXCJkYXRhL3dvcmtpbmcvc2FsZXNfd2l0aF9ibGtcIiwgZ2VvaWRfc3QsIFwiLlJEU1wiKSAiLCIgICIsIiAgc2F2ZVJEUyhkYl9yb3dzX2JsaywgZmlsZV9wYXRoKSBybShibGtfbWFwKSB9IiwiIiwiZ2VvaWRzX3N0IDwtIHRpZ3Jpczo6c3RhdGVzKCkgZ2VvaWRzX3N0JGdlb21ldHJ5IDwtIE5VTEwgZ2VvaWRzX3N0IDwtIGdlb2lkc19zdFshZ2VvaWRzX3N0JEdFT0lEICVpbiUgYyhcIjc4XCIsIFwiNjlcIiwgXCI2MFwiLCBcIjcyXCIsIFwiMTJcIiwgXCI1MVwiLCBcIjU0XCIpLCBjKFwiR0VPSURcIildIiwiIiwibGlicmFyeShkb1BhcmFsbGVsKSIsIiIsImNsIDwtIG1ha2VGb3JrQ2x1c3Rlcig2LCBvdXRmaWxlID0gXCJzcmMvcGFybG9nXCIpIGRvUGFyYWxsZWw6OnJlZ2lzdGVyRG9QYXJhbGxlbChjbCkiLCIiLCJnZW9pZHNfc3RfdGVzdCA8LSBnZW9pZHNfc3RbMjE6NDldIHJlcyA8LSBmb3JlYWNoKGkgPSAxOmxlbmd0aChnZW9pZHNfc3RfdGVzdCkpICVkb3BhciUgeyBnZXRfYmxvY2tzKGdlb2lkc19zdF90ZXN0W2ldKSB9IiwiIiwicGFyYWxsZWw6OnN0b3BDbHVzdGVyKGNsKSIsIiIsImZpbGVfcGF0aHMgPC0gbGlzdC5maWxlcyhcImRhdGEvd29ya2luZy9cIiwgcGF0dGVybiA9IFwic2FsZXNfd2l0aF9ibGsqXCIsIGZ1bGwubmFtZXMgPSBUUlVFKSBjb24gPC0gZ2V0X2RiX2Nvbm4oKSBkYXQgPC0gcmVhZFJEUyhmaWxlX3BhdGhzWzFdKSBzZjo6ZGJXcml0ZVRhYmxlKGNvbiwgYyhcImNvcmVsb2dpY191c2RhXCIsIFwic2FsZXNfd2l0aF9ibGtcIiksIGRhdCkgcm0oZGF0KSBEQkk6OmRiRGlzY29ubmVjdChjb24pIiwiIiwibGlicmFyeShkb1BhcmFsbGVsKSBsaWJyYXJ5KHNmKSBsaWJyYXJ5KFJQb3N0Z3JlU1FMKSBsaWJyYXJ5KGRhdGEudGFibGUpIiwiIiwiY2wgPC0gbWFrZUZvcmtDbHVzdGVyKDYsIG91dGZpbGUgPSBcInNyYy9wYXJsb2dcIikgZG9QYXJhbGxlbDo6cmVnaXN0ZXJEb1BhcmFsbGVsKGNsKSIsIiIsImZpbGVfcGF0aHNfMiA8LSBmaWxlX3BhdGhzWzI6NDVdIHJlcyA8LSBmb3JlYWNoKGkgPSAxOmxlbmd0aChmaWxlX3BhdGhzXzIpKSAlZG9wYXIlIHsgY29uIDwtIGdldF9kYl9jb25uKCkgcHJpbnQocGFzdGUoXCJyZWFkaW5nXCIsIGZpbGVfcGF0aHNfMltpXSkpIGRhdCA8LSByZWFkUkRTKGZpbGVfcGF0aHNfMltpXSkgcHJpbnQocGFzdGUoXCJ3cml0aW5nXCIsIGZpbGVfcGF0aHNfMltpXSkpIHNmOjpkYldyaXRlVGFibGUoY29uLCBjKFwiY29yZWxvZ2ljX3VzZGFcIiwgXCJzYWxlc193aXRoX2Jsa1wiKSwgZGF0LCBhcHBlbmQgPSBUUlVFKSBybShkYXQpIERCSTo6ZGJEaXNjb25uZWN0KGNvbikgfSIsIiIsInBhcmFsbGVsOjpzdG9wQ2x1c3RlcihjbCkiXX0= -->
+<pre class="r"><code>get_blocks &lt;- function(geoid_st = &quot;51&quot;) { 
+  sql &lt;- paste0(&quot;select geoid_cnty, p_id_iris_frmtd, geometry from corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog where property_centroid_longitude IS NOT NULL AND geoid_cnty LIKE &#39;&quot;, geoid_st,&quot;%&#39;&quot;) 
+  
+  con &lt;- get_db_conn() print(paste(&quot;getting&quot;, geoid_st, &quot;rows&quot;)) 
+  
+  db_rows_blk &lt;- st_read(con, query = sql) DBI::dbDisconnect(con) 
+  
+  blk_map_path &lt;- paste0(&quot;/home/ads7fg/sdad/projects_data/usda/bb/original/censusblocks/blocks_TIGER2018_sf_RDS/tl_2018_&quot;, geoid_st, &quot;tabblock10.RDS&quot;) print(paste(&quot;getting&quot;, geoid_st, &quot;blocks&quot;)) 
+  
+  blk_map &lt;- readRDS(blk_map_path) %&gt;% sf::st_transform(4326) print(paste(&quot;getting&quot;, geoid_st, &quot;interesection&quot;)) 
+  
+  int &lt;- sf::st_intersects(db_rows_blk, blk_map) 
+  
+  int2 &lt;- as.integer(as.character(int)) db_rows_blk$geoid_blk &lt;- as.character(blk_map$GEOID10[unlist(int2)]) print(paste(&quot;saving&quot;, geoid_st, &quot;results&quot;)) 
+  
+  file_path &lt;- paste0(&quot;data/working/sales_with_blk&quot;, geoid_st, &quot;.RDS&quot;) 
+  
+  saveRDS(db_rows_blk, file_path) rm(blk_map) }
 
 geoids_st &lt;- tigris::states() geoids_st$geometry &lt;- NULL geoids_st &lt;- geoids_st[!geoids_st$GEOID %in% c(&quot;78&quot;, &quot;69&quot;, &quot;60&quot;, &quot;72&quot;, &quot;12&quot;, &quot;51&quot;, &quot;54&quot;), c(&quot;GEOID&quot;)]
 
@@ -250,7 +366,7 @@ parallel::stopCluster(cl)</code></pre>
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyMgQ3JlYXRlIENFTlNVUyBibG9jayB2YXJpYWJsZSwgZ2VvaWRfYmxvY2tjZQoKQnkgYWRkaW5nIGEgZ2VvaWQgdGhhdCBnb2VzIGRvd24gdG8gdGhlIGNlbnN1cyBibG9jayBsZXZlbCwgd2UgY2FuIGFzc29jaWF0ZSBkZW1vZ3JhcGhpYyBkYXRhIGNvbGxlY3RlZCBieSB0aGUgQ2Vuc3VzIHdpdGggZWFjaCBwcm9wZXJ0eS4KCiMjIyBHZXQgYmxvY2tzCgpUSElTIEFMTCBORUVEUyBUTyBCRSBVUERBVEVECgpgYGB7cn0KZ2V0X2Jsb2NrcyA8LSBmdW5jdGlvbihnZW9pZF9zdCA9ICI1MSIpIHsgc3FsIDwtIHBhc3RlMCgic2VsZWN0IGdlb2lkX2NudHksIHBfaWRfaXJpc19mcm10ZCwgZ2VvbWV0cnkgZnJvbSBjb3JlbG9naWNfdXNkYS5icm9hZGJhbmRfdmFyaWFibGVzX3RheF8yMDIwXzA2XzI3X3VucV9wcm9nIHdoZXJlIHByb3BlcnR5X2NlbnRyb2lkX2xvbmdpdHVkZSBJUyBOT1QgTlVMTCBBTkQgZ2VvaWRfY250eSBMSUtFICciLCBnZW9pZF9zdCwiJSciKSBjb24gPC0gZ2V0X2RiX2Nvbm4oKSBwcmludChwYXN0ZSgiZ2V0dGluZyIsIGdlb2lkX3N0LCAicm93cyIpKSBkYl9yb3dzX2JsayA8LSBzdF9yZWFkKGNvbiwgcXVlcnkgPSBzcWwpIERCSTo6ZGJEaXNjb25uZWN0KGNvbikgYmxrX21hcF9wYXRoIDwtIHBhc3RlMCgiL2hvbWUvYWRzN2ZnL3NkYWQvcHJvamVjdHNfZGF0YS91c2RhL2JiL29yaWdpbmFsL2NlbnN1c2Jsb2Nrcy9ibG9ja3NfVElHRVIyMDE4X3NmX1JEUy90bF8yMDE4XyIsIGdlb2lkX3N0LCAidGFiYmxvY2sxMC5SRFMiKSBwcmludChwYXN0ZSgiZ2V0dGluZyIsIGdlb2lkX3N0LCAiYmxvY2tzIikpIGJsa19tYXAgPC0gcmVhZFJEUyhibGtfbWFwX3BhdGgpICU+JSBzZjo6c3RfdHJhbnNmb3JtKDQzMjYpIHByaW50KHBhc3RlKCJnZXR0aW5nIiwgZ2VvaWRfc3QsICJpbnRlcmVzZWN0aW9uIikpIGludCA8LSBzZjo6c3RfaW50ZXJzZWN0cyhkYl9yb3dzX2JsaywgYmxrX21hcCkgaW50MiA8LSBhcy5pbnRlZ2VyKGFzLmNoYXJhY3RlcihpbnQpKSBkYl9yb3dzX2JsayRnZW9pZF9ibGsgPC0gYXMuY2hhcmFjdGVyKGJsa19tYXAkR0VPSUQxMFt1bmxpc3QoaW50MildKSBwcmludChwYXN0ZSgic2F2aW5nIiwgZ2VvaWRfc3QsICJyZXN1bHRzIikpIGZpbGVfcGF0aCA8LSBwYXN0ZTAoImRhdGEvd29ya2luZy9zYWxlc193aXRoX2JsayIsIGdlb2lkX3N0LCAiLlJEUyIpIHNhdmVSRFMoZGJfcm93c19ibGssIGZpbGVfcGF0aCkgcm0oYmxrX21hcCkgfQoKZ2VvaWRzX3N0IDwtIHRpZ3Jpczo6c3RhdGVzKCkgZ2VvaWRzX3N0JGdlb21ldHJ5IDwtIE5VTEwgZ2VvaWRzX3N0IDwtIGdlb2lkc19zdFshZ2VvaWRzX3N0JEdFT0lEICVpbiUgYygiNzgiLCAiNjkiLCAiNjAiLCAiNzIiLCAiMTIiLCAiNTEiLCAiNTQiKSwgYygiR0VPSUQiKV0KCmxpYnJhcnkoZG9QYXJhbGxlbCkKCmNsIDwtIG1ha2VGb3JrQ2x1c3Rlcig2LCBvdXRmaWxlID0gInNyYy9wYXJsb2ciKSBkb1BhcmFsbGVsOjpyZWdpc3RlckRvUGFyYWxsZWwoY2wpCgpnZW9pZHNfc3RfdGVzdCA8LSBnZW9pZHNfc3RbMjE6NDldIHJlcyA8LSBmb3JlYWNoKGkgPSAxOmxlbmd0aChnZW9pZHNfc3RfdGVzdCkpICVkb3BhciUgeyBnZXRfYmxvY2tzKGdlb2lkc19zdF90ZXN0W2ldKSB9CgpwYXJhbGxlbDo6c3RvcENsdXN0ZXIoY2wpCgpmaWxlX3BhdGhzIDwtIGxpc3QuZmlsZXMoImRhdGEvd29ya2luZy8iLCBwYXR0ZXJuID0gInNhbGVzX3dpdGhfYmxrKiIsIGZ1bGwubmFtZXMgPSBUUlVFKSBjb24gPC0gZ2V0X2RiX2Nvbm4oKSBkYXQgPC0gcmVhZFJEUyhmaWxlX3BhdGhzWzFdKSBzZjo6ZGJXcml0ZVRhYmxlKGNvbiwgYygiY29yZWxvZ2ljX3VzZGEiLCAic2FsZXNfd2l0aF9ibGsiKSwgZGF0KSBybShkYXQpIERCSTo6ZGJEaXNjb25uZWN0KGNvbikKCmxpYnJhcnkoZG9QYXJhbGxlbCkgbGlicmFyeShzZikgbGlicmFyeShSUG9zdGdyZVNRTCkgbGlicmFyeShkYXRhLnRhYmxlKQoKY2wgPC0gbWFrZUZvcmtDbHVzdGVyKDYsIG91dGZpbGUgPSAic3JjL3BhcmxvZyIpIGRvUGFyYWxsZWw6OnJlZ2lzdGVyRG9QYXJhbGxlbChjbCkKCmZpbGVfcGF0aHNfMiA8LSBmaWxlX3BhdGhzWzI6NDVdIHJlcyA8LSBmb3JlYWNoKGkgPSAxOmxlbmd0aChmaWxlX3BhdGhzXzIpKSAlZG9wYXIlIHsgY29uIDwtIGdldF9kYl9jb25uKCkgcHJpbnQocGFzdGUoInJlYWRpbmciLCBmaWxlX3BhdGhzXzJbaV0pKSBkYXQgPC0gcmVhZFJEUyhmaWxlX3BhdGhzXzJbaV0pIHByaW50KHBhc3RlKCJ3cml0aW5nIiwgZmlsZV9wYXRoc18yW2ldKSkgc2Y6OmRiV3JpdGVUYWJsZShjb24sIGMoImNvcmVsb2dpY191c2RhIiwgInNhbGVzX3dpdGhfYmxrIiksIGRhdCwgYXBwZW5kID0gVFJVRSkgcm0oZGF0KSBEQkk6OmRiRGlzY29ubmVjdChjb24pIH0KCnBhcmFsbGVsOjpzdG9wQ2x1c3RlcihjbCkKYGBgCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyMgQ3JlYXRlIENFTlNVUyBibG9jayB2YXJpYWJsZSwgZ2VvaWRfYmxvY2tjZQoKQnkgYWRkaW5nIGEgZ2VvaWQgdGhhdCBnb2VzIGRvd24gdG8gdGhlIGNlbnN1cyBibG9jayBsZXZlbCwgd2UgY2FuIGFzc29jaWF0ZSBkZW1vZ3JhcGhpYyBkYXRhIGNvbGxlY3RlZCBieSB0aGUgQ2Vuc3VzIHdpdGggZWFjaCBwcm9wZXJ0eS4KCiMjIyBHZXQgYmxvY2tzCgpUSElTIEFMTCBORUVEUyBUTyBCRSBVUERBVEVEIC0gRE8gSU5URVJTRUNUIElOIFBPU1RHSVM/CgpgYGB7ciwgZXZhbD1GQUxTRX0KZ2V0X2Jsb2NrcyA8LSBmdW5jdGlvbihnZW9pZF9zdCA9ICI1MSIpIHsgCiAgc3FsIDwtIHBhc3RlMCgic2VsZWN0IGdlb2lkX2NudHksIHBfaWRfaXJpc19mcm10ZCwgZ2VvbWV0cnkgZnJvbSBjb3JlbG9naWNfdXNkYS5icm9hZGJhbmRfdmFyaWFibGVzX3RheF8yMDIwXzA2XzI3X3VucV9wcm9nIHdoZXJlIHByb3BlcnR5X2NlbnRyb2lkX2xvbmdpdHVkZSBJUyBOT1QgTlVMTCBBTkQgZ2VvaWRfY250eSBMSUtFICciLCBnZW9pZF9zdCwiJSciKSAKICAKICBjb24gPC0gZ2V0X2RiX2Nvbm4oKSBwcmludChwYXN0ZSgiZ2V0dGluZyIsIGdlb2lkX3N0LCAicm93cyIpKSAKICAKICBkYl9yb3dzX2JsayA8LSBzdF9yZWFkKGNvbiwgcXVlcnkgPSBzcWwpIERCSTo6ZGJEaXNjb25uZWN0KGNvbikgCiAgCiAgYmxrX21hcF9wYXRoIDwtIHBhc3RlMCgiL2hvbWUvYWRzN2ZnL3NkYWQvcHJvamVjdHNfZGF0YS91c2RhL2JiL29yaWdpbmFsL2NlbnN1c2Jsb2Nrcy9ibG9ja3NfVElHRVIyMDE4X3NmX1JEUy90bF8yMDE4XyIsIGdlb2lkX3N0LCAidGFiYmxvY2sxMC5SRFMiKSBwcmludChwYXN0ZSgiZ2V0dGluZyIsIGdlb2lkX3N0LCAiYmxvY2tzIikpIAogIAogIGJsa19tYXAgPC0gcmVhZFJEUyhibGtfbWFwX3BhdGgpICU+JSBzZjo6c3RfdHJhbnNmb3JtKDQzMjYpIHByaW50KHBhc3RlKCJnZXR0aW5nIiwgZ2VvaWRfc3QsICJpbnRlcmVzZWN0aW9uIikpIAogIAogIGludCA8LSBzZjo6c3RfaW50ZXJzZWN0cyhkYl9yb3dzX2JsaywgYmxrX21hcCkgCiAgCiAgaW50MiA8LSBhcy5pbnRlZ2VyKGFzLmNoYXJhY3RlcihpbnQpKSBkYl9yb3dzX2JsayRnZW9pZF9ibGsgPC0gYXMuY2hhcmFjdGVyKGJsa19tYXAkR0VPSUQxMFt1bmxpc3QoaW50MildKSBwcmludChwYXN0ZSgic2F2aW5nIiwgZ2VvaWRfc3QsICJyZXN1bHRzIikpIAogIAogIGZpbGVfcGF0aCA8LSBwYXN0ZTAoImRhdGEvd29ya2luZy9zYWxlc193aXRoX2JsayIsIGdlb2lkX3N0LCAiLlJEUyIpIAogIAogIHNhdmVSRFMoZGJfcm93c19ibGssIGZpbGVfcGF0aCkgcm0oYmxrX21hcCkgfQoKZ2VvaWRzX3N0IDwtIHRpZ3Jpczo6c3RhdGVzKCkgZ2VvaWRzX3N0JGdlb21ldHJ5IDwtIE5VTEwgZ2VvaWRzX3N0IDwtIGdlb2lkc19zdFshZ2VvaWRzX3N0JEdFT0lEICVpbiUgYygiNzgiLCAiNjkiLCAiNjAiLCAiNzIiLCAiMTIiLCAiNTEiLCAiNTQiKSwgYygiR0VPSUQiKV0KCmxpYnJhcnkoZG9QYXJhbGxlbCkKCmNsIDwtIG1ha2VGb3JrQ2x1c3Rlcig2LCBvdXRmaWxlID0gInNyYy9wYXJsb2ciKSBkb1BhcmFsbGVsOjpyZWdpc3RlckRvUGFyYWxsZWwoY2wpCgpnZW9pZHNfc3RfdGVzdCA8LSBnZW9pZHNfc3RbMjE6NDldIHJlcyA8LSBmb3JlYWNoKGkgPSAxOmxlbmd0aChnZW9pZHNfc3RfdGVzdCkpICVkb3BhciUgeyBnZXRfYmxvY2tzKGdlb2lkc19zdF90ZXN0W2ldKSB9CgpwYXJhbGxlbDo6c3RvcENsdXN0ZXIoY2wpCgpmaWxlX3BhdGhzIDwtIGxpc3QuZmlsZXMoImRhdGEvd29ya2luZy8iLCBwYXR0ZXJuID0gInNhbGVzX3dpdGhfYmxrKiIsIGZ1bGwubmFtZXMgPSBUUlVFKSBjb24gPC0gZ2V0X2RiX2Nvbm4oKSBkYXQgPC0gcmVhZFJEUyhmaWxlX3BhdGhzWzFdKSBzZjo6ZGJXcml0ZVRhYmxlKGNvbiwgYygiY29yZWxvZ2ljX3VzZGEiLCAic2FsZXNfd2l0aF9ibGsiKSwgZGF0KSBybShkYXQpIERCSTo6ZGJEaXNjb25uZWN0KGNvbikKCmxpYnJhcnkoZG9QYXJhbGxlbCkgbGlicmFyeShzZikgbGlicmFyeShSUG9zdGdyZVNRTCkgbGlicmFyeShkYXRhLnRhYmxlKQoKY2wgPC0gbWFrZUZvcmtDbHVzdGVyKDYsIG91dGZpbGUgPSAic3JjL3BhcmxvZyIpIGRvUGFyYWxsZWw6OnJlZ2lzdGVyRG9QYXJhbGxlbChjbCkKCmZpbGVfcGF0aHNfMiA8LSBmaWxlX3BhdGhzWzI6NDVdIHJlcyA8LSBmb3JlYWNoKGkgPSAxOmxlbmd0aChmaWxlX3BhdGhzXzIpKSAlZG9wYXIlIHsgY29uIDwtIGdldF9kYl9jb25uKCkgcHJpbnQocGFzdGUoInJlYWRpbmciLCBmaWxlX3BhdGhzXzJbaV0pKSBkYXQgPC0gcmVhZFJEUyhmaWxlX3BhdGhzXzJbaV0pIHByaW50KHBhc3RlKCJ3cml0aW5nIiwgZmlsZV9wYXRoc18yW2ldKSkgc2Y6OmRiV3JpdGVUYWJsZShjb24sIGMoImNvcmVsb2dpY191c2RhIiwgInNhbGVzX3dpdGhfYmxrIiksIGRhdCwgYXBwZW5kID0gVFJVRSkgcm0oZGF0KSBEQkk6OmRiRGlzY29ubmVjdChjb24pIH0KCnBhcmFsbGVsOjpzdG9wQ2x1c3RlcihjbCkKYGBgCg==</div>
 
 
 

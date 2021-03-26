@@ -1,7 +1,16 @@
 ---
-title: "R Notebook"
-output: html_notebook
+title: "Add Variables Using External Data - Programs"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
 ---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  eval=FALSE
+)
+```
 
 Now we will add columns to the dataset for each USDA broadband program. Each program column will contain a program identifier code for each property that is within the eligibility area for that program. We will create these columns by finding the intersection of the program's eligibility areas (as specified in their respective shapefiles) with the coordinates of the corelogic properties.
 
@@ -19,6 +28,7 @@ library(magrittr)
 ### Set Geo Data Directory
 
 ```{r, cache=TRUE}
+# {r, cache=TRUE}
 geodatadir <- "../../../data/projects_data/usda/bb/original/geo"
 ```
 
@@ -27,6 +37,7 @@ geodatadir <- "../../../data/projects_data/usda/bb/original/geo"
 For use with program data that don't have county fips codes. Convert list to sf.
 
 ```{r, cache=TRUE}
+# {r, cache=TRUE}
 counties_us <- tigris::counties() %>%
   sf::st_transform(4326)
 ```
@@ -36,6 +47,7 @@ counties_us <- tigris::counties() %>%
 #### Load broadband program area shapefiles
 
 ```{r, cache=TRUE}
+# {r, cache=TRUE}
 map_program_area_cc <- st_read(file.path(geodatadir, "CC 2013_2019_83 04272020.shp")) %>%
   sf::st_transform(4326)
 ```
@@ -43,6 +55,7 @@ map_program_area_cc <- st_read(file.path(geodatadir, "CC 2013_2019_83 04272020.s
 #### Create list of county FIPS codes that are within the program area for the database query
 
 ```{r}
+# {r}
 counties_cc <- paste0("'", paste(unique(strsplit(paste(map_program_area_cc$FIPS, collapse = ", "), ", ")[[1]]), collapse = "','"), "'")
 
 counties_cc_sql <- glue_sql(counties_cc)
@@ -51,16 +64,19 @@ counties_cc_sql <- glue_sql(counties_cc)
 #### Get property records for the program related counties from the database
 
 ```{r}
+# {r}
 con <- get_db_conn(db_host = "localhost", db_port = 5434)
 ```
 
-```{sql connection=con, output.var="qry_res"}
+```{sql}
+-- {sql connection=con, output.var="qry_res"}
 SELECT geoid_cnty, p_id_iris_frmtd, property_centroid_longitude, property_centroid_latitude FROM corelogic_usda.current_tax_200627_latest_all_add_vars 
 WHERE property_centroid_longitude IS NOT NULL 
 AND geoid_cnty IN (?counties_cc_sql);
 ```
 
 ```{r}
+# {r}
 DBI::dbDisconnect(con)
 ```
 
@@ -69,6 +85,7 @@ DBI::dbDisconnect(con)
 First convert database query result to an sf object.
 
 ```{r}
+# {r}
 db_rows_cc <- st_as_sf(qry_res, coords = c("property_centroid_longitude", "property_centroid_latitude"), crs = 4326)
 
 int <- sf::st_intersects(db_rows_cc, map_program_area_cc)
@@ -78,6 +95,7 @@ int2 <- as.integer(as.character(int))
 #### Add RUSID to intersecting properties
 
 ```{r}
+# {r}
 db_rows_cc$program <- "CC"
 db_rows_cc$rusid <- as.character(map_program_area_cc$RUSID[unlist(int2)])
 db_rows_cc <- db_rows_cc[!is.na(db_rows_cc$rusid),]
@@ -88,6 +106,7 @@ db_rows_cc <- db_rows_cc[!is.na(db_rows_cc$rusid),]
 #### Load broadband program area shapefiles
 
 ```{r, cache=TRUE}
+# {r, cache=TRUE}
 map_program_area_rc <- st_read(file.path(geodatadir, "ReConnect R1 594 PFSA 05012020.shp")) %>%
   sf::st_transform(4326)
 ```
@@ -97,6 +116,7 @@ map_program_area_rc <- st_read(file.path(geodatadir, "ReConnect R1 594 PFSA 0501
 This dataset does not have a county FIPS code. Instead it provides a list of county names associated with that entry. We need to do some work to convert these lists of county names to a list of unique county fips codes.
 
 ```{r}
+# {r}
 int <- sf::st_intersects(map_program_area_rc, counties_us)
 
 cnty_ints <- data.table(rc_rownum = numeric(), cntys_rownum = numeric(), geoid = character())
@@ -127,16 +147,19 @@ counties_rc_sql <- glue_sql(counties_rc)
 #### Get property records for the program related counties from the database
 
 ```{r}
+# {r}
 con <- get_db_conn(db_host = "localhost", db_port = 5434)
 ```
 
-```{sql connection=con, output.var="qry_res"}
+```{sql}
+-- {sql connection=con, output.var="qry_res"}
 SELECT geoid_cnty, p_id_iris_frmtd, property_centroid_longitude, property_centroid_latitude FROM corelogic_usda.current_tax_200627_latest_all_add_vars 
 WHERE property_centroid_longitude IS NOT NULL 
 AND geoid_cnty IN (?counties_rc_sql);
 ```
 
 ```{r}
+# {r}
 DBI::dbDisconnect(con)
 ```
 
@@ -145,6 +168,7 @@ DBI::dbDisconnect(con)
 First convert database query result to an sf object.
 
 ```{r}
+# {r}
 db_rows_rc <- st_as_sf(qry_res, coords = c("property_centroid_longitude", "property_centroid_latitude"), crs = 4326)
 
 int <- sf::st_intersects(db_rows_rc, map_program_area_rc)
@@ -154,6 +178,7 @@ int2 <- as.integer(as.character(int))
 #### Add RUSID to intersecting properties
 
 ```{r}
+# {r}
 db_rows_rc$program <- "RC"
 db_rows_rc$rusid <- as.character(map_program_area_rc$RUS_ID[unlist(int2)])
 db_rows_rc <- db_rows_rc[!is.na(db_rows_rc$rusid),]
@@ -164,6 +189,7 @@ db_rows_rc <- db_rows_rc[!is.na(db_rows_rc$rusid),]
 #### Load broadband program area shapefiles
 
 ```{r, cache=TRUE}
+# {r, cache=TRUE}
 map_program_area_bip <- st_read(file.path(geodatadir, "200409_BIP_ServAr_ID.shp")) %>%
   sf::st_transform(4326)
 ```
@@ -173,6 +199,7 @@ map_program_area_bip <- st_read(file.path(geodatadir, "200409_BIP_ServAr_ID.shp"
 This dataset does not have a county FIPS code. Instead it provides a list of county names associated with that entry. We need to do some work to convert these lists of county names to a list of unique county fips codes.
 
 ```{r}
+# {r}
 int <- sf::st_intersects(map_program_area_bip, counties_us)
 
 cnty_ints <- data.table(rc_rownum = numeric(), cntys_rownum = numeric(), geoid = character())
@@ -202,10 +229,12 @@ counties_bip_sql <- glue_sql(counties_bip)
 #### Get property records for the program related counties from the database
 
 ```{r}
+# {r}
 con <- get_db_conn(db_host = "localhost", db_port = 5434)
 ```
 
-```{sql connection=con, output.var="qry_res"}
+```{sql}
+-- {sql connection=con, output.var="qry_res"}
 SELECT geoid_cnty, p_id_iris_frmtd, property_centroid_longitude, property_centroid_latitude FROM corelogic_usda.current_tax_200627_latest_all_add_vars 
 WHERE property_centroid_longitude IS NOT NULL
 AND property_centroid_latitude IS NOT NULL
@@ -213,6 +242,7 @@ AND geoid_cnty IN (?counties_bip_sql);
 ```
 
 ```{r}
+# {r}
 DBI::dbDisconnect(con)
 ```
 
@@ -221,6 +251,7 @@ DBI::dbDisconnect(con)
 First convert database query result to an sf object.
 
 ```{r}
+# {r}
 db_rows_bip <- st_as_sf(qry_res, coords = c("property_centroid_longitude", "property_centroid_latitude"), crs = 4326)
 
 int <- sf::st_intersects(db_rows_bip, map_program_area_bip)
@@ -230,6 +261,7 @@ int2 <- as.integer(as.character(int))
 #### Add RUSID to intersecting properties
 
 ```{r}
+# {r}
 db_rows_bip$program <- "BIP"
 db_rows_bip$rusid <- as.character(map_program_area_bip$RUS_ID[unlist(int2)])
 db_rows_bip <- db_rows_bip[!is.na(db_rows_bip$rusid),]
@@ -240,6 +272,7 @@ db_rows_bip <- db_rows_bip[!is.na(db_rows_bip$rusid),]
 #### Load broadband program area shapefiles
 
 ```{r, cache=TRUE}
+# {r, cache=TRUE}
 map_program_area_tcf <- st_read(file.path(geodatadir, "USDARD_RUS_TELCO_FARMBILL_06042020/USDARD_RUS_TELCO_FARMBILL_06042020.shp")) %>%
   sf::st_transform(4326)
 ```
@@ -249,6 +282,7 @@ map_program_area_tcf <- st_read(file.path(geodatadir, "USDARD_RUS_TELCO_FARMBILL
 This dataset does not have a county FIPS code. Instead it provides a list of county names associated with that entry. We need to do some work to convert these lists of county names to a list of unique county fips codes.
 
 ```{r}
+# {r}
 int <- sf::st_intersects(map_program_area_tcf, counties_us)
 
 cnty_ints <- data.table(rc_rownum = numeric(), cntys_rownum = numeric(), geoid = character())
@@ -279,10 +313,12 @@ counties_tcf_sql <- glue_sql(counties_tcf)
 #### Get property records for the program related counties from the database
 
 ```{r}
+# {r}
 con <- get_db_conn(db_host = "localhost", db_port = 5434)
 ```
 
-```{sql connection=con, output.var="qry_res"}
+```{sql}
+-- {sql connection=con, output.var="qry_res"}
 SELECT geoid_cnty, p_id_iris_frmtd, property_centroid_longitude, property_centroid_latitude FROM corelogic_usda.current_tax_200627_latest_all_add_vars 
 WHERE property_centroid_longitude IS NOT NULL 
 AND property_centroid_latitude IS NOT NULL
@@ -290,6 +326,7 @@ AND geoid_cnty IN (?counties_tcf_sql);
 ```
 
 ```{r}
+# {r}
 DBI::dbDisconnect(con)
 ```
 
@@ -298,6 +335,7 @@ DBI::dbDisconnect(con)
 First convert database query result to an sf object.
 
 ```{r}
+# {r}
 db_rows_tcf <- st_as_sf(qry_res, coords = c("property_centroid_longitude", "property_centroid_latitude"), crs = 4326)
 
 int <- sf::st_intersects(db_rows_tcf, map_program_area_tcf)
@@ -307,6 +345,7 @@ int2 <- as.integer(as.character(int))
 ### Add RUSID to intersecting properties
 
 ```{r}
+# {r}
 db_rows_tcf$program <- "TCF"
 db_rows_tcf$rusid <- as.character(map_program_area_tcf$RUS_ID[unlist(int2)])
 db_rows_tcf <- db_rows_tcf[!is.na(db_rows_tcf$rusid),]
@@ -317,6 +356,7 @@ db_rows_tcf <- db_rows_tcf[!is.na(db_rows_tcf$rusid),]
 #### Load broadband program area shapefiles
 
 ```{r, cache=TRUE}
+# {r, cache=TRUE}
 map_program_area_tci <- st_read(file.path(geodatadir, "USDARD_RUS_TELCO_INFRA_06042020/USDARD_RUS_TELCO_INFRA_06042020.shp")) %>%
   sf::st_transform(4326)
 ```
@@ -326,6 +366,7 @@ map_program_area_tci <- st_read(file.path(geodatadir, "USDARD_RUS_TELCO_INFRA_06
 This dataset does not have a county FIPS code. Instead it provides a list of county names associated with that entry. We need to do some work to convert these lists of county names to a list of unique county fips codes.
 
 ```{r}
+# {r}
 int <- sf::st_intersects(map_program_area_tci, counties_us)
 
 cnty_ints <- data.table(rc_rownum = numeric(), cntys_rownum = numeric(), geoid = character())
@@ -356,10 +397,12 @@ counties_tci_sql <- glue_sql(counties_tci)
 #### Get property records for the program related counties from the database
 
 ```{r}
+# {r}
 con <- get_db_conn(db_host = "localhost", db_port = 5434)
 ```
 
-```{sql connection=con, output.var="qry_res"}
+```{sql}
+-- {sql connection=con, output.var="qry_res"}
 SELECT geoid_cnty, p_id_iris_frmtd, property_centroid_longitude, property_centroid_latitude FROM corelogic_usda.current_tax_200627_latest_all_add_vars 
 WHERE property_centroid_longitude IS NOT NULL 
 AND property_centroid_latitude IS NOT NULL
@@ -367,6 +410,7 @@ AND geoid_cnty IN (?counties_tci_sql);
 ```
 
 ```{r}
+# {r}
 DBI::dbDisconnect(con)
 ```
 
@@ -375,6 +419,7 @@ DBI::dbDisconnect(con)
 First convert database query result to an sf object.
 
 ```{r}
+# {r}
 db_rows_tci <- st_as_sf(qry_res, coords = c("property_centroid_longitude", "property_centroid_latitude"), crs = 4326)
 
 int <- sf::st_intersects(db_rows_tci, map_program_area_tci)
@@ -384,6 +429,7 @@ int2 <- as.integer(as.character(int))
 #### Add RUSID to intersecting properties
 
 ```{r}
+# {r}
 db_rows_tci$program <- "TCI"
 db_rows_tci$rusid <- as.character(map_program_area_tci$RUSID[unlist(int2)])
 db_rows_tci <- db_rows_tci[!is.na(db_rows_tci$rusid),]
@@ -392,6 +438,7 @@ db_rows_tci <- db_rows_tci[!is.na(db_rows_tci$rusid),]
 ## Combine All Program Eligible Properties
 
 ```{r}
+# {r}
 combn <- rbindlist(list(db_rows_cc, db_rows_rc, db_rows_bip, db_rows_tcf, db_rows_tci))
 
 combn_cast <- dcast(combn, geoid_cnty + p_id_iris_frmtd ~ program, value.var = "rusid")
@@ -402,6 +449,7 @@ saveRDS(combn_cast, file.path(geodatadir, "program_eligible_properties.RDS"))
 ## Write combined data to the database
 
 ```{r}
+# {r}
 con <- get_db_conn(db_host = "localhost", db_port = 5434)
 
 dbWriteTable(con, c("corelogic_usda", "current_tax_200627_program_eligible_properties"), combn_cast, overwrite = TRUE, row.names = FALSE)
@@ -413,7 +461,8 @@ DBI::dbDisconnect(con)
 
 ## Join new table with current_tax_200627_latest_all_add_vars
 
-```{sql connection=con, eval=FALSE}
+```{sql}
+-- {sql} * Run In psql/pgcli
 SELECT a.*, b."BIP", b."CC", b."RC", b."TCF", b."TCI"
 INTO corelogic_usda.current_tax_200627_latest_all_add_vars_add_progs
 FROM corelogic_usda.current_tax_200627_latest_all_add_vars a

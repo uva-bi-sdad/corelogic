@@ -1,27 +1,29 @@
 ---
-title: "R Notebook"
-output: html_notebook
+title: "Create a Single Record of Latest Info for each Property"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
 ---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  eval=FALSE
+)
+```
 
 ## Load libraries and functions
 
 ```{r}
+# {r}
 source("../R/functions.R")
-library(data.table)
-library(dataplumbr)
-library(foreach)
-library(doParallel)
-library(DBI)
 library(glue)
-```
-
-```{r}
-con <- get_db_conn()
 ```
 
 ## Create Unique ID Table
 
-```{sql connection=con}
+```{sql}
+-- {sql} * Run In psql/pgcli
 SELECT DISTINCT geoid_cnty, p_id_iris_frmtd
 INTO corelogic_usda.current_tax_200627_unique_id
 FROM corelogic_usda.current_tax_200627_typed
@@ -32,6 +34,7 @@ ALTER TABLE corelogic_usda.current_tax_200627_unique_id ADD PRIMARY KEY (geoid_c
 ```
 
 ```{r}
+# {r}
 build_latest_query <- function(col_name) {
   tbl <- glue("current_tax_200627_latest_{col_name}")
   glue_sql("
@@ -60,105 +63,132 @@ build_latest_query <- function(col_name) {
 }
 ```
 
+### Run build_latest_query for each column, then copy the SQL into psql/pgcli
+
 ```{r}
+# {r}
 build_latest_query("property_indicator")
 ```
 
 ```{r}
+# {r}
 build_latest_query("acres")
 ```
 
 ```{r}
+# {r}
 build_latest_query("land_square_footage")
 ```
 
 ```{r}
+# {r}
 build_latest_query("bldg_code")
 ```
 
 ```{r}
+# {r}
 build_latest_query("building_square_feet")
 ```
 
 ```{r}
+# {r}
 build_latest_query("living_square_feet")
 ```
 
 ```{r}
+# {r}
 build_latest_query("year_built")
 ```
 
 ```{r}
+# {r}
 build_latest_query("effective_year_built")
 ```
 
 ```{r}
+# {r}
 build_latest_query("bedrooms")
 ```
 
 ```{r}
+# {r}
 build_latest_query("full_baths")
 ```
 
 ```{r}
+# {r}
 build_latest_query("qtr_baths")
 ```
 
 ```{r}
+# {r}
 build_latest_query("thrqtr_baths")
 ```
 
 ```{r}
+# {r}
 build_latest_query("half_baths")
 ```
 
 ```{r}
+# {r}
 build_latest_query("total_baths")
 ```
 
 ```{r}
+# {r}
 build_latest_query("situs_address")
 ```
 
 ```{r}
+# {r}
 build_latest_query("mail_address")
 ```
 
 ```{r}
+# {r}
 build_latest_query("sale_code")
 ```
 
 ```{r}
+# {r}
 build_latest_query("sale_price")
 ```
 
 ```{r}
+# {r}
 build_latest_query("sale_date")
 ```
 
 ```{r}
+# {r}
 build_latest_query("recording_date")
 ```
 
 ```{r}
+# {r}
 build_latest_query("transaction_type")
 ```
 
 ```{r}
+# {r}
 build_latest_query("tax_year")
 ```
 
 ```{r}
+# {r}
 build_latest_query("property_centroid_longitude")
 ```
 
 ```{r}
+# {r}
 build_latest_query("property_centroid_latitude")
 ```
 
 ## Create Table of All Latest Information
 
-```{sql connection=con}
+```{sql}
+-- {sql} * Run In psql/pgcli
 SELECT a.geoid_cnty, a.p_id_iris_frmtd,
       acres, land_square_footage, bldg_code, building_square_feet, living_square_feet,
       year_built, effective_year_built, bedrooms, full_baths, qtr_baths, thrqtr_baths,
@@ -217,9 +247,11 @@ SELECT a.geoid_cnty, a.p_id_iris_frmtd,
 ALTER TABLE corelogic_usda.current_tax_200627_latest_all ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);
 ```
 
+\<!--\#
+
 ## Not USED - Attempt to create psql function to get latest item
 
-```{sql connection=con}
+```{sql}
 create or replace function get_latest (
   col varchar
 ) 
@@ -244,3 +276,5 @@ begin
     AND %I IS NOT NULL', col);
 end;$$
 ```
+
+--\>

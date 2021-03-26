@@ -1,18 +1,45 @@
 ---
-title: "R Notebook"
-output: html_notebook
+title: "Add Geographies"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
 ---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  eval=FALSE
+)
+```
 
 ## Create CENSUS block variable, geoid_blockce
 
 By adding a geoid that goes down to the census block level, we can associate demographic data collected by the Census with each property.
 
-### Get blocks
+## Get blocks
 
-THIS ALL NEEDS TO BE UPDATED
+THIS ALL NEEDS TO BE UPDATED - DO INTERSECT IN POSTGIS?
 
 ```{r}
-get_blocks <- function(geoid_st = "51") { sql <- paste0("select geoid_cnty, p_id_iris_frmtd, geometry from corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog where property_centroid_longitude IS NOT NULL AND geoid_cnty LIKE '", geoid_st,"%'") con <- get_db_conn() print(paste("getting", geoid_st, "rows")) db_rows_blk <- st_read(con, query = sql) DBI::dbDisconnect(con) blk_map_path <- paste0("/home/ads7fg/sdad/projects_data/usda/bb/original/censusblocks/blocks_TIGER2018_sf_RDS/tl_2018_", geoid_st, "tabblock10.RDS") print(paste("getting", geoid_st, "blocks")) blk_map <- readRDS(blk_map_path) %>% sf::st_transform(4326) print(paste("getting", geoid_st, "interesection")) int <- sf::st_intersects(db_rows_blk, blk_map) int2 <- as.integer(as.character(int)) db_rows_blk$geoid_blk <- as.character(blk_map$GEOID10[unlist(int2)]) print(paste("saving", geoid_st, "results")) file_path <- paste0("data/working/sales_with_blk", geoid_st, ".RDS") saveRDS(db_rows_blk, file_path) rm(blk_map) }
+# {r}
+get_blocks <- function(geoid_st = "51") { 
+  sql <- paste0("select geoid_cnty, p_id_iris_frmtd, geometry from corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog where property_centroid_longitude IS NOT NULL AND geoid_cnty LIKE '", geoid_st,"%'") 
+  
+  con <- get_db_conn() print(paste("getting", geoid_st, "rows")) 
+  
+  db_rows_blk <- st_read(con, query = sql) DBI::dbDisconnect(con) 
+  
+  blk_map_path <- paste0("/home/ads7fg/sdad/projects_data/usda/bb/original/censusblocks/blocks_TIGER2018_sf_RDS/tl_2018_", geoid_st, "tabblock10.RDS") print(paste("getting", geoid_st, "blocks")) 
+  
+  blk_map <- readRDS(blk_map_path) %>% sf::st_transform(4326) print(paste("getting", geoid_st, "interesection")) 
+  
+  int <- sf::st_intersects(db_rows_blk, blk_map) 
+  
+  int2 <- as.integer(as.character(int)) db_rows_blk$geoid_blk <- as.character(blk_map$GEOID10[unlist(int2)]) print(paste("saving", geoid_st, "results")) 
+  
+  file_path <- paste0("data/working/sales_with_blk", geoid_st, ".RDS") 
+  
+  saveRDS(db_rows_blk, file_path) rm(blk_map) }
 
 geoids_st <- tigris::states() geoids_st$geometry <- NULL geoids_st <- geoids_st[!geoids_st$GEOID %in% c("78", "69", "60", "72", "12", "51", "54"), c("GEOID")]
 

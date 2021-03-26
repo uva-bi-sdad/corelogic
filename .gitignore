@@ -21,7 +21,7 @@
 # RStudio files
 .Rproj.user/
 .DS_Store
-/rsconnect/*
+/*/rsconnect/*
 
 # produced vignettes
 vignettes/*.html
@@ -41,8 +41,13 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 .Rproj.user
+.Rhistory
 
 *parlog
 *core.*
 *.zip
+*.nb.html
+*.csv
+*.CSV
+parlog
 
