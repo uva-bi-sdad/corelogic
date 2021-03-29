@@ -244,18 +244,39 @@ $(document).ready(function () {
         <li>
   <a href="index.html">Home</a>
 </li>
-<li>
-  <a href="data_pipeline_01.html">1. Import (Parallel)</a>
-</li>
-<li>
-  <a href="data_pipeline_02_clean_and_type.html">2. Fix Types</a>
-</li>
-<li>
-  <a href="data_pipeline_03_build_latest_data_set.html">3. Unique &amp; Latest</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Ingest
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="data_pipeline_01.html">Import (Parallel)</a>
+    </li>
+    <li>
+      <a href="data_pipeline_02_clean_and_type.html">Fix Types</a>
+    </li>
+  </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    4. Add Variables
+    Profile
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Structure</li>
+    <li class="dropdown-header">Quality</li>
+    <li class="dropdown-header">Metadata</li>
+  </ul>
+</li>
+<li>
+  <a href="data_pipeline_03_build_latest_data_set.html">Unique &amp; Latest</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Add Variables
      
     <span class="caret"></span>
   </a>
@@ -272,11 +293,11 @@ $(document).ready(function () {
   </ul>
 </li>
 <li>
-  <a href="data_pipeline_07_filter_records.html">5. Filter</a>
+  <a href="data_pipeline_07_filter_records.html">Filter</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    6. Profile
+    Re-Profile
      
     <span class="caret"></span>
   </a>

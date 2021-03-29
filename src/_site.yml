@@ -6,13 +6,20 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "1. Import (Parallel)"
-      href: data_pipeline_01.html
-    - text: "2. Fix Types"
-      href: data_pipeline_02_clean_and_type.html
-    - text: "3. Unique & Latest"
+    - text: "Ingest"
+      menu:
+        - text: "Import (Parallel)"
+          href: data_pipeline_01.html
+        - text: "Fix Types"
+          href: data_pipeline_02_clean_and_type.html
+    - text: "Profile"
+      menu:
+        - text: "Structure"
+        - text: "Quality"
+        - text: "Metadata"
+    - text: "Unique & Latest"
       href: data_pipeline_03_build_latest_data_set.html
-    - text: "4. Add Variables"
+    - text: "Add Variables"
       menu:
         - text: By Transforming Other Columns
           href: data_pipeline_04_add_vars_transforms.html
@@ -20,9 +27,9 @@ navbar:
           href: data_pipeline_05_add_vars_external.html
         - text: By Adding Geography
           href: data_pipeline_05_add_vars_external_2.html
-    - text: "5. Filter"
+    - text: "Filter"
       href: data_pipeline_07_filter_records.html
-    - text: "6. Profile"
+    - text: "Re-Profile"
       menu:
         - text: "Individual Variables"
           href: data_pipeline_08_profile_variables.html
