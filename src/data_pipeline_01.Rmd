@@ -12,6 +12,8 @@ knitr::opts_chunk$set(
 )
 ```
 
+------------------------------------------------------------------------
+
 Import of 174GB file: Corelogic_USDA_Current_Tax_2020_06_27.txt
 
 ## Load libraries and functions

@@ -1,5 +1,5 @@
 ---
-title: "R Notebook"
+title: "Initial Filtering to Desired Dataset"
 output: 
   html_document:
     toc: yes
@@ -11,6 +11,8 @@ knitr::opts_chunk$set(
   eval=FALSE
 )
 ```
+
+------------------------------------------------------------------------
 
 ```{sql}
 SELECT

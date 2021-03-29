@@ -313,7 +313,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">The Dataset Creation Pipeline</a>
+      <a class="navbar-brand" href="index.html">Admin2Research Data Pipeline</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -321,17 +321,17 @@ div.tocify {
   <a href="index.html">Home</a>
 </li>
 <li>
-  <a href="data_pipeline_01.html">Import (Parallel)</a>
+  <a href="data_pipeline_01.html">1. Import (Parallel)</a>
 </li>
 <li>
-  <a href="data_pipeline_02_clean_and_type.html">Fix Types</a>
+  <a href="data_pipeline_02_clean_and_type.html">2. Fix Types</a>
 </li>
 <li>
-  <a href="data_pipeline_03_build_latest_data_set.html">Latest Only</a>
+  <a href="data_pipeline_03_build_latest_data_set.html">3. Unique &amp; Latest</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Add Variables
+    4. Add Variables
      
     <span class="caret"></span>
   </a>
@@ -348,11 +348,11 @@ div.tocify {
   </ul>
 </li>
 <li>
-  <a href="data_pipeline_07_filter_records.html">Filter</a>
+  <a href="data_pipeline_07_filter_records.html">5. Filter</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Profile
+    6. Profile
      
     <span class="caret"></span>
   </a>
@@ -380,22 +380,17 @@ div.tocify {
 </div>
 
 
+<hr />
+<p>Administrative data records like real estate tax records have, by their nature, multiple entries over time of information related to some entity. For example, for a single property parcel there will be a separate entry for each sale that has occurred. However, it is rare for all pertinent information to be fully entered every time. For example, the number of bedrooms may be consistently entered when a sale occurs, but possibly not again when a record is entered for recording annual property tax not associated with a sale. Also, values can change over time from record to record (e.g property additions change the number of bedrooms). Also, it is reasonable to expect that the entries will not always be accurate (misspellings, transpositions, etc).</p>
+<p>For real estate tax records it is reasonable to assume that the most recent entry is the most probably valid entry (e.g. number of bedrooms recently recorded will be more accurate than number of bedrooms recorded before an addition was added to the house). However, <strong>the most recent record will not necessarily have all of the needed information</strong> (see previous paragraph). Therefore, for each unique real estate parcel, we need to get the <strong>latest recorded value for each item/variable</strong> we are interested in using.</p>
+<p>Accordingly, we create a <u>unique id table with a single record for each parcel</u> and <u>individual tables for each item/variable</u> (number of bedrooms, number of bathrooms, living square footage, etc.). These are then all joined to create a table of just the <strong>latest recorded information for each item/variable for each unique parcel</strong>.</p>
 <div id="load-libraries-and-functions" class="section level2">
 <h2>Load libraries and functions</h2>
 <pre class="r"><code># {r}
 source(&quot;../R/functions.R&quot;)
 library(glue)</code></pre>
-</div>
-<div id="create-unique-id-table" class="section level2">
-<h2>Create Unique ID Table</h2>
-<pre class="sql"><code>-- {sql} * Run In psql/pgcli
-SELECT DISTINCT geoid_cnty, p_id_iris_frmtd
-INTO corelogic_usda.current_tax_200627_unique_id
-FROM corelogic_usda.current_tax_200627_typed
-WHERE geoid_cnty IS NOT NULL
-AND p_id_iris_frmtd IS NOT NULL;
-
-ALTER TABLE corelogic_usda.current_tax_200627_unique_id ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);</code></pre>
+<div id="create-a-function-to-build-the-sql-queries-necessary-to-get-most-recent-item-recordings" class="section level3">
+<h3>Create a function to build the SQL queries necessary to get most recent item recordings</h3>
 <pre class="r"><code># {r}
 build_latest_query &lt;- function(col_name) {
   tbl &lt;- glue(&quot;current_tax_200627_latest_{col_name}&quot;)
@@ -423,6 +418,18 @@ build_latest_query &lt;- function(col_name) {
         ALTER TABLE corelogic_usda.{`tbl`} ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);
            &quot;, .con = con)
 }</code></pre>
+</div>
+</div>
+<div id="create-unique-id-table" class="section level2">
+<h2>Create Unique ID Table</h2>
+<pre class="sql"><code>-- {sql} * Run In psql/pgcli
+SELECT DISTINCT geoid_cnty, p_id_iris_frmtd
+INTO corelogic_usda.current_tax_200627_unique_id
+FROM corelogic_usda.current_tax_200627_typed
+WHERE geoid_cnty IS NOT NULL
+AND p_id_iris_frmtd IS NOT NULL;
+
+ALTER TABLE corelogic_usda.current_tax_200627_unique_id ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);</code></pre>
 <div id="run-build_latest_query-for-each-column-then-copy-the-sql-into-psqlpgcli" class="section level3">
 <h3>Run build_latest_query for each column, then copy the SQL into psql/pgcli</h3>
 <pre class="r"><code># {r}
@@ -534,10 +541,10 @@ SELECT a.geoid_cnty, a.p_id_iris_frmtd,
  WHERE s.sale_date IS NOT NULL;
 
 ALTER TABLE corelogic_usda.current_tax_200627_latest_all ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);</code></pre>
-<p>&lt;!–#</p>
 </div>
 <div id="not-used---attempt-to-create-psql-function-to-get-latest-item" class="section level2">
 <h2>Not USED - Attempt to create psql function to get latest item</h2>
+<p>This would obviate the need for all the copy pastes currently necessary. Doesn’t work yet.</p>
 <pre class="sql"><code>create or replace function get_latest (
   col varchar
 ) 
@@ -561,7 +568,6 @@ begin
     WHERE sale_date IS NOT NULL
     AND %I IS NOT NULL&#39;, col);
 end;$$</code></pre>
-<p>–&gt;</p>
 </div>
 
 

@@ -12,6 +12,14 @@ knitr::opts_chunk$set(
 )
 ```
 
+------------------------------------------------------------------------
+
+Administrative data records like real estate tax records have, by their nature, multiple entries over time of information related to some entity. For example, for a single property parcel there will be a separate entry for each sale that has occurred. However, it is rare for all pertinent information to be fully entered every time. For example, the number of bedrooms may be consistently entered when a sale occurs, but possibly not again when a record is entered for recording annual property tax not associated with a sale. Also, values can change over time from record to record (e.g property additions change the number of bedrooms). Also, it is reasonable to expect that the entries will not always be accurate (misspellings, transpositions, etc).
+
+For real estate tax records it is reasonable to assume that the most recent entry is the most probably valid entry (e.g. number of bedrooms recently recorded will be more accurate than number of bedrooms recorded before an addition was added to the house). However, **the most recent record will not necessarily have all of the needed information** (see previous paragraph). Therefore, for each unique real estate parcel, we need to get the **latest recorded value for each item/variable** we are interested in using.
+
+Accordingly, we create a [unique id table with a single record for each parcel]{.ul} and [individual tables for each item/variable]{.ul} (number of bedrooms, number of bathrooms, living square footage, etc.). These are then all joined to create a table of just the **latest recorded information for each item/variable for each unique parcel**.
+
 ## Load libraries and functions
 
 ```{r}
@@ -20,18 +28,7 @@ source("../R/functions.R")
 library(glue)
 ```
 
-## Create Unique ID Table
-
-```{sql}
--- {sql} * Run In psql/pgcli
-SELECT DISTINCT geoid_cnty, p_id_iris_frmtd
-INTO corelogic_usda.current_tax_200627_unique_id
-FROM corelogic_usda.current_tax_200627_typed
-WHERE geoid_cnty IS NOT NULL
-AND p_id_iris_frmtd IS NOT NULL;
-
-ALTER TABLE corelogic_usda.current_tax_200627_unique_id ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);
-```
+### Create a function to build the SQL queries necessary to get most recent item recordings
 
 ```{r}
 # {r}
@@ -61,6 +58,19 @@ build_latest_query <- function(col_name) {
         ALTER TABLE corelogic_usda.{`tbl`} ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);
            ", .con = con)
 }
+```
+
+## Create Unique ID Table
+
+```{sql}
+-- {sql} * Run In psql/pgcli
+SELECT DISTINCT geoid_cnty, p_id_iris_frmtd
+INTO corelogic_usda.current_tax_200627_unique_id
+FROM corelogic_usda.current_tax_200627_typed
+WHERE geoid_cnty IS NOT NULL
+AND p_id_iris_frmtd IS NOT NULL;
+
+ALTER TABLE corelogic_usda.current_tax_200627_unique_id ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);
 ```
 
 ### Run build_latest_query for each column, then copy the SQL into psql/pgcli
@@ -247,9 +257,9 @@ SELECT a.geoid_cnty, a.p_id_iris_frmtd,
 ALTER TABLE corelogic_usda.current_tax_200627_latest_all ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);
 ```
 
-\<!--\#
-
 ## Not USED - Attempt to create psql function to get latest item
+
+This would obviate the need for all the copy pastes currently necessary. Doesn't work yet.
 
 ```{sql}
 create or replace function get_latest (
@@ -276,5 +286,3 @@ begin
     AND %I IS NOT NULL', col);
 end;$$
 ```
-
---\>

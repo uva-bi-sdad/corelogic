@@ -12,7 +12,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-Now we will add columns to the dataset for each USDA broadband program. Each program column will contain a program identifier code for each property that is within the eligibility area for that program. We will create these columns by finding the intersection of the program's eligibility areas (as specified in their respective shapefiles) with the coordinates of the corelogic properties.
+------------------------------------------------------------------------
+
+We add columns to the dataset for **each USDA broadband program**. Each program column will contain a program identifier code for each property that is within the eligibility area for that program. We create these columns by finding the geographic intersection of the program's eligibility areas (as specified in their respective shapefiles) with the coordinates of the corelogic properties. The final output is a new table with a column for each broadband program. If a property is physically within the eligibility area for one of the programs, then a program identifier is entered in that program's column.
 
 ## Load libraries and functions
 

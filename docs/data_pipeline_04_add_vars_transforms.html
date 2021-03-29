@@ -313,7 +313,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">The Dataset Creation Pipeline</a>
+      <a class="navbar-brand" href="index.html">Admin2Research Data Pipeline</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -321,17 +321,17 @@ div.tocify {
   <a href="index.html">Home</a>
 </li>
 <li>
-  <a href="data_pipeline_01.html">Import (Parallel)</a>
+  <a href="data_pipeline_01.html">1. Import (Parallel)</a>
 </li>
 <li>
-  <a href="data_pipeline_02_clean_and_type.html">Fix Types</a>
+  <a href="data_pipeline_02_clean_and_type.html">2. Fix Types</a>
 </li>
 <li>
-  <a href="data_pipeline_03_build_latest_data_set.html">Latest Only</a>
+  <a href="data_pipeline_03_build_latest_data_set.html">3. Unique &amp; Latest</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Add Variables
+    4. Add Variables
      
     <span class="caret"></span>
   </a>
@@ -348,11 +348,11 @@ div.tocify {
   </ul>
 </li>
 <li>
-  <a href="data_pipeline_07_filter_records.html">Filter</a>
+  <a href="data_pipeline_07_filter_records.html">5. Filter</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Profile
+    6. Profile
      
     <span class="caret"></span>
   </a>
@@ -380,20 +380,24 @@ div.tocify {
 </div>
 
 
-<div id="load-libraries-and-functions" class="section level2">
-<h2>Load libraries and functions</h2>
-<pre class="r"><code># {r}
-source(&quot;../R/functions.R&quot;)</code></pre>
+<hr />
+<div id="create-sale_year-variable" class="section level2">
+<h2>Create sale_year variable</h2>
+<p>Planned analyses include <strong>analysis by year of sale</strong>. Creating a separate indexed column for year should be faster than repeatedly using DATEPART(‘year’, sale_date).</p>
+<pre class="sql"><code>SELECT DATE_PART(&#39;year&#39;, sale_date)::INTEGER AS sale_year</code></pre>
 </div>
-<div id="create-baths_appraised-and-sale_year" class="section level2">
-<h2>Create baths_appraised and sale_year</h2>
-<div id="sale-year" class="section level4">
-<h4>Sale Year</h4>
-<p>Planned analyses include analysis by year of sale. Creating a separate indexed column for year should be faster than repeatedly using DATEPART(‘year’, sale_date).</p>
-</div>
-<div id="bathrooms" class="section level4">
-<h4>Bathrooms</h4>
+<div id="create-baths_appraised-variable" class="section level2">
+<h2>Create baths_appraised variable</h2>
 <p>Using the Fannie Mae and Freddie Mac Uniform Appraisal Dataset Specification to calculate total bathrooms. 3/4 baths count as full baths, 1/4 baths are dropped, half bath is .1 of full bath, so 1 x full bath &amp; 1 x 3/4 bath &amp; 1 x half bath = 2.1 baths (2 full baths, 1 half bath).</p>
+<p>We use COALESCE to deal with NULL values because adding NULL values will always return NULL. COALESCE combines values, stopping at the first non-null value. So, if full_baths is NULL, the next non-null value ‘0’ will be used.</p>
+<p>We use NULLIF on the result of the baths equation to test if the result is 0. A 0 would indicate that all of the bath types were NULL (it’s extremely unlikely to have a house with 0 bathrooms). Therefore, a total value of 0 is converted back to NULL, indicating that we have no information.</p>
+<pre class="sql"><code>NULLIF(COALESCE(full_baths, 0) + 
+       COALESCE(thrqtr_baths, 0) + 
+       (.1 * COALESCE(half_baths, 0)), 0) AS baths_appraised</code></pre>
+</div>
+<div id="create-all-new-values-together-creating-a-new-table" class="section level2">
+<h2>Create all new values together, creating a new table</h2>
+<p>The <strong>fastest</strong> method to add new columns with values to a large dataset is to <strong>write everything to a new table</strong> (as opposed to the very slow operation of running an UPDATE on every record in the existing table). Therefore, we combine the creation of all new columns together in a single query creating a new table.</p>
 <pre class="sql"><code>-- {sql} * Run In psql/pgcli
 SELECT *,
        DATE_PART(&#39;year&#39;, sale_date)::INTEGER AS sale_year,
@@ -402,15 +406,6 @@ INTO corelogic_usda.current_tax_200627_latest_all_add_vars
 FROM corelogic_usda.current_tax_200627_latest_all;
 
 ALTER TABLE corelogic_usda.current_tax_200627_latest_all_add_vars ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);</code></pre>
-</div>
-<div id="first-fix-longitude-and-latitude-column-names" class="section level3">
-<h3>First, Fix Longitude and Latitude Column Names!</h3>
-<p>The column names are switched in this dataset! Longitude is latitude and vice versa.</p>
-<pre class="sql"><code>-- {sql} * Run In psql/pgcli
-ALTER TABLE corelogic_usda.current_tax_200627_latest_all_add_vars RENAME COLUMN property_centroid_longitude TO property_centroid_latitude_;
-ALTER TABLE corelogic_usda.current_tax_200627_latest_all_add_vars RENAME COLUMN property_centroid_latitude TO property_centroid_longitude;
-ALTER TABLE corelogic_usda.current_tax_200627_latest_all_add_vars RENAME COLUMN property_centroid_latitude_ TO property_centroid_latitude;</code></pre>
-</div>
 </div>
 
 

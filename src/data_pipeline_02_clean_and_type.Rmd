@@ -1,5 +1,5 @@
 ---
-title: "Prepare and Convert Columns to Correct Data Types"
+title: "Fix Data Types and Titles for Required Columns"
 output: 
   html_document:
     toc: yes
@@ -11,6 +11,8 @@ knitr::opts_chunk$set(
   eval=FALSE
 )
 ```
+
+------------------------------------------------------------------------
 
 ## Load libraries and functions
 
@@ -127,6 +129,10 @@ dbDisconnect(con)
 
 ## Clean and set column data types and insert into new typed table
 
+### First, Fix Longitude and Latitude Column Names!
+
+The column names are switched in this dataset! Longitude is latitude and vice versa. Therefore, the column names are reverse here to fix.
+
 ```{sql}
 -- {sql} * Run In psql/pgcli
   INSERT INTO corelogic_usda.current_tax_200627_typed
@@ -138,9 +144,11 @@ dbDisconnect(con)
   clean_char(municipality_name) municipality_name, 
   clean_char(municipality_code) municipality_code,
   CAST(NULLIF(REPLACE(acres, '"', ''), '') AS NUMERIC(11,2)) acres, 
-  CAST(NULLIF(REPLACE(land_square_footage, '"', ''), '') AS NUMERIC(11,2)) land_square_footage, 
-  CAST(NULLIF(REPLACE(property_centroid_longitude, '"', ''), '') AS NUMERIC(9,6)) property_centroid_longitude, 
-  CAST(NULLIF(REPLACE(property_centroid_latitude, '"', ''), '') AS NUMERIC(9,6)) property_centroid_latitude, 
+  CAST(NULLIF(REPLACE(land_square_footage, '"', ''), '') AS NUMERIC(11,2)) land_square_footage,
+  
+  CAST(NULLIF(REPLACE(property_centroid_longitude, '"', ''), '') AS NUMERIC(9,6)) property_centroid_latitude, 
+  CAST(NULLIF(REPLACE(property_centroid_latitude, '"', ''), '') AS NUMERIC(9,6)) property_centroid_longitude, 
+  
   clean_char(bldg_code) bldg_code, 
   CAST(NULLIF(REPLACE(building_square_feet, '"', ''), '') AS NUMERIC(9,2)) building_square_feet, 
   CAST(NULLIF(REPLACE(living_square_feet, '"', ''), '') AS NUMERIC(9,2)) living_square_feet, 

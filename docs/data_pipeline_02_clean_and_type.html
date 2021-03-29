@@ -11,7 +11,7 @@
 
 
 
-<title>Prepare and Convert Columns to Correct Data Types</title>
+<title>Fix Data Types and Titles for Required Columns</title>
 
 <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -313,7 +313,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">The Dataset Creation Pipeline</a>
+      <a class="navbar-brand" href="index.html">Admin2Research Data Pipeline</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -321,17 +321,17 @@ div.tocify {
   <a href="index.html">Home</a>
 </li>
 <li>
-  <a href="data_pipeline_01.html">Import (Parallel)</a>
+  <a href="data_pipeline_01.html">1. Import (Parallel)</a>
 </li>
 <li>
-  <a href="data_pipeline_02_clean_and_type.html">Fix Types</a>
+  <a href="data_pipeline_02_clean_and_type.html">2. Fix Types</a>
 </li>
 <li>
-  <a href="data_pipeline_03_build_latest_data_set.html">Latest Only</a>
+  <a href="data_pipeline_03_build_latest_data_set.html">3. Unique &amp; Latest</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Add Variables
+    4. Add Variables
      
     <span class="caret"></span>
   </a>
@@ -348,11 +348,11 @@ div.tocify {
   </ul>
 </li>
 <li>
-  <a href="data_pipeline_07_filter_records.html">Filter</a>
+  <a href="data_pipeline_07_filter_records.html">5. Filter</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Profile
+    6. Profile
      
     <span class="caret"></span>
   </a>
@@ -375,11 +375,12 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Prepare and Convert Columns to Correct Data Types</h1>
+<h1 class="title toc-ignore">Fix Data Types and Titles for Required Columns</h1>
 
 </div>
 
 
+<hr />
 <div id="load-libraries-and-functions" class="section level2">
 <h2>Load libraries and functions</h2>
 <pre class="r"><code># {r}
@@ -469,6 +470,9 @@ dbDisconnect(con)</code></pre>
 </div>
 <div id="clean-and-set-column-data-types-and-insert-into-new-typed-table" class="section level2">
 <h2>Clean and set column data types and insert into new typed table</h2>
+<div id="first-fix-longitude-and-latitude-column-names" class="section level3">
+<h3>First, Fix Longitude and Latitude Column Names!</h3>
+<p>The column names are switched in this dataset! Longitude is latitude and vice versa. Therefore, the column names are reverse here to fix.</p>
 <pre class="sql"><code>-- {sql} * Run In psql/pgcli
   INSERT INTO corelogic_usda.current_tax_200627_typed
   SELECT
@@ -479,9 +483,11 @@ dbDisconnect(con)</code></pre>
   clean_char(municipality_name) municipality_name, 
   clean_char(municipality_code) municipality_code,
   CAST(NULLIF(REPLACE(acres, &#39;&quot;&#39;, &#39;&#39;), &#39;&#39;) AS NUMERIC(11,2)) acres, 
-  CAST(NULLIF(REPLACE(land_square_footage, &#39;&quot;&#39;, &#39;&#39;), &#39;&#39;) AS NUMERIC(11,2)) land_square_footage, 
-  CAST(NULLIF(REPLACE(property_centroid_longitude, &#39;&quot;&#39;, &#39;&#39;), &#39;&#39;) AS NUMERIC(9,6)) property_centroid_longitude, 
-  CAST(NULLIF(REPLACE(property_centroid_latitude, &#39;&quot;&#39;, &#39;&#39;), &#39;&#39;) AS NUMERIC(9,6)) property_centroid_latitude, 
+  CAST(NULLIF(REPLACE(land_square_footage, &#39;&quot;&#39;, &#39;&#39;), &#39;&#39;) AS NUMERIC(11,2)) land_square_footage,
+  
+  CAST(NULLIF(REPLACE(property_centroid_longitude, &#39;&quot;&#39;, &#39;&#39;), &#39;&#39;) AS NUMERIC(9,6)) property_centroid_latitude, 
+  CAST(NULLIF(REPLACE(property_centroid_latitude, &#39;&quot;&#39;, &#39;&#39;), &#39;&#39;) AS NUMERIC(9,6)) property_centroid_longitude, 
+  
   clean_char(bldg_code) bldg_code, 
   CAST(NULLIF(REPLACE(building_square_feet, &#39;&quot;&#39;, &#39;&#39;), &#39;&#39;) AS NUMERIC(9,2)) building_square_feet, 
   CAST(NULLIF(REPLACE(living_square_feet, &#39;&quot;&#39;, &#39;&#39;), &#39;&#39;) AS NUMERIC(9,2)) living_square_feet, 
@@ -541,6 +547,7 @@ dbDisconnect(con)</code></pre>
   CAST(NULLIF(REPLACE(land_value_calculated, &#39;&quot;&#39;, &#39;&#39;), &#39;&#39;) AS NUMERIC) land_value_calculated,
   CAST(NULLIF(REPLACE(improvement_value_calculated, &#39;&quot;&#39;, &#39;&#39;), &#39;&#39;) AS NUMERIC) improvement_value_calculated
   FROM corelogic_usda.current_tax_200627_raw;</code></pre>
+</div>
 <div id="add-composite-index" class="section level3">
 <h3>Add Composite Index</h3>
 <pre class="sql"><code>-- {sql} * Run In psql/pgcli
