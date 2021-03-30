@@ -15,22 +15,26 @@ navbar:
     - text: "Profile"
       menu:
         - text: "Structure"
-        - text: "Quality"
+        - text: "Quality - Single Variables"
+          href: data_pipeline_08_profile_variables.html
+        - text: "Quality - Related Variables"
         - text: "Metadata"
-    - text: "Unique & Latest"
-      href: data_pipeline_03_build_latest_data_set.html
-    - text: "Add Variables"
+    - text: "Re-Structure"
       menu:
-        - text: By Transforming Other Columns
+        - text: "Unique & Latest"
+          href: data_pipeline_03_build_latest_data_set.html
+        - text: "New Vars from Transform"
           href: data_pipeline_04_add_vars_transforms.html
-        - text: By Adding External Data
+        - text: "New Vars from External"
           href: data_pipeline_05_add_vars_external.html
-        - text: By Adding Geography
+        - text: "Add Geography"
           href: data_pipeline_05_add_vars_external_2.html
-    - text: "Filter"
+    - text: "Enhance Quality"
       href: data_pipeline_07_filter_records.html
     - text: "Re-Profile"
       menu:
-        - text: "Individual Variables"
+        - text: "Structure"
+        - text: "Quality - Single Variables"
           href: data_pipeline_08_profile_variables.html
-        - text: "Related Variables"
+        - text: "Quality - Related Variables"
+        - text: "Metadata"
