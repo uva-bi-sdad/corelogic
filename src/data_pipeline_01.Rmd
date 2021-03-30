@@ -4,6 +4,7 @@ output:
   html_document:
     toc: yes
     toc_float: yes
+    toc_depth: 4
 ---
 
 ```{r, include=FALSE}
@@ -15,6 +16,8 @@ knitr::opts_chunk$set(
 ------------------------------------------------------------------------
 
 Import of 174GB file: Corelogic_USDA_Current_Tax_2020_06_27.txt
+
+# INGEST
 
 ## Load libraries and functions
 
@@ -130,4 +133,12 @@ res <- foreach(i = 151:179) %dopar% {
 }
 
 parallel::stopCluster(cl)
+```
+
+------------------------------------------------------------------------
+
+# PROFILE
+
+```{r}
+###
 ```

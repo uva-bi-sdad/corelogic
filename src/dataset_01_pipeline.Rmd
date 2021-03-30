@@ -1,0 +1,1199 @@
+---
+title: "Dataset 1 Pipeline"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
+    toc_depth: 4
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  eval=FALSE
+)
+```
+
+------------------------------------------------------------------------
+
+# DATASET INFO
+
+#### Input Data Title
+
+Corelogic USDA Current Tax Roll through 06/27/2020
+
+#### Input Data Delivered Data
+
+07/06/2020
+
+#### Input Data Type & Format
+
+Administrative; CSV
+
+#### Input Data Location
+
+/project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/Corelogic_USDA_Current_Tax_2020_06_27.txt
+
+#### Input Data Dictionary
+
+/project/biocomplexity/sdad/projects_data/usda/bb/original/L -- TAX -- Bulk Historical Tax Roll.xlsx
+
+#### Input Data Provider
+
+CoreLogic
+
+#### Input Data License
+
+Proprietary, <link to contract>
+
+#### Output Data Format
+
+Database table
+
+#### Output Data Location
+
+corelogic_usda.current_tax_200627_latest_final
+
+------------------------------------------------------------------------
+
+# INGEST
+
+## SPLIT AND PARALLEL IMPORT
+
+### Load libraries and functions
+
+```{r, eval=FALSE}
+# {r}
+source("R/functions.R")
+library(data.table)
+library(dataplumbr)
+library(foreach)
+library(doParallel)
+library(DBI)
+```
+
+### Set variables
+
+#### Files and directories
+
+```{r}
+# {r}
+file_dir <- "/project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files"
+file_name <- "Corelogic_USDA_Current_Tax_2020_06_27.txt"
+file_path <- file.path(file_dir, file_name)
+```
+
+#### Database
+
+```{r}
+# {r}
+schema_name <- "corelogic_usda"
+table_name <- "current_tax_200627_raw"
+```
+
+### Use system-level commands to split large file
+
+#### Set System-Level (bash) Environmental Variables
+
+System-level environmental variables are set to enable their use by command line functions
+
+```{r}
+# {r}
+Sys.setenv(file_dir=file_dir)
+Sys.setenv(file_path=file_path)
+```
+
+#### Create directory for split files from the terminal
+
+```{bash}
+# {bash}
+mkdir $file_dir/splits/
+rm -r $file_dir/splits/*
+```
+
+#### Split large file by number of lines per file
+
+Use system split function to create files not too large to be handled for import into R. In this case we are creating files with a maximum of 1,000,000 lines each
+
+```{bash}
+# {bash} * Might run in terminal depending on size
+split -l1000000 $file_path $file_dir/splits/
+```
+
+### Read and prepare first split file
+
+#### Get first split file path and read with data.table
+
+```{r}
+# {r}
+file_paths <- list.files(path = file.path(file_dir, "splits"), full.names = T)
+first_split_file <- file_paths[1]
+tbl <- fread(first_split_file, colClasses = "character", select = 1:188, quote = "")
+```
+
+#### Standardize column names for the database
+
+```{r}
+# {r}
+db_col_names <- dataplumbr::name.standard_col_names(colnames(tbl)) %>%
+  stringr::str_replace("^_", "") %>%
+  stringr::str_replace("_$", "")
+colnames(tbl) <- db_col_names
+```
+
+### Write data to new database table
+
+```{r}
+# {r}
+con <- get_db_conn()
+dbWriteTable(con, c(schema_name, table_name), tbl, overwrite = T, row.names = F)
+dbDisconnect(con)
+
+rm(tbl)
+```
+
+### Read remaining split files and upload to database
+
+```{r}
+# {r}
+# core_num <- parallel::detectCores() - 2
+cl <- makeCluster(6, outfile = "src/parlog")
+doParallel::registerDoParallel(cl)
+
+# num_files <- length(file_paths)
+
+res <- foreach(i = 151:179) %dopar% {
+  con <- get_db_conn()
+  print(paste("reading", file_paths[i]))
+  dt <- data.table::fread(file_paths[i], colClasses = "character", header = FALSE, select = 1:188, quote = "")
+  colnames(dt) <- db_col_names
+  db_res <- RPostgreSQL::dbWriteTable(con, c(schema_name, table_name), dt, append = TRUE, row.names = FALSE)
+  print(paste(db_res, "written", file_paths[i]))
+  DBI::dbDisconnect(con)
+  rm(dt)
+}
+
+parallel::stopCluster(cl)
+```
+
+------------------------------------------------------------------------
+
+## SELECT, TYPE & TITLE
+
+### Load libraries and functions
+
+```{r}
+# {r}
+source("../R/functions.R")
+library(DBI)
+```
+
+#### Function for testing if a string value is a valid date
+
+```{r}
+# {r}
+con <- get_db_conn()
+```
+
+```{sql}
+# {sql connection=con}
+create or replace function is_date(s varchar) 
+returns boolean as $$
+ begin
+   perform s::date;
+   return true;
+ exception when others then
+   return false;
+ end;
+ $$ language plpgsql;
+```
+
+```{r}
+# {r}
+dbDisconnect(con)
+```
+
+#### Function for cleaning character strings (in this case only removing double quotes). If string is empty after cleaning, returns null.
+
+```{r}
+# {r}
+con <- get_db_conn()
+```
+
+```{sql}
+-- {sql connection=con}
+create or replace function clean_char(s varchar) 
+returns varchar as $cleaned$
+ declare
+   cleaned varchar;
+ begin
+   SELECT NULLIF(REPLACE(s, '"', ''), '') INTO cleaned;
+   return cleaned;
+ end;
+ $cleaned$ language plpgsql;
+```
+
+```{r}
+# {r}
+dbDisconnect(con)
+```
+
+### Create new table of desired columns with correct data types
+
+```{r}
+# {r}
+con <- get_db_conn()
+```
+
+```{sql}
+-- {sql connection=con}
+CREATE TABLE corelogic_usda.current_tax_200627_typed
+(
+  geoid_cnty CHAR(5),
+  p_id_iris_frmtd VARCHAR(75),
+  property_indicator VARCHAR(5),
+  zoning VARCHAR(100),
+  municipality_name VARCHAR(255),
+  municipality_code VARCHAR(20),
+  acres NUMERIC(11,2),
+  land_square_footage NUMERIC(11,2),
+  property_centroid_longitude NUMERIC(9,6),
+  property_centroid_latitude NUMERIC(9,6),
+  bldg_code VARCHAR(10),
+  building_square_feet NUMERIC(9,2),
+  living_square_feet NUMERIC(9,2),
+  year_built VARCHAR(8),
+  effective_year_built VARCHAR(8),
+  bedrooms NUMERIC(6,1),
+  full_baths NUMERIC(6,1),
+  qtr_baths NUMERIC(6,1),
+  thrqtr_baths NUMERIC(6,1),
+  half_baths NUMERIC(6,1),
+  total_baths NUMERIC(6,1),
+  situs_address VARCHAR(255),
+  situs_zip_code VARCHAR(10),
+  mail_address VARCHAR(255),
+  mail_zip_code VARCHAR(10),
+  sale_code VARCHAR(5),
+  sale_price NUMERIC,
+  sale_date DATE,
+  recording_date DATE,
+  transaction_type VARCHAR(5),
+  tax_amount NUMERIC,
+  tax_year INTEGER,
+  assessed_year INTEGER,
+  total_value_calculated NUMERIC,
+  land_value_calculated NUMERIC,
+  improvement_value_calculated NUMERIC
+)
+```
+
+```{r}
+# {r}
+dbDisconnect(con)
+```
+
+### Clean and set column data types and insert into new typed table
+
+#### First, Fix Longitude and Latitude Column Names!
+
+The column names are switched in this dataset! Longitude is latitude and vice versa. Therefore, the column names are reverse here to fix.
+
+```{sql}
+-- {sql} * Run In psql/pgcli
+  INSERT INTO corelogic_usda.current_tax_200627_typed
+  SELECT
+  clean_char(fips_code) geoid_cnty, 
+  clean_char(p_id_iris_frmtd) p_id_iris_frmtd, 
+  clean_char(property_indicator) property_indicator, 
+  clean_char(zoning) zoning, 
+  clean_char(municipality_name) municipality_name, 
+  clean_char(municipality_code) municipality_code,
+  CAST(NULLIF(REPLACE(acres, '"', ''), '') AS NUMERIC(11,2)) acres, 
+  CAST(NULLIF(REPLACE(land_square_footage, '"', ''), '') AS NUMERIC(11,2)) land_square_footage,
+  
+  CAST(NULLIF(REPLACE(property_centroid_longitude, '"', ''), '') AS NUMERIC(9,6)) property_centroid_latitude, 
+  CAST(NULLIF(REPLACE(property_centroid_latitude, '"', ''), '') AS NUMERIC(9,6)) property_centroid_longitude, 
+  
+  clean_char(bldg_code) bldg_code, 
+  CAST(NULLIF(REPLACE(building_square_feet, '"', ''), '') AS NUMERIC(9,2)) building_square_feet, 
+  CAST(NULLIF(REPLACE(living_square_feet, '"', ''), '') AS NUMERIC(9,2)) living_square_feet, 
+  clean_char(year_built) year_built, 
+  clean_char(effective_year_built) effective_year_built,
+  CAST(NULLIF(REPLACE(bedrooms, '"', ''), '') AS NUMERIC(6,1)) bedrooms, 
+  CAST(NULLIF(REPLACE(full_baths, '"', ''), '') AS NUMERIC(6,1)) full_baths, 
+  CAST(NULLIF(REPLACE("1qtr_baths", '"', ''), '') AS NUMERIC(6,1)) qtr_baths, 
+  CAST(NULLIF(REPLACE("3qtr_baths", '"', ''), '') AS NUMERIC(6,1)) thrqtr_baths, 
+  CAST(NULLIF(REPLACE(half_baths, '"', ''), '') AS NUMERIC(6,1)) half_baths, 
+  CAST(NULLIF(REPLACE(total_baths, '"', ''), '') AS NUMERIC(6,1)) total_baths, 
+  trim(
+    replace( 
+      replace(
+        replace(
+          coalesce(situs_house_number_prefix, '') || ' ' ||
+          coalesce(situs_house_number, '') || ' ' ||
+          coalesce(situs_direction, '') || ' ' ||
+          coalesce(situs_street_name, '') || ' ' ||
+          coalesce(situs_mode, '') || ' ' ||
+          coalesce(situs_quadrant, '') || ' ' ||
+          coalesce(situs_city, '') || ' ' ||
+          coalesce(situs_state, '') || ' ' ||
+          coalesce(situs_zip_code, ''),
+        '  ', ' '),
+      '  ', ' '),
+      '"', '')
+  ) situs_address, 
+  clean_char(situs_zip_code) situs_zip_code, 
+  trim(
+    replace(
+     replace(
+       replace(
+         coalesce(mail_house_number_prefix, '') || ' ' ||
+         coalesce(mail_house_number, '') || ' ' ||
+         coalesce(mail_direction, '') || ' ' ||
+         coalesce(mail_street_name, '') || ' ' ||
+         coalesce(mail_mode, '') || ' ' ||
+         coalesce(mail_quadrant, '') || ' ' ||
+         coalesce(mail_city, '') || ' ' ||
+         coalesce(mail_state, '') || ' ' ||
+         coalesce(mail_zip_code, ''),
+       '  ', ' '),
+     '  ', ' '),
+    '"', '')
+    ) mail_address, 
+  clean_char(mail_zip_code) mail_zip_code,
+  clean_char(sale_code) sale_code, 
+  CAST(NULLIF(REPLACE(sale_price, '"', ''), '') AS NUMERIC) sale_price, 
+  CASE WHEN is_date(REPLACE(sale_date, '"', '')) = TRUE THEN TO_DATE(NULLIF(REPLACE(sale_date, '"', ''), ''), 'YYYYMMDD') ELSE NULL END sale_date,
+  CASE WHEN is_date(REPLACE(recording_date, '"', '')) = TRUE THEN TO_DATE(NULLIF(REPLACE(recording_date, '"', ''), ''), 'YYYYMMDD') ELSE NULL END recording_date,
+  clean_char(transaction_type) transaction_type,
+  CAST(NULLIF(REPLACE(tax_amount, '"', ''), '') AS NUMERIC) tax_amount, 
+  CAST(NULLIF(REPLACE(tax_year, '"', ''), '') AS INTEGER) tax_year, 
+  CAST(NULLIF(REPLACE(assessed_year, '"', ''), '') AS INTEGER) assessed_year, 
+  CAST(NULLIF(REPLACE(total_value_calculated, '"', ''), '') AS NUMERIC) total_value_calculated, 
+  CAST(NULLIF(REPLACE(land_value_calculated, '"', ''), '') AS NUMERIC) land_value_calculated,
+  CAST(NULLIF(REPLACE(improvement_value_calculated, '"', ''), '') AS NUMERIC) improvement_value_calculated
+  FROM corelogic_usda.current_tax_200627_raw;
+```
+
+#### Add Composite Index
+
+```{sql}
+-- {sql} * Run In psql/pgcli
+DROP INDEX IF EXISTS current_tax_200627_typed_geoid_cnty_p_id_iris_frmtd_idx;
+CREATE INDEX current_tax_200627_typed_geoid_cnty_p_id_iris_frmtd_idx ON corelogic_usda.current_tax_200627_typed (geoid_cnty, p_id_iris_frmtd);
+```
+
++:----------------------------------------------------------------------+
+| \# INITIAL PROFILE                                                    |
++-----------------------------------------------------------------------+
+| \#\# FIND STRUCTURAL ISSUES                                           |
++-----------------------------------------------------------------------+
+| \#\# FIND QUALITY ISSUES                                              |
++-----------------------------------------------------------------------+
+
+# RESTRUCTURE
+
+## CREATE SINGLE RECORD OF LATEST
+
+**Create a Single Record of Latest Info for each Property** - Administrative data records like real estate tax records have, by their nature, multiple entries over time of information related to some entity. For example, for a single property parcel there will be a separate entry for each sale that has occurred. However, it is rare for all pertinent information to be fully entered every time. For example, the number of bedrooms may be consistently entered when a sale occurs, but possibly not again when a record is entered for recording annual property tax not associated with a sale. Also, values can change over time from record to record (e.g property additions change the number of bedrooms). Also, it is reasonable to expect that the entries will not always be accurate (misspellings, transpositions, etc).
+
+For real estate tax records it is reasonable to assume that the most recent entry is the most probably valid entry (e.g. number of bedrooms recently recorded will be more accurate than number of bedrooms recorded before an addition was added to the house). However, **the most recent record will not necessarily have all of the needed information** (see previous paragraph). Therefore, for each unique real estate parcel, we need to get the **latest recorded value for each item/variable** we are interested in using.
+
+Accordingly, we create a [unique id table with a single record for each parcel]{.ul} and [individual tables for each item/variable]{.ul} (number of bedrooms, number of bathrooms, living square footage, etc.). These are then all joined to create a table of just the **latest recorded information for each item/variable for each unique parcel**.
+
+### Load libraries and functions
+
+```{r}
+# {r}
+source("../R/functions.R")
+library(glue)
+```
+
+#### Create a function to build the SQL queries necessary to get most recent item recordings
+
+```{r}
+# {r}
+build_latest_query <- function(col_name) {
+  tbl <- glue("current_tax_200627_latest_{col_name}")
+  glue_sql("
+        DROP TABLE IF EXISTS corelogic_usda.{`tbl`};
+        
+        SELECT geoid_cnty, 
+           p_id_iris_frmtd, 
+           {`col_name`}
+        INTO corelogic_usda.{`tbl`}
+        FROM
+        (
+          SELECT geoid_cnty, 
+                 p_id_iris_frmtd, 
+                 {`col_name`},
+                 sale_date,
+                 ROW_NUMBER() OVER (PARTITION BY geoid_cnty, p_id_iris_frmtd ORDER BY sale_date DESC) as rec_num
+          FROM corelogic_usda.current_tax_200627_typed
+          WHERE sale_date IS NOT NULL
+          AND p_id_iris_frmtd IS NOT NULL
+          AND {`col_name`} IS NOT NULL
+        ) t
+        WHERE rec_num = 1;
+        
+        ALTER TABLE corelogic_usda.{`tbl`} ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);
+           ", .con = con)
+}
+```
+
+### Create Unique ID Table
+
+```{sql}
+-- {sql} * Run In psql/pgcli
+SELECT DISTINCT geoid_cnty, p_id_iris_frmtd
+INTO corelogic_usda.current_tax_200627_unique_id
+FROM corelogic_usda.current_tax_200627_typed
+WHERE geoid_cnty IS NOT NULL
+AND p_id_iris_frmtd IS NOT NULL;
+
+ALTER TABLE corelogic_usda.current_tax_200627_unique_id ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);
+```
+
+#### Run build_latest_query for each column, then copy the SQL into psql/pgcli
+
+```{r}
+# {r}
+build_latest_query("property_indicator")
+```
+
+```{r}
+# {r}
+build_latest_query("acres")
+```
+
+```{r}
+# {r}
+build_latest_query("land_square_footage")
+```
+
+```{r}
+# {r}
+build_latest_query("bldg_code")
+```
+
+```{r}
+# {r}
+build_latest_query("building_square_feet")
+```
+
+```{r}
+# {r}
+build_latest_query("living_square_feet")
+```
+
+```{r}
+# {r}
+build_latest_query("year_built")
+```
+
+```{r}
+# {r}
+build_latest_query("effective_year_built")
+```
+
+```{r}
+# {r}
+build_latest_query("bedrooms")
+```
+
+```{r}
+# {r}
+build_latest_query("full_baths")
+```
+
+```{r}
+# {r}
+build_latest_query("qtr_baths")
+```
+
+```{r}
+# {r}
+build_latest_query("thrqtr_baths")
+```
+
+```{r}
+# {r}
+build_latest_query("half_baths")
+```
+
+```{r}
+# {r}
+build_latest_query("total_baths")
+```
+
+```{r}
+# {r}
+build_latest_query("situs_address")
+```
+
+```{r}
+# {r}
+build_latest_query("mail_address")
+```
+
+```{r}
+# {r}
+build_latest_query("sale_code")
+```
+
+```{r}
+# {r}
+build_latest_query("sale_price")
+```
+
+```{r}
+# {r}
+build_latest_query("sale_date")
+```
+
+```{r}
+# {r}
+build_latest_query("recording_date")
+```
+
+```{r}
+# {r}
+build_latest_query("transaction_type")
+```
+
+```{r}
+# {r}
+build_latest_query("tax_year")
+```
+
+```{r}
+# {r}
+build_latest_query("property_centroid_longitude")
+```
+
+```{r}
+# {r}
+build_latest_query("property_centroid_latitude")
+```
+
+### Create Table of All Latest Information
+
+```{sql}
+-- {sql} * Run In psql/pgcli
+SELECT a.geoid_cnty, a.p_id_iris_frmtd,
+      acres, land_square_footage, bldg_code, building_square_feet, living_square_feet,
+      year_built, effective_year_built, bedrooms, full_baths, qtr_baths, thrqtr_baths,
+      half_baths, total_baths, situs_address, mail_address, sale_code, sale_price,
+      sale_date, recording_date, transaction_type, tax_year
+ INTO corelogic_usda.current_tax_200627_latest_all
+ FROM corelogic_usda.current_tax_200627_unique_id a
+ LEFT JOIN corelogic_usda.current_tax_200627_latest_acres b
+   ON a.geoid_cnty = b.geoid_cnty AND a.p_id_iris_frmtd = b.p_id_iris_frmtd
+ LEFT JOIN corelogic_usda.current_tax_200627_latest_land_square_footage c
+   ON a.geoid_cnty = c.geoid_cnty AND a.p_id_iris_frmtd = c.p_id_iris_frmtd
+ LEFT JOIN corelogic_usda.current_tax_200627_latest_bldg_code d
+   ON a.geoid_cnty = d.geoid_cnty AND a.p_id_iris_frmtd = d.p_id_iris_frmtd
+ LEFT JOIN corelogic_usda.current_tax_200627_latest_building_square_feet e
+   ON a.geoid_cnty = e.geoid_cnty AND a.p_id_iris_frmtd = e.p_id_iris_frmtd
+ LEFT JOIN corelogic_usda.current_tax_200627_latest_living_square_feet f
+   ON a.geoid_cnty = f.geoid_cnty AND a.p_id_iris_frmtd = f.p_id_iris_frmtd
+ LEFT JOIN corelogic_usda.current_tax_200627_latest_year_built g
+   ON a.geoid_cnty = g.geoid_cnty AND a.p_id_iris_frmtd = g.p_id_iris_frmtd
+ LEFT JOIN corelogic_usda.current_tax_200627_latest_effective_year_built h
+   ON a.geoid_cnty = h.geoid_cnty AND a.p_id_iris_frmtd = h.p_id_iris_frmtd
+ LEFT JOIN corelogic_usda.current_tax_200627_latest_bedrooms i
+   ON a.geoid_cnty = i.geoid_cnty AND a.p_id_iris_frmtd = i.p_id_iris_frmtd
+ LEFT JOIN corelogic_usda.current_tax_200627_latest_full_baths j
+   ON a.geoid_cnty = j.geoid_cnty AND a.p_id_iris_frmtd = j.p_id_iris_frmtd
+ LEFT JOIN corelogic_usda.current_tax_200627_latest_qtr_baths k
+   ON a.geoid_cnty = k.geoid_cnty AND a.p_id_iris_frmtd = k.p_id_iris_frmtd
+ LEFT JOIN corelogic_usda.current_tax_200627_latest_thrqtr_baths l
+   ON a.geoid_cnty = l.geoid_cnty AND a.p_id_iris_frmtd = l.p_id_iris_frmtd
+ LEFT JOIN corelogic_usda.current_tax_200627_latest_half_baths m
+   ON a.geoid_cnty = m.geoid_cnty AND a.p_id_iris_frmtd = m.p_id_iris_frmtd
+ LEFT JOIN corelogic_usda.current_tax_200627_latest_total_baths n
+   ON a.geoid_cnty = n.geoid_cnty AND a.p_id_iris_frmtd = n.p_id_iris_frmtd
+ LEFT JOIN corelogic_usda.current_tax_200627_latest_situs_address o
+   ON a.geoid_cnty = o.geoid_cnty AND a.p_id_iris_frmtd = o.p_id_iris_frmtd
+ LEFT JOIN corelogic_usda.current_tax_200627_latest_mail_address p
+   ON a.geoid_cnty = p.geoid_cnty AND a.p_id_iris_frmtd = p.p_id_iris_frmtd
+ LEFT JOIN corelogic_usda.current_tax_200627_latest_sale_code q
+   ON a.geoid_cnty = q.geoid_cnty AND a.p_id_iris_frmtd = q.p_id_iris_frmtd
+ LEFT JOIN corelogic_usda.current_tax_200627_latest_sale_price r
+   ON a.geoid_cnty = r.geoid_cnty AND a.p_id_iris_frmtd = r.p_id_iris_frmtd
+ LEFT JOIN corelogic_usda.current_tax_200627_latest_sale_date s
+   ON a.geoid_cnty = s.geoid_cnty AND a.p_id_iris_frmtd = s.p_id_iris_frmtd
+ LEFT JOIN corelogic_usda.current_tax_200627_latest_recording_date t
+   ON a.geoid_cnty = t.geoid_cnty AND a.p_id_iris_frmtd = t.p_id_iris_frmtd
+ LEFT JOIN corelogic_usda.current_tax_200627_latest_transaction_type u
+   ON a.geoid_cnty = u.geoid_cnty AND a.p_id_iris_frmtd = u.p_id_iris_frmtd
+ LEFT JOIN corelogic_usda.current_tax_200627_latest_tax_year v
+   ON a.geoid_cnty = v.geoid_cnty AND a.p_id_iris_frmtd = v.p_id_iris_frmtd
+ LEFT JOIN corelogic_usda.current_tax_200627_latest_property_centroid_longitude w
+   ON a.geoid_cnty = w.geoid_cnty AND a.p_id_iris_frmtd = w.p_id_iris_frmtd
+ LEFT JOIN corelogic_usda.current_tax_200627_latest_property_centroid_latitude x
+   ON a.geoid_cnty = x.geoid_cnty AND a.p_id_iris_frmtd = x.p_id_iris_frmtd
+ WHERE s.sale_date IS NOT NULL;
+
+ALTER TABLE corelogic_usda.current_tax_200627_latest_all ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);
+```
+
+## ADD VARIABLES (TRANSFORM EXISTING)
+
+### Create sale_year variable
+
+Planned analyses include **analysis by year of sale**. Creating a separate indexed column for year should be faster than repeatedly using DATEPART('year', sale_date).
+
+```{sql}
+SELECT DATE_PART('year', sale_date)::INTEGER AS sale_year
+```
+
+### Create baths_appraised variable
+
+Using the Fannie Mae and Freddie Mac Uniform Appraisal Dataset Specification to calculate total bathrooms. 3/4 baths count as full baths, 1/4 baths are dropped, half bath is .1 of full bath, so 1 x full bath & 1 x 3/4 bath & 1 x half bath = 2.1 baths (2 full baths, 1 half bath).
+
+We use COALESCE to deal with NULL values because adding NULL values will always return NULL. COALESCE combines values, stopping at the first non-null value. So, if full_baths is NULL, the next non-null value '0' will be used.
+
+We use NULLIF on the result of the baths equation to test if the result is 0. A 0 would indicate that all of the bath types were NULL (it's extremely unlikely to have a house with 0 bathrooms). Therefore, a total value of 0 is converted back to NULL, indicating that we have no information.
+
+```{sql}
+NULLIF(COALESCE(full_baths, 0) + 
+       COALESCE(thrqtr_baths, 0) + 
+       (.1 * COALESCE(half_baths, 0)), 0) AS baths_appraised
+```
+
+### Create all new values together, creating a new table
+
+The **fastest** method to add new columns with values to a large dataset is to **write everything to a new table** (as opposed to the very slow operation of running an UPDATE on every record in the existing table). Therefore, we combine the creation of all new columns together in a single query creating a new table.
+
+```{sql}
+-- {sql} * Run In psql/pgcli
+SELECT *,
+       DATE_PART('year', sale_date)::INTEGER AS sale_year,
+       NULLIF(coalesce(full_baths, 0) + coalesce(thrqtr_baths, 0) + (.1 * coalesce(half_baths, 0)), 0) AS baths_appraised
+INTO corelogic_usda.current_tax_200627_latest_all_add_vars
+FROM corelogic_usda.current_tax_200627_latest_all;
+
+ALTER TABLE corelogic_usda.current_tax_200627_latest_all_add_vars ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);
+```
+
+------------------------------------------------------------------------
+
+## ADD VARIABLES (EXTERNAL DATA)
+
+We add columns to the dataset for **each USDA broadband program**. Each program column will contain a program identifier code for each property that is within the eligibility area for that program. We create these columns by finding the geographic intersection of the program's eligibility areas (as specified in their respective shapefiles) with the coordinates of the corelogic properties. The final output is a new table with a column for each broadband program. If a property is physically within the eligibility area for one of the programs, then a program identifier is entered in that program's column.
+
+### Load libraries and functions
+
+```{r}
+source("../R/functions.R")
+library(data.table)
+library(RPostgreSQL)
+library(sf)
+library(glue)
+library(magrittr)
+```
+
+### Set Geo Data Directory
+
+```{r, cache=TRUE}
+# {r, cache=TRUE}
+geodatadir <- "../../../data/projects_data/usda/bb/original/geo"
+```
+
+### Get list of all U.S. counties
+
+For use with program data that don't have county fips codes. Convert list to sf.
+
+```{r, cache=TRUE}
+# {r, cache=TRUE}
+counties_us <- tigris::counties() %>%
+  sf::st_transform(4326)
+```
+
+### CC Program Eligible Properties
+
+#### Load broadband program area shapefiles
+
+```{r, cache=TRUE}
+# {r, cache=TRUE}
+map_program_area_cc <- st_read(file.path(geodatadir, "CC 2013_2019_83 04272020.shp")) %>%
+  sf::st_transform(4326)
+```
+
+#### Create list of county FIPS codes that are within the program area for the database query
+
+```{r}
+# {r}
+counties_cc <- paste0("'", paste(unique(strsplit(paste(map_program_area_cc$FIPS, collapse = ", "), ", ")[[1]]), collapse = "','"), "'")
+
+counties_cc_sql <- glue_sql(counties_cc)
+```
+
+#### Get property records for the program related counties from the database
+
+```{r}
+# {r}
+con <- get_db_conn(db_host = "localhost", db_port = 5434)
+```
+
+```{sql}
+-- {sql connection=con, output.var="qry_res"}
+SELECT geoid_cnty, p_id_iris_frmtd, property_centroid_longitude, property_centroid_latitude FROM corelogic_usda.current_tax_200627_latest_all_add_vars 
+WHERE property_centroid_longitude IS NOT NULL 
+AND geoid_cnty IN (?counties_cc_sql);
+```
+
+```{r}
+# {r}
+DBI::dbDisconnect(con)
+```
+
+#### Get intersection between program area shapefile and the selected properties
+
+First convert database query result to an sf object.
+
+```{r}
+# {r}
+db_rows_cc <- st_as_sf(qry_res, coords = c("property_centroid_longitude", "property_centroid_latitude"), crs = 4326)
+
+int <- sf::st_intersects(db_rows_cc, map_program_area_cc)
+int2 <- as.integer(as.character(int))
+```
+
+#### Add RUSID to intersecting properties
+
+```{r}
+# {r}
+db_rows_cc$program <- "CC"
+db_rows_cc$rusid <- as.character(map_program_area_cc$RUSID[unlist(int2)])
+db_rows_cc <- db_rows_cc[!is.na(db_rows_cc$rusid),]
+```
+
+### RC Program Eligible Properties
+
+#### Load broadband program area shapefiles
+
+```{r, cache=TRUE}
+# {r, cache=TRUE}
+map_program_area_rc <- st_read(file.path(geodatadir, "ReConnect R1 594 PFSA 05012020.shp")) %>%
+  sf::st_transform(4326)
+```
+
+#### Create list of county FIPS codes that are within the program area for the database query
+
+This dataset does not have a county FIPS code. Instead it provides a list of county names associated with that entry. We need to do some work to convert these lists of county names to a list of unique county fips codes.
+
+```{r}
+# {r}
+int <- sf::st_intersects(map_program_area_rc, counties_us)
+
+cnty_ints <- data.table(rc_rownum = numeric(), cntys_rownum = numeric(), geoid = character())
+for (i in 1:length(int)) {
+  u <- unlist(int[i])
+  for (j in 1:length(int[[i]])) {
+    geoid <- counties_us[u[j],]$GEOID
+    newrow <- data.table(rc_rownum = i, cntys_rownum = u[j], geoid)
+    cnty_ints <- rbindlist(list(cnty_ints, newrow))
+    #print(paste(i, u[j]))
+  }
+}
+
+cnty_ints_geoid <- cnty_ints[, .(geoid_cntys = paste(geoid, collapse = ", ")), rc_rownum]
+map_program_area_rc$geoid_cnty <- ""
+
+for (i in 1:nrow(cnty_ints_geoid)) {
+  map_program_area_rc[cnty_ints_geoid[i,]$rc_rownum,]$geoid_cnty <- cnty_ints_geoid[i,]$geoid_cntys
+}
+
+geoid_cnty_unq <- unique(strsplit(paste(map_program_area_rc$geoid_cnty, collapse = ", "), ", ")[[1]])
+geoid_cnty_unq <- geoid_cnty_unq[geoid_cnty_unq != ""]
+counties_rc <- paste0("'", paste(geoid_cnty_unq, collapse = "','"), "'")
+
+counties_rc_sql <- glue_sql(counties_rc)
+```
+
+#### Get property records for the program related counties from the database
+
+```{r}
+# {r}
+con <- get_db_conn(db_host = "localhost", db_port = 5434)
+```
+
+```{sql}
+-- {sql connection=con, output.var="qry_res"}
+SELECT geoid_cnty, p_id_iris_frmtd, property_centroid_longitude, property_centroid_latitude FROM corelogic_usda.current_tax_200627_latest_all_add_vars 
+WHERE property_centroid_longitude IS NOT NULL 
+AND geoid_cnty IN (?counties_rc_sql);
+```
+
+```{r}
+# {r}
+DBI::dbDisconnect(con)
+```
+
+#### Get intersection between program area shapefile and the selected properties
+
+First convert database query result to an sf object.
+
+```{r}
+# {r}
+db_rows_rc <- st_as_sf(qry_res, coords = c("property_centroid_longitude", "property_centroid_latitude"), crs = 4326)
+
+int <- sf::st_intersects(db_rows_rc, map_program_area_rc)
+int2 <- as.integer(as.character(int))
+```
+
+#### Add RUSID to intersecting properties
+
+```{r}
+# {r}
+db_rows_rc$program <- "RC"
+db_rows_rc$rusid <- as.character(map_program_area_rc$RUS_ID[unlist(int2)])
+db_rows_rc <- db_rows_rc[!is.na(db_rows_rc$rusid),]
+```
+
+### BIP Program Eligible Properties
+
+#### Load broadband program area shapefiles
+
+```{r, cache=TRUE}
+# {r, cache=TRUE}
+map_program_area_bip <- st_read(file.path(geodatadir, "200409_BIP_ServAr_ID.shp")) %>%
+  sf::st_transform(4326)
+```
+
+#### Create list of county FIPS codes that are within the program area for the database query
+
+This dataset does not have a county FIPS code. Instead it provides a list of county names associated with that entry. We need to do some work to convert these lists of county names to a list of unique county fips codes.
+
+```{r}
+# {r}
+int <- sf::st_intersects(map_program_area_bip, counties_us)
+
+cnty_ints <- data.table(rc_rownum = numeric(), cntys_rownum = numeric(), geoid = character())
+for (i in 1:length(int)) {
+  u <- unlist(int[i])
+  for (j in 1:length(int[[i]])) {
+    geoid <- counties_us[u[j],]$GEOID
+    newrow <- data.table(rc_rownum = i, cntys_rownum = u[j], geoid)
+    cnty_ints <- rbindlist(list(cnty_ints, newrow))
+  }
+}
+
+cnty_ints_geoid <- cnty_ints[, .(geoid_cntys = paste(geoid, collapse = ", ")), rc_rownum]
+map_program_area_bip$geoid_cnty <- ""
+
+for (i in 1:nrow(cnty_ints_geoid)) {
+  map_program_area_bip[cnty_ints_geoid[i,]$rc_rownum,]$geoid_cnty <- cnty_ints_geoid[i,]$geoid_cntys
+}
+
+geoid_cnty_unq <- unique(strsplit(paste(map_program_area_bip$geoid_cnty, collapse = ", "), ", ")[[1]])
+geoid_cnty_unq <- geoid_cnty_unq[geoid_cnty_unq != ""]
+counties_bip <- paste0("'", paste(geoid_cnty_unq, collapse = "','"), "'")
+
+counties_bip_sql <- glue_sql(counties_bip)
+```
+
+#### Get property records for the program related counties from the database
+
+```{r}
+# {r}
+con <- get_db_conn(db_host = "localhost", db_port = 5434)
+```
+
+```{sql}
+-- {sql connection=con, output.var="qry_res"}
+SELECT geoid_cnty, p_id_iris_frmtd, property_centroid_longitude, property_centroid_latitude FROM corelogic_usda.current_tax_200627_latest_all_add_vars 
+WHERE property_centroid_longitude IS NOT NULL
+AND property_centroid_latitude IS NOT NULL
+AND geoid_cnty IN (?counties_bip_sql);
+```
+
+```{r}
+# {r}
+DBI::dbDisconnect(con)
+```
+
+#### Get intersection between program area shapefile and the selected properties
+
+First convert database query result to an sf object.
+
+```{r}
+# {r}
+db_rows_bip <- st_as_sf(qry_res, coords = c("property_centroid_longitude", "property_centroid_latitude"), crs = 4326)
+
+int <- sf::st_intersects(db_rows_bip, map_program_area_bip)
+int2 <- as.integer(as.character(int))
+```
+
+#### Add RUSID to intersecting properties
+
+```{r}
+# {r}
+db_rows_bip$program <- "BIP"
+db_rows_bip$rusid <- as.character(map_program_area_bip$RUS_ID[unlist(int2)])
+db_rows_bip <- db_rows_bip[!is.na(db_rows_bip$rusid),]
+```
+
+### TCF Program Eligible Properties
+
+#### Load broadband program area shapefiles
+
+```{r, cache=TRUE}
+# {r, cache=TRUE}
+map_program_area_tcf <- st_read(file.path(geodatadir, "USDARD_RUS_TELCO_FARMBILL_06042020/USDARD_RUS_TELCO_FARMBILL_06042020.shp")) %>%
+  sf::st_transform(4326)
+```
+
+#### Create list of county FIPS codes that are within the program area for the database query
+
+This dataset does not have a county FIPS code. Instead it provides a list of county names associated with that entry. We need to do some work to convert these lists of county names to a list of unique county fips codes.
+
+```{r}
+# {r}
+int <- sf::st_intersects(map_program_area_tcf, counties_us)
+
+cnty_ints <- data.table(rc_rownum = numeric(), cntys_rownum = numeric(), geoid = character())
+for (i in 1:length(int)) {
+  u <- unlist(int[i])
+  for (j in 1:length(int[[i]])) {
+    geoid <- counties_us[u[j],]$GEOID
+    newrow <- data.table(rc_rownum = i, cntys_rownum = u[j], geoid)
+    cnty_ints <- rbindlist(list(cnty_ints, newrow))
+    #print(paste(i, u[j]))
+  }
+}
+
+cnty_ints_geoid <- cnty_ints[, .(geoid_cntys = paste(geoid, collapse = ", ")), rc_rownum]
+map_program_area_tcf$geoid_cnty <- ""
+
+for (i in 1:nrow(cnty_ints_geoid)) {
+  map_program_area_tcf[cnty_ints_geoid[i,]$rc_rownum,]$geoid_cnty <- cnty_ints_geoid[i,]$geoid_cntys
+}
+
+geoid_cnty_unq <- unique(strsplit(paste(map_program_area_tcf$geoid_cnty, collapse = ", "), ", ")[[1]])
+geoid_cnty_unq <- geoid_cnty_unq[geoid_cnty_unq != ""]
+counties_tcf <- paste0("'", paste(geoid_cnty_unq, collapse = "','"), "'")
+
+counties_tcf_sql <- glue_sql(counties_tcf)
+```
+
+#### Get property records for the program related counties from the database
+
+```{r}
+# {r}
+con <- get_db_conn(db_host = "localhost", db_port = 5434)
+```
+
+```{sql}
+-- {sql connection=con, output.var="qry_res"}
+SELECT geoid_cnty, p_id_iris_frmtd, property_centroid_longitude, property_centroid_latitude FROM corelogic_usda.current_tax_200627_latest_all_add_vars 
+WHERE property_centroid_longitude IS NOT NULL 
+AND property_centroid_latitude IS NOT NULL
+AND geoid_cnty IN (?counties_tcf_sql);
+```
+
+```{r}
+# {r}
+DBI::dbDisconnect(con)
+```
+
+#### Get intersection between program area shapefile and the selected properties
+
+First convert database query result to an sf object.
+
+```{r}
+# {r}
+db_rows_tcf <- st_as_sf(qry_res, coords = c("property_centroid_longitude", "property_centroid_latitude"), crs = 4326)
+
+int <- sf::st_intersects(db_rows_tcf, map_program_area_tcf)
+int2 <- as.integer(as.character(int))
+```
+
+### Add RUSID to intersecting properties
+
+```{r}
+# {r}
+db_rows_tcf$program <- "TCF"
+db_rows_tcf$rusid <- as.character(map_program_area_tcf$RUS_ID[unlist(int2)])
+db_rows_tcf <- db_rows_tcf[!is.na(db_rows_tcf$rusid),]
+```
+
+### TCI Program Eligible Properties
+
+#### Load broadband program area shapefiles
+
+```{r, cache=TRUE}
+# {r, cache=TRUE}
+map_program_area_tci <- st_read(file.path(geodatadir, "USDARD_RUS_TELCO_INFRA_06042020/USDARD_RUS_TELCO_INFRA_06042020.shp")) %>%
+  sf::st_transform(4326)
+```
+
+#### Create list of county FIPS codes that are within the program area for the database query
+
+This dataset does not have a county FIPS code. Instead it provides a list of county names associated with that entry. We need to do some work to convert these lists of county names to a list of unique county fips codes.
+
+```{r}
+# {r}
+int <- sf::st_intersects(map_program_area_tci, counties_us)
+
+cnty_ints <- data.table(rc_rownum = numeric(), cntys_rownum = numeric(), geoid = character())
+for (i in 1:length(int)) {
+  u <- unlist(int[i])
+  for (j in 1:length(int[[i]])) {
+    geoid <- counties_us[u[j],]$GEOID
+    newrow <- data.table(rc_rownum = i, cntys_rownum = u[j], geoid)
+    cnty_ints <- rbindlist(list(cnty_ints, newrow))
+    #print(paste(i, u[j]))
+  }
+}
+
+cnty_ints_geoid <- cnty_ints[, .(geoid_cntys = paste(geoid, collapse = ", ")), rc_rownum]
+map_program_area_tci$geoid_cnty <- ""
+
+for (i in 1:nrow(cnty_ints_geoid)) {
+  map_program_area_tci[cnty_ints_geoid[i,]$rc_rownum,]$geoid_cnty <- cnty_ints_geoid[i,]$geoid_cntys
+}
+
+geoid_cnty_unq <- unique(strsplit(paste(map_program_area_tci$geoid_cnty, collapse = ", "), ", ")[[1]])
+geoid_cnty_unq <- geoid_cnty_unq[geoid_cnty_unq != ""]
+counties_tci <- paste0("'", paste(geoid_cnty_unq, collapse = "','"), "'")
+
+counties_tci_sql <- glue_sql(counties_tci)
+```
+
+#### Get property records for the program related counties from the database
+
+```{r}
+# {r}
+con <- get_db_conn(db_host = "localhost", db_port = 5434)
+```
+
+```{sql}
+-- {sql connection=con, output.var="qry_res"}
+SELECT geoid_cnty, p_id_iris_frmtd, property_centroid_longitude, property_centroid_latitude FROM corelogic_usda.current_tax_200627_latest_all_add_vars 
+WHERE property_centroid_longitude IS NOT NULL 
+AND property_centroid_latitude IS NOT NULL
+AND geoid_cnty IN (?counties_tci_sql);
+```
+
+```{r}
+# {r}
+DBI::dbDisconnect(con)
+```
+
+#### Get intersection between program area shapefile and the selected properties
+
+First convert database query result to an sf object.
+
+```{r}
+# {r}
+db_rows_tci <- st_as_sf(qry_res, coords = c("property_centroid_longitude", "property_centroid_latitude"), crs = 4326)
+
+int <- sf::st_intersects(db_rows_tci, map_program_area_tci)
+int2 <- as.integer(as.character(int))
+```
+
+#### Add RUSID to intersecting properties
+
+```{r}
+# {r}
+db_rows_tci$program <- "TCI"
+db_rows_tci$rusid <- as.character(map_program_area_tci$RUSID[unlist(int2)])
+db_rows_tci <- db_rows_tci[!is.na(db_rows_tci$rusid),]
+```
+
+### Combine All Program Eligible Properties
+
+```{r}
+# {r}
+combn <- rbindlist(list(db_rows_cc, db_rows_rc, db_rows_bip, db_rows_tcf, db_rows_tci))
+
+combn_cast <- dcast(combn, geoid_cnty + p_id_iris_frmtd ~ program, value.var = "rusid")
+
+saveRDS(combn_cast, file.path(geodatadir, "program_eligible_properties.RDS"))
+```
+
+### Write combined data to the database
+
+```{r}
+# {r}
+con <- get_db_conn(db_host = "localhost", db_port = 5434)
+
+dbWriteTable(con, c("corelogic_usda", "current_tax_200627_program_eligible_properties"), combn_cast, overwrite = TRUE, row.names = FALSE)
+
+dbExecute(con, "ALTER TABLE corelogic_usda.current_tax_200627_program_eligible_properties ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd)")
+
+DBI::dbDisconnect(con)
+```
+
+### Join new table with current_tax_200627_latest_all_add_vars
+
+```{sql}
+-- {sql} * Run In psql/pgcli
+SELECT a.*, b."BIP", b."CC", b."RC", b."TCF", b."TCI"
+INTO corelogic_usda.current_tax_200627_latest_all_add_vars_add_progs
+FROM corelogic_usda.current_tax_200627_latest_all_add_vars a
+LEFT JOIN corelogic_usda.current_tax_200627_program_eligible_properties b
+ON a.geoid_cnty = b.geoid_cnty AND a.p_id_iris_frmtd = b.p_id_iris_frmtd;
+
+ALTER TABLE corelogic_usda.current_tax_200627_latest_all_add_vars_add_progs ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);
+```
+
+------------------------------------------------------------------------
+
+# IMPROVE QUALITY
+
+## FILTER RECORDS
+
+```{sql}
+-- {sql}
+SELECT
+  geoid_cnty,
+  sale_yr,
+  pri_cat_code_req,
+  have_all
+FROM
+(
+SELECT
+  geoid_cnty,
+  LEFT(sale_date, 4) sale_yr,
+  'TRUE' pri_cat_code_req,
+  count(*) have_all
+FROM
+  corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog
+WHERE
+--  (geoid_cnty LIKE '51%' OR geoid_cnty LIKE '19%')
+-- AND
+  property_indicator = '10'
+AND
+  transaction_type != '9'
+AND
+  sale_date IS NOT NULL
+AND
+  sale_price IS NOT NULL
+AND
+  (building_square_feet IS NOT NULL OR living_square_feet IS NOT NULL)
+AND
+ (acres IS NOT NULL OR land_square_footage IS NOT NULL)
+AND
+ (year_built IS NOT NULL OR effective_year_built IS NOT NULL)
+AND
+ (full_baths IS NOT NULL OR \"1qtr_baths\" IS NOT NULL OR \"3qtr_baths\" IS NOT NULL OR half_baths IS NOT NULL OR total_baths IS NOT NULL)
+AND
+  pri_cat_code IS NOT NULL
+AND
+  LEFT(sale_date, 4) IN ('2006', '2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018')
+GROUP BY
+  geoid_cnty,
+  LEFT(sale_date, 4)
+
+
+```
+
+# Profile Final Dataset
+
+## Individual Variables (Longitudinally)
+
+## Consistency Between Variables

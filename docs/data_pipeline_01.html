@@ -304,10 +304,10 @@ div.tocify {
 
 
 
-
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
+      <!-- NOTE: add "navbar-inverse" class for an alternate navbar background -->
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -317,81 +317,79 @@ div.tocify {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
+        <li><a href="index.html">Home</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            Ingest
+
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li>
+              <a href="data_pipeline_01.html">Import (Parallel)</a>
+            </li>
+            <li>
+              <a href="data_pipeline_02_clean_and_type.html">Fix Types</a>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            Profile
+
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li class="dropdown-header">Structure</li>
+            <li>
+              <a href="data_pipeline_08_profile_variables.html">Quality - Single Variables</a>
+            </li>
+            <li class="dropdown-header">Quality - Related Variables</li>
+            <li class="dropdown-header">Metadata</li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            Re-Structure
+
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li>
+              <a href="data_pipeline_03_build_latest_data_set.html">Unique &amp; Latest</a>
+            </li>
+            <li>
+              <a href="data_pipeline_04_add_vars_transforms.html">New Vars from Transform</a>
+            </li>
+            <li>
+              <a href="data_pipeline_05_add_vars_external.html">New Vars from External</a>
+            </li>
+            <li>
+              <a href="data_pipeline_05_add_vars_external_2.html">Add Geography</a>
+            </li>
+          </ul>
+        </li>
         <li>
-  <a href="index.html">Home</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Ingest
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="data_pipeline_01.html">Import (Parallel)</a>
-    </li>
-    <li>
-      <a href="data_pipeline_02_clean_and_type.html">Fix Types</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Profile
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Structure</li>
-    <li>
-      <a href="data_pipeline_08_profile_variables.html">Quality - Single Variables</a>
-    </li>
-    <li class="dropdown-header">Quality - Related Variables</li>
-    <li class="dropdown-header">Metadata</li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Re-Structure
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="data_pipeline_03_build_latest_data_set.html">Unique &amp; Latest</a>
-    </li>
-    <li>
-      <a href="data_pipeline_04_add_vars_transforms.html">New Vars from Transform</a>
-    </li>
-    <li>
-      <a href="data_pipeline_05_add_vars_external.html">New Vars from External</a>
-    </li>
-    <li>
-      <a href="data_pipeline_05_add_vars_external_2.html">Add Geography</a>
-    </li>
-  </ul>
-</li>
-<li>
-  <a href="data_pipeline_07_filter_records.html">Enhance Quality</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Re-Profile
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Structure</li>
-    <li>
-      <a href="data_pipeline_08_profile_variables.html">Quality - Single Variables</a>
-    </li>
-    <li class="dropdown-header">Quality - Related Variables</li>
-    <li class="dropdown-header">Metadata</li>
-  </ul>
-</li>
+          <a href="data_pipeline_07_filter_records.html">Enhance Quality</a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            Re-Profile
+
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li class="dropdown-header">Structure</li>
+            <li>
+              <a href="data_pipeline_08_profile_variables.html">Quality - Single Variables</a>
+            </li>
+            <li class="dropdown-header">Quality - Related Variables</li>
+            <li class="dropdown-header">Metadata</li>
+          </ul>
+        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li><a href="https://github.com">GitHub</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -408,6 +406,8 @@ div.tocify {
 
 <hr />
 <p>Import of 174GB file: Corelogic_USDA_Current_Tax_2020_06_27.txt</p>
+<div id="ingest" class="section level1">
+<h1>INGEST</h1>
 <div id="load-libraries-and-functions" class="section level2">
 <h2>Load libraries and functions</h2>
 <pre class="r"><code># {r}
@@ -504,6 +504,12 @@ res &lt;- foreach(i = 151:179) %dopar% {
 }
 
 parallel::stopCluster(cl)</code></pre>
+<hr />
+</div>
+</div>
+<div id="profile" class="section level1">
+<h1>PROFILE</h1>
+<pre class="r"><code>###</code></pre>
 </div>
 
 
@@ -552,7 +558,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2,h3",
+      selectors: "h1,h2,h3,h4",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
