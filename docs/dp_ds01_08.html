@@ -11,7 +11,7 @@
 
 
 
-<title>Split and Parallel Import Large Data File</title>
+<title>Profile Individual Variables</title>
 
 <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -309,88 +309,88 @@ div.tocify {
     <div class="navbar-header">
       <!-- NOTE: add "navbar-inverse" class for an alternate navbar background -->
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-        <span class="icon-bar"></span>
+        <span class="icon-bar">HI</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">ERS Broadband Dataset Pipeline</a>
+      <a class="navbar-brand" href="index.html">Dataset Pipelines</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li><a href="index.html">Home</a></li>
+        <!-- DATASET -->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            Ingest
+            Corelogic01
 
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
-            <li>
-              <a href="data_pipeline_01.html">Import (Parallel)</a>
+            <li style="border: 1px solid silver; border-top: 1px solid silver; text-align: center">
+              INGEST
+            </li>
+             <li>
+              <a href="dp_ds01_01.html">Import Parallel</a>
             </li>
             <li>
-              <a href="data_pipeline_02_clean_and_type.html">Fix Types</a>
+              <a href="dp_ds01_02.html">Clean & Type</a>
+            </li>
+            <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
+              STRUCTURE
+            </li>
+            <li>
+              <a href="">Profile</a>
+            </li>
+            <li>
+              <a href="dp_ds01_03.html">Latest Data</a>
+            </li>
+            <li>
+              <a href="dp_ds01_04.html">Transform Variables</a>
+            </li>
+            <li>
+              <a href="dp_ds01_05_1.html">New Variables 1</a>
+            </li>
+            <li>
+              <a href="dp_ds01_05_2.html">New Variables 2</a>
+            </li>
+            <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
+              QUALITY
+            </li>
+            <li>
+              <a href="">Profile</a>
+            </li>
+            <li>
+              <a href="">Filter</a>
+            </li>
+            <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
+              VALIDATE
+            </li>
+            <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
+              ANALYZE
             </li>
           </ul>
         </li>
+        <!-- DATASET -->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            Profile
+            Corelogic02
 
             <span class="caret"></span>
           </a>
-          <ul class="dropdown-menu" role="menu">
-            <li class="dropdown-header">Structure</li>
-            <li>
-              <a href="data_pipeline_08_profile_variables.html">Quality - Single Variables</a>
-            </li>
-            <li class="dropdown-header">Quality - Related Variables</li>
-            <li class="dropdown-header">Metadata</li>
-          </ul>
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            Re-Structure
+            ARI01
 
             <span class="caret"></span>
           </a>
-          <ul class="dropdown-menu" role="menu">
-            <li>
-              <a href="data_pipeline_03_build_latest_data_set.html">Unique &amp; Latest</a>
-            </li>
-            <li>
-              <a href="data_pipeline_04_add_vars_transforms.html">New Vars from Transform</a>
-            </li>
-            <li>
-              <a href="data_pipeline_05_add_vars_external.html">New Vars from External</a>
-            </li>
-            <li>
-              <a href="data_pipeline_05_add_vars_external_2.html">Add Geography</a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="data_pipeline_07_filter_records.html">Enhance Quality</a>
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            Re-Profile
+            FCC01
 
             <span class="caret"></span>
           </a>
-          <ul class="dropdown-menu" role="menu">
-            <li class="dropdown-header">Structure</li>
-            <li>
-              <a href="data_pipeline_08_profile_variables.html">Quality - Single Variables</a>
-            </li>
-            <li class="dropdown-header">Quality - Related Variables</li>
-            <li class="dropdown-header">Metadata</li>
-          </ul>
         </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="https://github.com">GitHub</a></li>
-      </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -399,118 +399,12 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Split and Parallel Import Large Data File</h1>
+<h1 class="title toc-ignore">Profile Individual Variables</h1>
 
 </div>
 
 
 <hr />
-<p>Import of 174GB file: Corelogic_USDA_Current_Tax_2020_06_27.txt</p>
-<div id="ingest" class="section level1">
-<h1>INGEST</h1>
-<div id="load-libraries-and-functions" class="section level2">
-<h2>Load libraries and functions</h2>
-<pre class="r"><code># {r}
-source(&quot;R/functions.R&quot;)
-library(data.table)
-library(dataplumbr)
-library(foreach)
-library(doParallel)
-library(DBI)</code></pre>
-</div>
-<div id="set-variables" class="section level2">
-<h2>Set variables</h2>
-<div id="files-and-directories" class="section level4">
-<h4>Files and directories</h4>
-<pre class="r"><code># {r}
-file_dir &lt;- &quot;/project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files&quot;
-file_name &lt;- &quot;Corelogic_USDA_Current_Tax_2020_06_27.txt&quot;
-file_path &lt;- file.path(file_dir, file_name)</code></pre>
-</div>
-<div id="database" class="section level4">
-<h4>Database</h4>
-<pre class="r"><code># {r}
-schema_name &lt;- &quot;corelogic_usda&quot;
-table_name &lt;- &quot;current_tax_200627_raw&quot;</code></pre>
-</div>
-</div>
-<div id="use-system-level-commands-to-split-large-file" class="section level2">
-<h2>Use system-level commands to split large file</h2>
-<div id="set-system-level-bash-environmental-variables" class="section level4">
-<h4>Set System-Level (bash) Environmental Variables</h4>
-<p>System-level environmental variables are set to enable their use by command line functions</p>
-<pre class="r"><code># {r}
-Sys.setenv(file_dir=file_dir)
-Sys.setenv(file_path=file_path)</code></pre>
-</div>
-<div id="create-directory-for-split-files-from-the-terminal" class="section level4">
-<h4>Create directory for split files from the terminal</h4>
-<pre class="bash"><code># {bash}
-mkdir $file_dir/splits/
-rm -r $file_dir/splits/*</code></pre>
-</div>
-<div id="split-large-file-by-number-of-lines-per-file" class="section level4">
-<h4>Split large file by number of lines per file</h4>
-<p>Use system split function to create files not too large to be handled for import into R. In this case we are creating files with a maximum of 1,000,000 lines each</p>
-<pre class="bash"><code># {bash} * Might run in terminal depending on size
-split -l1000000 $file_path $file_dir/splits/</code></pre>
-</div>
-</div>
-<div id="read-and-prepare-first-split-file" class="section level2">
-<h2>Read and prepare first split file</h2>
-<div id="get-first-split-file-path-and-read-with-data.table" class="section level4">
-<h4>Get first split file path and read with data.table</h4>
-<pre class="r"><code># {r}
-file_paths &lt;- list.files(path = file.path(file_dir, &quot;splits&quot;), full.names = T)
-first_split_file &lt;- file_paths[1]
-tbl &lt;- fread(first_split_file, colClasses = &quot;character&quot;, select = 1:188, quote = &quot;&quot;)</code></pre>
-</div>
-<div id="standardize-column-names-for-the-database" class="section level4">
-<h4>Standardize column names for the database</h4>
-<pre class="r"><code># {r}
-db_col_names &lt;- dataplumbr::name.standard_col_names(colnames(tbl)) %&gt;%
-  stringr::str_replace(&quot;^_&quot;, &quot;&quot;) %&gt;%
-  stringr::str_replace(&quot;_$&quot;, &quot;&quot;)
-colnames(tbl) &lt;- db_col_names</code></pre>
-</div>
-</div>
-<div id="write-data-to-new-database-table" class="section level2">
-<h2>Write data to new database table</h2>
-<pre class="r"><code># {r}
-con &lt;- get_db_conn()
-dbWriteTable(con, c(schema_name, table_name), tbl, overwrite = T, row.names = F)
-dbDisconnect(con)
-
-rm(tbl)</code></pre>
-</div>
-<div id="read-remaining-split-files-and-upload-to-database" class="section level2">
-<h2>Read remaining split files and upload to database</h2>
-<pre class="r"><code># {r}
-# core_num &lt;- parallel::detectCores() - 2
-cl &lt;- makeCluster(6, outfile = &quot;src/parlog&quot;)
-doParallel::registerDoParallel(cl)
-
-# num_files &lt;- length(file_paths)
-
-res &lt;- foreach(i = 151:179) %dopar% {
-  con &lt;- get_db_conn()
-  print(paste(&quot;reading&quot;, file_paths[i]))
-  dt &lt;- data.table::fread(file_paths[i], colClasses = &quot;character&quot;, header = FALSE, select = 1:188, quote = &quot;&quot;)
-  colnames(dt) &lt;- db_col_names
-  db_res &lt;- RPostgreSQL::dbWriteTable(con, c(schema_name, table_name), dt, append = TRUE, row.names = FALSE)
-  print(paste(db_res, &quot;written&quot;, file_paths[i]))
-  DBI::dbDisconnect(con)
-  rm(dt)
-}
-
-parallel::stopCluster(cl)</code></pre>
-<hr />
-</div>
-</div>
-<div id="profile" class="section level1">
-<h1>PROFILE</h1>
-<pre class="r"><code>###</code></pre>
-</div>
 
 
 
@@ -558,7 +452,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2,h3,h4",
+      selectors: "h1,h2,h3",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {

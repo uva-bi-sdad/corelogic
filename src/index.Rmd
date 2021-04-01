@@ -1,43 +1,35 @@
 ---
-title: "USDA ERS Broadband Dataset Pipeline"
+title: "USDA-ERS Broadband Rural Impact"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
+    toc_depth: 4
 ---
 
-### DATASET 01 INFO
+```{r echo=FALSE, results='asis', message=FALSE}
+library(htmltools)
+library(data.table)
+library(DT)
+source("../R/functions.R")
 
-#### Input Data Title
+ds_info_files <- list.files(pattern = "*_00*.Rmd")
 
-Corelogic USDA Current Tax Roll through 06/27/2020
+for (ds in ds_info_files) {
+  rmd_yml <- extract_rmd_yml(ds)
+  ds <- rmd_yml$dataset
+  dt <- as.data.table(t(as.data.table(ds)), keep.rownames = T)
+  colnames(dt) <- c("Item", "Value")
+  print(h3(paste("Dataset:", dt[Item == "dataset_short_title", Value])))
+  print(knitr::kable(dt[Item != "dataset_short_title",], col.names = c("", "")))
+}
+```
 
-#### Input Data Delivered Data
-
-07/06/2020
-
-#### Input Data Type & Format
-
-Administrative; CSV
-
-#### Input Data Location
-
-/project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/Corelogic_USDA_Current_Tax_2020_06_27.txt
-
-#### Input Data Dictionary
-
-/project/biocomplexity/sdad/projects_data/usda/bb/original/L -- TAX -- Bulk Historical Tax Roll.xlsx
-
-#### Input Data Provider
-
-CoreLogic
-
-#### Input Data License
-
-Proprietary, <link to contract>
-
-#### Output Data Format
-
-Database table
-
-#### Output Data Location
-
-corelogic_usda.current_tax_200627_latest_final
-
-...
+```{r future_dynamic_menus}
+# fp <- list.files(pattern = "*_01*.Rmd")
+# rmd_yml <- extract_rmd_yml(fp)
+# 
+# navbar <- readr::read_lines("_navbar.html")
+# navbar <- stringr::str_replace(navbar, '<a href="dp_ds01_01.html">Parallel Import</a>', paste0('<a href="dp_ds01_01.html">', rmd_yml$menu_title, '</a>'))
+# readr::write_lines(navbar, "_navbar.html")
+```

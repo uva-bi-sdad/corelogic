@@ -11,7 +11,7 @@
 
 
 
-<title>Profile Individual Variables</title>
+<title>Initial Filtering to Desired Dataset</title>
 
 <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -309,88 +309,88 @@ div.tocify {
     <div class="navbar-header">
       <!-- NOTE: add "navbar-inverse" class for an alternate navbar background -->
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-        <span class="icon-bar"></span>
+        <span class="icon-bar">HI</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">ERS Broadband Dataset Pipeline</a>
+      <a class="navbar-brand" href="index.html">Dataset Pipelines</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li><a href="index.html">Home</a></li>
+        <!-- DATASET -->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            Ingest
+            Corelogic01
 
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
-            <li>
-              <a href="data_pipeline_01.html">Import (Parallel)</a>
+            <li style="border: 1px solid silver; border-top: 1px solid silver; text-align: center">
+              INGEST
+            </li>
+             <li>
+              <a href="dp_ds01_01.html">Import Parallel</a>
             </li>
             <li>
-              <a href="data_pipeline_02_clean_and_type.html">Fix Types</a>
+              <a href="dp_ds01_02.html">Clean & Type</a>
+            </li>
+            <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
+              STRUCTURE
+            </li>
+            <li>
+              <a href="">Profile</a>
+            </li>
+            <li>
+              <a href="dp_ds01_03.html">Latest Data</a>
+            </li>
+            <li>
+              <a href="dp_ds01_04.html">Transform Variables</a>
+            </li>
+            <li>
+              <a href="dp_ds01_05_1.html">New Variables 1</a>
+            </li>
+            <li>
+              <a href="dp_ds01_05_2.html">New Variables 2</a>
+            </li>
+            <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
+              QUALITY
+            </li>
+            <li>
+              <a href="">Profile</a>
+            </li>
+            <li>
+              <a href="">Filter</a>
+            </li>
+            <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
+              VALIDATE
+            </li>
+            <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
+              ANALYZE
             </li>
           </ul>
         </li>
+        <!-- DATASET -->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            Profile
+            Corelogic02
 
             <span class="caret"></span>
           </a>
-          <ul class="dropdown-menu" role="menu">
-            <li class="dropdown-header">Structure</li>
-            <li>
-              <a href="data_pipeline_08_profile_variables.html">Quality - Single Variables</a>
-            </li>
-            <li class="dropdown-header">Quality - Related Variables</li>
-            <li class="dropdown-header">Metadata</li>
-          </ul>
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            Re-Structure
+            ARI01
 
             <span class="caret"></span>
           </a>
-          <ul class="dropdown-menu" role="menu">
-            <li>
-              <a href="data_pipeline_03_build_latest_data_set.html">Unique &amp; Latest</a>
-            </li>
-            <li>
-              <a href="data_pipeline_04_add_vars_transforms.html">New Vars from Transform</a>
-            </li>
-            <li>
-              <a href="data_pipeline_05_add_vars_external.html">New Vars from External</a>
-            </li>
-            <li>
-              <a href="data_pipeline_05_add_vars_external_2.html">Add Geography</a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="data_pipeline_07_filter_records.html">Enhance Quality</a>
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            Re-Profile
+            FCC01
 
             <span class="caret"></span>
           </a>
-          <ul class="dropdown-menu" role="menu">
-            <li class="dropdown-header">Structure</li>
-            <li>
-              <a href="data_pipeline_08_profile_variables.html">Quality - Single Variables</a>
-            </li>
-            <li class="dropdown-header">Quality - Related Variables</li>
-            <li class="dropdown-header">Metadata</li>
-          </ul>
         </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="https://github.com">GitHub</a></li>
-      </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -399,12 +399,51 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Profile Individual Variables</h1>
+<h1 class="title toc-ignore">Initial Filtering to Desired Dataset</h1>
 
 </div>
 
 
 <hr />
+<pre class="sql"><code>SELECT
+  geoid_cnty,
+  sale_yr,
+  pri_cat_code_req,
+  have_all
+FROM
+(
+SELECT
+  geoid_cnty,
+  LEFT(sale_date, 4) sale_yr,
+  &#39;TRUE&#39; pri_cat_code_req,
+  count(*) have_all
+FROM
+  corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog
+WHERE
+--  (geoid_cnty LIKE &#39;51%&#39; OR geoid_cnty LIKE &#39;19%&#39;)
+-- AND
+  property_indicator = &#39;10&#39;
+AND
+  transaction_type != &#39;9&#39;
+AND
+  sale_date IS NOT NULL
+AND
+  sale_price IS NOT NULL
+AND
+  (building_square_feet IS NOT NULL OR living_square_feet IS NOT NULL)
+AND
+ (acres IS NOT NULL OR land_square_footage IS NOT NULL)
+AND
+ (year_built IS NOT NULL OR effective_year_built IS NOT NULL)
+AND
+ (full_baths IS NOT NULL OR \&quot;1qtr_baths\&quot; IS NOT NULL OR \&quot;3qtr_baths\&quot; IS NOT NULL OR half_baths IS NOT NULL OR total_baths IS NOT NULL)
+AND
+  pri_cat_code IS NOT NULL
+AND
+  LEFT(sale_date, 4) IN (&#39;2006&#39;, &#39;2007&#39;,&#39;2008&#39;,&#39;2009&#39;,&#39;2010&#39;,&#39;2011&#39;,&#39;2012&#39;,&#39;2013&#39;,&#39;2014&#39;,&#39;2015&#39;,&#39;2016&#39;,&#39;2017&#39;,&#39;2018&#39;)
+GROUP BY
+  geoid_cnty,
+  LEFT(sale_date, 4)</code></pre>
 
 
 

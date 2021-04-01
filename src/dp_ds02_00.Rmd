@@ -1,0 +1,22 @@
+---
+title: "Dataset 01 Info"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
+    toc_depth: 4
+dataset:
+  dataset_short_title: "CoreLogic02"
+  dataset_description: ""
+  associated_project: "USDA ERS Broadband Program Impacts"
+  input_data_provider: "CoreLogic"
+  input_data_title: "CoreLogic USDA Current Tax Roll through 06/27/2020"
+  input_data_deleivered_date: "07/06/2020"
+  input_data_type: "Administrative"
+  input_data_format: "csv"
+  input_data_location: "/project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/Corelogic_USDA_Current_Tax_2020_06_27.txt"
+  input_data_dictionary: "/project/biocomplexity/sdad/projects_data/usda/bb/original/L – TAX – Bulk Historical Tax Roll.xlsx"
+  input_data_license: "Proprietary, --link to contract--"
+  output_data_format: "Database Table"
+  output_data_location: "corelogic_usda.current_tax_200627_latest_final"
+---

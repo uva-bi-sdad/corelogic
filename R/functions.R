@@ -15,3 +15,22 @@ get_db_conn <-
       password = db_pass
     )
   }
+
+extract_rmd_yml <- function(file_path) {
+  #browser()
+  if (file.exists(file_path)) {
+    yml_txt <- readr::read_lines(file_path)
+    delims <- stringr::str_locate(yml_txt, "^---$")
+    rws <- which(!is.na(delims[, 1]))
+    if (length(rws) == 2) {
+      temp <- tempfile()
+      on.exit(unlink(temp))
+      writeLines(yml_txt[rws[1]:rws[2]], con = temp)
+      return(yaml::read_yaml(temp))
+    } else {
+      return("No yaml detected")
+    }
+  } else {
+    return(paste("file", file_path, "doesn't exist"))
+  }
+}

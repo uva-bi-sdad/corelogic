@@ -1,5 +1,5 @@
 ---
-title: "Dataset 1 Pipeline"
+title: "Dataset 01 Pipeline"
 output: 
   html_document:
     toc: yes
@@ -12,46 +12,6 @@ knitr::opts_chunk$set(
   eval=FALSE
 )
 ```
-
-------------------------------------------------------------------------
-
-# DATASET INFO
-
-#### Input Data Title
-
-Corelogic USDA Current Tax Roll through 06/27/2020
-
-#### Input Data Delivered Data
-
-07/06/2020
-
-#### Input Data Type & Format
-
-Administrative; CSV
-
-#### Input Data Location
-
-/project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/Corelogic_USDA_Current_Tax_2020_06_27.txt
-
-#### Input Data Dictionary
-
-/project/biocomplexity/sdad/projects_data/usda/bb/original/L -- TAX -- Bulk Historical Tax Roll.xlsx
-
-#### Input Data Provider
-
-CoreLogic
-
-#### Input Data License
-
-Proprietary, <link to contract>
-
-#### Output Data Format
-
-Database table
-
-#### Output Data Location
-
-corelogic_usda.current_tax_200627_latest_final
 
 ------------------------------------------------------------------------
 

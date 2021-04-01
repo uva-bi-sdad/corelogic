@@ -1,5 +1,6 @@
 ---
 title: "Split and Parallel Import Large Data File"
+menu_title: "Import Large"
 output: 
   html_document:
     toc: yes
