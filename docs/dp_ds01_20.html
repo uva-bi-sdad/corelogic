@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Aaron Schroeder" />
 
 
-<title>Profile Individual Variables</title>
+<title>Profile for Structural Issues</title>
 
 <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -304,12 +305,12 @@ div.tocify {
 
 
 
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+<div id="topdiv" class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <!-- NOTE: add "navbar-inverse" class for an alternate navbar background -->
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-        <span class="icon-bar">HI</span>
+        <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
@@ -328,41 +329,44 @@ div.tocify {
             <li style="border: 1px solid silver; border-top: 1px solid silver; text-align: center">
               INGEST
             </li>
-             <li>
-              <a href="dp_ds01_01.html">Import Parallel</a>
+            <li>
+              <a href="dp_ds01_10.html">Metadata & Provenance</a>
             </li>
             <li>
-              <a href="dp_ds01_02.html">Clean & Type</a>
+              <a href="dp_ds01_11.html">Import Parallel</a>
+            </li>
+            <li>
+              <a href="dp_ds01_12.html">Clean & Type</a>
             </li>
             <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
               STRUCTURE
             </li>
             <li>
-              <a href="">Profile</a>
+              <a href="dp_ds01_20.html">Profile Structure</a>
             </li>
             <li>
-              <a href="dp_ds01_03.html">Latest Data</a>
+              <a href="dp_ds01_21.html">Latest Data</a>
             </li>
             <li>
-              <a href="dp_ds01_04.html">Transform Variables</a>
+              <a href="dp_ds01_22.html">Transform Variables</a>
             </li>
             <li>
-              <a href="dp_ds01_05_1.html">New Variables 1</a>
+              <a href="dp_ds01_23.html">New Variables 1</a>
             </li>
             <li>
-              <a href="dp_ds01_05_2.html">New Variables 2</a>
+              <a href="dp_ds01_24.html">New Variables 2</a>
             </li>
             <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
               QUALITY
             </li>
             <li>
-              <a href="">Profile</a>
+              <a href="dp_ds01_30.html">Profile Quality</a>
             </li>
             <li>
-              <a href="">Filter</a>
+              <a href="dp_ds01_31.html">Filter Values</a>
             </li>
-            <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
-              VALIDATE
+            <li>
+              <a href="dp_ds01_31.html">Validate Values</a>
             </li>
             <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
               ANALYZE
@@ -391,6 +395,7 @@ div.tocify {
             <span class="caret"></span>
           </a>
         </li>
+      </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -399,12 +404,34 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Profile Individual Variables</h1>
+<h1 class="title toc-ignore">Profile for Structural Issues</h1>
+<h4 class="author">Aaron Schroeder</h4>
+<h4 class="date">4/3/2021</h4>
 
 </div>
 
 
 <hr />
+<div id="missing-variables" class="section level2">
+<h2>Missing Variables</h2>
+<p>Values in column headers instead of variable names (e.g. Value-ranges being used as column headers (0-9|10-19|20-29|…))</p>
+</div>
+<div id="combined-variables" class="section level2">
+<h2>Combined Variables</h2>
+<p>More than one variable represented in a attribute (column) value (e.g. An attribute combining gender and age (m25, f32,…))</p>
+</div>
+<div id="multiple-observation-directions" class="section level2">
+<h2>Multiple Observation Directions</h2>
+<p>Variables in both columns and rows (e.g. A dataset with an element(column) for each day of the month (horizontal) and an element(column) for ‘month’ (vertical)) note. The messiest and can be dealt with multiple ways according to the needs of the specific analysis</p>
+</div>
+<div id="combined-observation-unit-types" class="section level2">
+<h2>Combined Observation Unit Types</h2>
+<p>More than one observation unit type per table (e.g. A table containing both individual demographic data and a periodic measurement like weekly attendance where demographic data and weekly attendance are separate observational units and need to be in separate datasets)</p>
+</div>
+<div id="divided-observation-unit-type" class="section level2">
+<h2>Divided Observation Unit Type</h2>
+<p>Observation unit type is split among multiple tables (e.g. Individual demographic information split among several datasets; for example, separate tables for gender, ethnicity, and surname)</p>
+</div>
 
 
 
@@ -452,7 +479,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2,h3",
+      selectors: "h1,h2,h3,h4",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {

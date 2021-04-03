@@ -1,0 +1,39 @@
+---
+title: "Profile for Structural Issues"
+author: "Aaron Schroeder"
+date: "4/3/2021"
+menu_title: "Profile Structure"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
+    toc_depth: 4
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  eval=FALSE
+)
+```
+
+------------------------------------------------------------------------
+
+## Missing Variables
+
+Values in column headers instead of variable names (e.g. Value-ranges being used as column headers (0-9\|10-19\|20-29\|...))
+
+## Combined Variables
+
+More than one variable represented in a attribute (column) value (e.g. An attribute combining gender and age (m25, f32,...))
+
+## Multiple Observation Directions
+
+Variables in both columns and rows (e.g. A dataset with an element(column) for each day of the month (horizontal) and an element(column) for 'month' (vertical)) note. The messiest and can be dealt with multiple ways according to the needs of the specific analysis
+
+## Combined Observation Unit Types
+
+More than one observation unit type per table (e.g. A table containing both individual demographic data and a periodic measurement like weekly attendance where demographic data and weekly attendance are separate observational units and need to be in separate datasets)
+
+## Divided Observation Unit Type
+
+Observation unit type is split among multiple tables (e.g. Individual demographic information split among several datasets; for example, separate tables for gender, ethnicity, and surname)

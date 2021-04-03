@@ -1,0 +1,50 @@
+---
+title: "Profile for Issues of Quality"
+author: "Aaron Schroeder"
+date: "4/3/2021"
+menu_title: "Profile Quality"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
+    toc_depth: 4
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  eval=FALSE
+)
+```
+
+------------------------------------------------------------------------
+
+## Completeness
+
+Percentage of elements properly populated (e.g. testing for NULLs and empty strings
+where not appropriate)
+
+## Value Validity
+
+Percentage of elements whose attributes possess meaningful values (e.g. A comparison constraint like {male, female} or an interval constraint like age = [0,110])
+
+## Longitudinal Consistency
+
+A measure of the degree to which a attribute value that should remain static remains static over time.
+
+## Record Consistency
+
+A measure of the degree to which two or more data attributes satisfy a well-defined dependency constraint -- relationship validation (e.g. zip-code -- state consistency  or gender -- pregnancy consistency)
+
+### Identify Outliers
+
+## Uniqueness
+
+The number of unique values taken by an attribute, or a combination of attributes in a dataset (e.g. frequency distribution of an element)
+
+note. The more homogeneous the data values of an element, the less useful the element is for analysis
+
+## Duplication
+
+A measure of the degree of replication of distinct observations per observation unit type (e.g. greater than 1 registration per student per official reporting period)
+
+note. Duplication occurs as a result of choice of level of aggregation

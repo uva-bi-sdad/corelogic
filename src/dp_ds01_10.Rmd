@@ -1,0 +1,39 @@
+---
+title: "Profile Provenance"
+author: "Aaron Schroeder"
+date: "4/3/2021"
+menu_title: "Profile Provenance"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
+    toc_depth: 4
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  eval=FALSE
+)
+```
+
+------------------------------------------------------------------------
+
+## Import Notes
+
+....... .......
+
+## System of Origin
+
+Where was this data originally collected?
+
+## Intermediate Storage Systems
+
+Chain of Custody
+
+## Contact Information
+
+Who can I contact with my questions?
+
+## Transformations
+
+What happened to the data since collection and why?
