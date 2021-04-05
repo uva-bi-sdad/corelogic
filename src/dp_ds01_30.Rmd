@@ -17,3 +17,5 @@ knitr::opts_chunk$set(
 ```
 
 ------------------------------------------------------------------------
+
+The total_baths variable provided was not always calculated, even when other bath columns had values, therefore we needed our own more complete version of total bathrooms. We used the Fannie Mae and Freddie Mac Uniform Appraisal Dataset Specification to calculate.
