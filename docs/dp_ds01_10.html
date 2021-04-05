@@ -12,7 +12,7 @@
 <meta name="author" content="Aaron Schroeder" />
 
 
-<title>Profile Provenance</title>
+<title>Import Notes</title>
 
 <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -330,7 +330,7 @@ div.tocify {
               INGEST
             </li>
             <li>
-              <a href="dp_ds01_10.html">Metadata & Provenance</a>
+              <a href="dp_ds01_10.html">Import Notes</a>
             </li>
             <li>
               <a href="dp_ds01_11.html">Import Parallel</a>
@@ -347,14 +347,17 @@ div.tocify {
             <li>
               <a href="dp_ds01_21.html">Latest Data</a>
             </li>
-            <li>
-              <a href="dp_ds01_22.html">Transform Variables</a>
+            <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
+              TRANSFORM
             </li>
             <li>
-              <a href="dp_ds01_23.html">New Variables 1</a>
+              <a href="dp_ds01_22.html">Add Variables (Internal)</a>
             </li>
             <li>
-              <a href="dp_ds01_24.html">New Variables 2</a>
+              <a href="dp_ds01_23.html">Add Variables (External) 1</a>
+            </li>
+            <li>
+              <a href="dp_ds01_24.html">Add Variables (External) 2</a>
             </li>
             <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
               QUALITY
@@ -366,7 +369,7 @@ div.tocify {
               <a href="dp_ds01_31.html">Filter Values</a>
             </li>
             <li>
-              <a href="dp_ds01_31.html">Validate Values</a>
+              <a href="dp_ds01_32.html">Validate Values</a>
             </li>
             <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
               ANALYZE
@@ -404,7 +407,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Profile Provenance</h1>
+<h1 class="title toc-ignore">Import Notes</h1>
 <h4 class="author">Aaron Schroeder</h4>
 <h4 class="date">4/3/2021</h4>
 
@@ -412,22 +415,8 @@ div.tocify {
 
 
 <hr />
-<div id="system-of-origin" class="section level2">
-<h2>System of Origin</h2>
-<p>Where was this data originally collected?</p>
-</div>
-<div id="intermediate-storage-systems" class="section level2">
-<h2>Intermediate Storage Systems</h2>
-<p>Chain of Custody</p>
-</div>
-<div id="contact-information" class="section level2">
-<h2>Contact Information</h2>
-<p>Who can I contact with my questions?</p>
-</div>
-<div id="transformations" class="section level2">
-<h2>Transformations</h2>
-<p>What happened to the data since collection and why?</p>
-</div>
+<p>This dataset originally came as a .bip export file from Microsoft SQL Server. It was read into a temporary SQL Server instance and re-exported as a txt file using a pipe “|” as a field separator.</p>
+<p>Issues with import were still encountered because of odd characters in the Legal1, Legal2, and Legal3 columns. it was determined that these columns were unnecessary for the project and so were removed from the import.</p>
 
 
 

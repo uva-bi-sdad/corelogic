@@ -1,5 +1,5 @@
 ---
-title: "Profile Provenance"
+title: "Import Notes"
 author: "Aaron Schroeder"
 date: "4/3/2021"
 menu_title: "Profile Provenance"
@@ -18,22 +18,6 @@ knitr::opts_chunk$set(
 
 ------------------------------------------------------------------------
 
-## Import Notes
+This dataset originally came as a .bip export file from Microsoft SQL Server. It was read into a temporary SQL Server instance and re-exported as a txt file using a pipe "\|" as a field separator.
 
-....... .......
-
-## System of Origin
-
-Where was this data originally collected?
-
-## Intermediate Storage Systems
-
-Chain of Custody
-
-## Contact Information
-
-Who can I contact with my questions?
-
-## Transformations
-
-What happened to the data since collection and why?
+Issues with import were still encountered because of odd characters in the Legal1, Legal2, and Legal3 columns. it was determined that these columns were unnecessary for the project and so were removed from the import.

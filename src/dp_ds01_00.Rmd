@@ -9,10 +9,14 @@ dataset:
   dataset_short_title: "CoreLogic01"
   dataset_description: ""
   input_data_provider: "CoreLogic"
+  inpit_data_contact: ""
   input_data_title: "CoreLogic USDA Current Tax Roll through 06/27/2020"
   input_data_deleivered_date: "07/06/2020"
   input_data_type: "Administrative"
   input_data_format: "csv"
+  input_data_system_of_origin: "" # Where was this data originally collected?
+  input_data_intermediate_systems: "" # Chain of custody
+  input_data_previous_transforms: "" # What data transformation happened to the data since collection and why?
   input_data_location: "/project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/Corelogic_USDA_Current_Tax_2020_06_27.txt"
   input_data_dictionary: "/project/biocomplexity/sdad/projects_data/usda/bb/original/L – TAX – Bulk Historical Tax Roll.xlsx"
   input_data_license: "Proprietary, --link to contract--"
