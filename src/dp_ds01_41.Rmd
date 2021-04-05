@@ -1,0 +1,57 @@
+---
+title: "Initial Filtering to Desired Dataset"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  eval=FALSE
+)
+```
+
+------------------------------------------------------------------------
+
+```{sql}
+SELECT
+  geoid_cnty,
+  sale_yr,
+  pri_cat_code_req,
+  have_all
+FROM
+(
+SELECT
+  geoid_cnty,
+  LEFT(sale_date, 4) sale_yr,
+  'TRUE' pri_cat_code_req,
+  count(*) have_all
+FROM
+  corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog
+WHERE
+--  (geoid_cnty LIKE '51%' OR geoid_cnty LIKE '19%')
+-- AND
+  property_indicator = '10'
+AND
+  transaction_type != '9'
+AND
+  sale_date IS NOT NULL
+AND
+  sale_price IS NOT NULL
+AND
+  (building_square_feet IS NOT NULL OR living_square_feet IS NOT NULL)
+AND
+ (acres IS NOT NULL OR land_square_footage IS NOT NULL)
+AND
+ (year_built IS NOT NULL OR effective_year_built IS NOT NULL)
+AND
+ (full_baths IS NOT NULL OR \"1qtr_baths\" IS NOT NULL OR \"3qtr_baths\" IS NOT NULL OR half_baths IS NOT NULL OR total_baths IS NOT NULL)
+AND
+  pri_cat_code IS NOT NULL
+AND
+  LEFT(sale_date, 4) IN ('2006', '2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018')
+GROUP BY
+  geoid_cnty,
+  LEFT(sale_date, 4)
+```

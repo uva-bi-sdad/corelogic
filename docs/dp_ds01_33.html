@@ -9,10 +9,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Aaron Schroeder" />
 
 
-<title>New Variable Notes</title>
+<title>Add Geographies</title>
 
 <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -410,14 +409,59 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">New Variable Notes</h1>
-<h4 class="author">Aaron Schroeder</h4>
-<h4 class="date">4/3/2021</h4>
+<h1 class="title toc-ignore">Add Geographies</h1>
 
 </div>
 
 
 <hr />
+<div id="create-census-block-variable-geoid_blockce" class="section level2">
+<h2>Create CENSUS block variable, geoid_blockce</h2>
+<p>By adding a geoid that goes down to the census block level, we can associate demographic data collected by the Census with each property.</p>
+</div>
+<div id="get-blocks" class="section level2">
+<h2>Get blocks</h2>
+<p>THIS ALL NEEDS TO BE UPDATED - DO INTERSECT IN POSTGIS?</p>
+<pre class="r"><code># {r}
+get_blocks &lt;- function(geoid_st = &quot;51&quot;) { 
+  sql &lt;- paste0(&quot;select geoid_cnty, p_id_iris_frmtd, geometry from corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog where property_centroid_longitude IS NOT NULL AND geoid_cnty LIKE &#39;&quot;, geoid_st,&quot;%&#39;&quot;) 
+  
+  con &lt;- get_db_conn() print(paste(&quot;getting&quot;, geoid_st, &quot;rows&quot;)) 
+  
+  db_rows_blk &lt;- st_read(con, query = sql) DBI::dbDisconnect(con) 
+  
+  blk_map_path &lt;- paste0(&quot;/home/ads7fg/sdad/projects_data/usda/bb/original/censusblocks/blocks_TIGER2018_sf_RDS/tl_2018_&quot;, geoid_st, &quot;tabblock10.RDS&quot;) print(paste(&quot;getting&quot;, geoid_st, &quot;blocks&quot;)) 
+  
+  blk_map &lt;- readRDS(blk_map_path) %&gt;% sf::st_transform(4326) print(paste(&quot;getting&quot;, geoid_st, &quot;interesection&quot;)) 
+  
+  int &lt;- sf::st_intersects(db_rows_blk, blk_map) 
+  
+  int2 &lt;- as.integer(as.character(int)) db_rows_blk$geoid_blk &lt;- as.character(blk_map$GEOID10[unlist(int2)]) print(paste(&quot;saving&quot;, geoid_st, &quot;results&quot;)) 
+  
+  file_path &lt;- paste0(&quot;data/working/sales_with_blk&quot;, geoid_st, &quot;.RDS&quot;) 
+  
+  saveRDS(db_rows_blk, file_path) rm(blk_map) }
+
+geoids_st &lt;- tigris::states() geoids_st$geometry &lt;- NULL geoids_st &lt;- geoids_st[!geoids_st$GEOID %in% c(&quot;78&quot;, &quot;69&quot;, &quot;60&quot;, &quot;72&quot;, &quot;12&quot;, &quot;51&quot;, &quot;54&quot;), c(&quot;GEOID&quot;)]
+
+library(doParallel)
+
+cl &lt;- makeForkCluster(6, outfile = &quot;src/parlog&quot;) doParallel::registerDoParallel(cl)
+
+geoids_st_test &lt;- geoids_st[21:49] res &lt;- foreach(i = 1:length(geoids_st_test)) %dopar% { get_blocks(geoids_st_test[i]) }
+
+parallel::stopCluster(cl)
+
+file_paths &lt;- list.files(&quot;data/working/&quot;, pattern = &quot;sales_with_blk*&quot;, full.names = TRUE) con &lt;- get_db_conn() dat &lt;- readRDS(file_paths[1]) sf::dbWriteTable(con, c(&quot;corelogic_usda&quot;, &quot;sales_with_blk&quot;), dat) rm(dat) DBI::dbDisconnect(con)
+
+library(doParallel) library(sf) library(RPostgreSQL) library(data.table)
+
+cl &lt;- makeForkCluster(6, outfile = &quot;src/parlog&quot;) doParallel::registerDoParallel(cl)
+
+file_paths_2 &lt;- file_paths[2:45] res &lt;- foreach(i = 1:length(file_paths_2)) %dopar% { con &lt;- get_db_conn() print(paste(&quot;reading&quot;, file_paths_2[i])) dat &lt;- readRDS(file_paths_2[i]) print(paste(&quot;writing&quot;, file_paths_2[i])) sf::dbWriteTable(con, c(&quot;corelogic_usda&quot;, &quot;sales_with_blk&quot;), dat, append = TRUE) rm(dat) DBI::dbDisconnect(con) }
+
+parallel::stopCluster(cl)</code></pre>
+</div>
 
 
 
@@ -465,7 +509,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2,h3,h4",
+      selectors: "h1,h2,h3",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {

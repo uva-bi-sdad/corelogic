@@ -9,10 +9,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Aaron Schroeder" />
 
 
-<title>New Variable Notes</title>
+<title>Initial Filtering to Desired Dataset</title>
 
 <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -410,14 +409,51 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">New Variable Notes</h1>
-<h4 class="author">Aaron Schroeder</h4>
-<h4 class="date">4/3/2021</h4>
+<h1 class="title toc-ignore">Initial Filtering to Desired Dataset</h1>
 
 </div>
 
 
 <hr />
+<pre class="sql"><code>SELECT
+  geoid_cnty,
+  sale_yr,
+  pri_cat_code_req,
+  have_all
+FROM
+(
+SELECT
+  geoid_cnty,
+  LEFT(sale_date, 4) sale_yr,
+  &#39;TRUE&#39; pri_cat_code_req,
+  count(*) have_all
+FROM
+  corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog
+WHERE
+--  (geoid_cnty LIKE &#39;51%&#39; OR geoid_cnty LIKE &#39;19%&#39;)
+-- AND
+  property_indicator = &#39;10&#39;
+AND
+  transaction_type != &#39;9&#39;
+AND
+  sale_date IS NOT NULL
+AND
+  sale_price IS NOT NULL
+AND
+  (building_square_feet IS NOT NULL OR living_square_feet IS NOT NULL)
+AND
+ (acres IS NOT NULL OR land_square_footage IS NOT NULL)
+AND
+ (year_built IS NOT NULL OR effective_year_built IS NOT NULL)
+AND
+ (full_baths IS NOT NULL OR \&quot;1qtr_baths\&quot; IS NOT NULL OR \&quot;3qtr_baths\&quot; IS NOT NULL OR half_baths IS NOT NULL OR total_baths IS NOT NULL)
+AND
+  pri_cat_code IS NOT NULL
+AND
+  LEFT(sale_date, 4) IN (&#39;2006&#39;, &#39;2007&#39;,&#39;2008&#39;,&#39;2009&#39;,&#39;2010&#39;,&#39;2011&#39;,&#39;2012&#39;,&#39;2013&#39;,&#39;2014&#39;,&#39;2015&#39;,&#39;2016&#39;,&#39;2017&#39;,&#39;2018&#39;)
+GROUP BY
+  geoid_cnty,
+  LEFT(sale_date, 4)</code></pre>
 
 
 
@@ -465,7 +501,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2,h3,h4",
+      selectors: "h1,h2,h3",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {

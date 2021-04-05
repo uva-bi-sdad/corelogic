@@ -1,13 +1,9 @@
 ---
-title: "New Variable Notes"
-author: "Aaron Schroeder"
-date: "4/3/2021"
-menu_title: "Profile Provenance"
+title: "Value Validation"
 output: 
   html_document:
     toc: yes
     toc_float: yes
-    toc_depth: 4
 ---
 
 ```{r, include=FALSE}

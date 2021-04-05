@@ -11,7 +11,7 @@
 
 
 
-<title>Initial Filtering to Desired Dataset</title>
+<title>Add Variables by Transorming Existing Columns</title>
 
 <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -347,28 +347,31 @@ div.tocify {
               <a href="dp_ds01_21.html">Latest Data</a>
             </li>
             <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
-              TRANSFORM
+              NEW VARIABLES
             </li>
             <li>
-              <a href="dp_ds01_22.html">Add Variables (Internal)</a>
+              <a href="dp_ds01_30.html">New Variable Notes</a>
             </li>
             <li>
-              <a href="dp_ds01_23.html">Add Variables (External) 1</a>
+              <a href="dp_ds01_31.html">Add Variables (Internal)</a>
             </li>
             <li>
-              <a href="dp_ds01_24.html">Add Variables (External) 2</a>
+              <a href="dp_ds01_32.html">Add Variables (External) 1</a>
+            </li>
+            <li>
+              <a href="dp_ds01_33.html">Add Variables (External) 2</a>
             </li>
             <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
               QUALITY
             </li>
             <li>
-              <a href="dp_ds01_30.html">Profile Quality</a>
+              <a href="dp_ds01_40.html">Profile Quality</a>
             </li>
             <li>
-              <a href="dp_ds01_31.html">Filter Values</a>
+              <a href="dp_ds01_41.html">Filter Values</a>
             </li>
             <li>
-              <a href="dp_ds01_32.html">Validate Values</a>
+              <a href="dp_ds01_42.html">Validate Values</a>
             </li>
             <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
               ANALYZE
@@ -406,51 +409,38 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Initial Filtering to Desired Dataset</h1>
+<h1 class="title toc-ignore">Add Variables by Transorming Existing Columns</h1>
 
 </div>
 
 
 <hr />
-<pre class="sql"><code>SELECT
-  geoid_cnty,
-  sale_yr,
-  pri_cat_code_req,
-  have_all
-FROM
-(
-SELECT
-  geoid_cnty,
-  LEFT(sale_date, 4) sale_yr,
-  &#39;TRUE&#39; pri_cat_code_req,
-  count(*) have_all
-FROM
-  corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog
-WHERE
---  (geoid_cnty LIKE &#39;51%&#39; OR geoid_cnty LIKE &#39;19%&#39;)
--- AND
-  property_indicator = &#39;10&#39;
-AND
-  transaction_type != &#39;9&#39;
-AND
-  sale_date IS NOT NULL
-AND
-  sale_price IS NOT NULL
-AND
-  (building_square_feet IS NOT NULL OR living_square_feet IS NOT NULL)
-AND
- (acres IS NOT NULL OR land_square_footage IS NOT NULL)
-AND
- (year_built IS NOT NULL OR effective_year_built IS NOT NULL)
-AND
- (full_baths IS NOT NULL OR \&quot;1qtr_baths\&quot; IS NOT NULL OR \&quot;3qtr_baths\&quot; IS NOT NULL OR half_baths IS NOT NULL OR total_baths IS NOT NULL)
-AND
-  pri_cat_code IS NOT NULL
-AND
-  LEFT(sale_date, 4) IN (&#39;2006&#39;, &#39;2007&#39;,&#39;2008&#39;,&#39;2009&#39;,&#39;2010&#39;,&#39;2011&#39;,&#39;2012&#39;,&#39;2013&#39;,&#39;2014&#39;,&#39;2015&#39;,&#39;2016&#39;,&#39;2017&#39;,&#39;2018&#39;)
-GROUP BY
-  geoid_cnty,
-  LEFT(sale_date, 4)</code></pre>
+<div id="create-sale_year-variable" class="section level2">
+<h2>Create sale_year variable</h2>
+<p>Planned analyses include <strong>analysis by year of sale</strong>. Creating a separate indexed column for year should be faster than repeatedly using DATEPART(‘year’, sale_date).</p>
+<pre class="sql"><code>SELECT DATE_PART(&#39;year&#39;, sale_date)::INTEGER AS sale_year</code></pre>
+</div>
+<div id="create-baths_appraised-variable" class="section level2">
+<h2>Create baths_appraised variable</h2>
+<p>Using the Fannie Mae and Freddie Mac Uniform Appraisal Dataset Specification to calculate total bathrooms. 3/4 baths count as full baths, 1/4 baths are dropped, half bath is .1 of full bath, so 1 x full bath &amp; 1 x 3/4 bath &amp; 1 x half bath = 2.1 baths (2 full baths, 1 half bath).</p>
+<p>We use COALESCE to deal with NULL values because adding NULL values will always return NULL. COALESCE combines values, stopping at the first non-null value. So, if full_baths is NULL, the next non-null value ‘0’ will be used.</p>
+<p>We use NULLIF on the result of the baths equation to test if the result is 0. A 0 would indicate that all of the bath types were NULL (it’s extremely unlikely to have a house with 0 bathrooms). Therefore, a total value of 0 is converted back to NULL, indicating that we have no information.</p>
+<pre class="sql"><code>NULLIF(COALESCE(full_baths, 0) + 
+       COALESCE(thrqtr_baths, 0) + 
+       (.1 * COALESCE(half_baths, 0)), 0) AS baths_appraised</code></pre>
+</div>
+<div id="create-all-new-values-together-creating-a-new-table" class="section level2">
+<h2>Create all new values together, creating a new table</h2>
+<p>The <strong>fastest</strong> method to add new columns with values to a large dataset is to <strong>write everything to a new table</strong> (as opposed to the very slow operation of running an UPDATE on every record in the existing table). Therefore, we combine the creation of all new columns together in a single query creating a new table.</p>
+<pre class="sql"><code>-- {sql} * Run In psql/pgcli
+SELECT *,
+       DATE_PART(&#39;year&#39;, sale_date)::INTEGER AS sale_year,
+       NULLIF(coalesce(full_baths, 0) + coalesce(thrqtr_baths, 0) + (.1 * coalesce(half_baths, 0)), 0) AS baths_appraised
+INTO corelogic_usda.current_tax_200627_latest_all_add_vars
+FROM corelogic_usda.current_tax_200627_latest_all;
+
+ALTER TABLE corelogic_usda.current_tax_200627_latest_all_add_vars ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);</code></pre>
+</div>
 
 
 
