@@ -33,7 +33,7 @@ dataset:
   input_data_provider_03: "Census"
     input_data_title_03: "Census Blocks 2018"
     input_data_subtitle_03: ""
-    input_data_deleivered_date_03: "Accessed 2019?."
+    input_data_deleivered_date_03: "Accessed Ictober 2019."
     input_data_type_03: "Administrative"
     input_data_format_03: "gis"
     input_data_location_03: "/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL/RD_BROADBAND_IELG_PRODUCTION.shp"
