@@ -18,6 +18,10 @@ knitr::opts_chunk$set(
 
 ------------------------------------------------------------------------
 
-This dataset originally came as a zipped csv file posted to the FCC's data page for Form 477. It was read into a temporary SQL Server instance and re-exported as a txt file using a pipe "\|" as a field separator.
+[FCC Form 477 (2014 and 2018)]{.ul}
 
-Issues with import were still encountered because of odd characters in the Legal1, Legal2, and Legal3 columns. it was determined that these columns were unnecessary for the project and so were removed from the import.
+This dataset originally came as a zipped csv file posted to the FCC's data page for Form 477. It was unzipped into a temporary file location and saved to the project folder in the script linked here: <https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/fcc_speed_data_load_manip.R>.
+
+-   2014: lines 3-14
+
+-   2018: lines 69 - 80
