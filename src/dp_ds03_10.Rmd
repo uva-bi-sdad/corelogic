@@ -1,0 +1,27 @@
+---
+title: "Import Notes"
+author: "Devika Mahoney-Nair"
+date: "4/6/2021"
+menu_title: "Profile Provenance"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
+    toc_depth: 4
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  eval=FALSE
+)
+```
+
+------------------------------------------------------------------------
+
+[FCC Form 477 (2014 and 2018)]{.ul}
+
+This dataset originally came as a zipped csv file posted to the FCC's data page for Form 477. It was unzipped into a temporary file location and saved to the project folder in the script linked here: <https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/fcc_speed_data_load_manip.R>.
+
+-   2014: lines 3-14
+
+-   2018: lines 69 - 80
