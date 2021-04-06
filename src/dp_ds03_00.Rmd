@@ -1,0 +1,22 @@
+---
+title: "Dataset 03 Info"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
+    toc_depth: 4
+dataset:
+  dataset_short_title: "FCC Form 477 (2014 and 2018)"
+  dataset_description: ""
+  associated_project: "USDA ERS Broadband Program Impacts"
+  input_data_provider: "FCC"
+  input_data_title: "US-Fixed-without-Satellite-Dec2014.zip"
+  input_data_deleivered_date: "## 07/06/2020"
+  input_data_type: "Administrative"
+  input_data_format: "zip csv"
+  input_data_location: "## /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Filesfbd_us_without_satellite_dec2014_v3.csv"
+  input_data_dictionary: " ## /project/biocomplexity/sdad/projects_data/usda/bb/original/L – TAX – Bulk Historical Tax Roll.xlsx"
+  input_data_license: "Public, ## --link to site--"
+  output_data_format: "csv"
+  output_data_location: " ## corelogic_usda.current_tax_200627_latest_final"
+---

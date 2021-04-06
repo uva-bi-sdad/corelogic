@@ -1,0 +1,23 @@
+---
+title: "Import Notes"
+author: "Devika Mahoney-Nair"
+date: "4/6/2021"
+menu_title: "Profile Provenance"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
+    toc_depth: 4
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  eval=FALSE
+)
+```
+
+------------------------------------------------------------------------
+
+This dataset originally came as a zipped csv file posted to the FCC's data page for Form 477. It was read into a temporary SQL Server instance and re-exported as a txt file using a pipe "\|" as a field separator.
+
+Issues with import were still encountered because of odd characters in the Legal1, Legal2, and Legal3 columns. it was determined that these columns were unnecessary for the project and so were removed from the import.
