@@ -24,7 +24,7 @@ Import of 174GB file: Corelogic_USDA_Current_Tax_2020_06_27.txt
 
 ```{r, eval=FALSE}
 # {r}
-source("R/functions.R")
+source("../R/functions.R")
 library(data.table)
 library(dataplumbr)
 library(foreach)
@@ -134,12 +134,4 @@ res <- foreach(i = 151:179) %dopar% {
 }
 
 parallel::stopCluster(cl)
-```
-
-------------------------------------------------------------------------
-
-# PROFILE
-
-```{r}
-###
 ```

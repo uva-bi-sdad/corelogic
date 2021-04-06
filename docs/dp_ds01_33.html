@@ -317,7 +317,7 @@ div.tocify {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <!-- DATASET -->
+        <!-- NEW DATASET -->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
             Corelogic01
@@ -376,29 +376,122 @@ div.tocify {
             <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
               ANALYZE
             </li>
+            <li>
+              <a href="dp_ds01_50.html">Analysis Notes</a>
+            </li>
           </ul>
         </li>
-        <!-- DATASET -->
+
+        <!-- NEW DATASET -->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            Corelogic02
+            New Dataset 2
 
             <span class="caret"></span>
           </a>
+          <ul class="dropdown-menu" role="menu">
+            <li style="border: 1px solid silver; border-top: 1px solid silver; text-align: center">
+              INGEST
+            </li>
+            <li>
+              <a href="dp_ds02_10.html">Import Notes</a>
+            </li>
+            <li>
+              <a href="">blank</a>
+            </li>
+            <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
+              STRUCTURE
+            </li>
+            <li>
+              <a href="dp_ds02_20.html">Profile Structure</a>
+            </li>
+            <li>
+              <a href="">blank</a>
+            </li>
+            <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
+              NEW VARIABLES
+            </li>
+            <li>
+              <a href="dp_ds02_30.html">New Variable Notes</a>
+            </li>
+            <li>
+              <a href="">blank</a>
+            </li>
+            <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
+              QUALITY
+            </li>
+            <li>
+              <a href="dp_ds02_40.html">Profile Quality</a>
+            </li>
+            <li>
+              <a href="">blank</a>
+            </li>
+            <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
+              ANALYZE
+            </li>
+            <li>
+              <a href="dp_ds02_50.html">Analysis Notes</a>
+            </li>
+            <li>
+              <a href="">blank</a>
+            </li>
+          </ul>
         </li>
+
+        <!-- NEW DATASET -->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            ARI01
+            New Dataset 3
 
             <span class="caret"></span>
           </a>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            FCC01
-
-            <span class="caret"></span>
-          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li style="border: 1px solid silver; border-top: 1px solid silver; text-align: center">
+              INGEST
+            </li>
+            <li>
+              <a href="dp_ds03_10.html">Import Notes</a>
+            </li>
+            <li>
+              <a href="">blank</a>
+            </li>
+            <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
+              STRUCTURE
+            </li>
+            <li>
+              <a href="dp_ds03_20.html">Profile Structure</a>
+            </li>
+            <li>
+              <a href="">blank</a>
+            </li>
+            <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
+              NEW VARIABLES
+            </li>
+            <li>
+              <a href="dp_ds03_30.html">New Variable Notes</a>
+            </li>
+            <li>
+              <a href="">blank</a>
+            </li>
+            <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
+              QUALITY
+            </li>
+            <li>
+              <a href="dp_ds03_40.html">Profile Quality</a>
+            </li>
+            <li>
+              <a href="">blank</a>
+            </li>
+            <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
+              ANALYZE
+            </li>
+            <li>
+              <a href="dp_ds03_50.html">Analysis Notes</a>
+            </li>
+            <li>
+              <a href="">blank</a>
+            </li>
+          </ul>
         </li>
       </ul>
     </div><!--/.nav-collapse -->
@@ -418,6 +511,18 @@ div.tocify {
 <div id="create-census-block-variable-geoid_blockce" class="section level2">
 <h2>Create CENSUS block variable, geoid_blockce</h2>
 <p>By adding a geoid that goes down to the census block level, we can associate demographic data collected by the Census with each property.</p>
+<div id="create-new-table-adding-geometry-column" class="section level3">
+<h3>Create New Table Adding Geometry Column</h3>
+<pre class="sql"><code>SELECT *, ST_SetSRID(
+        ST_MakePoint(
+             property_centroid_longitude,
+             property_centroid_latitude
+        ), 4326)
+INTO corelogic_usda.current_tax_200627_latest_all_add_vars_add_progs_geom
+FROM corelogic_usda.current_tax_200627_latest_all_add_vars_add_progs;
+
+ALTER TABLE corelogic_usda.current_tax_200627_latest_all_add_vars_add_progs_geom ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);</code></pre>
+</div>
 </div>
 <div id="get-blocks" class="section level2">
 <h2>Get blocks</h2>
@@ -452,15 +557,53 @@ geoids_st_test &lt;- geoids_st[21:49] res &lt;- foreach(i = 1:length(geoids_st_t
 
 parallel::stopCluster(cl)
 
-file_paths &lt;- list.files(&quot;data/working/&quot;, pattern = &quot;sales_with_blk*&quot;, full.names = TRUE) con &lt;- get_db_conn() dat &lt;- readRDS(file_paths[1]) sf::dbWriteTable(con, c(&quot;corelogic_usda&quot;, &quot;sales_with_blk&quot;), dat) rm(dat) DBI::dbDisconnect(con)
+file_paths &lt;- list.files(&quot;data/working/&quot;, pattern = &quot;sales_with_blk*&quot;, full.names = TRUE) 
 
-library(doParallel) library(sf) library(RPostgreSQL) library(data.table)
+con &lt;- get_db_conn() 
+dat &lt;- readRDS(file_paths[1]) 
+sf::dbWriteTable(con, c(&quot;corelogic_usda&quot;, &quot;sales_with_blk&quot;), dat) rm(dat) DBI::dbDisconnect(con)
+
+library(doParallel) 
+library(sf) 
+library(RPostgreSQL) 
+library(data.table)
 
 cl &lt;- makeForkCluster(6, outfile = &quot;src/parlog&quot;) doParallel::registerDoParallel(cl)
 
-file_paths_2 &lt;- file_paths[2:45] res &lt;- foreach(i = 1:length(file_paths_2)) %dopar% { con &lt;- get_db_conn() print(paste(&quot;reading&quot;, file_paths_2[i])) dat &lt;- readRDS(file_paths_2[i]) print(paste(&quot;writing&quot;, file_paths_2[i])) sf::dbWriteTable(con, c(&quot;corelogic_usda&quot;, &quot;sales_with_blk&quot;), dat, append = TRUE) rm(dat) DBI::dbDisconnect(con) }
+file_paths_2 &lt;- file_paths[2:45] 
+res &lt;- foreach(i = 1:length(file_paths_2)) %dopar% { 
+  con &lt;- get_db_conn() 
+  print(paste(&quot;reading&quot;, file_paths_2[i])) 
+  dat &lt;- readRDS(file_paths_2[i]) 
+  print(paste(&quot;writing&quot;, file_paths_2[i])) 
+  sf::dbWriteTable(con, c(&quot;corelogic_usda&quot;, &quot;sales_with_blk&quot;), dat, append = TRUE) 
+  rm(dat) 
+  DBI::dbDisconnect(con) }
 
 parallel::stopCluster(cl)</code></pre>
+<div id="reduce-to-unique-property-census-block" class="section level3">
+<h3>Reduce to Unique Property Census Block</h3>
+<pre class="sql"><code>SELECT DISTINCT * 
+INTO corelogic_usda.sales_with_blk_unq
+FROM corelogic_usda.sales_with_blk;
+
+ALTER TABLE corelogic_usda.sales_with_blk_unq ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);</code></pre>
+</div>
+<div id="create-new-table-adding-census-block" class="section level3">
+<h3>Create New Table Adding Census Block</h3>
+<pre class="sql"><code>SELECT a.*, b.geoid_blk
+INTO corelogic_usda.current_tax_200627_latest_all_add_vars_add_progs_geom_blk
+FROM corelogic_usda.current_tax_200627_latest_all_add_vars_add_progs_geom a
+LEFT JOIN corelogic_usda.sales_with_blk_unq b
+WHERE a.geoid_cnty = b.geoid_cnty
+  AND a.p_id_iris_frmtd = b.p_id_iris_frmtd;
+  
+UPDATE corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog a
+SET geoid_blk = b.geoid_blk
+FROM corelogic_usda.sales_with_blk b
+WHERE a.geoid_cnty = b.geoid_cnty
+  AND a.p_id_iris_frmtd = b.p_id_iris_frmtd;</code></pre>
+</div>
 </div>
 
 

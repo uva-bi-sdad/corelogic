@@ -18,6 +18,20 @@ knitr::opts_chunk$set(
 
 By adding a geoid that goes down to the census block level, we can associate demographic data collected by the Census with each property.
 
+### Create New Table Adding Geometry Column
+
+```{sql}
+SELECT *, ST_SetSRID(
+        ST_MakePoint(
+             property_centroid_longitude,
+             property_centroid_latitude
+        ), 4326)
+INTO corelogic_usda.current_tax_200627_latest_all_add_vars_add_progs_geom
+FROM corelogic_usda.current_tax_200627_latest_all_add_vars_add_progs;
+
+ALTER TABLE corelogic_usda.current_tax_200627_latest_all_add_vars_add_progs_geom ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);
+```
+
 ## Get blocks
 
 THIS ALL NEEDS TO BE UPDATED - DO INTERSECT IN POSTGIS?
@@ -53,13 +67,49 @@ geoids_st_test <- geoids_st[21:49] res <- foreach(i = 1:length(geoids_st_test)) 
 
 parallel::stopCluster(cl)
 
-file_paths <- list.files("data/working/", pattern = "sales_with_blk*", full.names = TRUE) con <- get_db_conn() dat <- readRDS(file_paths[1]) sf::dbWriteTable(con, c("corelogic_usda", "sales_with_blk"), dat) rm(dat) DBI::dbDisconnect(con)
+file_paths <- list.files("data/working/", pattern = "sales_with_blk*", full.names = TRUE) 
 
-library(doParallel) library(sf) library(RPostgreSQL) library(data.table)
+con <- get_db_conn() 
+dat <- readRDS(file_paths[1]) 
+sf::dbWriteTable(con, c("corelogic_usda", "sales_with_blk"), dat) rm(dat) DBI::dbDisconnect(con)
+
+library(doParallel) 
+library(sf) 
+library(RPostgreSQL) 
+library(data.table)
 
 cl <- makeForkCluster(6, outfile = "src/parlog") doParallel::registerDoParallel(cl)
 
-file_paths_2 <- file_paths[2:45] res <- foreach(i = 1:length(file_paths_2)) %dopar% { con <- get_db_conn() print(paste("reading", file_paths_2[i])) dat <- readRDS(file_paths_2[i]) print(paste("writing", file_paths_2[i])) sf::dbWriteTable(con, c("corelogic_usda", "sales_with_blk"), dat, append = TRUE) rm(dat) DBI::dbDisconnect(con) }
+file_paths_2 <- file_paths[2:45] 
+res <- foreach(i = 1:length(file_paths_2)) %dopar% { 
+  con <- get_db_conn() 
+  print(paste("reading", file_paths_2[i])) 
+  dat <- readRDS(file_paths_2[i]) 
+  print(paste("writing", file_paths_2[i])) 
+  sf::dbWriteTable(con, c("corelogic_usda", "sales_with_blk"), dat, append = TRUE) 
+  rm(dat) 
+  DBI::dbDisconnect(con) }
 
 parallel::stopCluster(cl)
+```
+
+### Reduce to Unique Property Census Block
+
+```{sql}
+SELECT DISTINCT * 
+INTO corelogic_usda.sales_with_blk_unq
+FROM corelogic_usda.sales_with_blk;
+
+ALTER TABLE corelogic_usda.sales_with_blk_unq ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);
+```
+
+### Create New Table Adding Census Block
+
+```{sql}
+SELECT a.*, b.geoid_blk
+INTO corelogic_usda.current_tax_200627_latest_all_add_vars_add_progs_geom_blk
+FROM corelogic_usda.current_tax_200627_latest_all_add_vars_add_progs_geom a
+LEFT JOIN corelogic_usda.sales_with_blk_unq b
+  ON a.geoid_cnty = b.geoid_cnty
+  AND a.p_id_iris_frmtd = b.p_id_iris_frmtd;
 ```
