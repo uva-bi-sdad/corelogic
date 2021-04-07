@@ -14,6 +14,19 @@ knitr::opts_chunk$set(
 
 ------------------------------------------------------------------------
 
+\`\`\`{r, eval=FALSE}
+
+\# {r}
+
+```{r}
+source("../R/functions.R")
+library(data.table)
+library(foreach)
+library(doParallel)
+library(DBI)
+library(sf)
+```
+
 ## Create CENSUS block variable, geoid_blockce
 
 By adding a geoid that goes down to the census block level, we can associate demographic data collected by the Census with each property.
@@ -39,48 +52,73 @@ THIS ALL NEEDS TO BE UPDATED - DO INTERSECT IN POSTGIS?
 ```{r}
 # {r}
 get_blocks <- function(geoid_st = "51") { 
-  sql <- paste0("select geoid_cnty, p_id_iris_frmtd, geometry from corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog where property_centroid_longitude IS NOT NULL AND geoid_cnty LIKE '", geoid_st,"%'") 
+  library(magrittr)
+  sql <- paste0("select geoid_cnty, p_id_iris_frmtd, geometry from corelogic_usda.current_tax_200627_latest_all_add_vars_add_progs_geom where property_centroid_longitude IS NOT NULL AND geoid_cnty LIKE '", geoid_st,"%'") 
   
-  con <- get_db_conn() print(paste("getting", geoid_st, "rows")) 
+  con <- get_db_conn() 
   
-  db_rows_blk <- st_read(con, query = sql) DBI::dbDisconnect(con) 
+  print(paste("getting", geoid_st, "rows")) 
   
-  blk_map_path <- paste0("/home/ads7fg/sdad/projects_data/usda/bb/original/censusblocks/blocks_TIGER2018_sf_RDS/tl_2018_", geoid_st, "tabblock10.RDS") print(paste("getting", geoid_st, "blocks")) 
+  db_rows_blk <- sf::st_read(con, query = sql) 
+  DBI::dbDisconnect(con) 
   
-  blk_map <- readRDS(blk_map_path) %>% sf::st_transform(4326) print(paste("getting", geoid_st, "interesection")) 
+  blk_map_path <- paste0("/home/ads7fg/sdad/projects_data/usda/bb/original/censusblocks/blocks_TIGER2018_sf_RDS/tl_2018_", geoid_st, "_tabblock10.RDS") 
+  print(paste("getting", geoid_st, "blocks")) 
   
-  int <- sf::st_intersects(db_rows_blk, blk_map) 
+  blk_map <- readRDS(blk_map_path) %>% sf::st_transform(4326) 
+  print(paste("getting", geoid_st, "interesection")) 
   
-  int2 <- as.integer(as.character(int)) db_rows_blk$geoid_blk <- as.character(blk_map$GEOID10[unlist(int2)]) print(paste("saving", geoid_st, "results")) 
-  
-  file_path <- paste0("data/working/sales_with_blk", geoid_st, ".RDS") 
-  
-  saveRDS(db_rows_blk, file_path) rm(blk_map) }
+  if ("sf" %in% class(db_rows_blk) & "sf" %in% class(blk_map)) {
+    int <- sf::st_intersects(db_rows_blk, blk_map) 
+     
+    int2 <- as.integer(as.character(int)) 
+    db_rows_blk$geoid_blk <- as.character(blk_map$GEOID10[unlist(int2)]) 
+    print(paste("saving", geoid_st, "results")) 
+    
+    file_path <- paste0("/home/ads7fg/sdad/projects_data/usda/bb/working/sales_with_blk_", geoid_st, ".RDS") 
+    
+    saveRDS(db_rows_blk, file_path)
+  }
 
-geoids_st <- tigris::states() geoids_st$geometry <- NULL geoids_st <- geoids_st[!geoids_st$GEOID %in% c("78", "69", "60", "72", "12", "51", "54"), c("GEOID")]
+  rm(blk_map) 
+}
 
-library(doParallel)
 
-cl <- makeForkCluster(6, outfile = "src/parlog") doParallel::registerDoParallel(cl)
+```
 
-geoids_st_test <- geoids_st[21:49] res <- foreach(i = 1:length(geoids_st_test)) %dopar% { get_blocks(geoids_st_test[i]) }
+```{r}
+
+geoids_st <- tigris::states() 
+geoids_st$geometry <- NULL 
+geoids_st <- geoids_st[!geoids_st$GEOID %in% c("78", "69", "60", "72", "12", "51", "54"), c("GEOID")]
+
+
+cl <- makeCluster(6, outfile = "parlog") 
+doParallel::registerDoParallel(cl)
+
+geoids_st_test <- geoids_st[31:49] 
+
+res <- foreach(i = 1:length(geoids_st_test)) %dopar% { 
+  get_blocks(geoids_st_test[i]) 
+}
 
 parallel::stopCluster(cl)
+```
 
-file_paths <- list.files("data/working/", pattern = "sales_with_blk*", full.names = TRUE) 
+### Write census block RDS file to database
+```{r}
+file_paths <- list.files("../data/working", pattern = "sales_with_blk*", full.names = TRUE) 
 
 con <- get_db_conn() 
 dat <- readRDS(file_paths[1]) 
-sf::dbWriteTable(con, c("corelogic_usda", "sales_with_blk"), dat) rm(dat) DBI::dbDisconnect(con)
+sf::dbWriteTable(con, c("corelogic_usda", "sales_with_blk"), dat) 
+rm(dat) 
+DBI::dbDisconnect(con)
 
-library(doParallel) 
-library(sf) 
-library(RPostgreSQL) 
-library(data.table)
+cl <- makeCluster(6, outfile = "parlog") 
+doParallel::registerDoParallel(cl)
 
-cl <- makeForkCluster(6, outfile = "src/parlog") doParallel::registerDoParallel(cl)
-
-file_paths_2 <- file_paths[2:45] 
+file_paths_2 <- file_paths[2:51] 
 res <- foreach(i = 1:length(file_paths_2)) %dopar% { 
   con <- get_db_conn() 
   print(paste("reading", file_paths_2[i])) 
@@ -88,7 +126,8 @@ res <- foreach(i = 1:length(file_paths_2)) %dopar% {
   print(paste("writing", file_paths_2[i])) 
   sf::dbWriteTable(con, c("corelogic_usda", "sales_with_blk"), dat, append = TRUE) 
   rm(dat) 
-  DBI::dbDisconnect(con) }
+  DBI::dbDisconnect(con) 
+}
 
 parallel::stopCluster(cl)
 ```
@@ -112,4 +151,7 @@ FROM corelogic_usda.current_tax_200627_latest_all_add_vars_add_progs_geom a
 LEFT JOIN corelogic_usda.sales_with_blk_unq b
   ON a.geoid_cnty = b.geoid_cnty
   AND a.p_id_iris_frmtd = b.p_id_iris_frmtd;
+  
+  
+ALTER TABLE corelogic_usda.current_tax_200627_latest_all_add_vars_add_progs_geom_blk ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);
 ```
