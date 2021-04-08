@@ -106,6 +106,7 @@ parallel::stopCluster(cl)
 ```
 
 ### Write census block RDS file to database
+
 ```{r}
 file_paths <- list.files("../data/working", pattern = "sales_with_blk*", full.names = TRUE) 
 

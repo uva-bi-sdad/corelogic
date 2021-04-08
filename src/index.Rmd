@@ -7,11 +7,14 @@ output:
     toc_depth: 4
 ---
 
-```{r echo=FALSE, results='asis', message=FALSE}
+```{r echo=FALSE, message=FALSE}
 library(htmltools)
 library(data.table)
 library(DT)
 source("../R/functions.R")
+```
+
+```{r echo=FALSE, results='asis', message=FALSE}
 
 ds_info_files <- list.files(pattern = "*_00*.Rmd")
 

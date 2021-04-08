@@ -394,7 +394,7 @@ div.tocify {
               INGEST
             </li>
             <li>
-              <a href="dp_ds02_10.html">Import Notes</a>
+              <!-- <a href="dp_ds02_10.html">Import Notes</a> -->
             </li>
             <li>
               <a href="">blank</a>
@@ -403,7 +403,7 @@ div.tocify {
               STRUCTURE
             </li>
             <li>
-              <a href="dp_ds02_20.html">Profile Structure</a>
+              <!-- <a href="dp_ds02_20.html">Profile Structure</a> -->
             </li>
             <li>
               <a href="">blank</a>
@@ -412,7 +412,7 @@ div.tocify {
               NEW VARIABLES
             </li>
             <li>
-              <a href="dp_ds02_30.html">New Variable Notes</a>
+              <!-- <a href="dp_ds02_30.html">New Variable Notes</a> -->
             </li>
             <li>
               <a href="">blank</a>
@@ -421,7 +421,7 @@ div.tocify {
               QUALITY
             </li>
             <li>
-              <a href="dp_ds02_40.html">Profile Quality</a>
+              <!-- <a href="dp_ds02_40.html">Profile Quality</a> -->
             </li>
             <li>
               <a href="">blank</a>
@@ -430,7 +430,7 @@ div.tocify {
               ANALYZE
             </li>
             <li>
-              <a href="dp_ds02_50.html">Analysis Notes</a>
+              <!-- <a href="dp_ds02_50.html">Analysis Notes</a> -->
             </li>
             <li>
               <a href="">blank</a>
@@ -450,7 +450,7 @@ div.tocify {
               INGEST
             </li>
             <li>
-              <a href="dp_ds03_10.html">Import Notes</a>
+              <!-- <a href="dp_ds03_10.html">Import Notes</a> -->
             </li>
             <li>
               <a href="">blank</a>
@@ -459,7 +459,7 @@ div.tocify {
               STRUCTURE
             </li>
             <li>
-              <a href="dp_ds03_20.html">Profile Structure</a>
+              <!-- <a href="dp_ds03_20.html">Profile Structure</a> -->
             </li>
             <li>
               <a href="">blank</a>
@@ -468,7 +468,7 @@ div.tocify {
               NEW VARIABLES
             </li>
             <li>
-              <a href="dp_ds03_30.html">New Variable Notes</a>
+              <!-- <a href="dp_ds03_30.html">New Variable Notes</a> -->
             </li>
             <li>
               <a href="">blank</a>
@@ -477,7 +477,7 @@ div.tocify {
               QUALITY
             </li>
             <li>
-              <a href="dp_ds03_40.html">Profile Quality</a>
+              <!-- <a href="dp_ds03_40.html">Profile Quality</a> -->
             </li>
             <li>
               <a href="">blank</a>
@@ -486,7 +486,7 @@ div.tocify {
               ANALYZE
             </li>
             <li>
-              <a href="dp_ds03_50.html">Analysis Notes</a>
+              <!-- <a href="dp_ds03_50.html">Analysis Notes</a> -->
             </li>
             <li>
               <a href="">blank</a>
@@ -517,8 +517,9 @@ div.tocify {
 <pre class="r"><code># {r}
 source(&quot;../R/functions.R&quot;)
 library(glue)</code></pre>
-<div id="create-a-function-to-build-the-sql-queries-necessary-to-get-most-recent-item-recordings" class="section level3">
-<h3>Create a function to build the SQL queries necessary to get most recent item recordings</h3>
+</div>
+<div id="create-a-function-to-build-the-sql-queries-necessary-to-get-most-recent-item-recordings" class="section level2">
+<h2>Create a function to build the SQL queries necessary to get most recent item recordings</h2>
 <pre class="r"><code># {r}
 build_latest_query &lt;- function(col_name) {
   tbl &lt;- glue(&quot;current_tax_200627_latest_{col_name}&quot;)
@@ -546,7 +547,6 @@ build_latest_query &lt;- function(col_name) {
         ALTER TABLE corelogic_usda.{`tbl`} ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);
            &quot;, .con = con)
 }</code></pre>
-</div>
 </div>
 <div id="create-unique-id-table" class="section level2">
 <h2>Create Unique ID Table</h2>
@@ -669,11 +669,15 @@ SELECT a.geoid_cnty, a.p_id_iris_frmtd,
  WHERE s.sale_date IS NOT NULL;
 
 ALTER TABLE corelogic_usda.current_tax_200627_latest_all ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);</code></pre>
-</div>
-<div id="not-used---attempt-to-create-psql-function-to-get-latest-item" class="section level2">
-<h2>Not USED - Attempt to create psql function to get latest item</h2>
-<p>This would obviate the need for all the copy pastes currently necessary. Doesn’t work yet.</p>
-<pre class="sql"><code>create or replace function get_latest (
+<!--
+
+## Not USED - Attempt to create psql function to get latest item
+
+This would obviate the need for all the copy pastes currently necessary. Doesn't work yet.
+
+
+```sql
+create or replace function get_latest (
   col varchar
 ) 
     returns table (
@@ -686,16 +690,17 @@ ALTER TABLE corelogic_usda.current_tax_200627_latest_all ADD PRIMARY KEY (geoid_
 as $$
 begin
     return query 
-        execute format(&#39;
+        execute format('
         SELECT geoid_cnty, 
        p_id_iris_frmtd, 
        %I,
        sale_date,
-       ROW_NUMBER() OVER (PARTITION BY geoid_cnty, p_id_iris_frmtd ORDER BY sale_date DESC) as &quot;rec_num&quot;
+       ROW_NUMBER() OVER (PARTITION BY geoid_cnty, p_id_iris_frmtd ORDER BY sale_date DESC) as "rec_num"
     FROM (select * from corelogic_usda.current_tax_200627_typed limit 50000) t
     WHERE sale_date IS NOT NULL
-    AND %I IS NOT NULL&#39;, col);
-end;$$</code></pre>
+    AND %I IS NOT NULL', col);
+end;$$
+<p>–&gt; ```</p>
 </div>
 
 

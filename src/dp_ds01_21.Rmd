@@ -30,7 +30,7 @@ source("../R/functions.R")
 library(glue)
 ```
 
-### Create a function to build the SQL queries necessary to get most recent item recordings
+## Create a function to build the SQL queries necessary to get most recent item recordings
 
 ```{r}
 # {r}
@@ -259,6 +259,9 @@ SELECT a.geoid_cnty, a.p_id_iris_frmtd,
 ALTER TABLE corelogic_usda.current_tax_200627_latest_all ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);
 ```
 
+```{=html}
+<!--
+
 ## Not USED - Attempt to create psql function to get latest item
 
 This would obviate the need for all the copy pastes currently necessary. Doesn't work yet.
@@ -287,4 +290,7 @@ begin
     WHERE sale_date IS NOT NULL
     AND %I IS NOT NULL', col);
 end;$$
+```
+
+-->
 ```
