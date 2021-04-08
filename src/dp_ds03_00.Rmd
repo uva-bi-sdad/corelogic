@@ -46,7 +46,7 @@ output_data_location_03: "/project/biocomplexity/sdad/projects_data/usda/bb/orig
 input_data_provider_04: "USDA"
 input_data_title_04: "RUS Program Service Areas"
 input_data_subtitle_04: ""
-input_data_deleivered_date_02: "Provided April 2020"
+input_data_deleivered_date_04: "Provided April 2020"
 input_data_type_04: "Administrative"
 input_data_format_04: "gis"
 input_data_location_04: ""
