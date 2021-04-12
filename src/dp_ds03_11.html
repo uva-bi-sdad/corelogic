@@ -11,7 +11,7 @@
 
 
 
-<title>Dataset 01 Info</title>
+<title>Split and Parallel Import Large Data File</title>
 
 <script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -544,12 +544,91 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Dataset 01 Info</h1>
+<h1 class="title toc-ignore">Split and Parallel Import Large Data File</h1>
 
 </div>
 
 
+<hr />
+<div id="download-2014-data" class="section level2">
+<h2>DOWNLOAD 2014 DATA</h2>
+<pre class="r"><code># url &lt;- &quot;http://transition.fcc.gov/form477/BroadbandData/Fixed/Dec14/Version%203/US-Fixed-without-Satellite-Dec2014.zip&quot;
+# temp &lt;- tempfile()
+# download.file(url,temp)
+# unlink(temp)
 
+# grab temp pathname and go intoto terminal 
+# ran this to see name of file in zip 
+# unzip -l /tmp/RtmpwK6I3G/file33274b60567b
+# ran this to unzip from terminal:
+# unzip /tmp/RtmpwK6I3G/file33274b60567b -d /project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/
+
+fcc_2014 &lt;- read.csv(&quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fbd_us_without_satellite_dec2014_v3.csv&quot;)</code></pre>
+</div>
+<div id="new-variables" class="section level2">
+<h2>NEW VARIABLES:</h2>
+<ul>
+<li>Get the maximum speed per census block where data is available in FCC data</li>
+<li>Compare that maximum speed to our eligibility threshold</li>
+</ul>
+<p>Note that we tried the following thresholds for 2014.</p>
+<ul>
+<li>10/1</li>
+<li>4/1</li>
+<li>4/768</li>
+<li>3 (upload + download) ** selected</li>
+</ul>
+<pre class="r"><code># #threshold of 3 mbps (download + upload)
+fcc_2014_block_max_ &lt;- fcc_2014 %&gt;%
+  group_by(StateAbbr, BlockCode) %&gt;%
+  summarise(MaxAdDown_ = max(MaxAdDown),
+            MaxAdUp_ = max(MaxAdUp)) %&gt;%
+  mutate(total_speed = MaxAdDown_ + MaxAdUp_,
+         speed_elig_down = NA, #ifelse(MaxAdDown_ &gt;= 4, 0, 1),
+         speed_elig_up = NA, #ifelse(MaxAdUp_ &gt;= 0.768, 0, 1),
+         speed_inelig = ifelse(total_speed &lt; 3, 1, 0),
+         speed_elig = ifelse(total_speed &gt;= 3, 0, 1))
+
+saveRDS(fcc_2014_block_max_, &quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fcc_2014_block_maxspdelig_threshold_total3.RDS&quot;)</code></pre>
+</div>
+<div id="download-2018-data" class="section level2">
+<h2>DOWNLOAD 2018 DATA</h2>
+</div>
+<div id="url---httpswww.fcc.govform477broadbanddatafixeddec18version202us-fixed-without-satellite-dec2018.zip" class="section level1">
+<h1>url &lt;- “<a href="https://www.fcc.gov/form477/BroadbandData/Fixed/Dec18/Version%202/US-Fixed-without-Satellite-Dec2018.zip" class="uri">https://www.fcc.gov/form477/BroadbandData/Fixed/Dec18/Version%202/US-Fixed-without-Satellite-Dec2018.zip</a>”</h1>
+</div>
+<div id="temp---tempfile" class="section level1">
+<h1>temp &lt;- tempfile()</h1>
+</div>
+<div id="download.fileurltemp" class="section level1">
+<h1>download.file(url,temp)</h1>
+</div>
+<div id="unlinktemp" class="section level1">
+<h1>unlink(temp)</h1>
+</div>
+<div id="grab-temp-pathname-and-go-intoto-terminal" class="section level1">
+<h1>grab temp pathname and go intoto terminal</h1>
+</div>
+<div id="ran-this-to-see-name-of-file-in-zip" class="section level1">
+<h1>ran this to see name of file in zip</h1>
+</div>
+<div id="unzip--l-tmprtmpsdilsmfile360be78486be5" class="section level1">
+<h1>unzip -l /tmp/RtmpSdiLsM/file360be78486be5</h1>
+</div>
+<div id="ran-this-to-unzip-from-terminal" class="section level1">
+<h1>ran this to unzip from terminal:</h1>
+</div>
+<div id="unzip-tmprtmpsdilsmfile360be78486be5--d-projectbiocomplexitysdadprojects_dataproject_datausdarural_broadbandfcc_availability" class="section level1">
+<h1>unzip /tmp/RtmpSdiLsM/file360be78486be5 -d /project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/</h1>
+<div id="manipulate-2018-data" class="section level2">
+<h2>MANIPULATE 2018 DATA</h2>
+<p>fcc_2018 &lt;- read.csv(“/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fbd_us_without_satellite_dec2018_v2.csv”)</p>
+<p>fcc_2018_block_max &lt;- fcc_2018 %&gt;% group_by(StateAbbr, BlockCode) %&gt;% summarise(MaxAdDown_ = max(MaxAdDown), MaxAdUp_ = max(MaxAdUp)) %&gt;% mutate(speed_elig_down = ifelse(MaxAdDown_ &gt;= 10, 0, 1), speed_elig_up = ifelse(MaxAdUp_ &gt;= 1, 0, 1), speed_inelig = ifelse(MaxAdDown_ &gt;= 10 &amp; MaxAdUp_ &gt;= 1, 1, 0), speed_elig = ifelse(MaxAdDown_ &gt;= 10 &amp; MaxAdUp_ &gt;= 1, 0, 1))</p>
+</div>
+</div>
+<div id="saverdsfcc_2018_block_max-projectbiocomplexitysdadprojects_dataproject_datausdarural_broadbandfcc_availabilityfcc_2018_block_maxspdelig.rds" class="section level1">
+<h1>saveRDS(fcc_2018_block_max, “/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fcc_2018_block_maxspdelig.RDS”)</h1>
+</div>
 
 
 

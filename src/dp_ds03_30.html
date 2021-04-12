@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Aaron Schroeder" />
 
 
-<title>Dataset 01 Info</title>
+<title>New Variable Notes</title>
 
 <script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -544,12 +545,19 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Dataset 01 Info</h1>
+<h1 class="title toc-ignore">New Variable Notes</h1>
+<h4 class="author">Aaron Schroeder</h4>
+<h4 class="date">4/3/2021</h4>
 
 </div>
 
 
-
+<hr />
+<p><u>FCC Form 477 (2014 and 2018)</u></p>
+<p>This dataset originally came as a zipped csv file posted to the FCC’s data page for Form 477. It was unzipped into a temporary file location and saved to the project folder in the script linked here: <a href="https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/fcc_speed_data_load_manip.R" class="uri">https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/fcc_speed_data_load_manip.R</a>.</p>
+<p>2014: lines 3-14</p>
+<p>2018: lines 69 - 80</p>
+<p>The total_baths variable provided was not always calculated, even when other bath columns had values, therefore we needed our own more complete version of total bathrooms. We used the Fannie Mae and Freddie Mac Uniform Appraisal Dataset Specification to calculate.</p>
 
 
 
