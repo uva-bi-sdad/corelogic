@@ -1,10 +1,10 @@
 ---
 title: "Dataset 03 Info"
-output: 
-  html_document:
-    toc: yes
-    toc_float: yes
-    toc_depth: 4
+output:
+html_document:
+toc: yes
+toc_float: yes
+toc_depth: 4
 dataset:
   dataset_short_title: "Program Eligibility Dataset 2014"
   dataset_description: ""
