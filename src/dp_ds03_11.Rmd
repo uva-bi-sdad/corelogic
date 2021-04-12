@@ -1,11 +1,13 @@
 ---
-title: "Split and Parallel Import Large Data File"
-menu_title: "Import Large"
+title: "Import Data File"
 output: 
   html_document:
     toc: yes
     toc_float: yes
     toc_depth: 4
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r, include=FALSE}
@@ -15,8 +17,6 @@ knitr::opts_chunk$set(
 ```
 
 ------------------------------------------------------------------------
-
-
 
 ## DOWNLOAD 2014 DATA
 
@@ -35,18 +35,18 @@ knitr::opts_chunk$set(
 fcc_2014 <- read.csv("/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fbd_us_without_satellite_dec2014_v3.csv")
 ```
 
+## NEW VARIABLES:
 
-## NEW VARIABLES: 
-
-* Get the maximum speed per census block where data is available in FCC data
-* Compare that maximum speed to our eligibility threshold 
+-   Get the maximum speed per census block where data is available in
+    FCC data
+-   Compare that maximum speed to our eligibility threshold
 
 Note that we tried the following thresholds for 2014.
 
-* 10/1
-* 4/1
-* 4/768
-* 3 (upload + download)  ** selected 
+-   10/1
+-   4/1
+-   4/768
+-   3 (upload + download) \*\* selected
 
 ```{r include = FALSE}
 # fcc_2014_block_max <- fcc_2014 %>%
@@ -84,7 +84,6 @@ Note that we tried the following thresholds for 2014.
 
 ```
 
-
 ```{r}
 # #threshold of 3 mbps (download + upload)
 fcc_2014_block_max_ <- fcc_2014 %>%
@@ -101,37 +100,41 @@ saveRDS(fcc_2014_block_max_, "/project/biocomplexity/sdad/projects_data/project_
 
 ```
 
+```{r}
 
-
-
-
+```
 
 
 ## DOWNLOAD 2018 DATA
 
-# url <- "https://www.fcc.gov/form477/BroadbandData/Fixed/Dec18/Version%202/US-Fixed-without-Satellite-Dec2018.zip"
-# temp <- tempfile()
+# url \<- "<https://www.fcc.gov/form477/BroadbandData/Fixed/Dec18/Version%202/US-Fixed-without-Satellite-Dec2018.zip>"
+
+# temp \<- tempfile()
+
 # download.file(url,temp)
+
 # unlink(temp)
 
-# grab temp pathname and go intoto terminal 
-# ran this to see name of file in zip 
+# grab temp pathname and go intoto terminal
+
+# ran this to see name of file in zip
+
 # unzip -l /tmp/RtmpSdiLsM/file360be78486be5
+
 # ran this to unzip from terminal:
+
 # unzip /tmp/RtmpSdiLsM/file360be78486be5 -d /project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/
 
 ## MANIPULATE 2018 DATA
 
-fcc_2018 <- read.csv("/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fbd_us_without_satellite_dec2018_v2.csv")
+fcc_2018 \<-
+read.csv("/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fbd_us_without_satellite_dec2018_v2.csv")
 
-fcc_2018_block_max <- fcc_2018 %>%
-  group_by(StateAbbr, BlockCode) %>%
-  summarise(MaxAdDown_ = max(MaxAdDown),
-            MaxAdUp_ = max(MaxAdUp)) %>%
-  mutate(speed_elig_down = ifelse(MaxAdDown_ >= 10, 0, 1),
-         speed_elig_up = ifelse(MaxAdUp_ >= 1, 0, 1),
-         speed_inelig = ifelse(MaxAdDown_ >= 10 & MaxAdUp_ >= 1, 1, 0),
-         speed_elig = ifelse(MaxAdDown_ >= 10 & MaxAdUp_ >= 1, 0, 1))
+fcc_2018_block_max \<- fcc_2018 %\>% group_by(StateAbbr, BlockCode) %\>%
+summarise(MaxAdDown\_ = max(MaxAdDown), MaxAdUp\_ = max(MaxAdUp)) %\>%
+mutate(speed_elig_down = ifelse(MaxAdDown\_ \>= 10, 0, 1), speed_elig_up
+= ifelse(MaxAdUp\_ \>= 1, 0, 1), speed_inelig = ifelse(MaxAdDown\_ \>=
+10 & MaxAdUp\_ \>= 1, 1, 0), speed_elig = ifelse(MaxAdDown\_ \>= 10 &
+MaxAdUp\_ \>= 1, 0, 1))
 
 # saveRDS(fcc_2018_block_max, "/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fcc_2018_block_maxspdelig.RDS")
-
