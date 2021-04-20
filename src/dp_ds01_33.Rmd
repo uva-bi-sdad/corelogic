@@ -155,4 +155,6 @@ LEFT JOIN corelogic_usda.sales_with_blk_unq b
   
   
 ALTER TABLE corelogic_usda.current_tax_200627_latest_all_add_vars_add_progs_geom_blk ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);
+
+create index cur_tax_latest_geom_idx on corelogic_usda.current_tax_200627_latest_all_add_vars_add_progs_geom_blk using GIST (geometry);
 ```

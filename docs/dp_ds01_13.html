@@ -11,7 +11,7 @@
 
 
 
-<title>USDA-ERS Broadband Rural Impact</title>
+<title>Import USDA Broadband Program Shapefiles</title>
 
 <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -508,312 +508,53 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">USDA-ERS Broadband Rural Impact</h1>
+<h1 class="title toc-ignore">Import USDA Broadband Program Shapefiles</h1>
 
 </div>
 
 
-<h3>
-Dataset: CoreLogic01
-</h3>
-<table>
-<colgroup>
-<col width="20%" />
-<col width="79%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left">dataset_description</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">input_data_provider</td>
-<td align="left">CoreLogic</td>
-</tr>
-<tr class="odd">
-<td align="left">inpit_data_contact</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">input_data_title</td>
-<td align="left">CoreLogic USDA Current Tax Roll through 06/27/2020</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_deleivered_date</td>
-<td align="left">07/06/2020</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_type</td>
-<td align="left">Administrative</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_format</td>
-<td align="left">csv</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_system_of_origin</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_intermediate_systems</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">input_data_previous_transforms</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_location</td>
-<td align="left">/project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/Corelogic_USDA_Current_Tax_2020_06_27.txt</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_dictionary</td>
-<td align="left">/project/biocomplexity/sdad/projects_data/usda/bb/original/L – TAX – Bulk Historical Tax Roll.xlsx</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_license</td>
-<td align="left">Proprietary, –link to contract–</td>
-</tr>
-<tr class="even">
-<td align="left">output_data_format</td>
-<td align="left">Database Table</td>
-</tr>
-<tr class="odd">
-<td align="left">output_data_location</td>
-<td align="left">corelogic_usda.current_tax_200627_latest_final</td>
-</tr>
-</tbody>
-</table>
-<h3>
-Dataset: Census Blocks 2018
-</h3>
-<table>
-<colgroup>
-<col width="17%" />
-<col width="82%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left">dataset_description</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">associated_project</td>
-<td align="left">USDA ERS Broadband Program Impacts</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_provider</td>
-<td align="left">Census Bureau</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_title</td>
-<td align="left">Census Blocks (TIGER 2018)</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_deleivered_date</td>
-<td align="left">## 07/06/2020</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_type</td>
-<td align="left">Administrative</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_format</td>
-<td align="left">shp</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_location</td>
-<td align="left">## /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/Corelogic_USDA_Current_Tax_2020_06_27.txt</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_dictionary</td>
-<td align="left">## /project/biocomplexity/sdad/projects_data/usda/bb/original/L – TAX – Bulk Historical Tax Roll.xlsx</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_license</td>
-<td align="left">Public, ## –link to site–</td>
-</tr>
-<tr class="odd">
-<td align="left">output_data_format</td>
-<td align="left">Simple Features dataframe</td>
-</tr>
-<tr class="even">
-<td align="left">output_data_location</td>
-<td align="left">## corelogic_usda.current_tax_200627_latest_final</td>
-</tr>
-</tbody>
-</table>
-<h3>
-Dataset: Program Eligibility Dataset 2014
-</h3>
-<table>
-<colgroup>
-<col width="18%" />
-<col width="81%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left">dataset_description</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">associated_project</td>
-<td align="left">USDA ERS Broadband Program Impacts</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_provider_01</td>
-<td align="left">FCC</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_title_01</td>
-<td align="left">FCC Form 477 Dec 2014</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_subtitle_01</td>
-<td align="left">US-Fixed-without-Satellite-Dec2014.zip</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_deleivered_date_01</td>
-<td align="left">Accessed April 2019.</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_type_01</td>
-<td align="left">Administrative</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_format_01</td>
-<td align="left">zip csv</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_location_01</td>
-<td align="left">/project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Filesfbd_us_without_satellite_dec2014_v3.csv</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_dictionary_01</td>
-<td align="left"><a href="https://www.fcc.gov/general/explanation-broadband-deployment-data" class="uri">https://www.fcc.gov/general/explanation-broadband-deployment-data</a></td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_license_01</td>
-<td align="left">Public</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_provider_02</td>
-<td align="left">USDA</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_title_02</td>
-<td align="left">Non-Rural Areas 2010-2020</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_subtitle_02</td>
-<td align="left">RD_BROADBAND_IELG_PRODUCTION.shp</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_deleivered_date_02</td>
-<td align="left">Accessed November 2020.</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_type_02</td>
-<td align="left">Administrative</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_format_02</td>
-<td align="left">gis</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_location_02</td>
-<td align="left">/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL/RD_BROADBAND_IELG_PRODUCTION.shp</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_dictionary_02</td>
-<td align="left"><a href="https://www.usda.gov/reconnect/eligibility-area-map-datasets" class="uri">https://www.usda.gov/reconnect/eligibility-area-map-datasets</a></td>
-</tr>
-<tr class="even">
-<td align="left">input_data_license_02</td>
-<td align="left">Public</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_provider_03</td>
-<td align="left">Census</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_title_03</td>
-<td align="left">Census Blocks 2018</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_subtitle_03</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">input_data_deleivered_date_03</td>
-<td align="left">Accessed Ictober 2019.</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_type_03</td>
-<td align="left">Administrative</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_format_03</td>
-<td align="left">gis</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_location_03</td>
-<td align="left">/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL/RD_BROADBAND_IELG_PRODUCTION.shp</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_dictionary_03</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_license_03</td>
-<td align="left">Public</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_provider_04</td>
-<td align="left">USDA</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_title_04</td>
-<td align="left">RUS Program Service Areas</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_subtitle_04</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_deleivered_date_04</td>
-<td align="left">Provided April 2020</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_type_04</td>
-<td align="left">Administrative</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_format_04</td>
-<td align="left">gis</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_location_04</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_dictionary_04</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">input_data_license_04</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">output_data_format</td>
-<td align="left">RDS</td>
-</tr>
-<tr class="even">
-<td align="left">output_data_location</td>
-<td align="left">/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/USA_2014_final_eligibility_sf_14DEC2020v5.RDS</td>
-</tr>
-</tbody>
-</table>
+<pre class="r"><code>source(&quot;R/functions.R&quot;)
+library(data.table)
+library(RPostgreSQL)
+library(sf)
+library(glue)
+library(magrittr)</code></pre>
+<pre class="r"><code>geodatadir &lt;- &quot;../../data/projects_data/usda/bb/original/geo/&quot;
+map_program_area_cc &lt;- st_read(file.path(geodatadir, &quot;CC 2013_2019_83 04272020.shp&quot;)) %&gt;%
+  sf::st_transform(4326)
+
+con &lt;- get_db_conn(db_host = &quot;localhost&quot;, db_port = 5434)
+
+sf::st_write(map_program_area_cc, con, c(&quot;usda_bb&quot;, &quot;cc_program_areas&quot;), delete_layer = TRUE)
+DBI::dbDisconnect(con)</code></pre>
+<pre class="r"><code>map_program_area_rc &lt;- st_read(file.path(geodatadir, &quot;ReConnect R1 594 PFSA 05012020.shp&quot;)) %&gt;%
+  sf::st_transform(4326)
+
+con &lt;- get_db_conn(db_host = &quot;localhost&quot;, db_port = 5434)
+
+sf::st_write(map_program_area_rc, con, c(&quot;usda_bb&quot;, &quot;rc_program_areas&quot;), delete_layer = TRUE)
+DBI::dbDisconnect(con)</code></pre>
+<pre class="r"><code>map_program_area_bip &lt;- st_read(file.path(geodatadir, &quot;200409_BIP_ServAr_ID.shp&quot;)) %&gt;%
+  sf::st_transform(4326)
+
+con &lt;- get_db_conn(db_host = &quot;localhost&quot;, db_port = 5434)
+
+sf::st_write(map_program_area_bip, con, c(&quot;usda_bb&quot;, &quot;bip_program_areas&quot;), delete_layer = TRUE)
+DBI::dbDisconnect(con)</code></pre>
+<pre class="r"><code>map_program_area_tcf &lt;- st_read(file.path(geodatadir, &quot;USDARD_RUS_TELCO_FARMBILL_06042020/USDARD_RUS_TELCO_FARMBILL_06042020.shp&quot;)) %&gt;%
+  sf::st_transform(4326)
+
+con &lt;- get_db_conn(db_host = &quot;localhost&quot;, db_port = 5434)
+
+sf::st_write(map_program_area_tcf, con, c(&quot;usda_bb&quot;, &quot;tcf_program_areas&quot;), delete_layer = TRUE)
+DBI::dbDisconnect(con)</code></pre>
+<pre class="r"><code>map_program_area_tci &lt;- st_read(file.path(geodatadir, &quot;USDARD_RUS_TELCO_INFRA_06042020/USDARD_RUS_TELCO_INFRA_06042020.shp&quot;)) %&gt;%
+  sf::st_transform(4326)
+
+con &lt;- get_db_conn(db_host = &quot;localhost&quot;, db_port = 5434)
+
+sf::st_write(map_program_area_tci, con, c(&quot;usda_bb&quot;, &quot;tci_program_areas&quot;), delete_layer = TRUE)
+DBI::dbDisconnect(con)</code></pre>
 
 
 
@@ -861,7 +602,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2,h3,h4",
+      selectors: "h1,h2,h3",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {

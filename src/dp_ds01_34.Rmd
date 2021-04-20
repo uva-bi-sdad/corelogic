@@ -1,0 +1,186 @@
+---
+title: "Create Table of All Properties within 20 Miles of Program Boundaries"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  eval=FALSE)
+```
+
+## Create table of property data converted to CRS 26918 (to work in meters), index geo for spatial joins
+
+```{sql}
+select geoid_cnty, p_id_iris_frmtd, st_transform(geometry, 26918) geometry 
+into corelogic_usda.current_tax_200627_latest_locs_geom_26918
+from corelogic_usda.current_tax_200627_latest_all_add_vars_add_progs_geom_blk ctlaavapgb;
+
+create index current_tax_200627_latest_locs_geom_26918_idx on corelogic_usda.current_tax_200627_latest_locs_geom_26918 using GIST (geometry);
+```
+
+## CC
+
+### Convert CC Table to CRS 26918 (to work in meters), index geo
+
+```{sql}
+select *, st_transform(geometry, 26918) geom 
+into usda_bb.cc_program_areas_26918
+from usda_bb.cc_program_areas bpa;
+
+create index cc_program_areas_26918_geom_idx on usda_bb.cc_program_areas_26918 using gist(geom);
+```
+
+### Create table of every property within 20 miles of a CC boundary, index id, distance, and links to property table
+
+```{sql}
+select cpa."OBJECTID", cpa."RUSID", ctllg.geoid_cnty, ctllg.p_id_iris_frmtd, st_distance(ctllg.geometry, cpa.geom) distance_meters
+into usda_bb.cc_program_area_properties_20mi
+from usda_bb.cc_program_areas_26918 cpa 
+inner join corelogic_usda.current_tax_200627_latest_locs_geom_26918 ctllg on st_dwithin(ctllg.geometry, cpa.geom , 32186.88);
+
+alter table usda_bb.cc_program_area_properties_20mi rename column "RUSID" to cc_rusid;
+alter table usda_bb.cc_program_area_properties_20mi rename column "distance_meters" to cc_dist_m;
+create index cc_20mi_geoid_cnty_idx on usda_bb.cc_program_area_properties_20mi (geoid_cnty);
+create index cc_20mi_p_id_iris_frmtd_idx on usda_bb.cc_program_area_properties_20mi (p_id_iris_frmtd);
+```
+
+## BIP
+
+### Convert BIP Table to CRS 26918 (to work in meters), index geo
+
+```{sql}
+select *, st_transform(geometry, 26918) geom 
+into usda_bb.bip_program_areas_26918
+from usda_bb.bip_program_areas bpa;
+
+create index bip_program_areas_26918_geom_idx on usda_bb.bip_program_areas_26918 using gist(geom);
+```
+
+### Create table of every property within 20 miles of a BIP boundary, index id, distance, and links to property table
+
+```{sql}
+select bip."ProjectID", bip."RUS_ID", ctllg.geoid_cnty, ctllg.p_id_iris_frmtd, st_distance(ctllg.geometry, bip.geom) distance_meters
+into usda_bb.bip_program_area_properties_20mi
+from usda_bb.bip_program_areas_26918 bip 
+inner join corelogic_usda.current_tax_200627_latest_locs_geom_26918 ctllg on st_dwithin(ctllg.geometry, bip.geom , 32186.88);
+
+alter table usda_bb.bip_program_area_properties_20mi rename column "RUS_ID" to bip_rusid;
+alter table usda_bb.bip_program_area_properties_20mi rename column "distance_meters" to bip_dist_m;
+create index bip_20mi_geoid_cnty_idx on usda_bb.bip_program_area_properties_20mi (geoid_cnty);
+create index bip_20mi_p_id_iris_frmtd_idx on usda_bb.bip_program_area_properties_20mi (p_id_iris_frmtd);
+```
+
+## RC
+
+### Convert RC Table to CRS 26918 (to work in meters), index geo
+
+```{sql}
+select *, st_transform(geometry, 26918) geom 
+into usda_bb.rc_program_areas_26918
+from usda_bb.rc_program_areas;
+
+create index rc_program_areas_26918_geom_idx on usda_bb.rc_program_areas_26918 using gist(geom);
+```
+
+### Create table of every property within 20 miles of a RC boundary, index id, distance, and links to property table
+
+```{sql}
+select rc."OBJECT_ID", rc."RUS_ID", ctllg.geoid_cnty, ctllg.p_id_iris_frmtd, st_distance(ctllg.geometry, rc.geom) distance_meters
+into usda_bb.rc_program_area_properties_20mi
+from usda_bb.rc_program_areas_26918 rc 
+inner join corelogic_usda.current_tax_200627_latest_locs_geom_26918 ctllg on st_dwithin(ctllg.geometry, rc.geom , 32186.88);
+
+alter table usda_bb.rc_program_area_properties_20mi rename column "RUS_ID" to rc_rusid;
+alter table usda_bb.rc_program_area_properties_20mi rename column "distance_meters" to rc_dist_m;
+create index rc_20mi_geoid_cnty_idx on usda_bb.rc_program_area_properties_20mi (geoid_cnty);
+create index rc_20mi_p_id_iris_frmtd_idx on usda_bb.rc_program_area_properties_20mi (p_id_iris_frmtd);
+```
+
+## TCF
+
+### Convert TCF Table to CRS 26918 (to work in meters), index geo
+
+```{sql}
+select *, st_transform(geometry, 26918) geom 
+into usda_bb.tcf_program_areas_26918
+from usda_bb.tcf_program_areas;
+
+create index tcf_program_areas_26918_geom_idx on usda_bb.tcf_program_areas_26918 using gist(geom);
+```
+
+### Create table of every property within 20 miles of a TCF boundary, index id, distance, and links to property table
+
+```{sql}
+select tcf."OBJECTID", tcf."RUS_ID", ctllg.geoid_cnty, ctllg.p_id_iris_frmtd, st_distance(ctllg.geometry, tcf.geom) distance_meters
+into usda_bb.tcf_program_area_properties_20mi
+from usda_bb.tcf_program_areas_26918 tcf 
+inner join corelogic_usda.current_tax_200627_latest_locs_geom_26918 ctllg on st_dwithin(ctllg.geometry, tcf.geom , 32186.88);
+
+alter table usda_bb.tcf_program_area_properties_20mi rename column "RUS_ID" to tcf_rusid;
+alter table usda_bb.tcf_program_area_properties_20mi rename column "distance_meters" to tcf_dist_m;
+create index tcf_20mi_geoid_cnty_idx on usda_bb.tcf_program_area_properties_20mi (geoid_cnty);
+create index tcf_20mi_p_id_iris_frmtd_idx on usda_bb.tcf_program_area_properties_20mi (p_id_iris_frmtd);
+```
+
+## TCI
+
+### Convert TCI Table to CRS 26918 (to work in meters), index geo
+
+```{sql}
+select *, st_transform(geometry, 26918) geom 
+into usda_bb.tci_program_areas_26918
+from usda_bb.tci_program_areas;
+
+create index tci_program_areas_26918_geom_idx on usda_bb.tci_program_areas_26918 using gist(geom);
+```
+
+### Create table of every property within 20 miles of a TCI boundary, index id, distance, and links to property table
+
+```{sql}
+select tci."OBJECTID", tci."RUSID", ctllg.geoid_cnty, ctllg.p_id_iris_frmtd, st_distance(ctllg.geometry, tci.geom) distance_meters
+into usda_bb.tci_program_area_properties_20mi
+from usda_bb.tci_program_areas_26918 tci 
+inner join corelogic_usda.current_tax_200627_latest_locs_geom_26918 ctllg on st_dwithin(ctllg.geometry, tci.geom , 32186.88);
+
+alter table usda_bb.tci_program_area_properties_20mi rename column "RUSID" to tci_rusid;
+alter table usda_bb.tci_program_area_properties_20mi rename column "distance_meters" to tci_dist_m;
+create index tci_20mi_geoid_cnty_idx on usda_bb.tci_program_area_properties_20mi (geoid_cnty);
+create index tci_20mi_p_id_iris_frmtd_idx on usda_bb.tci_program_area_properties_20mi (p_id_iris_frmtd);
+```
+
+## Create single table of all properties within 20 miles of USDA broadband program boundaries, add indexes for link and search
+
+```{sql}
+select *
+into usda_bb.rus_program_property_distances_to_20mi
+from 
+(
+select * from
+(select 'BIP' rus_prog, bip_rusid rus_id, geoid_cnty, p_id_iris_frmtd, round(bip_dist_m::numeric/1609.344, 2) distance_mi
+from usda_bb.bip_program_area_properties_20mi) a 
+union
+select * from
+(select 'CC' rus_prog, cc_rusid rus_id, geoid_cnty, p_id_iris_frmtd, round(cc_dist_m::numeric/1609.344, 2) distance_mi
+from usda_bb.cc_program_area_properties_20mi) b 
+union
+select * from
+(select 'RC' rus_prog, rc_rusid rus_id, geoid_cnty, p_id_iris_frmtd, round(rc_dist_m::numeric/1609.344, 2) distance_mi
+from usda_bb.rc_program_area_properties_20mi) c
+union
+select * from
+(select 'TCF' rus_prog, tcf_rusid rus_id, geoid_cnty, p_id_iris_frmtd, round(tcf_dist_m::numeric/1609.344, 2) distance_mi
+from usda_bb.tcf_program_area_properties_20mi) d
+union
+select * from
+(select 'TCI' rus_prog, tci_rusid rus_id, geoid_cnty, p_id_iris_frmtd, round(tci_dist_m::numeric/1609.344, 2) distance_mi
+from usda_bb.tci_program_area_properties_20mi) e
+) t;
+
+create index rppd20_prop_idx on usda_bb.rus_program_property_distances_to_20mi (geoid_cnty, p_id_iris_frmtd);
+create index rppd20_rusid_idx on usda_bb.rus_program_property_distances_to_20mi (rus_id);
+create index rppd20_rusprog_idx on usda_bb.rus_program_property_distances_to_20mi (rus_prog);
+
+```

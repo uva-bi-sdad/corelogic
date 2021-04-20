@@ -1,0 +1,72 @@
+---
+title: "Import USDA Broadband Program Shapefiles"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  eval=FALSE)
+```
+
+```{r}
+source("R/functions.R")
+library(data.table)
+library(RPostgreSQL)
+library(sf)
+library(glue)
+library(magrittr)
+```
+
+```{r}
+geodatadir <- "../../data/projects_data/usda/bb/original/geo/"
+map_program_area_cc <- st_read(file.path(geodatadir, "CC 2013_2019_83 04272020.shp")) %>%
+  sf::st_transform(4326)
+
+con <- get_db_conn(db_host = "localhost", db_port = 5434)
+
+sf::st_write(map_program_area_cc, con, c("usda_bb", "cc_program_areas"), delete_layer = TRUE)
+DBI::dbDisconnect(con)
+```
+
+```{r}
+map_program_area_rc <- st_read(file.path(geodatadir, "ReConnect R1 594 PFSA 05012020.shp")) %>%
+  sf::st_transform(4326)
+
+con <- get_db_conn(db_host = "localhost", db_port = 5434)
+
+sf::st_write(map_program_area_rc, con, c("usda_bb", "rc_program_areas"), delete_layer = TRUE)
+DBI::dbDisconnect(con)
+```
+
+```{r}
+map_program_area_bip <- st_read(file.path(geodatadir, "200409_BIP_ServAr_ID.shp")) %>%
+  sf::st_transform(4326)
+
+con <- get_db_conn(db_host = "localhost", db_port = 5434)
+
+sf::st_write(map_program_area_bip, con, c("usda_bb", "bip_program_areas"), delete_layer = TRUE)
+DBI::dbDisconnect(con)
+```
+
+```{r}
+map_program_area_tcf <- st_read(file.path(geodatadir, "USDARD_RUS_TELCO_FARMBILL_06042020/USDARD_RUS_TELCO_FARMBILL_06042020.shp")) %>%
+  sf::st_transform(4326)
+
+con <- get_db_conn(db_host = "localhost", db_port = 5434)
+
+sf::st_write(map_program_area_tcf, con, c("usda_bb", "tcf_program_areas"), delete_layer = TRUE)
+DBI::dbDisconnect(con)
+```
+
+```{r}
+map_program_area_tci <- st_read(file.path(geodatadir, "USDARD_RUS_TELCO_INFRA_06042020/USDARD_RUS_TELCO_INFRA_06042020.shp")) %>%
+  sf::st_transform(4326)
+
+con <- get_db_conn(db_host = "localhost", db_port = 5434)
+
+sf::st_write(map_program_area_tci, con, c("usda_bb", "tci_program_areas"), delete_layer = TRUE)
+DBI::dbDisconnect(con)
+```

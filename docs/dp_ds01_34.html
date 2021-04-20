@@ -11,7 +11,7 @@
 
 
 
-<title>USDA-ERS Broadband Rural Impact</title>
+<title>Create Table of All Properties within 20 Miles of Program Boundaries</title>
 
 <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -508,312 +508,166 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">USDA-ERS Broadband Rural Impact</h1>
+<h1 class="title toc-ignore">Create Table of All Properties within 20 Miles of Program Boundaries</h1>
 
 </div>
 
 
-<h3>
-Dataset: CoreLogic01
-</h3>
-<table>
-<colgroup>
-<col width="20%" />
-<col width="79%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left">dataset_description</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">input_data_provider</td>
-<td align="left">CoreLogic</td>
-</tr>
-<tr class="odd">
-<td align="left">inpit_data_contact</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">input_data_title</td>
-<td align="left">CoreLogic USDA Current Tax Roll through 06/27/2020</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_deleivered_date</td>
-<td align="left">07/06/2020</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_type</td>
-<td align="left">Administrative</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_format</td>
-<td align="left">csv</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_system_of_origin</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_intermediate_systems</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">input_data_previous_transforms</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_location</td>
-<td align="left">/project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/Corelogic_USDA_Current_Tax_2020_06_27.txt</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_dictionary</td>
-<td align="left">/project/biocomplexity/sdad/projects_data/usda/bb/original/L – TAX – Bulk Historical Tax Roll.xlsx</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_license</td>
-<td align="left">Proprietary, –link to contract–</td>
-</tr>
-<tr class="even">
-<td align="left">output_data_format</td>
-<td align="left">Database Table</td>
-</tr>
-<tr class="odd">
-<td align="left">output_data_location</td>
-<td align="left">corelogic_usda.current_tax_200627_latest_final</td>
-</tr>
-</tbody>
-</table>
-<h3>
-Dataset: Census Blocks 2018
-</h3>
-<table>
-<colgroup>
-<col width="17%" />
-<col width="82%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left">dataset_description</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">associated_project</td>
-<td align="left">USDA ERS Broadband Program Impacts</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_provider</td>
-<td align="left">Census Bureau</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_title</td>
-<td align="left">Census Blocks (TIGER 2018)</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_deleivered_date</td>
-<td align="left">## 07/06/2020</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_type</td>
-<td align="left">Administrative</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_format</td>
-<td align="left">shp</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_location</td>
-<td align="left">## /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/Corelogic_USDA_Current_Tax_2020_06_27.txt</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_dictionary</td>
-<td align="left">## /project/biocomplexity/sdad/projects_data/usda/bb/original/L – TAX – Bulk Historical Tax Roll.xlsx</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_license</td>
-<td align="left">Public, ## –link to site–</td>
-</tr>
-<tr class="odd">
-<td align="left">output_data_format</td>
-<td align="left">Simple Features dataframe</td>
-</tr>
-<tr class="even">
-<td align="left">output_data_location</td>
-<td align="left">## corelogic_usda.current_tax_200627_latest_final</td>
-</tr>
-</tbody>
-</table>
-<h3>
-Dataset: Program Eligibility Dataset 2014
-</h3>
-<table>
-<colgroup>
-<col width="18%" />
-<col width="81%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left">dataset_description</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">associated_project</td>
-<td align="left">USDA ERS Broadband Program Impacts</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_provider_01</td>
-<td align="left">FCC</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_title_01</td>
-<td align="left">FCC Form 477 Dec 2014</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_subtitle_01</td>
-<td align="left">US-Fixed-without-Satellite-Dec2014.zip</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_deleivered_date_01</td>
-<td align="left">Accessed April 2019.</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_type_01</td>
-<td align="left">Administrative</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_format_01</td>
-<td align="left">zip csv</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_location_01</td>
-<td align="left">/project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Filesfbd_us_without_satellite_dec2014_v3.csv</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_dictionary_01</td>
-<td align="left"><a href="https://www.fcc.gov/general/explanation-broadband-deployment-data" class="uri">https://www.fcc.gov/general/explanation-broadband-deployment-data</a></td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_license_01</td>
-<td align="left">Public</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_provider_02</td>
-<td align="left">USDA</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_title_02</td>
-<td align="left">Non-Rural Areas 2010-2020</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_subtitle_02</td>
-<td align="left">RD_BROADBAND_IELG_PRODUCTION.shp</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_deleivered_date_02</td>
-<td align="left">Accessed November 2020.</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_type_02</td>
-<td align="left">Administrative</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_format_02</td>
-<td align="left">gis</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_location_02</td>
-<td align="left">/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL/RD_BROADBAND_IELG_PRODUCTION.shp</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_dictionary_02</td>
-<td align="left"><a href="https://www.usda.gov/reconnect/eligibility-area-map-datasets" class="uri">https://www.usda.gov/reconnect/eligibility-area-map-datasets</a></td>
-</tr>
-<tr class="even">
-<td align="left">input_data_license_02</td>
-<td align="left">Public</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_provider_03</td>
-<td align="left">Census</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_title_03</td>
-<td align="left">Census Blocks 2018</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_subtitle_03</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">input_data_deleivered_date_03</td>
-<td align="left">Accessed Ictober 2019.</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_type_03</td>
-<td align="left">Administrative</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_format_03</td>
-<td align="left">gis</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_location_03</td>
-<td align="left">/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL/RD_BROADBAND_IELG_PRODUCTION.shp</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_dictionary_03</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_license_03</td>
-<td align="left">Public</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_provider_04</td>
-<td align="left">USDA</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_title_04</td>
-<td align="left">RUS Program Service Areas</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_subtitle_04</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_deleivered_date_04</td>
-<td align="left">Provided April 2020</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_type_04</td>
-<td align="left">Administrative</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_format_04</td>
-<td align="left">gis</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_location_04</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_dictionary_04</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">input_data_license_04</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">output_data_format</td>
-<td align="left">RDS</td>
-</tr>
-<tr class="even">
-<td align="left">output_data_location</td>
-<td align="left">/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/USA_2014_final_eligibility_sf_14DEC2020v5.RDS</td>
-</tr>
-</tbody>
-</table>
+<div id="create-table-of-property-data-converted-to-crs-26918-to-work-in-meters-index-geo-for-spatial-joins" class="section level2">
+<h2>Create table of property data converted to CRS 26918 (to work in meters), index geo for spatial joins</h2>
+<pre class="sql"><code>select geoid_cnty, p_id_iris_frmtd, st_transform(geometry, 26918) geometry 
+into corelogic_usda.current_tax_200627_latest_locs_geom_26918
+from corelogic_usda.current_tax_200627_latest_all_add_vars_add_progs_geom_blk ctlaavapgb;
+
+create index current_tax_200627_latest_locs_geom_26918_idx on corelogic_usda.current_tax_200627_latest_locs_geom_26918 using GIST (geometry);</code></pre>
+</div>
+<div id="cc" class="section level2">
+<h2>CC</h2>
+<div id="convert-cc-table-to-crs-26918-to-work-in-meters-index-geo" class="section level3">
+<h3>Convert CC Table to CRS 26918 (to work in meters), index geo</h3>
+<pre class="sql"><code>select *, st_transform(geometry, 26918) geom 
+into usda_bb.cc_program_areas_26918
+from usda_bb.cc_program_areas bpa;
+
+create index cc_program_areas_26918_geom_idx on usda_bb.cc_program_areas_26918 using gist(geom);</code></pre>
+</div>
+<div id="create-table-of-every-property-within-20-miles-of-a-cc-boundary-index-id-distance-and-links-to-property-table" class="section level3">
+<h3>Create table of every property within 20 miles of a CC boundary, index id, distance, and links to property table</h3>
+<pre class="sql"><code>select cpa.&quot;OBJECTID&quot;, cpa.&quot;RUSID&quot;, ctllg.geoid_cnty, ctllg.p_id_iris_frmtd, st_distance(ctllg.geometry, cpa.geom) distance_meters
+into usda_bb.cc_program_area_properties_20mi
+from usda_bb.cc_program_areas_26918 cpa 
+inner join corelogic_usda.current_tax_200627_latest_locs_geom_26918 ctllg on st_dwithin(ctllg.geometry, cpa.geom , 32186.88);
+
+alter table usda_bb.cc_program_area_properties_20mi rename column &quot;RUSID&quot; to cc_rusid;
+alter table usda_bb.cc_program_area_properties_20mi rename column &quot;distance_meters&quot; to cc_dist_m;
+create index cc_20mi_geoid_cnty_idx on usda_bb.cc_program_area_properties_20mi (geoid_cnty);
+create index cc_20mi_p_id_iris_frmtd_idx on usda_bb.cc_program_area_properties_20mi (p_id_iris_frmtd);</code></pre>
+</div>
+</div>
+<div id="bip" class="section level2">
+<h2>BIP</h2>
+<div id="convert-bip-table-to-crs-26918-to-work-in-meters-index-geo" class="section level3">
+<h3>Convert BIP Table to CRS 26918 (to work in meters), index geo</h3>
+<pre class="sql"><code>select *, st_transform(geometry, 26918) geom 
+into usda_bb.bip_program_areas_26918
+from usda_bb.bip_program_areas bpa;
+
+create index bip_program_areas_26918_geom_idx on usda_bb.bip_program_areas_26918 using gist(geom);</code></pre>
+</div>
+<div id="create-table-of-every-property-within-20-miles-of-a-bip-boundary-index-id-distance-and-links-to-property-table" class="section level3">
+<h3>Create table of every property within 20 miles of a BIP boundary, index id, distance, and links to property table</h3>
+<pre class="sql"><code>select bip.&quot;ProjectID&quot;, bip.&quot;RUS_ID&quot;, ctllg.geoid_cnty, ctllg.p_id_iris_frmtd, st_distance(ctllg.geometry, bip.geom) distance_meters
+into usda_bb.bip_program_area_properties_20mi
+from usda_bb.bip_program_areas_26918 bip 
+inner join corelogic_usda.current_tax_200627_latest_locs_geom_26918 ctllg on st_dwithin(ctllg.geometry, bip.geom , 32186.88);
+
+alter table usda_bb.bip_program_area_properties_20mi rename column &quot;RUS_ID&quot; to bip_rusid;
+alter table usda_bb.bip_program_area_properties_20mi rename column &quot;distance_meters&quot; to bip_dist_m;
+create index bip_20mi_geoid_cnty_idx on usda_bb.bip_program_area_properties_20mi (geoid_cnty);
+create index bip_20mi_p_id_iris_frmtd_idx on usda_bb.bip_program_area_properties_20mi (p_id_iris_frmtd);</code></pre>
+</div>
+</div>
+<div id="rc" class="section level2">
+<h2>RC</h2>
+<div id="convert-rc-table-to-crs-26918-to-work-in-meters-index-geo" class="section level3">
+<h3>Convert RC Table to CRS 26918 (to work in meters), index geo</h3>
+<pre class="sql"><code>select *, st_transform(geometry, 26918) geom 
+into usda_bb.rc_program_areas_26918
+from usda_bb.rc_program_areas;
+
+create index rc_program_areas_26918_geom_idx on usda_bb.rc_program_areas_26918 using gist(geom);</code></pre>
+</div>
+<div id="create-table-of-every-property-within-20-miles-of-a-rc-boundary-index-id-distance-and-links-to-property-table" class="section level3">
+<h3>Create table of every property within 20 miles of a RC boundary, index id, distance, and links to property table</h3>
+<pre class="sql"><code>select rc.&quot;OBJECT_ID&quot;, rc.&quot;RUS_ID&quot;, ctllg.geoid_cnty, ctllg.p_id_iris_frmtd, st_distance(ctllg.geometry, rc.geom) distance_meters
+into usda_bb.rc_program_area_properties_20mi
+from usda_bb.rc_program_areas_26918 rc 
+inner join corelogic_usda.current_tax_200627_latest_locs_geom_26918 ctllg on st_dwithin(ctllg.geometry, rc.geom , 32186.88);
+
+alter table usda_bb.rc_program_area_properties_20mi rename column &quot;RUS_ID&quot; to rc_rusid;
+alter table usda_bb.rc_program_area_properties_20mi rename column &quot;distance_meters&quot; to rc_dist_m;
+create index rc_20mi_geoid_cnty_idx on usda_bb.rc_program_area_properties_20mi (geoid_cnty);
+create index rc_20mi_p_id_iris_frmtd_idx on usda_bb.rc_program_area_properties_20mi (p_id_iris_frmtd);</code></pre>
+</div>
+</div>
+<div id="tcf" class="section level2">
+<h2>TCF</h2>
+<div id="convert-tcf-table-to-crs-26918-to-work-in-meters-index-geo" class="section level3">
+<h3>Convert TCF Table to CRS 26918 (to work in meters), index geo</h3>
+<pre class="sql"><code>select *, st_transform(geometry, 26918) geom 
+into usda_bb.tcf_program_areas_26918
+from usda_bb.tcf_program_areas;
+
+create index tcf_program_areas_26918_geom_idx on usda_bb.tcf_program_areas_26918 using gist(geom);</code></pre>
+</div>
+<div id="create-table-of-every-property-within-20-miles-of-a-tcf-boundary-index-id-distance-and-links-to-property-table" class="section level3">
+<h3>Create table of every property within 20 miles of a TCF boundary, index id, distance, and links to property table</h3>
+<pre class="sql"><code>select tcf.&quot;OBJECTID&quot;, tcf.&quot;RUS_ID&quot;, ctllg.geoid_cnty, ctllg.p_id_iris_frmtd, st_distance(ctllg.geometry, tcf.geom) distance_meters
+into usda_bb.tcf_program_area_properties_20mi
+from usda_bb.tcf_program_areas_26918 tcf 
+inner join corelogic_usda.current_tax_200627_latest_locs_geom_26918 ctllg on st_dwithin(ctllg.geometry, tcf.geom , 32186.88);
+
+alter table usda_bb.tcf_program_area_properties_20mi rename column &quot;RUS_ID&quot; to tcf_rusid;
+alter table usda_bb.tcf_program_area_properties_20mi rename column &quot;distance_meters&quot; to tcf_dist_m;
+create index tcf_20mi_geoid_cnty_idx on usda_bb.tcf_program_area_properties_20mi (geoid_cnty);
+create index tcf_20mi_p_id_iris_frmtd_idx on usda_bb.tcf_program_area_properties_20mi (p_id_iris_frmtd);</code></pre>
+</div>
+</div>
+<div id="tci" class="section level2">
+<h2>TCI</h2>
+<div id="convert-tci-table-to-crs-26918-to-work-in-meters-index-geo" class="section level3">
+<h3>Convert TCI Table to CRS 26918 (to work in meters), index geo</h3>
+<pre class="sql"><code>select *, st_transform(geometry, 26918) geom 
+into usda_bb.tci_program_areas_26918
+from usda_bb.tci_program_areas;
+
+create index tci_program_areas_26918_geom_idx on usda_bb.tci_program_areas_26918 using gist(geom);</code></pre>
+</div>
+<div id="create-table-of-every-property-within-20-miles-of-a-tci-boundary-index-id-distance-and-links-to-property-table" class="section level3">
+<h3>Create table of every property within 20 miles of a TCI boundary, index id, distance, and links to property table</h3>
+<pre class="sql"><code>select tci.&quot;OBJECTID&quot;, tci.&quot;RUSID&quot;, ctllg.geoid_cnty, ctllg.p_id_iris_frmtd, st_distance(ctllg.geometry, tci.geom) distance_meters
+into usda_bb.tci_program_area_properties_20mi
+from usda_bb.tci_program_areas_26918 tci 
+inner join corelogic_usda.current_tax_200627_latest_locs_geom_26918 ctllg on st_dwithin(ctllg.geometry, tci.geom , 32186.88);
+
+alter table usda_bb.tci_program_area_properties_20mi rename column &quot;RUSID&quot; to tci_rusid;
+alter table usda_bb.tci_program_area_properties_20mi rename column &quot;distance_meters&quot; to tci_dist_m;
+create index tci_20mi_geoid_cnty_idx on usda_bb.tci_program_area_properties_20mi (geoid_cnty);
+create index tci_20mi_p_id_iris_frmtd_idx on usda_bb.tci_program_area_properties_20mi (p_id_iris_frmtd);</code></pre>
+</div>
+</div>
+<div id="create-single-table-of-all-properties-within-20-miles-of-usda-broadband-program-boundaries-add-indexes-for-link-and-search" class="section level2">
+<h2>Create single table of all properties within 20 miles of USDA broadband program boundaries, add indexes for link and search</h2>
+<pre class="sql"><code>select *
+into usda_bb.rus_program_property_distances_to_20mi
+from 
+(
+select * from
+(select &#39;BIP&#39; rus_prog, bip_rusid rus_id, geoid_cnty, p_id_iris_frmtd, round(bip_dist_m::numeric/1609.344, 2) distance_mi
+from usda_bb.bip_program_area_properties_20mi) a 
+union
+select * from
+(select &#39;CC&#39; rus_prog, cc_rusid rus_id, geoid_cnty, p_id_iris_frmtd, round(cc_dist_m::numeric/1609.344, 2) distance_mi
+from usda_bb.cc_program_area_properties_20mi) b 
+union
+select * from
+(select &#39;RC&#39; rus_prog, rc_rusid rus_id, geoid_cnty, p_id_iris_frmtd, round(rc_dist_m::numeric/1609.344, 2) distance_mi
+from usda_bb.rc_program_area_properties_20mi) c
+union
+select * from
+(select &#39;TCF&#39; rus_prog, tcf_rusid rus_id, geoid_cnty, p_id_iris_frmtd, round(tcf_dist_m::numeric/1609.344, 2) distance_mi
+from usda_bb.tcf_program_area_properties_20mi) d
+union
+select * from
+(select &#39;TCI&#39; rus_prog, tci_rusid rus_id, geoid_cnty, p_id_iris_frmtd, round(tci_dist_m::numeric/1609.344, 2) distance_mi
+from usda_bb.tci_program_area_properties_20mi) e
+) t;
+
+create index rppd20_prop_idx on usda_bb.rus_program_property_distances_to_20mi (geoid_cnty, p_id_iris_frmtd);
+create index rppd20_rusid_idx on usda_bb.rus_program_property_distances_to_20mi (rus_id);
+create index rppd20_rusprog_idx on usda_bb.rus_program_property_distances_to_20mi (rus_prog);
+</code></pre>
+</div>
 
 
 
@@ -861,7 +715,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2,h3,h4",
+      selectors: "h1,h2,h3",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
