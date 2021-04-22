@@ -11,7 +11,7 @@
 
 
 
-<title>USDA-ERS Broadband Rural Impact</title>
+<title>Add Variables by Transorming Existing Columns</title>
 
 <script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -550,384 +550,129 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">USDA-ERS Broadband Rural Impact</h1>
+<h1 class="title toc-ignore">Add Variables by Transorming Existing Columns</h1>
 
 </div>
 
 
-<h3>
-Dataset: CoreLogic01
-</h3>
-<table>
-<colgroup>
-<col width="20%" />
-<col width="79%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left">dataset_description</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">input_data_provider</td>
-<td align="left">CoreLogic</td>
-</tr>
-<tr class="odd">
-<td align="left">inpit_data_contact</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">input_data_title</td>
-<td align="left">CoreLogic USDA Current Tax Roll through 06/27/2020</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_deleivered_date</td>
-<td align="left">07/06/2020</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_type</td>
-<td align="left">Administrative</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_format</td>
-<td align="left">csv</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_system_of_origin</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_intermediate_systems</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">input_data_previous_transforms</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_location</td>
-<td align="left">/project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/Corelogic_USDA_Current_Tax_2020_06_27.txt</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_dictionary</td>
-<td align="left">/project/biocomplexity/sdad/projects_data/usda/bb/original/L – TAX – Bulk Historical Tax Roll.xlsx</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_license</td>
-<td align="left">Proprietary, –link to contract–</td>
-</tr>
-<tr class="even">
-<td align="left">output_data_format</td>
-<td align="left">Database Table</td>
-</tr>
-<tr class="odd">
-<td align="left">output_data_location</td>
-<td align="left">corelogic_usda.current_tax_200627_latest_final</td>
-</tr>
-</tbody>
-</table>
-<h3>
-Dataset: Census Blocks 2018
-</h3>
-<table>
-<colgroup>
-<col width="17%" />
-<col width="82%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left">dataset_description</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">associated_project</td>
-<td align="left">USDA ERS Broadband Program Impacts</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_provider</td>
-<td align="left">Census Bureau</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_title</td>
-<td align="left">Census Blocks (TIGER 2018)</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_deleivered_date</td>
-<td align="left">## 07/06/2020</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_type</td>
-<td align="left">Administrative</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_format</td>
-<td align="left">shp</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_location</td>
-<td align="left">## /project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Files/Corelogic_USDA_Current_Tax_2020_06_27.txt</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_dictionary</td>
-<td align="left">## /project/biocomplexity/sdad/projects_data/usda/bb/original/L – TAX – Bulk Historical Tax Roll.xlsx</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_license</td>
-<td align="left">Public, ## –link to site–</td>
-</tr>
-<tr class="odd">
-<td align="left">output_data_format</td>
-<td align="left">Simple Features dataframe</td>
-</tr>
-<tr class="even">
-<td align="left">output_data_location</td>
-<td align="left">## corelogic_usda.current_tax_200627_latest_final</td>
-</tr>
-</tbody>
-</table>
-<h3>
-Dataset: Eligibility Dataset (CC &amp; RC, 2014 &amp; 2018)
-</h3>
-<table>
-<colgroup>
-<col width="18%" />
-<col width="81%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left">dataset_description</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">associated_project</td>
-<td align="left">USDA ERS Broadband Program Impacts</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_provider_01</td>
-<td align="left">FCC</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_title_01</td>
-<td align="left">FCC Form 477 Dec 2014</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_subtitle_01</td>
-<td align="left">US-Fixed-without-Satellite-Dec2014.zip</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_deleivered_date_01</td>
-<td align="left">Accessed April 2019.</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_type_01</td>
-<td align="left">Administrative</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_format_01</td>
-<td align="left">zip csv</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_location_01</td>
-<td align="left">/project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Filesfbd_us_without_satellite_dec2014_v3.csv</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_dictionary_01</td>
-<td align="left"><a href="https://www.fcc.gov/general/explanation-broadband-deployment-data" class="uri">https://www.fcc.gov/general/explanation-broadband-deployment-data</a></td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_license_01</td>
-<td align="left">Public</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_provider_02</td>
-<td align="left">USDA</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_title_02</td>
-<td align="left">Non-Rural Areas 2010-2020</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_subtitle_02</td>
-<td align="left">RD_BROADBAND_IELG_PRODUCTION.shp</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_deleivered_date_02</td>
-<td align="left">Accessed November 2020.</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_type_02</td>
-<td align="left">Administrative</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_format_02</td>
-<td align="left">gis</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_location_02</td>
-<td align="left">/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL/RD_BROADBAND_IELG_PRODUCTION.shp</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_dictionary_02</td>
-<td align="left"><a href="https://www.usda.gov/reconnect/eligibility-area-map-datasets" class="uri">https://www.usda.gov/reconnect/eligibility-area-map-datasets</a></td>
-</tr>
-<tr class="even">
-<td align="left">input_data_license_02</td>
-<td align="left">Public</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_provider_03</td>
-<td align="left">Census</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_title_03</td>
-<td align="left">Census Blocks 2018</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_subtitle_03</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">input_data_deleivered_date_03</td>
-<td align="left">Accessed October 2019.</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_type_03</td>
-<td align="left">Administrative</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_format_03</td>
-<td align="left">gis</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_location_03</td>
-<td align="left">/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL/RD_BROADBAND_IELG_PRODUCTION.shp</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_dictionary_03</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_license_03</td>
-<td align="left">Public</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_provider_04</td>
-<td align="left">USDA</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_title_04</td>
-<td align="left">RUS Program Service Areas</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_subtitle_04</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_deleivered_date_04</td>
-<td align="left">Provided April 2020</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_type_04</td>
-<td align="left">Administrative</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_format_04</td>
-<td align="left">gis</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_location_04</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_dictionary_04</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">input_data_license_04</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_provider_05</td>
-<td align="left">USDA</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_title_05</td>
-<td align="left">Protected Borrowers</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_subtitle_05</td>
-<td align="left">.shp</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_deleivered_date_05</td>
-<td align="left">Accessed November 2020.</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_type_05</td>
-<td align="left">Administrative</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_format_05</td>
-<td align="left">gis</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_location_05</td>
-<td align="left">/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL/RD_BROADBAND_IELG_PRODUCTION.shp</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_dictionary_05</td>
-<td align="left"><a href="https://www.usda.gov/reconnect/eligibility-area-map-datasets" class="uri">https://www.usda.gov/reconnect/eligibility-area-map-datasets</a></td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_license_05</td>
-<td align="left">Public</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_provider_06</td>
-<td align="left">USDA</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_title_06</td>
-<td align="left">CAF II Auction Spectrum</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_subtitle_06</td>
-<td align="left">RD_BROADBAND_IELG_PRODUCTION.shp</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_deleivered_date_06</td>
-<td align="left">Accessed November 2020.</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_type_06</td>
-<td align="left">Administrative</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_format_06</td>
-<td align="left">gis</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_location_06</td>
-<td align="left">/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL/RD_BROADBAND_IELG_PRODUCTION.shp</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_dictionary_06</td>
-<td align="left"><a href="https://www.usda.gov/reconnect/eligibility-area-map-datasets" class="uri">https://www.usda.gov/reconnect/eligibility-area-map-datasets</a></td>
-</tr>
-<tr class="even">
-<td align="left">input_data_license_06</td>
-<td align="left">Public</td>
-</tr>
-<tr class="odd">
-<td align="left">output_data_format</td>
-<td align="left">RDS</td>
-</tr>
-<tr class="even">
-<td align="left">output_data_location</td>
-<td align="left">/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/USA_2014_final_eligibility_sf_14DEC2020v5.RDS</td>
-</tr>
-</tbody>
-</table>
+<hr />
+<div id="fcc" class="section level2">
+<h2>FCC</h2>
+<div id="form-477" class="section level3">
+<h3>Form 477</h3>
+<ul>
+<li>Get the maximum speed per census block where data is available in FCC data</li>
+<li>Compare that maximum speed to our eligibility threshold</li>
+</ul>
+<div id="data" class="section level4">
+<h4>2014 Data</h4>
+<!-- Note that we tried the following thresholds for 2014. -->
+<!-- -   10/1 -->
+<!-- -   4/1 -->
+<!-- -   4/768 -->
+<!-- -   5 (upload + download) ** selected -->
+<p>For the year 2014, we used a combined speed threshold using the maximum advertised download and upload speeds. The combined value needed to be equal or greater than 5 Mbps.</p>
+<p>This is the code I used - Josh may have a version of this somewhere.</p>
+<pre class="r"><code># #threshold of 3 mbps (download + upload)
+fcc_2014_block_max_ &lt;- fcc_2014 %&gt;%
+  group_by(StateAbbr, BlockCode) %&gt;%
+  summarise(MaxAdDown_ = max(MaxAdDown),
+            MaxAdUp_ = max(MaxAdUp)) %&gt;%
+  mutate(total_speed = MaxAdDown_ + MaxAdUp_,
+         speed_elig_down = NA, #ifelse(MaxAdDown_ &gt;= 4, 0, 1),
+         speed_elig_up = NA, #ifelse(MaxAdUp_ &gt;= 0.768, 0, 1),
+         speed_inelig = ifelse(total_speed &lt; 3, 1, 0),
+         speed_elig = ifelse(total_speed &gt;= 3, 0, 1))
+
+saveRDS(fcc_2014_block_max_, &quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fcc_2014_block_maxspdelig_threshold_total3.RDS&quot;)</code></pre>
+</div>
+<div id="data-1" class="section level4">
+<h4>2018 DATA</h4>
+<pre class="r"><code>fcc_2018 &lt;-
+read.csv(&quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fbd_us_without_satellite_dec2018_v2.csv&quot;)
+
+fcc_2018_block_max &lt;- fcc_2018 %&gt;% group_by(StateAbbr, BlockCode) %&gt;%
+summarise(MaxAdDown_ = max(MaxAdDown), MaxAdUp_ = max(MaxAdUp)) %&gt;%
+mutate(speed_elig_down = ifelse(MaxAdDown_ &gt;= 10, 0, 1), speed_elig_up
+= ifelse(MaxAdUp_ &gt;= 1, 0, 1), speed_inelig = ifelse(MaxAdDown_ &gt;=
+10 &amp; MaxAdUp_ &gt;= 1, 1, 0), speed_elig = ifelse(MaxAdDown_ &gt;= 10 &amp;
+MaxAdUp_ &gt;= 1, 0, 1))
+
+# saveRDS(fcc_2018_block_max, &quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fcc_2018_block_maxspdelig.RDS&quot;)</code></pre>
+</div>
+</div>
+</div>
+<div id="usda" class="section level2">
+<h2>USDA</h2>
+<div id="non-rural-areas-2010-2020" class="section level3">
+<h3>Non-Rural Areas 2010-2020</h3>
+<p>Took shapefile</p>
+<ul>
+<li>intersected against counties to return TF - get counties where T - didn’t use</li>
+<li>made boundaries valid - didn’t use</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>intersection against state (returns polygons)</li>
+<li>intersection against tract</li>
+<li>intersection against block</li>
+</ol>
+<pre class="r"><code>### entire thing https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/usda_nonrural_areas_map_manip.Rmd
+
+for (i in 4:nrow(files_to_intersect_)) {
+  print(files_to_intersect_$state[i])
+  options(tigris_use_cache = TRUE)
+  tracts &lt;- tigris::tracts(state = files_to_intersect_$state[i])
+  tracts &lt;- tracts %&gt;% left_join(us_counties_x_urban, by = c( &quot;STATEFP&quot;,  &quot;COUNTYFP&quot;))
+  rural_cty_tracts &lt;- tracts %&gt;% filter(county_nonrural != 1 | is.na(county_nonrural))
+  
+  
+  
+  if(nrow(rural_cty_tracts) != nrow(tracts) ) {
+    # INTERSECTION WITH TRACTS - get tract level polygons
+    nonrural_cty_tracts &lt;- tracts %&gt;% filter(county_nonrural == 1)
+    nonrural &lt;- readRDS(files_to_intersect_$nr_path[i])
+    nonrural_cty_tracts_polygons &lt;- st_intersection(nonrural_cty_tracts, nonrural)
+    saveRDS(nonrural_cty_tracts_polygons, file = paste0(&quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL_working/nonruralstate_2018_&quot;, files_to_intersect_$state[i],&quot;_nonruraltracts_polygons.RDS&quot;))
+    
+    # INTERSECT TRACT POLYGONS WITH BLOCKS - get block level YES/NO nonrural
+    blocks &lt;- readRDS(files_to_intersect_$cb_paths[i])
+    blocks &lt;- blocks %&gt;% left_join(us_counties_x_urban, by = c(&quot;STATEFP10&quot; = &quot;STATEFP&quot;, &quot;COUNTYFP10&quot; = &quot;COUNTYFP&quot;))
+    rural_cty_blocks &lt;- blocks %&gt;% filter(county_nonrural != 1|is.na(county_nonrural))
+    nonrural_cty_blocks &lt;- blocks %&gt;% filter(county_nonrural == 1)
+    
+    blocks_nonrural_tract_vector &lt;- st_intersects(nonrural_cty_blocks, nonrural_cty_tracts_polygons)
+    nonrural_cty_blocks$nonruralTF &lt;- blocks_nonrural_tract_vector %&gt;% lengths &gt; 0 
+    
+    blocks &lt;- rbind(rural_cty_blocks %&gt;% mutate(nonruralTF = 0), nonrural_cty_blocks)
+    
+    saveRDS(blocks, paste0(savepath, savepath_1, &quot;blocks_2018_nonruralTF_sf_&quot;, files_to_intersect_$state[i], &quot;.RDS&quot;))
+    
+    blocks_df &lt;- blocks %&gt;% as.data.frame() %&gt;% select(STATEFP10, COUNTYFP10, TRACTCE10, BLOCKCE10, GEOID10, NAME10, nonruralTF)
+    saveRDS(blocks_df, paste0(savepath, savepath_2, &quot;blocks_2018_nonruralTF_df_&quot;, files_to_intersect_$state[i], &quot;.RDS&quot;))
+  }
+  
+  if(nrow(rural_cty_blocks) == nrow(blocks) ) {
+    print(files_to_intersect_$state[i])
+    print(&quot;has no non-rural counties&quot;)
+  }
+  
+}</code></pre>
+</div>
+<div id="protected-borrowers" class="section level3">
+<h3>Protected Borrowers</h3>
+<pre class="r"><code>protborr &lt;- sf::st_read(&quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/rus_broadband_servicearea/ProtectedBorrowers04222019.shp&quot;)
+protborr &lt;- protborr %&gt;% st_transform(st_crs(usa_blocks_speed_rural))
+blocks_criteriaXprotborr_VECTOR &lt;- st_intersects(usa_blocks_speed_rural, protborr) 
+usa_blocks_speed_rural$protborr_inelg_vec &lt;- blocks_criteriaXprotborr_VECTOR %&gt;% lengths &gt;0 </code></pre>
+</div>
+<div id="usda-caf-ii-spectrum-auction-winners" class="section level3">
+<h3>USDA CAF II Spectrum Auction Winners</h3>
+<pre class="r"><code>caf2auctionwinners &lt;- st_read(&quot;/project/biocomplexity/sdad/projects_data/usda/bb/original/Protected_bb_borrower_service_areas/Auction903_April2019.shp&quot;)
+caf2auctionwinners &lt;- caf2auctionwinners %&gt;% st_transform(st_crs(usa_blocks_speed_rural))
+blocks_criteriaXcaf2winners_VECTOR &lt;- st_intersects(usa_blocks_speed_rural, caf2auctionwinners) 
+usa_blocks_speed_rural$caf2_inelg_vec &lt;- blocks_criteriaXcaf2winners_VECTOR %&gt;% lengths &gt;0 </code></pre>
+</div>
+</div>
 
 
 
@@ -975,7 +720,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2,h3,h4",
+      selectors: "h1,h2,h3",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {

@@ -6,7 +6,7 @@ toc: yes
 toc_float: yes
 toc_depth: 4
 dataset:
-  dataset_short_title: "Program Eligibility Dataset 2014"
+  dataset_short_title: "Eligibility Dataset (CC & RC, 2014 & 2018)"
   dataset_description: ""
   associated_project: "USDA ERS Broadband Program Impacts"
 
@@ -35,7 +35,7 @@ dataset:
   input_data_provider_03: "Census"
   input_data_title_03: "Census Blocks 2018"
   input_data_subtitle_03: ""
-  input_data_deleivered_date_03: "Accessed Ictober 2019."
+  input_data_deleivered_date_03: "Accessed October 2019."
   input_data_type_03: "Administrative"
   input_data_format_03: "gis"
   input_data_location_03: "/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL/RD_BROADBAND_IELG_PRODUCTION.shp"
@@ -52,6 +52,28 @@ dataset:
   input_data_location_04: ""
   input_data_dictionary_04: ""
   input_data_license_04: ""
+  
+  input_data_provider_05: "USDA"
+  input_data_title_05: "Protected Borrowers"
+  input_data_subtitle_05: ".shp"
+  input_data_deleivered_date_05: "Accessed November 2020."
+  input_data_type_05: "Administrative"
+  input_data_format_05: "gis"
+  input_data_location_05: "/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL/RD_BROADBAND_IELG_PRODUCTION.shp"
+  input_data_dictionary_05: "https://www.usda.gov/reconnect/eligibility-area-map-datasets"
+  input_data_license_05: "Public"
+  # output_data_location_02: "/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL_working/final_nonruralareas_USDAfile_translatedblocks_df_NOV182020.RDS"
+  
+  input_data_provider_06: "USDA"
+  input_data_title_06: "CAF II Auction Spectrum"
+  input_data_subtitle_06: "RD_BROADBAND_IELG_PRODUCTION.shp"
+  input_data_deleivered_date_06: "Accessed November 2020."
+  input_data_type_06: "Administrative"
+  input_data_format_06: "gis"
+  input_data_location_06: "/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL/RD_BROADBAND_IELG_PRODUCTION.shp"
+  input_data_dictionary_06: "https://www.usda.gov/reconnect/eligibility-area-map-datasets"
+  input_data_license_06: "Public"
+  # output_data_location_02: "/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL_working/final_nonruralareas_USDAfile_translatedblocks_df_NOV182020.RDS"
 
   output_data_format: "RDS"
   output_data_location: "/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/USA_2014_final_eligibility_sf_14DEC2020v5.RDS"
