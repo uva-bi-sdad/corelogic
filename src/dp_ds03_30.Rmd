@@ -19,3 +19,10 @@ knitr::opts_chunk$set(
 ------------------------------------------------------------------------
 
 The data needed to be summarized to maximum coverage per block and compared against a threshold. 
+
+![Spatial Transformations](images/Spatial Transformations.png)
+
+
+
+
+

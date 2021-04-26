@@ -69,4 +69,11 @@ N/A - simply downloaded
 ## Census 
 
 ### Census Blocks
+Also had a bunch of code to check complete download of data
+
+```{r}
+# setwd("~/censusblocks/blocks_TIGER2018_zips_shapes/")
+# download.file(links$LINKS[], destfile = links$NAME[])
+# xmlfiles <- unzip(temp, exdir = tdir)
+```
 

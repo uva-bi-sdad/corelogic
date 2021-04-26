@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 ------------------------------------------------------------------------
 
-![image](images/Data Sources USDA BB.png)
+![Data Sources](images/Data Sources USDA BB.png)
   
 
 ## FCC
@@ -57,7 +57,16 @@ This dataset was posted to USDA's website of eligibility datasets.
 
 [RUS Program Service Areas]{.ul}
 
-MULTIPLE DATASETS 
 
 * Data Source: Provided by USDA
 * Repo Location: [xxx](https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/eligibilitymaps_18NOV2020.R)
+
+
+## Census 
+
+### Census Blocks
+
+Tigris 
+
+* Data Source: [Census: TIGER Database](https://www2.census.gov/geo/tiger/TIGER2018/TABBLOCK/)
+* Repo Location: [Downloading 2018 Census Blocks](https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/census_blocks/get2018censusblocks.R)
