@@ -36,14 +36,6 @@ This dataset was posted to USDA's website of eligibility datasets. This dataset 
 * Repo Location: [Translating CAF II loc.40-43](https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/eligibilitymaps_18NOV2020.R)
 
 
-#### RUS Program Service Areas
-
-RUS directly shared a set of program service areas' shapefiles with SDAD. These include one dataset for Community Connect and one for ReConnect. These datasets were filtered for time (2014 and earlier vs 2014-2018 for CC) where appropriate. They were then compared against census block shapefiles to produce an intermediate dataset of census blocks and an indicator of whether the block was considered funded by that program at that time or not. No specific download code; these were downloaded locally and manually uploaded to Rivanna.
-
-* Data Source: Provided directly to SDAD by USDA
-* Repo Location: [Code, loc.123, 159](https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/eligibilitymaps_18NOV2020.R)
-
-
 ## Structure
 
 #### USDA Protected Borrowers
@@ -65,9 +57,3 @@ usa_blocks_speed_rural$caf2_inelg_vec <- blocks_criteriaXcaf2winners_VECTOR %>% 
 ```
 
 
-#### RUS Program Service Areas
-
-## Exceptions?
-
-* Had to run another version using tracts for big states 
-* Had an issue with Kentucky (didn't believe it had no non-rural areas), ran that separately

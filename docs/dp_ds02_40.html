@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Devika Mahoney-Nair" />
 
 
-<title>Dataset 02 Info</title>
+<title>RUS Service Areas</title>
 
 <script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -565,12 +566,98 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Dataset 02 Info</h1>
+<h1 class="title toc-ignore">RUS Service Areas</h1>
+<h4 class="author">Devika Mahoney-Nair</h4>
+<h4 class="date">4/6/2021</h4>
 
 </div>
 
 
+<hr />
+<div id="about" class="section level2">
+<h2>About</h2>
+<p><u>RUS Program Service Areas</u></p>
+<p>RUS directly shared a set of program service areas’ shapefiles with SDAD. These include one dataset for Community Connect and one for ReConnect. These datasets were filtered for time (2014 and earlier vs 2014-2018 for CC) where appropriate. They were then compared against census block shapefiles to produce an intermediate dataset of census blocks and an indicator of whether the block was considered funded by that program at that time or not. No specific download code; these were downloaded locally and manually uploaded to Rivanna.</p>
+<ul>
+<li>Data Source: Provided directly to SDAD by USDA</li>
+<li>Repo Location: <a href="https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/eligibilitymaps_18NOV2020.R">Code, loc.123, 159</a></li>
+</ul>
+</div>
+<div id="structure" class="section level2">
+<h2>Structure</h2>
+<p>Read in Community Connect project areas and filter for time-appropriate projects.</p>
+<pre class="r"><code>usa_blocks_speed_rural_projects_final_2014 &lt;- readRDS(&quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/USA_2014_final_eligibility_sf_08DEC2020v3.RDS&quot;)
+usa_blocks_speed_rural_projects_final_2018 &lt;- readRDS(&quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/USA_2018_final_eligibility_sf_18NOV2020v2.RDS&quot;)
 
+# BIP, TC does not have a date
+# CC has a date - 2013-2020
+# RC has a date - 2019-2020
+# bip_areas &lt;- sf::st_read(&quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RUS_BIP_Shapefiles_April2020/200409_BIP_ServAr_ID.shp&quot;) %&gt;% sf::st_transform(sf::st_crs(usa_blocks_speed_rural_projects_final_2014))
+cc_areas &lt;- sf::st_read(&quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RUS_CC_Shapefiles_April2020/CC 2013_2019_83 04272020.shp&quot;) %&gt;% sf::st_transform(sf::st_crs(usa_blocks_speed_rural_projects_final_2014))
+cc_areas_2014andearlier &lt;- cc_areas %&gt;% filter(OBLFY &lt;= 2014)
+cc_areas_2018andearlier &lt;- cc_areas %&gt;% filter(OBLFY &lt;= 2018 &amp; OBLFY &gt; 2014)
+# tc_fb_areas &lt;- sf::st_read(&quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RUS_TC_Shapefiles_June2020/USDARD_RUS_TELCO_FARMBILL_06042020/USDARD_RUS_TELCO_FARMBILL_06042020.shp&quot;) %&gt;% sf::st_transform(sf::st_crs(usa_blocks_speed_rural_projects_final_2014))
+# tc_inf_areas &lt;- sf::st_read(&quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RUS_TC_Shapefiles_June2020/USDARD_RUS_TELCO_INFRA_06042020/USDARD_RUS_TELCO_INFRA_06042020.shp&quot;) %&gt;% sf::st_transform(sf::st_crs(usa_blocks_speed_rural_projects_final_2014))</code></pre>
+<p>Determine if block:</p>
+<ul>
+<li>on CC project boundary</li>
+<li>inside CC project boundaries</li>
+<li>touches CC project site anywhere</li>
+</ul>
+<div id="cc" class="section level4">
+<h4>2014 CC</h4>
+<pre class="r"><code>## CC 2014 - Block at CC Project Boundaries
+eligblocks_cc14_crossbound &lt;- sf::st_crosses(usa_blocks_speed_rural_projects_final_2014, st_boundary(cc_areas_2014andearlier))
+usa_blocks_speed_rural_projects_final_2014$CC_14_RUSID_boundary &lt;- cc_areas_2014andearlier$RUSID[ sapply(eligblocks_cc14_crossbound, first) ]
+## CC 2014 - Block within CC Project Boundaries
+eligblocks_cc14_within &lt;- sf::st_within(usa_blocks_speed_rural_projects_final_2014,cc_areas_2014andearlier)
+usa_blocks_speed_rural_projects_final_2014$CC_14_RUSID_inside &lt;- cc_areas_2014andearlier$RUSID[ sapply(eligblocks_cc14_within, first) ]
+## CC 2014 - Block intersects CC Project 
+eligblocks_cc14_intersect &lt;- sf::st_intersects(usa_blocks_speed_rural_projects_final_2014, cc_areas_2014andearlier)
+usa_blocks_speed_rural_projects_final_2014$CC_14_RUSID_intersect &lt;- cc_areas_2014andearlier$RUSID[ sapply(eligblocks_cc14_intersect, first) ]
+
+# saveRDS(usa_blocks_speed_rural_projects_final_2014, &quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/USA_2014_final_eligibility_sf_14DEC2020v5.RDS&quot;)
+usa_blocks_speed_rural_projects_final_2014 &lt;- readRDS(&quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/USA_2014_final_eligibility_sf_14DEC2020v5.RDS&quot;)</code></pre>
+</div>
+<div id="cc-1" class="section level4">
+<h4>2018 CC</h4>
+<pre class="r"><code>## CC 2018 - Block at CC Project Boundaries
+eligblocks_cc18_crossbound &lt;- sf::st_crosses(usa_blocks_speed_rural_projects_final_2018, st_boundary(cc_areas_2018andearlier))
+usa_blocks_speed_rural_projects_final_2018$CC_18_RUSID_boundary &lt;- cc_areas_2018andearlier$RUSID[ sapply(eligblocks_cc18_crossbound, first) ]
+## CC 2018 - Block within CC Project Boundaries
+eligblocks_cc18_within &lt;- sf::st_within(usa_blocks_speed_rural_projects_final_2018,cc_areas_2018andearlier)
+usa_blocks_speed_rural_projects_final_2018$CC_18_RUSID_inside &lt;- cc_areas_2018andearlier$RUSID[ sapply(eligblocks_cc18_within, first) ]
+## CC 2018 - Block intersects CC Project 
+eligblocks_cc18_intersect &lt;- sf::st_intersects(usa_blocks_speed_rural_projects_final_2018, cc_areas_2018andearlier)
+usa_blocks_speed_rural_projects_final_2018$CC_18_RUSID_intersect &lt;- cc_areas_2018andearlier$RUSID[ sapply(eligblocks_cc18_intersect, first) ]
+
+# saveRDS(usa_blocks_speed_rural_projects_final_2018, &quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/USA_2018_final_eligibility_sf_14DEC2020v5.RDS&quot;)
+usa_blocks_speed_rural_projects_final_2014 &lt;- readRDS(&quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/USA_2014_final_eligibility_sf_14DEC2020v5.RDS&quot;)
+usa_blocks_speed_rural_projects_final_2018 &lt;- readRDS(&quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/USA_2018_final_eligibility_sf_14DEC2020v5.RDS&quot;)</code></pre>
+</div>
+<div id="rc" class="section level4">
+<h4>2018 RC</h4>
+<p>Read in ReConnect project areas.</p>
+<pre class="r"><code>rc_areas &lt;- sf::st_read(&quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RUS_RC_Shapefiles_April2020/ReConnect R1 594 PFSA 05012020.shp&quot;) %&gt;% sf::st_transform(sf::st_crs(usa_blocks_speed_rural_projects_final_2018))
+
+## RC 2018 - Block at RC Project Boundaries
+eligblocks_rc18_crossbound &lt;- sf::st_crosses(usa_blocks_speed_rural_projects_final_2018, st_boundary(rc_areas))
+usa_blocks_speed_rural_projects_final_2018$RC_18_RUSID_boundary &lt;- rc_areas$RUS_ID[ sapply(eligblocks_rc18_crossbound, first) ]
+# saveRDS(usa_blocks_speed_rural_projects_final_2018, &quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/working/eligibility_summary_percentages/intermediates_delete/&quot;)</code></pre>
+<pre class="r"><code>## RC 2018 - Block within RC Project Boundaries
+eligblocks_rc18_within &lt;- sf::st_within(usa_blocks_speed_rural_projects_final_2018,rc_areas)
+usa_blocks_speed_rural_projects_final_2018$RC_18_RUSID_inside &lt;- rc_areas$RUS_ID[ sapply(eligblocks_rc18_within, first) ]
+## RC 2018 - Block intersects RC Project 
+eligblocks_rc18_intersect &lt;- sf::st_intersects(usa_blocks_speed_rural_projects_final_2018, rc_areas)
+usa_blocks_speed_rural_projects_final_2018$RC_18_RUSID_intersect &lt;- rc_areas$RUS_ID[ sapply(eligblocks_rc18_intersect, first) ]
+
+# saveRDS(usa_blocks_speed_rural_projects_final_2018, &quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/working/eligibility_summary_percentages/intermediates_delete/usa_blocks_speed_rural_projects_final_2018WRC_sf.RDS&quot;)
+
+join_18_rc &lt;- usa_blocks_speed_rural_projects_final_2018 %&gt;% 
+  as.data.frame() %&gt;% 
+  select(GEOID10, BlockCode, RC_18_RUSID_boundary, RC_18_RUSID_inside, RC_18_RUSID_intersect)</code></pre>
+</div>
+</div>
 
 
 
