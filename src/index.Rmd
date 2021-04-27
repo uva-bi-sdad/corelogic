@@ -28,19 +28,12 @@ for (ds in ds_info_files) {
 }
 ```
 
-```{r future_dynamic_menus, include=FALSE}
-# fp <- list.files(pattern = "*_01*.Rmd")
-# rmd_yml <- extract_rmd_yml(fp)
-# 
-# library(magrittr)
-# navbar <- readr::read_lines("_navbar.html")
-# nb <- xml2::read_html("_navbar.html")
-# rvest::html_node(nb, "#topdiv") %>% 
-#   rvest::html_attr("role")
-# 
-# 
-# xml2::write_html(nb, "test.html")
+```{r dynamic_menus, include=FALSE}
+section_number <- c("01", "02")
+section_title <- c("INGEST", "STRUCTURE")
+menu_sections <- data.frame(section_number, section_title)
 
-# navbar <- stringr::str_replace(navbar, '<a href="dp_ds01_01.html">Parallel Import</a>', paste0('<a href="dp_ds01_01.html">', rmd_yml$menu_title, '</a>'))
-# readr::write_lines(navbar, "_navbar.html")
+m <- get_menu_title("dp_ds01_11.Rmd")
+
+merge(menu_sections, m, by.x = "section_number", by.y = "menu_section")
 ```

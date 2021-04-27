@@ -1,8 +1,4 @@
 name: "Constructing Data for Research from Administrative Datasets"
 output_dir: "../docs"
 exclude: ["*.nb.html", "*.csv", "*.CSV", "*.dcf", "parlog", "old", "dashboard"]
-navbar:
-  title: "Admin2Research Data Pipeline"
-  left:
-    - text: "Home"
-      href: index.html
+

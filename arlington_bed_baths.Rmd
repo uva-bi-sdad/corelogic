@@ -1,0 +1,47 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+
+get_arlington_beds_baths <- function(lrsn = "11555") {
+  prop_improvs_html <- xml2::read_html(paste0("https://propertysearch.arlingtonva.us/Home/Improvements?lrsn=", lrsn))
+  tables <- rvest::html_nodes(prop_improvs_html, "table")
+  if(length(tables) > 0) {
+    table <- rvest::html_table(tables[1], header = TRUE)[[1]]
+    half_bath_cnt <- sum(table$`2 Fix Bath`)
+    full_bath_cnt <- sum(table$`3 Fix Bath`) + sum(table$`4 Fix Bath`) + sum(table$`5 Fix Bath`)
+    bedroom_cnt <- sum(table$Bedrooms)
+    data.table::data.table(lrsn = lrsn, bedroom_cnt = bedroom_cnt, bathroom_cnt = (full_bath_cnt + (0.1 * half_bath_cnt)))
+  }
+}
+
+get_arlington_beds_baths("30955")
+
+```
+
+
+```{r}
+arlington_property_api <- "https://datahub-v2.arlingtonva.us/api/RealEstate/PropertyAddress"
+record_cnt <- 100
+filter <- "reasPropertyStatusCode eq 'A' and propertyClassTypeCode eq '511'"
+select <- "provalLrsnId"
+api_call <- paste0(arlington_property_api, "?$top=", record_cnt, "&$filter=", filter, "&$select=", select)
+active_property_codes <- jsonlite::fromJSON(utils::URLencode(api_call))
+```
+
+```{r}
+get_arl_bb <- function() {
+  arl_beds_baths <- data.table::data.table(lrsn = character(), bedroom_cnt = integer(), bathroom_cnt = double())
+  for (lrsn in active_property_codes$provalLrsnId[1:10]) {
+    print(paste("getting", lrsn))
+    bb <- get_arlington_beds_baths(lrsn)
+    arl_beds_baths <- data.table::rbindlist(list(arl_beds_baths, bb))
+  }
+  arl_beds_baths
+}
+
+bbs <- get_arl_bb()
+```
+

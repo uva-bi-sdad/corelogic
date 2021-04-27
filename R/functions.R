@@ -34,3 +34,12 @@ extract_rmd_yml <- function(file_path) {
     return(paste("file", file_path, "doesn't exist"))
   }
 }
+
+get_menu_title <- function(file_path) {
+  rmd_yml <- extract_rmd_yml(file_path)
+  menu_title <- rmd_yml$menu_title
+  menu_section <- stringr::str_match(file_path, "dp_ds([0-9][0-9])")
+  if (!is.null(menu_title)) {
+    data.frame(menu_section = menu_section[,2], menu_title = menu_title)
+  }
+}
