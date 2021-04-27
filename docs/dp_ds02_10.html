@@ -12,7 +12,7 @@
 <meta name="author" content="Devika Mahoney-Nair" />
 
 
-<title>Import Notes</title>
+<title>FCC Form 477</title>
 
 <script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -496,6 +496,21 @@ div.tocify {
           </a>
           <ul class="dropdown-menu" role="menu">
             <li style="border: 1px solid silver; border-top: 1px solid silver; text-align: center">
+              DATA SOURCES
+            </li>
+            <li>
+              <a href="dp_ds02_10.html">FCC Form 477</a>
+            </li>
+            <li>
+              <a href="dp_ds02_20.html">USDA Non-Rural</a>
+            </li>
+            <li>
+              <a href="dp_ds02_30.html">USDA Project Areas</a>
+            </li>
+            <li>
+              <a href="dp_ds02_20.html">USDA 4</a>
+            </li>
+            <li style="border: 1px solid silver; border-top: 1px solid silver; text-align: center">
               INGEST
             </li>
             <li>
@@ -551,7 +566,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Import Notes</h1>
+<h1 class="title toc-ignore">FCC Form 477</h1>
 <h4 class="author">Devika Mahoney-Nair</h4>
 <h4 class="date">4/6/2021</h4>
 
@@ -559,8 +574,103 @@ div.tocify {
 
 
 <hr />
-<p>This dataset originally came as a series of shapefile databases (1 database per state) US Census Bureau’s TIGER database. It was read into a temporary SQL Server instance and re-exported as a txt file using a pipe “|” as a field separator.</p>
-<p>Issues with import were still encountered because of odd characters in the Legal1, Legal2, and Legal3 columns. it was determined that these columns were unnecessary for the project and so were removed from the import.</p>
+<div id="import" class="section level2">
+<h2>Import</h2>
+<p><u>FCC Form 477 (2014 and 2018)</u></p>
+<p>This dataset originally came as a zipped csv file posted to the FCC’s data page for Form 477. Data was downloaded from FCC Form 477 website. The 2014 data uses version 3 of the zipped csv file posted online in December 2014. The 2018 data uses the file posted online in December 2018. Both files were downloaded via FTP, unzipped into a temporary file location and saved to the project folder in the script linked here: &lt;&gt;.</p>
+<ul>
+<li>Data Source: <a href="https://www.fcc.gov/general/broadband-deployment-data-fcc-form-477">FCC Form 477 Website</a></li>
+<li>Repo Location: <a href="https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/fcc_speed_data_load_manip.R">FCC Manipulation Code</a></li>
+</ul>
+<div id="download-2014-data" class="section level4">
+<h4>Download 2014 Data</h4>
+<pre class="r"><code># url &lt;- &quot;http://transition.fcc.gov/form477/BroadbandData/Fixed/Dec14/Version%203/US-Fixed-without-Satellite-Dec2014.zip&quot;
+# temp &lt;- tempfile()
+# download.file(url,temp)
+# unlink(temp)
+
+# grab temp pathname and go intoto terminal 
+# ran this to see name of file in zip 
+# unzip -l /tmp/RtmpwK6I3G/file33274b60567b
+# ran this to unzip from terminal:
+# unzip /tmp/RtmpwK6I3G/file33274b60567b -d /project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/
+
+## DATA NOW STORED AT
+fcc_2014 &lt;- read.csv(&quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fbd_us_without_satellite_dec2014_v3.csv&quot;)</code></pre>
+</div>
+<div id="download-2018-data" class="section level4">
+<h4>Download 2018 data</h4>
+<pre class="r"><code># url &lt;- &quot;&lt;https://www.fcc.gov/form477/BroadbandData/Fixed/Dec18/Version%202/US-Fixed-without-Satellite-Dec2018.zip&gt;&quot;
+# temp &lt;- tempfile()
+# download.file(url,temp)
+# unlink(temp)
+# grab temp pathname and go intoto terminal
+# ran this to see name of file in zip
+# unzip -l /tmp/RtmpSdiLsM/file360be78486be5
+# ran this to unzip from terminal:
+# unzip /tmp/RtmpSdiLsM/file360be78486be5 -d /project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/
+
+## DATA NOW STORED AT
+fcc_2018 &lt;-
+read.csv(&quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fbd_us_without_satellite_dec2018_v2.csv&quot;)</code></pre>
+</div>
+</div>
+<div id="structure" class="section level2">
+<h2>Structure</h2>
+<p>The data needed to be summarized to maximum coverage per block and compared against a threshold. The code in this section gets the maximum speed per census block where data is available in FCC data.</p>
+<div id="data" class="section level4">
+<h4>2014 DATA</h4>
+<pre class="r"><code>fcc_2014 &lt;- read.csv(&quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fbd_us_without_satellite_dec2014_v3.csv&quot;)
+
+# #threshold of 3 mbps (download + upload)
+fcc_2014_block_max_ &lt;- fcc_2014 %&gt;%
+  group_by(StateAbbr, BlockCode) %&gt;%
+  summarise(MaxAdDown_ = max(MaxAdDown),
+            MaxAdUp_ = max(MaxAdUp)) </code></pre>
+</div>
+<div id="data-1" class="section level4">
+<h4>2018 DATA</h4>
+<pre class="r"><code>fcc_2018 &lt;-
+read.csv(&quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fbd_us_without_satellite_dec2018_v2.csv&quot;)
+
+fcc_2018_block_max &lt;- fcc_2018 %&gt;% group_by(StateAbbr, BlockCode) %&gt;%
+summarise(MaxAdDown_ = max(MaxAdDown), MaxAdUp_ = max(MaxAdUp))</code></pre>
+</div>
+</div>
+<div id="new-variables" class="section level2">
+<h2>New Variables</h2>
+<p>New variables indicated whether or not download/upload speeds were acceptable. The code in this section compares the maximum speed of coverage per block to a time-based eligibility threshold.</p>
+<p><em>Josh’s code set 2014 threshold to 5 mbps, but that isn’t reflected in my version. Need to check with him where he did this?</em></p>
+<div id="data-2" class="section level4">
+<h4>2014 Data</h4>
+<p>For the year 2014, we used a combined speed threshold using the maximum advertised download and upload speeds. After testing a number of different thresholds (10/1, 4/1, 4/768, combined 3), we selected a combined value threshold of 5 Mbps, meaning the combined maximum advertised upload and download speeds needed to sum below 5 Mbps to be considered eligible.</p>
+<pre class="r"><code># picks off from restructure chunk
+fcc_2014_block_max_ &lt;- fcc_2014_block_max_ %&gt;%
+  mutate(total_speed = MaxAdDown_ + MaxAdUp_,
+         speed_elig_down = NA, #ifelse(MaxAdDown_ &gt;= 4, 0, 1),
+         speed_elig_up = NA, #ifelse(MaxAdUp_ &gt;= 0.768, 0, 1),
+         speed_inelig = ifelse(total_speed &lt; 3, 1, 0),
+         speed_elig = ifelse(total_speed &gt;= 3, 0, 1))
+
+saveRDS(fcc_2014_block_max_, &quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fcc_2014_block_maxspdelig_threshold_total3.RDS&quot;)</code></pre>
+</div>
+<div id="data-3" class="section level4">
+<h4>2018 DATA</h4>
+<p>For the year 2018, we used a straightforward speed threshold, where the maximum advertised download speed needed to sit below 10 Mbps AND the maximum upload speed needed to sit below 1 Mbps to be considered eligible.</p>
+<pre class="r"><code># picks off from restructure chunk
+fcc_2018_block_max &lt;- fcc_2018_block_max %&gt;%
+  mutate(speed_elig_down = ifelse(MaxAdDown_ &gt;= 10, 0, 1), 
+         speed_elig_up = ifelse(MaxAdUp_ &gt;= 1, 0, 1), 
+         speed_inelig = ifelse(MaxAdDown_ &gt;= 10 &amp; MaxAdUp_ &gt;= 1, 1, 0), 
+         speed_elig = ifelse(MaxAdDown_ &gt;= 10 &amp; MaxAdUp_ &gt;= 1, 0, 1))
+
+# saveRDS(fcc_2018_block_max, &quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fcc_2018_block_maxspdelig.RDS&quot;)</code></pre>
+</div>
+</div>
+<div id="fill-in-missing-census-blocks" class="section level2">
+<h2>Fill in missing census blocks</h2>
+<p>happens at join</p>
+</div>
 
 
 

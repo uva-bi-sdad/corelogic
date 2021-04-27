@@ -12,7 +12,7 @@
 <meta name="author" content="Devika Mahoney-Nair" />
 
 
-<title>New Variable Notes</title>
+<title>Transformations Notes</title>
 
 <script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -496,6 +496,21 @@ div.tocify {
           </a>
           <ul class="dropdown-menu" role="menu">
             <li style="border: 1px solid silver; border-top: 1px solid silver; text-align: center">
+              DATA SOURCES
+            </li>
+            <li>
+              <a href="dp_ds02_10.html">FCC Form 477</a>
+            </li>
+            <li>
+              <a href="dp_ds02_20.html">USDA Non-Rural</a>
+            </li>
+            <li>
+              <a href="dp_ds02_30.html">USDA Project Areas</a>
+            </li>
+            <li>
+              <a href="dp_ds02_20.html">USDA 4</a>
+            </li>
+            <li style="border: 1px solid silver; border-top: 1px solid silver; text-align: center">
               INGEST
             </li>
             <li>
@@ -551,7 +566,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">New Variable Notes</h1>
+<h1 class="title toc-ignore">Transformations Notes</h1>
 <h4 class="author">Devika Mahoney-Nair</h4>
 <h4 class="date">4/21/2021</h4>
 
@@ -559,7 +574,37 @@ div.tocify {
 
 
 <hr />
-<p>The data needed to be summarized to maximum coverage per block and compared against a threshold.</p>
+<div class="figure">
+<img src="images/Spatial%20Transformations.png" alt="" />
+<p class="caption">Spatial Transformations</p>
+</div>
+<div id="fcc" class="section level2">
+<h2>FCC</h2>
+<p><u>FCC Form 477 (2014 and 2018)</u></p>
+<p>The data needed to be summarized to maximum coverage per block and compared against a threshold. New variables indicated whether or not download/upload speeds were acceptable.</p>
+<p><em>Josh’s code set 2014 threshold to 5 mbps, but that isn’t reflected in my version. Need to check with him where he did this?</em></p>
+<p>Repo Location: <a href="https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/fcc_speed_data_load_manip.R">FCC Manipulation Code</a>, loc.48-57 (2014), and 86-93 (2018)</p>
+</div>
+<div id="usda" class="section level2">
+<h2>USDA</h2>
+<p><u>USDA Non-Rural Areas 2010-2020</u></p>
+<p>This dataset consisted of a single (custom) shapefile representing all the non-rural areas of the U.S. For the purposes of analysis, this file was compared sequentially against state shapefiles, county shapefiles, and census block shapefiles, to produce an intermediate dataset of census blocks and an indicator of whether the block was considered non-rural or not.</p>
+<p>Repo Location: <a href="https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/usda_nonrural_areas_map_manip.Rmd">Non-Rural Areas Translation Code</a></p>
+<p><u>USDA Protected Borrowers</u></p>
+<p>This dataset consisted of multiple (custom) shapefiles representing all the areas of the U.S. wherein active borrowers (companies with active loans with RUS) had ongoing broadband projects whose sites are protected from new development. <em>(phrasing?)</em> For the purposes of analysis, this file was compared against census block shapefiles to produce an intermediate dataset of census blocks and an indicator of whether the block was considered protected or not.</p>
+<p>Repo Location: <a href="https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/eligibilitymaps_18NOV2020.R">Translating Prot Borr loc.34-39</a></p>
+<p><u>USDA CAF II Auction Spectrum</u></p>
+<p>This dataset consisted of multiple (custom) shapefiles representing all the areas of the U.S. wherein companies had won the right to develop spectrum whose sites are protected from new development. <em>(phrasing?)</em> For the purposes of analysis, this file was compared against census block shapefiles to produce an intermediate dataset of census blocks and an indicator of whether the block was considered protected or not.</p>
+<p>Repo Location: <a href="https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/eligibilitymaps_18NOV2020.R">Translating CAF II loc.40-43</a></p>
+<p><u>RUS Program Service Areas: Community Connect &amp; ReConnect</u></p>
+<p>These datasets were filtered for time (2014 and earlier vs 2014-2018 for CC) where appropriate. They were then compared against census block shapefiles to produce an intermediate dataset of census blocks and an indicator of whether the block was considered funded by that program at that time or not.</p>
+<p>Repo Location: <a href="https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/eligibilitymaps_18NOV2020.R">Code, loc.116-176</a></p>
+</div>
+<div id="census" class="section level2">
+<h2>Census</h2>
+<p><u>2018 Census Blocks</u></p>
+<p>No transformations made.</p>
+</div>
 
 
 

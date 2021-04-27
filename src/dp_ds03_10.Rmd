@@ -57,9 +57,10 @@ This dataset was posted to USDA's website of eligibility datasets.
 
 [RUS Program Service Areas]{.ul}
 
+RUS directly shared a set of program service areas' shapefiles with SDAD. These include one dataset for Community Connect and one for ReConnect.
 
-* Data Source: Provided by USDA
-* Repo Location: [xxx](https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/eligibilitymaps_18NOV2020.R)
+* Data Source: Provided directly to SDAD by USDA
+* Repo Location: [Code, loc.123, 159](https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/eligibilitymaps_18NOV2020.R)
 
 
 ## Census 

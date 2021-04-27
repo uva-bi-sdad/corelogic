@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Devika Mahoney-Nair" />
 
 
-<title>Dataset 02 Info</title>
+<title>USDA Non-Rural Areas</title>
 
 <script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -565,12 +566,45 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Dataset 02 Info</h1>
+<h1 class="title toc-ignore">USDA Non-Rural Areas</h1>
+<h4 class="author">Devika Mahoney-Nair</h4>
+<h4 class="date">4/6/2021</h4>
 
 </div>
 
 
-
+<hr />
+<div id="import" class="section level2">
+<h2>Import</h2>
+<p><u>USDA Protected Borrowers</u></p>
+<p>This dataset was posted to USDA’s website of eligibility datasets. This dataset consisted of multiple (custom) shapefiles representing all the areas of the U.S. wherein active borrowers (companies with active loans with RUS) had ongoing broadband projects whose sites are protected from new development. (phrasing?) For the purposes of analysis, this file was compared against census block shapefiles to produce an intermediate dataset of census blocks and an indicator of whether the block was considered protected or not. No specific download code; these were downloaded locally and manually uploaded to Rivanna.</p>
+<ul>
+<li>Data Source: <a href="https://www.usda.gov/reconnect/eligibility-area-map-datasets">USDA Eligibility Datasets</a></li>
+<li>Repo Location: <a href="https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/eligibilitymaps_18NOV2020.R">Translating Prot Borr loc.34-39</a></li>
+</ul>
+<p><u>USDA CAF II Auction Spectrum</u></p>
+<p>This dataset was posted to USDA’s website of eligibility datasets. This dataset consisted of multiple (custom) shapefiles representing all the areas of the U.S. wherein companies had won the right to develop spectrum whose sites are protected from new development. (phrasing?) For the purposes of analysis, this file was compared against census block shapefiles to produce an intermediate dataset of census blocks and an indicator of whether the block was considered protected or not. No specific download code; these were downloaded locally and manually uploaded to Rivanna.</p>
+<ul>
+<li>Data Source: <a href="https://www.usda.gov/reconnect/eligibility-area-map-datasets">USDA Eligibility Datasets</a></li>
+<li>Repo Location: <a href="https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/eligibilitymaps_18NOV2020.R">Translating CAF II loc.40-43</a></li>
+</ul>
+<p><u>RUS Program Service Areas</u></p>
+<p>RUS directly shared a set of program service areas’ shapefiles with SDAD. These include one dataset for Community Connect and one for ReConnect. These datasets were filtered for time (2014 and earlier vs 2014-2018 for CC) where appropriate. They were then compared against census block shapefiles to produce an intermediate dataset of census blocks and an indicator of whether the block was considered funded by that program at that time or not. No specific download code; these were downloaded locally and manually uploaded to Rivanna.</p>
+<ul>
+<li>Data Source: Provided directly to SDAD by USDA</li>
+<li>Repo Location: <a href="https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/eligibilitymaps_18NOV2020.R">Code, loc.123, 159</a></li>
+</ul>
+</div>
+<div id="structure" class="section level2">
+<h2>Structure</h2>
+</div>
+<div id="exceptions" class="section level2">
+<h2>Exceptions?</h2>
+<ul>
+<li>Had to run another version using tracts for big states</li>
+<li>Had an issue with Kentucky (didn’t believe it had no non-rural areas), ran that separately</li>
+</ul>
+</div>
 
 
 

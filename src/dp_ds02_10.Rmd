@@ -1,5 +1,5 @@
 ---
-title: "Import Notes"
+title: "FCC Form 477"
 author: "Devika Mahoney-Nair"
 date: "4/6/2021"
 menu_title: "Profile Provenance"
@@ -18,6 +18,115 @@ knitr::opts_chunk$set(
 
 ------------------------------------------------------------------------
 
-This dataset originally came as a series of shapefile databases (1 database per state) US Census Bureau's TIGER database. It was read into a temporary SQL Server instance and re-exported as a txt file using a pipe "\|" as a field separator.
+## Import
 
-Issues with import were still encountered because of odd characters in the Legal1, Legal2, and Legal3 columns. it was determined that these columns were unnecessary for the project and so were removed from the import.
+[FCC Form 477 (2014 and 2018)]{.ul}
+
+This dataset originally came as a zipped csv file posted to the FCC's data page for Form 477. Data was downloaded from FCC Form 477 website. The 2014 data uses version 3 of the zipped csv file posted online in December 2014. The 2018 data uses the file posted online in December 2018. Both files were downloaded via FTP, unzipped into a temporary file location and saved to the project folder in the script linked here: \<\>.
+
+-   Data Source: [FCC Form 477 Website](https://www.fcc.gov/general/broadband-deployment-data-fcc-form-477)
+-   Repo Location: [FCC Manipulation Code](https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/fcc_speed_data_load_manip.R)
+
+#### Download 2014 Data
+
+```{r}
+# url <- "http://transition.fcc.gov/form477/BroadbandData/Fixed/Dec14/Version%203/US-Fixed-without-Satellite-Dec2014.zip"
+# temp <- tempfile()
+# download.file(url,temp)
+# unlink(temp)
+
+# grab temp pathname and go intoto terminal 
+# ran this to see name of file in zip 
+# unzip -l /tmp/RtmpwK6I3G/file33274b60567b
+# ran this to unzip from terminal:
+# unzip /tmp/RtmpwK6I3G/file33274b60567b -d /project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/
+
+## DATA NOW STORED AT
+fcc_2014 <- read.csv("/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fbd_us_without_satellite_dec2014_v3.csv")
+```
+
+#### Download 2018 data
+
+```{r}
+# url <- "<https://www.fcc.gov/form477/BroadbandData/Fixed/Dec18/Version%202/US-Fixed-without-Satellite-Dec2018.zip>"
+# temp <- tempfile()
+# download.file(url,temp)
+# unlink(temp)
+# grab temp pathname and go intoto terminal
+# ran this to see name of file in zip
+# unzip -l /tmp/RtmpSdiLsM/file360be78486be5
+# ran this to unzip from terminal:
+# unzip /tmp/RtmpSdiLsM/file360be78486be5 -d /project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/
+
+## DATA NOW STORED AT
+fcc_2018 <-
+read.csv("/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fbd_us_without_satellite_dec2018_v2.csv")
+```
+
+## Structure
+
+The data needed to be summarized to maximum coverage per block and compared against a threshold. The code in this section gets the maximum speed per census block where data is available in FCC data.
+
+#### 2014 DATA
+
+```{r}
+fcc_2014 <- read.csv("/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fbd_us_without_satellite_dec2014_v3.csv")
+
+# #threshold of 3 mbps (download + upload)
+fcc_2014_block_max_ <- fcc_2014 %>%
+  group_by(StateAbbr, BlockCode) %>%
+  summarise(MaxAdDown_ = max(MaxAdDown),
+            MaxAdUp_ = max(MaxAdUp)) 
+```
+
+#### 2018 DATA
+
+```{r}
+fcc_2018 <-
+read.csv("/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fbd_us_without_satellite_dec2018_v2.csv")
+
+fcc_2018_block_max <- fcc_2018 %>% group_by(StateAbbr, BlockCode) %>%
+summarise(MaxAdDown_ = max(MaxAdDown), MaxAdUp_ = max(MaxAdUp))
+
+```
+
+## New Variables
+
+New variables indicated whether or not download/upload speeds were acceptable. The code in this section compares the maximum speed of coverage per block to a time-based eligibility threshold.
+
+*Josh's code set 2014 threshold to 5 mbps, but that isn't reflected in my version. Need to check with him where he did this?*
+
+#### 2014 Data
+
+For the year 2014, we used a combined speed threshold using the maximum advertised download and upload speeds. After testing a number of different thresholds (10/1, 4/1, 4/768, combined 3), we selected a combined value threshold of 5 Mbps, meaning the combined maximum advertised upload and download speeds needed to sum below 5 Mbps to be considered eligible.
+
+```{r}
+# picks off from restructure chunk
+fcc_2014_block_max_ <- fcc_2014_block_max_ %>%
+  mutate(total_speed = MaxAdDown_ + MaxAdUp_,
+         speed_elig_down = NA, #ifelse(MaxAdDown_ >= 4, 0, 1),
+         speed_elig_up = NA, #ifelse(MaxAdUp_ >= 0.768, 0, 1),
+         speed_inelig = ifelse(total_speed < 3, 1, 0),
+         speed_elig = ifelse(total_speed >= 3, 0, 1))
+
+saveRDS(fcc_2014_block_max_, "/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fcc_2014_block_maxspdelig_threshold_total3.RDS")
+```
+
+#### 2018 DATA
+
+For the year 2018, we used a straightforward speed threshold, where the maximum advertised download speed needed to sit below 10 Mbps AND the maximum upload speed needed to sit below 1 Mbps to be considered eligible.
+
+```{r}
+# picks off from restructure chunk
+fcc_2018_block_max <- fcc_2018_block_max %>%
+  mutate(speed_elig_down = ifelse(MaxAdDown_ >= 10, 0, 1), 
+         speed_elig_up = ifelse(MaxAdUp_ >= 1, 0, 1), 
+         speed_inelig = ifelse(MaxAdDown_ >= 10 & MaxAdUp_ >= 1, 1, 0), 
+         speed_elig = ifelse(MaxAdDown_ >= 10 & MaxAdUp_ >= 1, 0, 1))
+
+# saveRDS(fcc_2018_block_max, "/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fcc_2018_block_maxspdelig.RDS")
+```
+
+## Fill in missing census blocks
+
+happens at join

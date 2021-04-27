@@ -1,5 +1,5 @@
 ---
-title: "Add Variables by Transorming Existing Columns"
+title: "Transformations: Spatial Translations and New Variables"
 output: 
   html_document:
     toc: yes
@@ -14,68 +14,20 @@ knitr::opts_chunk$set(
 
 ------------------------------------------------------------------------
 
-
-
-
-## FCC 
-
+## FCC
 
 ### Form 477
 
--   Get the maximum speed per census block where data is available in
-    FCC data
+-   Get the maximum speed per census block where data is available in FCC data
 -   Compare that maximum speed to our eligibility threshold
 
-#### 2014 Data
+#### 2014 DATA
 
-<!-- Note that we tried the following thresholds for 2014. -->
-
-<!-- -   10/1 -->
-<!-- -   4/1 -->
-<!-- -   4/768 -->
-<!-- -   5 (upload + download) ** selected -->
-
-For the year 2014, we used a combined speed threshold using the maximum advertised download and upload speeds. The combined value needed to be equal or greater than 5 Mbps. 
-
-```{r include = FALSE}
-# fcc_2014_block_max <- fcc_2014 %>%
-#   group_by(StateAbbr, BlockCode) %>%
-#   summarise(MaxAdDown_ = max(MaxAdDown),
-#             MaxAdUp_ = max(MaxAdUp)) %>%
-#   mutate(speed_elig_down = ifelse(MaxAdDown_ >= 10, 0, 1),
-#          speed_elig_up = ifelse(MaxAdUp_ >= 1, 0, 1),
-#          speed_inelig = ifelse(MaxAdDown_ >= 10 & MaxAdUp_ >= 1, 1, 0),
-#          speed_elig = ifelse(MaxAdDown_ >= 10 & MaxAdUp_ >= 1, 0, 1))
-
-# #threshold of 4/1
-# fcc_2014_block_max <- fcc_2014 %>%
-#   group_by(StateAbbr, BlockCode) %>%
-#   summarise(MaxAdDown_ = max(MaxAdDown),
-#             MaxAdUp_ = max(MaxAdUp)) %>%
-#   mutate(speed_elig_down = ifelse(MaxAdDown_ >= 4, 0, 1),
-#          speed_elig_up = ifelse(MaxAdUp_ >= 1, 0, 1),
-#          speed_inelig = ifelse(MaxAdDown_ >= 4 & MaxAdUp_ >= 1, 1, 0),
-#          speed_elig = ifelse(MaxAdDown_ >= 4 & MaxAdUp_ >= 1, 0, 1))
-
-# #threshold of 4/768
-# fcc_2014_block_max_ <- fcc_2014 %>%
-#   group_by(StateAbbr, BlockCode) %>%
-#   summarise(MaxAdDown_ = max(MaxAdDown),
-#             MaxAdUp_ = max(MaxAdUp)) %>%
-#   mutate(speed_elig_down = ifelse(MaxAdDown_ >= 4, 0, 1),
-#          speed_elig_up = ifelse(MaxAdUp_ >= 0.768, 0, 1),
-#          speed_inelig = ifelse(MaxAdDown_ >= 4 & MaxAdUp_ >= 0.768, 1, 0),
-#          speed_elig = ifelse(MaxAdDown_ >= 4 & MaxAdUp_ >= 0.768, 0, 1))
-
-# saveRDS(fcc_2014_block_max, "/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fcc_2014_block_maxspdelig.RDS")
-# saveRDS(fcc_2014_block_max, "/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fcc_2014_block_maxspdelig_threshold_4_1.RDS")
-# saveRDS(fcc_2014_block_max_, "/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fcc_2014_block_maxspdelig_threshold_4_768.RDS")
-
-```
-
-This is the code I used - Josh may have a version of this somewhere. 
+For the year 2014, we used a combined speed threshold using the maximum advertised download and upload speeds. After testing a number of different thresholds (10/1, 4/1, 4/768, combined 3), we selected a combined value threshold of 5 Mbps, meaning the combined maximum advertised upload and download speeds needed to sum below 5 Mbps to be considered eligible.
 
 ```{r}
+fcc_2014 <- read.csv("/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fbd_us_without_satellite_dec2014_v3.csv")
+
 # #threshold of 3 mbps (download + upload)
 fcc_2014_block_max_ <- fcc_2014 %>%
   group_by(StateAbbr, BlockCode) %>%
@@ -88,11 +40,11 @@ fcc_2014_block_max_ <- fcc_2014 %>%
          speed_elig = ifelse(total_speed >= 3, 0, 1))
 
 saveRDS(fcc_2014_block_max_, "/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fcc_2014_block_maxspdelig_threshold_total3.RDS")
-
 ```
 
 #### 2018 DATA
 
+For the year 2018, we used a straightforward speed threshold, where the maximum advertised download speed needed to sit below 10 Mbps AND the maximum upload speed needed to sit below 1 Mbps to be considered eligible.
 
 ```{r}
 fcc_2018 <-
@@ -109,18 +61,18 @@ MaxAdUp_ >= 1, 0, 1))
 
 ```
 
-## USDA 
+## USDA
 
 ### Non-Rural Areas 2010-2020
 
 Took shapefile
 
-* intersected against counties to return TF - get counties where T - didn't use
-* made boundaries valid - didn't use 
+-   X intersected against counties to return TF - get counties where T - didn't use
+-   X made boundaries valid - didn't use
 
-1. intersection against state (returns polygons)
-2. intersection against tract 
-3. intersection against block 
+1.  intersection against state (returns polygons)
+2.  intersection against tract
+3.  intersection against block
 
 ```{r}
 ### entire thing https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/usda_nonrural_areas_map_manip.Rmd
@@ -166,8 +118,9 @@ for (i in 4:nrow(files_to_intersect_)) {
 }
 ```
 
-
 ### Protected Borrowers
+
+Took shapefile intersection against block
 
 ```{r}
 protborr <- sf::st_read("/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/rus_broadband_servicearea/ProtectedBorrowers04222019.shp")
@@ -179,6 +132,8 @@ usa_blocks_speed_rural$protborr_inelg_vec <- blocks_criteriaXprotborr_VECTOR %>%
 
 ### USDA CAF II Spectrum Auction Winners
 
+Took shapefile intersection against block
+
 ```{r}
 caf2auctionwinners <- st_read("/project/biocomplexity/sdad/projects_data/usda/bb/original/Protected_bb_borrower_service_areas/Auction903_April2019.shp")
 caf2auctionwinners <- caf2auctionwinners %>% st_transform(st_crs(usa_blocks_speed_rural))
@@ -186,3 +141,68 @@ blocks_criteriaXcaf2winners_VECTOR <- st_intersects(usa_blocks_speed_rural, caf2
 usa_blocks_speed_rural$caf2_inelg_vec <- blocks_criteriaXcaf2winners_VECTOR %>% lengths >0 
 ```
 
+### USDA Program Service Areas: Community Connect & ReConnect
+
+```{r}
+usa_blocks_speed_rural_projects_final_2014 <- readRDS("/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/USA_2014_final_eligibility_sf_08DEC2020v3.RDS")
+usa_blocks_speed_rural_projects_final_2018 <- readRDS("/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/USA_2018_final_eligibility_sf_18NOV2020v2.RDS")
+
+# BIP, TC does not have a date
+# CC has a date - 2013-2020
+# RC has a date - 2019-2020
+# bip_areas <- sf::st_read("/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RUS_BIP_Shapefiles_April2020/200409_BIP_ServAr_ID.shp") %>% sf::st_transform(sf::st_crs(usa_blocks_speed_rural_projects_final_2014))
+cc_areas <- sf::st_read("/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RUS_CC_Shapefiles_April2020/CC 2013_2019_83 04272020.shp") %>% sf::st_transform(sf::st_crs(usa_blocks_speed_rural_projects_final_2014))
+cc_areas_2014andearlier <- cc_areas %>% filter(OBLFY <= 2014)
+cc_areas_2018andearlier <- cc_areas %>% filter(OBLFY <= 2018 & OBLFY > 2014)
+# tc_fb_areas <- sf::st_read("/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RUS_TC_Shapefiles_June2020/USDARD_RUS_TELCO_FARMBILL_06042020/USDARD_RUS_TELCO_FARMBILL_06042020.shp") %>% sf::st_transform(sf::st_crs(usa_blocks_speed_rural_projects_final_2014))
+# tc_inf_areas <- sf::st_read("/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RUS_TC_Shapefiles_June2020/USDARD_RUS_TELCO_INFRA_06042020/USDARD_RUS_TELCO_INFRA_06042020.shp") %>% sf::st_transform(sf::st_crs(usa_blocks_speed_rural_projects_final_2014))
+
+## CC 2014 - Block at CC Project Boundaries
+eligblocks_cc14_crossbound <- sf::st_crosses(usa_blocks_speed_rural_projects_final_2014, st_boundary(cc_areas_2014andearlier))
+usa_blocks_speed_rural_projects_final_2014$CC_14_RUSID_boundary <- cc_areas_2014andearlier$RUSID[ sapply(eligblocks_cc14_crossbound, first) ]
+## CC 2014 - Block within CC Project Boundaries
+eligblocks_cc14_within <- sf::st_within(usa_blocks_speed_rural_projects_final_2014,cc_areas_2014andearlier)
+usa_blocks_speed_rural_projects_final_2014$CC_14_RUSID_inside <- cc_areas_2014andearlier$RUSID[ sapply(eligblocks_cc14_within, first) ]
+## CC 2014 - Block intersects CC Project 
+eligblocks_cc14_intersect <- sf::st_intersects(usa_blocks_speed_rural_projects_final_2014, cc_areas_2014andearlier)
+usa_blocks_speed_rural_projects_final_2014$CC_14_RUSID_intersect <- cc_areas_2014andearlier$RUSID[ sapply(eligblocks_cc14_intersect, first) ]
+
+# saveRDS(usa_blocks_speed_rural_projects_final_2014, "/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/USA_2014_final_eligibility_sf_14DEC2020v5.RDS")
+usa_blocks_speed_rural_projects_final_2014 <- readRDS("/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/USA_2014_final_eligibility_sf_14DEC2020v5.RDS")
+
+##########
+
+
+## CC 2018 - Block at CC Project Boundaries
+eligblocks_cc18_crossbound <- sf::st_crosses(usa_blocks_speed_rural_projects_final_2018, st_boundary(cc_areas_2018andearlier))
+usa_blocks_speed_rural_projects_final_2018$CC_18_RUSID_boundary <- cc_areas_2018andearlier$RUSID[ sapply(eligblocks_cc18_crossbound, first) ]
+## CC 2018 - Block within CC Project Boundaries
+eligblocks_cc18_within <- sf::st_within(usa_blocks_speed_rural_projects_final_2018,cc_areas_2018andearlier)
+usa_blocks_speed_rural_projects_final_2018$CC_18_RUSID_inside <- cc_areas_2018andearlier$RUSID[ sapply(eligblocks_cc18_within, first) ]
+## CC 2018 - Block intersects CC Project 
+eligblocks_cc18_intersect <- sf::st_intersects(usa_blocks_speed_rural_projects_final_2018, cc_areas_2018andearlier)
+usa_blocks_speed_rural_projects_final_2018$CC_18_RUSID_intersect <- cc_areas_2018andearlier$RUSID[ sapply(eligblocks_cc18_intersect, first) ]
+
+# saveRDS(usa_blocks_speed_rural_projects_final_2018, "/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/USA_2018_final_eligibility_sf_14DEC2020v5.RDS")
+usa_blocks_speed_rural_projects_final_2014 <- readRDS("/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/USA_2014_final_eligibility_sf_14DEC2020v5.RDS")
+usa_blocks_speed_rural_projects_final_2018 <- readRDS("/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/USA_2018_final_eligibility_sf_14DEC2020v5.RDS")
+
+rc_areas <- sf::st_read("/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RUS_RC_Shapefiles_April2020/ReConnect R1 594 PFSA 05012020.shp") %>% sf::st_transform(sf::st_crs(usa_blocks_speed_rural_projects_final_2018))
+
+## RC 2018 - Block at RC Project Boundaries
+eligblocks_rc18_crossbound <- sf::st_crosses(usa_blocks_speed_rural_projects_final_2018, st_boundary(rc_areas))
+usa_blocks_speed_rural_projects_final_2018$RC_18_RUSID_boundary <- rc_areas$RUS_ID[ sapply(eligblocks_rc18_crossbound, first) ]
+# saveRDS(usa_blocks_speed_rural_projects_final_2018, "/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/working/eligibility_summary_percentages/intermediates_delete/")
+## RC 2018 - Block within RC Project Boundaries
+eligblocks_rc18_within <- sf::st_within(usa_blocks_speed_rural_projects_final_2018,rc_areas)
+usa_blocks_speed_rural_projects_final_2018$RC_18_RUSID_inside <- rc_areas$RUS_ID[ sapply(eligblocks_rc18_within, first) ]
+## RC 2018 - Block intersects RC Project 
+eligblocks_rc18_intersect <- sf::st_intersects(usa_blocks_speed_rural_projects_final_2018, rc_areas)
+usa_blocks_speed_rural_projects_final_2018$RC_18_RUSID_intersect <- rc_areas$RUS_ID[ sapply(eligblocks_rc18_intersect, first) ]
+
+# saveRDS(usa_blocks_speed_rural_projects_final_2018, "/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/working/eligibility_summary_percentages/intermediates_delete/usa_blocks_speed_rural_projects_final_2018WRC_sf.RDS")
+
+join_18_rc <- usa_blocks_speed_rural_projects_final_2018 %>% 
+  as.data.frame() %>% 
+  select(GEOID10, BlockCode, RC_18_RUSID_boundary, RC_18_RUSID_inside, RC_18_RUSID_intersect)
+```
