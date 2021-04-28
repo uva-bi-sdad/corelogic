@@ -14,24 +14,61 @@ knitr::opts_chunk$set(
 
 ------------------------------------------------------------------------
 
+## Required Characteristics of the Final Dataset
+
+-   Location of Property
+
+-   Type of Property
+
+-   Date of Sale
+
+-   Price of Sale
+
+-   Type of Transaction
+
+-   Size of Residence
+
+-   Size of Property
+
+-   Age of Property
+
+-   Number of Bedrooms
+
+-   Number of Bathrooms
+
+For each of these required characteristics, at least one column, of possibly multiple columns) that could satisfy the requirement must have a value for each record. For example, to satisfy the requirement for Size of Property, either "acres" or "land_square_footage" needs to not be null to be included in the final data set.
+
+## Transaction Type
+
+Additionally, there is a requirement for the transaction to be what is called "arms-length". This is what we might call a "typical" transaction between two parties, not a special transaction between parties, such as a sale to a relative for a reduced amount. For this data, there are many transaction types, but type '9' is specified for transaction that are "non-arms-length", so the requirement that is used here is to not include transactions that are coded '9'.
+
 ```{sql}
 SELECT
   geoid_cnty,
-  sale_yr,
-  pri_cat_code_req,
-  have_all
+  geoid_blk,
+  p_id_iris_frmtd,
+  property_indicator,
+  acres,
+  land_square_footage,
+  bldg_code,
+  building_square_feet,
+  living_square_feet,
+  year_built,
+  effective_year_built,
+  bedrooms,
+  baths_appraised,
+  situs_address property_address,
+  sale_price,
+  sale_date,
+  sale_year,
+  transaction_type,
+  property_centroid_latitude,
+  property_centroid_longitude
+INTO
+  corelogic_usda.real_estate_sales_final_characteristics
 FROM
-(
-SELECT
-  geoid_cnty,
-  LEFT(sale_date, 4) sale_yr,
-  'TRUE' pri_cat_code_req,
-  count(*) have_all
-FROM
-  corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog
+  corelogic_usda.current_tax_200627_latest_all_add_vars_add_progs_geom_blk
 WHERE
---  (geoid_cnty LIKE '51%' OR geoid_cnty LIKE '19%')
--- AND
   property_indicator = '10'
 AND
   transaction_type != '9'
@@ -46,12 +83,14 @@ AND
 AND
  (year_built IS NOT NULL OR effective_year_built IS NOT NULL)
 AND
- (full_baths IS NOT NULL OR \"1qtr_baths\" IS NOT NULL OR \"3qtr_baths\" IS NOT NULL OR half_baths IS NOT NULL OR total_baths IS NOT NULL)
+ baths_appraised IS NOT NULL
 AND
-  pri_cat_code IS NOT NULL
-AND
-  LEFT(sale_date, 4) IN ('2006', '2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018')
-GROUP BY
-  geoid_cnty,
-  LEFT(sale_date, 4)
+  sale_year BETWEEN 2006 AND 2018;
+  
+ALTER TABLE corelogic_usda.real_estate_sales_final_characteristics ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);
+create index fnl_char_sale_year_idx on corelogic_usda.real_estate_sales_final_characteristics (sale_year);
+create index fnl_char_sale_year_baths on corelogic_usda.real_estate_sales_final_characteristics (baths_appraised);
+create index fnl_char_sale_year_beds on corelogic_usda.real_estate_sales_final_characteristics (bedrooms);
+create index fnl_char_sale_year_trantype on corelogic_usda.real_estate_sales_final_characteristics (transaction_type);
+create index fnl_char_sale_year_blk on corelogic_usda.real_estate_sales_final_characteristics (geoid_blk);
 ```

@@ -254,43 +254,9 @@ SELECT a.geoid_cnty, a.p_id_iris_frmtd,
    ON a.geoid_cnty = w.geoid_cnty AND a.p_id_iris_frmtd = w.p_id_iris_frmtd
  LEFT JOIN corelogic_usda.current_tax_200627_latest_property_centroid_latitude x
    ON a.geoid_cnty = x.geoid_cnty AND a.p_id_iris_frmtd = x.p_id_iris_frmtd
+ LEFT JOIN corelogic_usda.current_tax_200627_latest_property_indicator y
+   ON a.geoid_cnty = y.geoid_cnty AND a.p_id_iris_frmtd = y.p_id_iris_frmtd
  WHERE s.sale_date IS NOT NULL;
 
 ALTER TABLE corelogic_usda.current_tax_200627_latest_all ADD PRIMARY KEY (geoid_cnty, p_id_iris_frmtd);
-```
-
-```{=html}
-<!--
-
-## Not USED - Attempt to create psql function to get latest item
-
-This would obviate the need for all the copy pastes currently necessary. Doesn't work yet.
-
-```{sql}
-create or replace function get_latest (
-  col varchar
-) 
-	returns table (
-		geoid_cnty char(5),
-		p_id_iris_frmtd varchar(75),
-		reslt numeric,
-		sale_date date
-	) 
-	language plpgsql
-as $$
-begin
-	return query 
-		execute format('
-		SELECT geoid_cnty, 
-       p_id_iris_frmtd, 
-       %I,
-       sale_date,
-       ROW_NUMBER() OVER (PARTITION BY geoid_cnty, p_id_iris_frmtd ORDER BY sale_date DESC) as "rec_num"
-    FROM (select * from corelogic_usda.current_tax_200627_typed limit 50000) t
-    WHERE sale_date IS NOT NULL
-    AND %I IS NOT NULL', col);
-end;$$
-```
-
--->
 ```
