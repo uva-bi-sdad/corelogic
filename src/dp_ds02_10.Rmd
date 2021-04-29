@@ -109,7 +109,7 @@ fcc_2014_block_max_ <- fcc_2014_block_max_ %>%
          speed_inelig = ifelse(total_speed < 3, 1, 0),
          speed_elig = ifelse(total_speed >= 3, 0, 1))
 
-saveRDS(fcc_2014_block_max_, "/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fcc_2014_block_maxspdelig_threshold_total3.RDS")
+# saveRDS(fcc_2014_block_max_, "/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fcc_2014_block_maxspdelig_threshold_total3.RDS")
 ```
 
 #### 2018 DATA
@@ -127,6 +127,12 @@ fcc_2018_block_max <- fcc_2018_block_max %>%
 # saveRDS(fcc_2018_block_max, "/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fcc_2018_block_maxspdelig.RDS")
 ```
 
-## Fill in missing census blocks
+## Notes
 
-happens at join
+The FCC data does not include census blocks where there are no providers.
+
+## Intermediate Resulting Datasets:
+
+-   FCC Form 477 2014 Maximum Coverage at Block ()
+
+-   FCC Form 477 201 Maximum Coverage at Block (*/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/fcc_availability/fcc_2018_block_maxspdelig.RDS*)

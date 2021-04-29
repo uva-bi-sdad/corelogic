@@ -1,5 +1,5 @@
 ---
-title: "Dataset 03 Info"
+title: "Eligibility Dataset (CC & RC, 2014 & 2018)"
 output:
 html_document:
 toc: yes
@@ -100,3 +100,8 @@ dataset:
   output_data_format: "RDS"
   output_data_location: "/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/USA_2014_final_eligibility_sf_14DEC2020v7.RDS"
 ---
+
+### GOAL
+
+To study and compare the eligible populations associated with the various broadband programs and understand the community characteristics and their respective programs' incidence.
+
