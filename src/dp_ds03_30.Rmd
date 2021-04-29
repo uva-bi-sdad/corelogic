@@ -1,7 +1,7 @@
 ---
-title: "New Variable Notes"
-author: "Aaron Schroeder"
-date: "4/3/2021"
+title: "Transformations Notes"
+author: "Devika Mahoney-Nair"
+date: "4/21/2021"
 menu_title: "Profile Provenance"
 output: 
   html_document:
@@ -18,15 +18,46 @@ knitr::opts_chunk$set(
 
 ------------------------------------------------------------------------
 
+![Spatial Transformations](images/Spatial%20Transformations.png)
+
+## FCC
+
 [FCC Form 477 (2014 and 2018)]{.ul}
 
-This dataset originally came as a zipped csv file posted to the FCC's data page for Form 477. It was unzipped into a temporary file location and saved to the project folder in the script linked here: <https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/fcc_speed_data_load_manip.R>.
+The data needed to be summarized to maximum coverage per block and compared against a threshold. New variables indicated whether or not download/upload speeds were acceptable.
 
-2014: lines 3-14
+*Josh's code set 2014 threshold to 5 mbps, but that isn't reflected in my version. Need to check with him where he did this?*
 
-2018: lines 69 - 80
+Repo Location: [FCC Manipulation Code](https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/fcc_speed_data_load_manip.R), loc.48-57 (2014), and 86-93 (2018)
 
-The total_baths variable provided was not always calculated, even when other bath columns had values, therefore we needed our own more complete version of total bathrooms. We used the Fannie Mae and Freddie Mac Uniform Appraisal Dataset Specification to calculate.
+## USDA
 
+[USDA Non-Rural Areas 2010-2020]{.ul}
 
+This dataset consisted of a single (custom) shapefile representing all the non-rural areas of the U.S. For the purposes of analysis, this file was compared sequentially against state shapefiles, county shapefiles, and census block shapefiles, to produce an intermediate dataset of census blocks and an indicator of whether the block was considered non-rural or not.
 
+Repo Location: [Non-Rural Areas Translation Code](https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/usda_nonrural_areas_map_manip.Rmd)
+
+[USDA Protected Borrowers]{.ul}
+
+This dataset consisted of multiple (custom) shapefiles representing all the areas of the U.S. wherein active borrowers (companies with active loans with RUS) had ongoing broadband projects whose sites are protected from new development. *(phrasing?)* For the purposes of analysis, this file was compared against census block shapefiles to produce an intermediate dataset of census blocks and an indicator of whether the block was considered protected or not.
+
+Repo Location: [Translating Prot Borr loc.34-39](https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/eligibilitymaps_18NOV2020.R)
+
+[USDA CAF II Auction Spectrum]{.ul}
+
+This dataset consisted of multiple (custom) shapefiles representing all the areas of the U.S. wherein companies had won the right to develop spectrum whose sites are protected from new development. *(phrasing?)* For the purposes of analysis, this file was compared against census block shapefiles to produce an intermediate dataset of census blocks and an indicator of whether the block was considered protected or not.
+
+Repo Location: [Translating CAF II loc.40-43](https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/eligibilitymaps_18NOV2020.R)
+
+[RUS Program Service Areas: Community Connect & ReConnect]{.ul}
+
+These datasets were filtered for time (2014 and earlier vs 2014-2018 for CC) where appropriate. They were then compared against census block shapefiles to produce an intermediate dataset of census blocks and an indicator of whether the block was considered funded by that program at that time or not.
+
+Repo Location: [Code, loc.116-176](https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/eligibilitymaps_18NOV2020.R)
+
+## Census
+
+[2018 Census Blocks]{.ul}
+
+No transformations made.

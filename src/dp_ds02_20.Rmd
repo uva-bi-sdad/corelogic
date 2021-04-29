@@ -1,0 +1,183 @@
+---
+title: "USDA Non-Rural Areas"
+author: "Devika Mahoney-Nair"
+date: "4/6/2021"
+menu_title: "Profile Provenance"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
+    toc_depth: 4
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  eval=FALSE
+)
+```
+
+------------------------------------------------------------------------
+
+## Import
+
+[USDA Non-Rural Areas 2010-2020]{.ul}
+
+This dataset was posted to USDA's website of eligibility datasets. No code to download, simply saved locally then uploaded to Rivanna. 
+
+```{r}
+# STORED HERE
+rurality <- sf::st_read("/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL/RD_BROADBAND_IELG_PRODUCTION.shp")
+```
+
+* Data Source: [USDA Eligibility Datasets](https://www.usda.gov/reconnect/eligibility-area-map-datasets)
+* Repo Location: [Non-Rural Areas Translation Code](https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/usda_nonrural_areas_map_manip.Rmd)
+
+
+
+## Structure
+
+This dataset consisted of a single (custom) shapefile representing all the non-rural areas of the U.S. For the purposes of analysis, this file was compared sequentially against state shapefiles, county shapefiles, and census block shapefiles, to produce an intermediate dataset of census blocks and an indicator of whether the block was considered non-rural or not.
+
+
+#### County Indicator
+
+For all counties, perform an intersect of the original non-rural areas shapefile against the county-level polygons. 
+
+```{r}
+us_counties <- tigris::counties()
+
+rurality <- sf::st_read("/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL/RD_BROADBAND_IELG_PRODUCTION.shp")
+
+# shapes_e  <- readRDS("/project/biocomplexity/sdad/projects_data/usda/bb/original/censusblocks/blocks_TIGER2018_sf_RDS_USA_SF.RDS")
+
+rurality <- rurality %>% st_transform(st_crs(us_counties))
+counties_x_urban <- st_intersects(us_counties, rurality)
+counties_x_urban[1:6]
+us_counties$x_urban <- counties_x_urban %>% lengths > 0
+us_counties %>% .$x_urban %>% table
+us_counties_x_urban <- us_counties %>% filter(x_urban == TRUE)
+urban_county_list  <- us_counties_x_urban %>% as.data.frame %>% select(1, 2)  %>% mutate(check_cty = paste0(STATEFP, COUNTYFP)) #%>% group_by(STATEFP) %>% summarise(counties = list(COUNTYFP))
+# shapes_states <- shapes_e %>% filter(STATEFP10 %in% urban_county_list$STATEFP)
+# 
+# shapes_states$check_cty <- paste0(shapes_states$STATEFP10, shapes_states$COUNTYFP10)
+# 
+# blocks_in_counties_with_urban <- shapes_states %>% filter(check_cty %in% urban_county_list$check_cty)
+# nrow(blocks_in_counties_with_urban)
+# us_counties_x_urban %>% saveRDS("/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL_counties_intersect.RDS")
+```
+
+*Note: Some states without non-rural areas (aka entirely RURAL, according to new USDA file's county intersects). FIPS Codes: 66, 60, 69, 21. State Abbreviations "AS", "GU", "MP", "KY")*
+
+```{r}
+# states without non-rural states (aka entirely RURAL, according to new USDA file's county intersects)
+c(66, 60, 69, 21)
+c("AS", "GU", "MP", "KY")
+```
+
+#### State Polygons
+
+For each state, perform an intersection of the original non-rural areas shapefile against the state-level polygons. 
+
+```{r}
+rurality <- sf::st_read("/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL/RD_BROADBAND_IELG_PRODUCTION.shp")
+
+states <- tigris::states()
+
+rurality_ <- rurality %>% st_transform(st_crs(states)) %>% st_buffer(0)
+
+for (i in 1:nrow(states)) {
+  print(states$STUSPS[i])
+  a <- Sys.time()
+  states_nonrural <- st_intersection(states[i,], rurality_)
+  b <- Sys.time()
+  c <- as.character(as.integer((b-a)/60))
+  print(paste0((c), " minutes"))
+  saveRDS(states_nonrural, paste0("/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL_working/nonrural_state_intersections/nonrural_states_polygon_", states$STATEFP[i], ".RDS"))
+}
+
+```
+
+#### Block Indicator
+
+For each state, we pull in all the census blocks and see if any of them belong to non-rural counties based on join to previous file. We filter for blocks in the nonrural counties then intersect the block against the non-rural state-level polygons from previous state-level intersection. The output is then appended to the rural-only counties so you have a file of all the blocks in the state with a rural/non-rural indicator.
+
+```{r}
+## Path to census blocks
+cb_path <- "/project/biocomplexity/sdad/projects_data/usda/bb/original/censusblocks/blocks_TIGER2018_sf_RDS/"
+census_blocks_states <- list.files(cb_path)
+cb_files <- data.frame(state = stringr::str_remove_all(census_blocks_states, "tl_2018_|_tabblock10.RDS"), cb_filenames = census_blocks_states, cb_paths = paste0(cb_path, census_blocks_states))
+
+## Path to nonrural state polygons
+nonrural_path <- "/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL_working/nonrural_state_intersections/"
+nonrural_states <- list.files(nonrural_path)
+nonrural_files <- data.frame(state = stringr::str_remove_all(nonrural_states, "nonrural_states_polygon_|\\.RDS"), nr_filename = nonrural_states, nr_path = paste0(nonrural_path, nonrural_states))
+
+## Join blocks to states to determine which states can be included
+files_to_intersect <- cb_files %>% full_join(nonrural_files, by = "state")
+files_to_intersect <- files_to_intersect[!is.na(files_to_intersect$cb_filenames),]
+
+## Savepaths for sf objects and dataframes
+savepath <- "/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL_working/"
+savepath_1 <- "blocks_nonruralTF_sf/"
+savepath_2 <- "blocks_nonruralTF_df/"
+
+## Non-rural counties
+us_counties_x_urban <- readRDS("/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL_counties_intersect.RDS")  %>% as.data.frame %>% select(1, 2)  %>% mutate(county_nonrural = 1)
+
+
+## Progress checks
+files_to_intersect <- files_to_intersect %>% mutate(size = file.size(nr_path)) %>% arrange(size)
+completed <- data.frame(completed_files = list.files(paste0(savepath, savepath_2)) ) %>% transmute(state = stringr::str_remove_all(completed_files, "blocks_2018_nonruralTF_df_|\\.RDS"), complete = 1)
+files_to_intersect_ <- files_to_intersect %>% left_join(completed, by = "state") %>% filter(is.na(complete)) %>% arrange((size))
+fips <- tigris::fips_codes %>% select(state, state_code, state_name) %>% distinct()
+files_to_intersect_ %>% inner_join(fips, by = c("state" = "state_code")) %>% select(state, size, state.y, state_name)
+
+i <- 4
+rm(i)
+for (i in i:nrow(files_to_intersect_)) {
+  # what state are we on?
+  print(files_to_intersect_$state[i])
+  # pull in all blocks of that state
+  blocks <- readRDS(files_to_intersect_$cb_paths[i])
+  # check to see if state has non-rural counties
+  blocks <- blocks %>% left_join(us_counties_x_urban, by = c("STATEFP10" = "STATEFP", "COUNTYFP10" = "COUNTYFP"))
+  rural_cty_blocks <- blocks %>% filter(county_nonrural != 1|is.na(county_nonrural))
+  
+  # assuming that the state has non-rural counties, then...
+  if(nrow(rural_cty_blocks) != nrow(blocks) ) {
+    # filter for blocks in non-rural counties
+    nonrural_cty_blocks <- blocks %>% filter(county_nonrural == 1)
+    # read in the non-rural polygons of the state
+    nonrural <- readRDS(files_to_intersect_$nr_path[i])
+    # pull out a yes/no of whether the block is in a non-rural area
+    blocks_nonrural_vector <- st_intersects(nonrural_cty_blocks, nonrural)
+    nonrural_cty_blocks$nonruralTF <- blocks_nonrural_vector %>% lengths > 0 
+    # append the results to the RURAL BLOCKS (that weren't intersected) so you have a complete picture of the state
+    blocks <- rbind(rural_cty_blocks %>% mutate(nonruralTF = 0), nonrural_cty_blocks)
+    
+    
+    # save out the sf object (spatial file) 
+    saveRDS(blocks, paste0(savepath, savepath_1, "blocks_2018_nonruralTF_sf_", files_to_intersect_$state[i], ".RDS"))
+    # save out the dataframe
+    blocks_df <- blocks %>% as.data.frame() %>% select(STATEFP10, COUNTYFP10, TRACTCE10, BLOCKCE10, GEOID10, NAME10, nonruralTF)
+    saveRDS(blocks_df, paste0(savepath, savepath_2, "blocks_2018_nonruralTF_df_", files_to_intersect_$state[i], ".RDS"))
+  }
+  
+  # assuming that the state is completely rural
+  if(nrow(rural_cty_blocks) == nrow(blocks) ) {
+    print(files_to_intersect_$state[i])
+    print("has no non-rural counties")
+  }
+  
+}
+
+rural_blocks <- blocks %>% filter(nonruralTF == FALSE)
+plot(states$geometry[1])
+plot(nonrural$geometry, add = TRUE, col = "red")
+plot(rural_blocks$geometry, add = TRUE, col = "blue")
+```
+
+## Exceptions?
+
+* Had to run another version using tracts for big states 
+* Had an issue with Kentucky (didn't believe it had no non-rural areas), ran that separately

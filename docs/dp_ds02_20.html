@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Devika Mahoney-Nair" />
 
 
-<title>Initial Filtering to Desired Dataset</title>
+<title>USDA Non-Rural Areas</title>
 
 <script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -548,51 +549,160 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Initial Filtering to Desired Dataset</h1>
+<h1 class="title toc-ignore">USDA Non-Rural Areas</h1>
+<h4 class="author">Devika Mahoney-Nair</h4>
+<h4 class="date">4/6/2021</h4>
 
 </div>
 
 
 <hr />
-<pre class="sql"><code>SELECT
-  geoid_cnty,
-  sale_yr,
-  pri_cat_code_req,
-  have_all
-FROM
-(
-SELECT
-  geoid_cnty,
-  LEFT(sale_date, 4) sale_yr,
-  &#39;TRUE&#39; pri_cat_code_req,
-  count(*) have_all
-FROM
-  corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog
-WHERE
---  (geoid_cnty LIKE &#39;51%&#39; OR geoid_cnty LIKE &#39;19%&#39;)
--- AND
-  property_indicator = &#39;10&#39;
-AND
-  transaction_type != &#39;9&#39;
-AND
-  sale_date IS NOT NULL
-AND
-  sale_price IS NOT NULL
-AND
-  (building_square_feet IS NOT NULL OR living_square_feet IS NOT NULL)
-AND
- (acres IS NOT NULL OR land_square_footage IS NOT NULL)
-AND
- (year_built IS NOT NULL OR effective_year_built IS NOT NULL)
-AND
- (full_baths IS NOT NULL OR \&quot;1qtr_baths\&quot; IS NOT NULL OR \&quot;3qtr_baths\&quot; IS NOT NULL OR half_baths IS NOT NULL OR total_baths IS NOT NULL)
-AND
-  pri_cat_code IS NOT NULL
-AND
-  LEFT(sale_date, 4) IN (&#39;2006&#39;, &#39;2007&#39;,&#39;2008&#39;,&#39;2009&#39;,&#39;2010&#39;,&#39;2011&#39;,&#39;2012&#39;,&#39;2013&#39;,&#39;2014&#39;,&#39;2015&#39;,&#39;2016&#39;,&#39;2017&#39;,&#39;2018&#39;)
-GROUP BY
-  geoid_cnty,
-  LEFT(sale_date, 4)</code></pre>
+<div id="import" class="section level2">
+<h2>Import</h2>
+<p><u>USDA Non-Rural Areas 2010-2020</u></p>
+<p>This dataset was posted to USDA’s website of eligibility datasets. No code to download, simply saved locally then uploaded to Rivanna.</p>
+<pre class="r"><code># STORED HERE
+rurality &lt;- sf::st_read(&quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL/RD_BROADBAND_IELG_PRODUCTION.shp&quot;)</code></pre>
+<ul>
+<li>Data Source: <a href="https://www.usda.gov/reconnect/eligibility-area-map-datasets">USDA Eligibility Datasets</a></li>
+<li>Repo Location: <a href="https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/usda_nonrural_areas_map_manip.Rmd">Non-Rural Areas Translation Code</a></li>
+</ul>
+</div>
+<div id="structure" class="section level2">
+<h2>Structure</h2>
+<p>This dataset consisted of a single (custom) shapefile representing all the non-rural areas of the U.S. For the purposes of analysis, this file was compared sequentially against state shapefiles, county shapefiles, and census block shapefiles, to produce an intermediate dataset of census blocks and an indicator of whether the block was considered non-rural or not.</p>
+<div id="county-indicator" class="section level4">
+<h4>County Indicator</h4>
+<p>For all counties, perform an intersect of the original non-rural areas shapefile against the county-level polygons.</p>
+<pre class="r"><code>us_counties &lt;- tigris::counties()
+
+rurality &lt;- sf::st_read(&quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL/RD_BROADBAND_IELG_PRODUCTION.shp&quot;)
+
+# shapes_e  &lt;- readRDS(&quot;/project/biocomplexity/sdad/projects_data/usda/bb/original/censusblocks/blocks_TIGER2018_sf_RDS_USA_SF.RDS&quot;)
+
+rurality &lt;- rurality %&gt;% st_transform(st_crs(us_counties))
+counties_x_urban &lt;- st_intersects(us_counties, rurality)
+counties_x_urban[1:6]
+us_counties$x_urban &lt;- counties_x_urban %&gt;% lengths &gt; 0
+us_counties %&gt;% .$x_urban %&gt;% table
+us_counties_x_urban &lt;- us_counties %&gt;% filter(x_urban == TRUE)
+urban_county_list  &lt;- us_counties_x_urban %&gt;% as.data.frame %&gt;% select(1, 2)  %&gt;% mutate(check_cty = paste0(STATEFP, COUNTYFP)) #%&gt;% group_by(STATEFP) %&gt;% summarise(counties = list(COUNTYFP))
+# shapes_states &lt;- shapes_e %&gt;% filter(STATEFP10 %in% urban_county_list$STATEFP)
+# 
+# shapes_states$check_cty &lt;- paste0(shapes_states$STATEFP10, shapes_states$COUNTYFP10)
+# 
+# blocks_in_counties_with_urban &lt;- shapes_states %&gt;% filter(check_cty %in% urban_county_list$check_cty)
+# nrow(blocks_in_counties_with_urban)
+# us_counties_x_urban %&gt;% saveRDS(&quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL_counties_intersect.RDS&quot;)</code></pre>
+<p><em>Note: Some states without non-rural areas (aka entirely RURAL, according to new USDA file’s county intersects). FIPS Codes: 66, 60, 69, 21. State Abbreviations “AS”, “GU”, “MP”, “KY”)</em></p>
+<pre class="r"><code># states without non-rural states (aka entirely RURAL, according to new USDA file&#39;s county intersects)
+c(66, 60, 69, 21)
+c(&quot;AS&quot;, &quot;GU&quot;, &quot;MP&quot;, &quot;KY&quot;)</code></pre>
+</div>
+<div id="state-polygons" class="section level4">
+<h4>State Polygons</h4>
+<p>For each state, perform an intersection of the original non-rural areas shapefile against the state-level polygons.</p>
+<pre class="r"><code>rurality &lt;- sf::st_read(&quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL/RD_BROADBAND_IELG_PRODUCTION.shp&quot;)
+
+states &lt;- tigris::states()
+
+rurality_ &lt;- rurality %&gt;% st_transform(st_crs(states)) %&gt;% st_buffer(0)
+
+for (i in 1:nrow(states)) {
+  print(states$STUSPS[i])
+  a &lt;- Sys.time()
+  states_nonrural &lt;- st_intersection(states[i,], rurality_)
+  b &lt;- Sys.time()
+  c &lt;- as.character(as.integer((b-a)/60))
+  print(paste0((c), &quot; minutes&quot;))
+  saveRDS(states_nonrural, paste0(&quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL_working/nonrural_state_intersections/nonrural_states_polygon_&quot;, states$STATEFP[i], &quot;.RDS&quot;))
+}</code></pre>
+</div>
+<div id="block-indicator" class="section level4">
+<h4>Block Indicator</h4>
+<p>For each state, we pull in all the census blocks and see if any of them belong to non-rural counties based on join to previous file. We filter for blocks in the nonrural counties then intersect the block against the non-rural state-level polygons from previous state-level intersection. The output is then appended to the rural-only counties so you have a file of all the blocks in the state with a rural/non-rural indicator.</p>
+<pre class="r"><code>## Path to census blocks
+cb_path &lt;- &quot;/project/biocomplexity/sdad/projects_data/usda/bb/original/censusblocks/blocks_TIGER2018_sf_RDS/&quot;
+census_blocks_states &lt;- list.files(cb_path)
+cb_files &lt;- data.frame(state = stringr::str_remove_all(census_blocks_states, &quot;tl_2018_|_tabblock10.RDS&quot;), cb_filenames = census_blocks_states, cb_paths = paste0(cb_path, census_blocks_states))
+
+## Path to nonrural state polygons
+nonrural_path &lt;- &quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL_working/nonrural_state_intersections/&quot;
+nonrural_states &lt;- list.files(nonrural_path)
+nonrural_files &lt;- data.frame(state = stringr::str_remove_all(nonrural_states, &quot;nonrural_states_polygon_|\\.RDS&quot;), nr_filename = nonrural_states, nr_path = paste0(nonrural_path, nonrural_states))
+
+## Join blocks to states to determine which states can be included
+files_to_intersect &lt;- cb_files %&gt;% full_join(nonrural_files, by = &quot;state&quot;)
+files_to_intersect &lt;- files_to_intersect[!is.na(files_to_intersect$cb_filenames),]
+
+## Savepaths for sf objects and dataframes
+savepath &lt;- &quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL_working/&quot;
+savepath_1 &lt;- &quot;blocks_nonruralTF_sf/&quot;
+savepath_2 &lt;- &quot;blocks_nonruralTF_df/&quot;
+
+## Non-rural counties
+us_counties_x_urban &lt;- readRDS(&quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL_counties_intersect.RDS&quot;)  %&gt;% as.data.frame %&gt;% select(1, 2)  %&gt;% mutate(county_nonrural = 1)
+
+
+## Progress checks
+files_to_intersect &lt;- files_to_intersect %&gt;% mutate(size = file.size(nr_path)) %&gt;% arrange(size)
+completed &lt;- data.frame(completed_files = list.files(paste0(savepath, savepath_2)) ) %&gt;% transmute(state = stringr::str_remove_all(completed_files, &quot;blocks_2018_nonruralTF_df_|\\.RDS&quot;), complete = 1)
+files_to_intersect_ &lt;- files_to_intersect %&gt;% left_join(completed, by = &quot;state&quot;) %&gt;% filter(is.na(complete)) %&gt;% arrange((size))
+fips &lt;- tigris::fips_codes %&gt;% select(state, state_code, state_name) %&gt;% distinct()
+files_to_intersect_ %&gt;% inner_join(fips, by = c(&quot;state&quot; = &quot;state_code&quot;)) %&gt;% select(state, size, state.y, state_name)
+
+i &lt;- 4
+rm(i)
+for (i in i:nrow(files_to_intersect_)) {
+  # what state are we on?
+  print(files_to_intersect_$state[i])
+  # pull in all blocks of that state
+  blocks &lt;- readRDS(files_to_intersect_$cb_paths[i])
+  # check to see if state has non-rural counties
+  blocks &lt;- blocks %&gt;% left_join(us_counties_x_urban, by = c(&quot;STATEFP10&quot; = &quot;STATEFP&quot;, &quot;COUNTYFP10&quot; = &quot;COUNTYFP&quot;))
+  rural_cty_blocks &lt;- blocks %&gt;% filter(county_nonrural != 1|is.na(county_nonrural))
+  
+  # assuming that the state has non-rural counties, then...
+  if(nrow(rural_cty_blocks) != nrow(blocks) ) {
+    # filter for blocks in non-rural counties
+    nonrural_cty_blocks &lt;- blocks %&gt;% filter(county_nonrural == 1)
+    # read in the non-rural polygons of the state
+    nonrural &lt;- readRDS(files_to_intersect_$nr_path[i])
+    # pull out a yes/no of whether the block is in a non-rural area
+    blocks_nonrural_vector &lt;- st_intersects(nonrural_cty_blocks, nonrural)
+    nonrural_cty_blocks$nonruralTF &lt;- blocks_nonrural_vector %&gt;% lengths &gt; 0 
+    # append the results to the RURAL BLOCKS (that weren&#39;t intersected) so you have a complete picture of the state
+    blocks &lt;- rbind(rural_cty_blocks %&gt;% mutate(nonruralTF = 0), nonrural_cty_blocks)
+    
+    
+    # save out the sf object (spatial file) 
+    saveRDS(blocks, paste0(savepath, savepath_1, &quot;blocks_2018_nonruralTF_sf_&quot;, files_to_intersect_$state[i], &quot;.RDS&quot;))
+    # save out the dataframe
+    blocks_df &lt;- blocks %&gt;% as.data.frame() %&gt;% select(STATEFP10, COUNTYFP10, TRACTCE10, BLOCKCE10, GEOID10, NAME10, nonruralTF)
+    saveRDS(blocks_df, paste0(savepath, savepath_2, &quot;blocks_2018_nonruralTF_df_&quot;, files_to_intersect_$state[i], &quot;.RDS&quot;))
+  }
+  
+  # assuming that the state is completely rural
+  if(nrow(rural_cty_blocks) == nrow(blocks) ) {
+    print(files_to_intersect_$state[i])
+    print(&quot;has no non-rural counties&quot;)
+  }
+  
+}
+
+rural_blocks &lt;- blocks %&gt;% filter(nonruralTF == FALSE)
+plot(states$geometry[1])
+plot(nonrural$geometry, add = TRUE, col = &quot;red&quot;)
+plot(rural_blocks$geometry, add = TRUE, col = &quot;blue&quot;)</code></pre>
+</div>
+</div>
+<div id="exceptions" class="section level2">
+<h2>Exceptions?</h2>
+<ul>
+<li>Had to run another version using tracts for big states</li>
+<li>Had an issue with Kentucky (didn’t believe it had no non-rural areas), ran that separately</li>
+</ul>
+</div>
 
 
 
@@ -640,7 +750,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2,h3",
+      selectors: "h1,h2,h3,h4",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {

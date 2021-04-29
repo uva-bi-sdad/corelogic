@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Devika Mahoney-Nair" />
 
 
-<title>Initial Filtering to Desired Dataset</title>
+<title>USDA Project Areas</title>
 
 <script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -548,51 +549,50 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Initial Filtering to Desired Dataset</h1>
+<h1 class="title toc-ignore">USDA Project Areas</h1>
+<h4 class="author">Devika Mahoney-Nair</h4>
+<h4 class="date">4/6/2021</h4>
 
 </div>
 
 
 <hr />
-<pre class="sql"><code>SELECT
-  geoid_cnty,
-  sale_yr,
-  pri_cat_code_req,
-  have_all
-FROM
-(
-SELECT
-  geoid_cnty,
-  LEFT(sale_date, 4) sale_yr,
-  &#39;TRUE&#39; pri_cat_code_req,
-  count(*) have_all
-FROM
-  corelogic_usda.broadband_variables_tax_2020_06_27_unq_prog
-WHERE
---  (geoid_cnty LIKE &#39;51%&#39; OR geoid_cnty LIKE &#39;19%&#39;)
--- AND
-  property_indicator = &#39;10&#39;
-AND
-  transaction_type != &#39;9&#39;
-AND
-  sale_date IS NOT NULL
-AND
-  sale_price IS NOT NULL
-AND
-  (building_square_feet IS NOT NULL OR living_square_feet IS NOT NULL)
-AND
- (acres IS NOT NULL OR land_square_footage IS NOT NULL)
-AND
- (year_built IS NOT NULL OR effective_year_built IS NOT NULL)
-AND
- (full_baths IS NOT NULL OR \&quot;1qtr_baths\&quot; IS NOT NULL OR \&quot;3qtr_baths\&quot; IS NOT NULL OR half_baths IS NOT NULL OR total_baths IS NOT NULL)
-AND
-  pri_cat_code IS NOT NULL
-AND
-  LEFT(sale_date, 4) IN (&#39;2006&#39;, &#39;2007&#39;,&#39;2008&#39;,&#39;2009&#39;,&#39;2010&#39;,&#39;2011&#39;,&#39;2012&#39;,&#39;2013&#39;,&#39;2014&#39;,&#39;2015&#39;,&#39;2016&#39;,&#39;2017&#39;,&#39;2018&#39;)
-GROUP BY
-  geoid_cnty,
-  LEFT(sale_date, 4)</code></pre>
+<div id="about" class="section level2">
+<h2>About</h2>
+<div id="usda-protected-borrowers" class="section level4">
+<h4>USDA Protected Borrowers</h4>
+<p>This dataset was posted to USDA’s website of eligibility datasets. This dataset consisted of multiple (custom) shapefiles representing all the areas of the U.S. wherein active borrowers (companies with active loans with RUS) had ongoing broadband projects whose sites are protected from new development. (phrasing?) For the purposes of analysis, this file was compared against census block shapefiles to produce an intermediate dataset of census blocks and an indicator of whether the block was considered protected or not. No specific download code; these were downloaded locally and manually uploaded to Rivanna.</p>
+<ul>
+<li>Data Source: <a href="https://www.usda.gov/reconnect/eligibility-area-map-datasets">USDA Eligibility Datasets</a></li>
+<li>Repo Location: <a href="https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/eligibilitymaps_18NOV2020.R">Translating Prot Borr loc.34-39</a></li>
+</ul>
+</div>
+<div id="usda-caf-ii-auction-spectrum" class="section level4">
+<h4>USDA CAF II Auction Spectrum</h4>
+<p>This dataset was posted to USDA’s website of eligibility datasets. This dataset consisted of multiple (custom) shapefiles representing all the areas of the U.S. wherein companies had won the right to develop spectrum whose sites are protected from new development. (phrasing?) For the purposes of analysis, this file was compared against census block shapefiles to produce an intermediate dataset of census blocks and an indicator of whether the block was considered protected or not. No specific download code; these were downloaded locally and manually uploaded to Rivanna.</p>
+<ul>
+<li>Data Source: <a href="https://www.usda.gov/reconnect/eligibility-area-map-datasets">USDA Eligibility Datasets</a></li>
+<li>Repo Location: <a href="https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/eligibilitymaps_18NOV2020.R">Translating CAF II loc.40-43</a></li>
+</ul>
+</div>
+</div>
+<div id="structure" class="section level2">
+<h2>Structure</h2>
+<div id="usda-protected-borrowers-1" class="section level4">
+<h4>USDA Protected Borrowers</h4>
+<pre class="r"><code>protborr &lt;- sf::st_read(&quot;/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/rus_broadband_servicearea/ProtectedBorrowers04222019.shp&quot;)
+protborr &lt;- protborr %&gt;% st_transform(st_crs(usa_blocks_speed_rural))
+blocks_criteriaXprotborr_VECTOR &lt;- st_intersects(usa_blocks_speed_rural, protborr) 
+usa_blocks_speed_rural$protborr_inelg_vec &lt;- blocks_criteriaXprotborr_VECTOR %&gt;% lengths &gt;0 </code></pre>
+</div>
+<div id="usda-caf-ii-auction-spectrum-1" class="section level4">
+<h4>USDA CAF II Auction Spectrum</h4>
+<pre class="r"><code>caf2auctionwinners &lt;- st_read(&quot;/project/biocomplexity/sdad/projects_data/usda/bb/original/Protected_bb_borrower_service_areas/Auction903_April2019.shp&quot;)
+caf2auctionwinners &lt;- caf2auctionwinners %&gt;% st_transform(st_crs(usa_blocks_speed_rural))
+blocks_criteriaXcaf2winners_VECTOR &lt;- st_intersects(usa_blocks_speed_rural, caf2auctionwinners) 
+usa_blocks_speed_rural$caf2_inelg_vec &lt;- blocks_criteriaXcaf2winners_VECTOR %&gt;% lengths &gt;0 </code></pre>
+</div>
+</div>
 
 
 
@@ -640,7 +640,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2,h3",
+      selectors: "h1,h2,h3,h4",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {

@@ -1,0 +1,59 @@
+---
+title: "USDA Project Areas"
+author: "Devika Mahoney-Nair"
+date: "4/6/2021"
+menu_title: "Profile Provenance"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
+    toc_depth: 4
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  eval=FALSE
+)
+```
+
+------------------------------------------------------------------------
+
+## About
+
+#### USDA Protected Borrowers
+
+This dataset was posted to USDA's website of eligibility datasets. This dataset consisted of multiple (custom) shapefiles representing all the areas of the U.S. wherein active borrowers (companies with active loans with RUS) had ongoing broadband projects whose sites are protected from new development. (phrasing?) For the purposes of analysis, this file was compared against census block shapefiles to produce an intermediate dataset of census blocks and an indicator of whether the block was considered protected or not. No specific download code; these were downloaded locally and manually uploaded to Rivanna. 
+
+* Data Source: [USDA Eligibility Datasets](https://www.usda.gov/reconnect/eligibility-area-map-datasets)
+* Repo Location: [Translating Prot Borr loc.34-39](https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/eligibilitymaps_18NOV2020.R)
+
+
+#### USDA CAF II Auction Spectrum
+
+This dataset was posted to USDA's website of eligibility datasets. This dataset consisted of multiple (custom) shapefiles representing all the areas of the U.S. wherein companies had won the right to develop spectrum whose sites are protected from new development. (phrasing?) For the purposes of analysis, this file was compared against census block shapefiles to produce an intermediate dataset of census blocks and an indicator of whether the block was considered protected or not. No specific download code; these were downloaded locally and manually uploaded to Rivanna.
+
+* Data Source: [USDA Eligibility Datasets](https://www.usda.gov/reconnect/eligibility-area-map-datasets)
+* Repo Location: [Translating CAF II loc.40-43](https://github.com/uva-bi-sdad/rural_broadband/blob/dtmn_elig/src/eligibility/eligibilitymaps_18NOV2020.R)
+
+
+## Structure
+
+#### USDA Protected Borrowers
+
+```{r}
+protborr <- sf::st_read("/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/rus_broadband_servicearea/ProtectedBorrowers04222019.shp")
+protborr <- protborr %>% st_transform(st_crs(usa_blocks_speed_rural))
+blocks_criteriaXprotborr_VECTOR <- st_intersects(usa_blocks_speed_rural, protborr) 
+usa_blocks_speed_rural$protborr_inelg_vec <- blocks_criteriaXprotborr_VECTOR %>% lengths >0 
+```
+
+#### USDA CAF II Auction Spectrum
+
+```{r}
+caf2auctionwinners <- st_read("/project/biocomplexity/sdad/projects_data/usda/bb/original/Protected_bb_borrower_service_areas/Auction903_April2019.shp")
+caf2auctionwinners <- caf2auctionwinners %>% st_transform(st_crs(usa_blocks_speed_rural))
+blocks_criteriaXcaf2winners_VECTOR <- st_intersects(usa_blocks_speed_rural, caf2auctionwinners) 
+usa_blocks_speed_rural$caf2_inelg_vec <- blocks_criteriaXcaf2winners_VECTOR %>% lengths >0 
+```
+
+
