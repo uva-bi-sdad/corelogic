@@ -65,7 +65,7 @@ SELECT
   property_centroid_latitude,
   property_centroid_longitude
 INTO
-  corelogic_usda.real_estate_sales_final_characteristics
+  corelogic_usda.real_estate_arms_length_sales_2006_2018
 FROM
   corelogic_usda.current_tax_200627_latest_all_add_vars_add_progs_geom_blk
 WHERE

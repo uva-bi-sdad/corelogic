@@ -14,12 +14,13 @@ counties <- merge(setDT(tigris::states()), setDT(tigris::counties()), by = "STAT
 
 # counties <- counties[abbrv_st=="IN",]
 
-for (i in 1:nrow(counties)) {
+for (i in 3001:3233) {
   qry <-
     paste0("SELECT
     geoid_cnty,
     geoid_blk,
     p_id_iris_frmtd,
+    property_indicator,
     acres,
     land_square_footage,
     bldg_code,
@@ -38,8 +39,7 @@ for (i in 1:nrow(counties)) {
     property_centroid_longitude
   FROM
     corelogic_usda.current_tax_200627_latest_all_add_vars_add_progs_geom_blk
-  WHERE geoid_cnty = '", counties[i,]$geoid_co,"'
-    AND property_indicator='10'")
+  WHERE geoid_cnty = '", counties[i,]$geoid_co, "'")
 
   rows <- dbGetQuery(con, qry)
   file_name <- paste0(counties[i,]$abbrv_st,
@@ -47,15 +47,17 @@ for (i in 1:nrow(counties)) {
                       counties[i,]$geoid_co,
                       "_",
                       gsub(" ", "_", counties[i,]$name_co))
-  csv_path <- paste0("src/www/county_data/",
+  csv_path <- paste0("src/dashboard/www/county_data/",
                     file_name,
                     ".csv")
   # xlsx_path <- paste0("data/county_data/",
   #                    file_name,
   #                    ".xlsx")
-  zip_path <- paste0("src/www/county_data/",
+  zip_path <- paste0("src/dashboard/www/county_data/",
                      file_name,
                      ".zip")
+  write.csv(rows, csv_path)
+
   write.csv(rows, csv_path)
   # write.xlsx(rows, xlsx_path)
   zip(zip_path, csv_path)
