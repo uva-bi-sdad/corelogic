@@ -13,28 +13,21 @@
 
 <title>USDA-ERS Broadband Rural Impact</title>
 
-<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<style>h1 {font-size: 34px;}
-       h1.title {font-size: 38px;}
-       h2 {font-size: 30px;}
-       h3 {font-size: 24px;}
-       h4 {font-size: 18px;}
-       h5 {font-size: 16px;}
-       h6 {font-size: 12px;}
-       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
-       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -46,6 +39,11 @@
     </style>
 
 <style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -58,7 +56,32 @@ if (window.hljs) {
 
 
 
-
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
 
 
 
@@ -68,6 +91,10 @@ if (window.hljs) {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -84,13 +111,40 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
-pre code {
-  padding: 0;
-}
 </style>
 
 
 <style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
 .dropdown-submenu {
   position: relative;
 }
@@ -118,7 +172,7 @@ pre code {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #adb5bd;
+  border-left-color: #ffffff;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -130,7 +184,7 @@ pre code {
 }
 </style>
 
-<script type="text/javascript">
+<script>
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -141,23 +195,10 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.tab('show');
+  menuAnchor.parent().addClass('active');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
-
-  // Navbar adjustments
-  var navHeight = $(".navbar").first().height() + 15;
-  var style = document.createElement('style');
-  var pt = "padding-top: " + navHeight + "px; ";
-  var mt = "margin-top: -" + navHeight + "px; ";
-  var css = "";
-  // offset scroll position for anchor links (for fixed navbar)
-  for (var i = 1; i <= 6; i++) {
-    css += ".section h" + i + "{ " + pt + mt + "}\n";
-  }
-  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
-  document.head.appendChild(style);
 });
 </script>
 
@@ -169,6 +210,7 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
+  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -294,13 +336,13 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-sm-12 col-md-4 col-lg-3">
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-sm-12 col-md-8 col-lg-9">
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -391,7 +433,7 @@ div.tocify {
         <!-- NEW DATASET -->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            Census Blocks 2018
+            Data Discovery
 
             <span class="caret"></span>
           </a>
@@ -447,22 +489,43 @@ div.tocify {
         <!-- NEW DATASET -->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            Program Eligibility Dataset 2014
+            Eligibility Dataset
 
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
             <li style="border: 1px solid silver; border-top: 1px solid silver; text-align: center">
-              INGEST
+              ABOUT
+            </li>
+            <li>
+              <a href="dp_ds03_00.html">FCC Form 477</a>
+            </li>
+            <li style="border: 1px solid silver; border-top: 1px solid silver; text-align: center">
+              DATA INPUT
+            </li>
+            <li>
+              <a href="dp_ds02_10.html">FCC Form 477</a>
+            </li>
+            <li>
+              <a href="dp_ds02_20.html">USDA Non-Rural</a>
+            </li>
+            <li>
+              <a href="dp_ds02_30.html">USDA Project Areas</a>
+            </li>
+            <li>
+              <a href="dp_ds02_40.html">RUS Program Service Areas</a>
+            </li>
+            <li style="border: 1px solid silver; border-top: 1px solid silver; text-align: center">
+              JOIN
             </li>
             <li>
               <a href="dp_ds03_10.html">Import Notes</a>
             </li>
             <li>
-              <a href="dp_ds03_11.html">Import 2014 Data</a>
+              <a href="dp_ds03_11.html">Import Data</a>
             </li>
             <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
-              STRUCTURE
+              ANALYZE
             </li>
             <li>
               <!-- <a href="dp_ds03_20.html">Profile Structure</a> -->
@@ -470,30 +533,7 @@ div.tocify {
             <li>
               <a href="">blank</a>
             </li>
-            <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
-              NEW VARIABLES
-            </li>
-            <li>
-              <!-- <a href="dp_ds03_30.html">New Variable Notes</a> -->
-            </li>
-            <li>
-              <a href="">blank</a>
-            </li>
-            <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
-              QUALITY
-            </li>
-            <li>
-              <!-- <a href="dp_ds03_40.html">Profile Quality</a> -->
-            </li>
-            <li>
-              <a href="">blank</a>
-            </li>
-            <li style="border-bottom: 1px solid silver; border-top: 1px solid silver; text-align: center">
-              ANALYZE
-            </li>
-            <li>
-              <!-- <a href="dp_ds03_50.html">Analysis Notes</a> -->
-            </li>
+
             <li>
               <a href="">blank</a>
             </li>
@@ -504,7 +544,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div id="header">
+<div class="fluid-row" id="header">
 
 
 
@@ -644,13 +684,9 @@ Dataset: Census Blocks 2018
 </tbody>
 </table>
 <h3>
-Dataset: Program Eligibility Dataset 2014
+Dataset: Eligibility Dataset (CC &amp; RC, 2014 &amp; 2018)
 </h3>
 <table>
-<colgroup>
-<col width="18%" />
-<col width="81%" />
-</colgroup>
 <tbody>
 <tr class="odd">
 <td align="left">dataset_description</td>
@@ -658,159 +694,7 @@ Dataset: Program Eligibility Dataset 2014
 </tr>
 <tr class="even">
 <td align="left">associated_project</td>
-<td align="left">USDA ERS Broadband Program Impacts</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_provider_01</td>
-<td align="left">FCC</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_title_01</td>
-<td align="left">FCC Form 477 Dec 2014</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_subtitle_01</td>
-<td align="left">US-Fixed-without-Satellite-Dec2014.zip</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_deleivered_date_01</td>
-<td align="left">Accessed April 2019.</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_type_01</td>
-<td align="left">Administrative</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_format_01</td>
-<td align="left">zip csv</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_location_01</td>
-<td align="left">/project/biocomplexity/sdad/projects_data/usda/bb/original/Corelogic_June_2020_Filesfbd_us_without_satellite_dec2014_v3.csv</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_dictionary_01</td>
-<td align="left"><a href="https://www.fcc.gov/general/explanation-broadband-deployment-data" class="uri">https://www.fcc.gov/general/explanation-broadband-deployment-data</a></td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_license_01</td>
-<td align="left">Public</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_provider_02</td>
-<td align="left">USDA</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_title_02</td>
-<td align="left">Non-Rural Areas 2010-2020</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_subtitle_02</td>
-<td align="left">RD_BROADBAND_IELG_PRODUCTION.shp</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_deleivered_date_02</td>
-<td align="left">Accessed November 2020.</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_type_02</td>
-<td align="left">Administrative</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_format_02</td>
-<td align="left">gis</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_location_02</td>
-<td align="left">/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL/RD_BROADBAND_IELG_PRODUCTION.shp</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_dictionary_02</td>
-<td align="left"><a href="https://www.usda.gov/reconnect/eligibility-area-map-datasets" class="uri">https://www.usda.gov/reconnect/eligibility-area-map-datasets</a></td>
-</tr>
-<tr class="even">
-<td align="left">input_data_license_02</td>
-<td align="left">Public</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_provider_03</td>
-<td align="left">Census</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_title_03</td>
-<td align="left">Census Blocks 2018</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_subtitle_03</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">input_data_deleivered_date_03</td>
-<td align="left">Accessed Ictober 2019.</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_type_03</td>
-<td align="left">Administrative</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_format_03</td>
-<td align="left">gis</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_location_03</td>
-<td align="left">/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/RECONNECT_NON_RURAL/RD_BROADBAND_IELG_PRODUCTION.shp</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_dictionary_03</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_license_03</td>
-<td align="left">Public</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_provider_04</td>
-<td align="left">USDA</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_title_04</td>
-<td align="left">RUS Program Service Areas</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_subtitle_04</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_deleivered_date_04</td>
-<td align="left">Provided April 2020</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_type_04</td>
-<td align="left">Administrative</td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_format_04</td>
-<td align="left">gis</td>
-</tr>
-<tr class="even">
-<td align="left">input_data_location_04</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">input_data_dictionary_04</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">input_data_license_04</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">output_data_format</td>
-<td align="left">RDS</td>
-</tr>
-<tr class="even">
-<td align="left">output_data_location</td>
-<td align="left">/project/biocomplexity/sdad/projects_data/project_data/usda/rural_broadband/USA_2014_final_eligibility_sf_14DEC2020v5.RDS</td>
+<td align="left">USDA ERS Broadband Program Eligibility</td>
 </tr>
 </tbody>
 </table>
@@ -844,7 +728,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open');
+    $(this).parent().toggleClass('nav-tabs-open')
   });
 });
 </script>
