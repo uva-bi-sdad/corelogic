@@ -47,13 +47,13 @@ for (i in 3001:3233) {
                       counties[i,]$geoid_co,
                       "_",
                       gsub(" ", "_", counties[i,]$name_co))
-  csv_path <- paste0("src/dashboard/www/county_data/",
+  csv_path <- paste0("src/web/shiny_app/www/county_data/",
                     file_name,
                     ".csv")
   # xlsx_path <- paste0("data/county_data/",
   #                    file_name,
   #                    ".xlsx")
-  zip_path <- paste0("src/dashboard/www/county_data/",
+  zip_path <- paste0("src/web/shiny_app/www/county_data/",
                      file_name,
                      ".zip")
   write.csv(rows, csv_path)

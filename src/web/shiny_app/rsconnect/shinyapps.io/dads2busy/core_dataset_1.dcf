@@ -5,8 +5,9 @@ account: dads2busy
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 3084045
-bundleId: 3867957
+bundleId: 4740828
 url: https://dspgtools.shinyapps.io/core_dataset_1/
-when: 1605551650.79459
+when: 1624311488.61422
 asMultiple: FALSE
 asStatic: FALSE
+ignoredFiles: arms_length_sales.R|cl_program_eligible_properties.RDS|corelogic_have_all_vars_fnl.RDS
