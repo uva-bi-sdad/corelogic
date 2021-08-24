@@ -1,0 +1,21 @@
+﻿Variable Name,CoreLogic Field Name,Type,Width,Definition
+geoid_cnty,FIPS,Numeric,5,"Federal Information Processing Standards codes, used to identify specific counties or political jurisdictions."
+geoid_blk,NA,NA,NA,This is a standard Census Geographic Entity ID up to a census tract block level. 
+p_id_iris_frmtd,P-ID-IRIS-FRMTD,Numeric,60,APN that would link to CoreLogic online products.
+property_indicator,PROPERTY INDICATOR,Alpha,3,"A CoreLogic general code used to easily recognize specific property types (e.g, Residential, Condominium, Commercial)."
+acres,ACRES,Numeric,13,Total land mass in Acres. 
+land_square_footage,LAND SQUARE FOOTAGE,Numeric,9,Total land mass is Square Feet.
+bldg_code,BUILDING CODE,AlphaNumeric,3,"The primary building type (e.g., Bowling Alley, Supermarket)."
+building_square_feet,BUILDING SQUARE FEET,Numeric,9,The size of the building in square feet. This field is most commonly populated as an aggregate total when a county does not differentiate between living and non-living areas.
+living_square_feet,LIVING SQUARE FEET,Numeric,10,"This is the area of a building that is used for general living. This is typically the area of a building that is heated or air conditioned and generally does not include Garage, Porch or Unfinished Basement Square Footage values."
+year_built,YEAR BUILT,Numeric,4,This is the construction year of the original building.
+effective_year_built,EFFECTIVE YEAR BUILT,Numeric,4,"This is the first year the building was assessed with its current components (e.g., a building is originally constructed in 1960 and a bedroom and bath was added to the building in 1974. The Year Built would be 1960 and the Effective Year Built would be 1974)."
+bedrooms,BEDROOMS,Numeric,5,CoreLogic calculated total bedrooms for all the buildings on the property.
+baths_appraised,NA,NA,NA,"This is the total number of full and partial baths in a building calculated using the Fannie Mae and Freddie Mac Uniform Appraisal Dataset Specification from fields: FULL BATHS, HALF BATHS, 1QTR BATHS, 3QTR BATHS."
+property_address,NA,NA,NA,"This is a property full address composed of fields: SITUS HOUSE NUMBER, SITUS HOUSE NUMBER SUFFIX, SITUS HOUSE NUMBER 2, SITUS DIRECTION, SITUS STREET NAME, SITUS MODE, SITUS QUADRANT, SITUS UNIT NUMBER, SITUS CITY, SITUS STATE, SITUS ZIP CODE, SITUS COUNTY. See Code tab for fields description."
+sale_price,SALE AMOUNT,Numeric,14,Dollar amount of the most recent sale of the property.
+sale_date,SALE DATE,Numeric,8,"The date the sales transaction was legally completed (i.e., contract signed).  Format: YYYYMMDD."
+sale_year,NA,Numeric,NA,This is a sale year derived from SALE DATE field.
+transaction_type,TRANSACTION TYPE,AlphaNumeric,3,"This identifies situations associated with the sale (e.g., Resale, Construction Loan, Seller Carryback)."
+property_centroid_latitude,PARCEL LEVEL LATITUDE,Numeric,10,"CoreLogic proprietary parcel-centroid coordinate that specifies the north–south position of the center point of a parcel. The latitude contains numeric data values conforming to the mask XX.ZZZZZZ, where the XX are the digits to the left of the decimal point, and ZZZZZZ are the digits to the right of the decimal point. Latitude is always a positive value north on the North American continent."
+property_centroid_longitude,PARCEL LEVEL LONGITUDE,Numeric,11,"CoreLogic proprietary parcel-centroid coordinate that specifies the east–west position of the center point of a parcel. The longitude contains numeric data values conforming to the mask -XXX.ZZZZZZ, where the XXX are the numeric digits to the left of the decimal point, and ZZZZZZ are the 6 numeric digits to the right of the decimal point. Longitude is negative on the North American continent."
