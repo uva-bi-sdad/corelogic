@@ -38,9 +38,9 @@ names(state_codes_chr) <- state_codes$name
 
 # Create table of county data file links
 # cnty_files <- unlist(list.files("src/dashboard/www/county_data/"))
-cnty_files <- unlist(list.files("www/county_data/"))
+cnty_files <- unlist(list.files("./www/"))
 cnty_codes <- str_extract(cnty_files, "[0-9]{5}")
-links <- paste0("<a href='./county_data/", cnty_files, "'>", cnty_files, "</a>")
+links <- paste0("<a href='", cnty_files, "'>", cnty_files, "</a>")
 cnty_files_dt <- data.table(file_link = links, geoid_cnty = cnty_codes)
 
 # Merge arms length sales with links
@@ -48,9 +48,9 @@ m_dt <- merge(dt, cnty_files_dt, by = "geoid_cnty", all.x = T)
 
 
 # tax_rol_cols <- read.csv("src/dashboard/tax_role_columns.csv")
-tax_rol_cols <- read.csv("tax_role_columns.csv")
+tax_rol_cols <- read.csv("shiny_app_dict_19aug21.csv")
 # tax_rol_codes <- read.csv("src/dashboard/tax_roll_codes.csv")
-tax_rol_codes <- read.csv("tax_roll_codes.csv")
+tax_rol_codes <- read.csv("shiny_app_codebook_20aug21.csv")
 
 # Load Program Eligible Properties
 # el <- setDT(readRDS("src/dashboard/cl_program_eligible_properties.RDS"))
@@ -64,19 +64,29 @@ ui <- fluidPage(
   h3("As Recorded in Corelogic Historical Tax Roles and Satisfying the Following Conditions"),
   # hr(),
   # h4("Required Variable Categories and Applicable Column Conditions"),
-  h3("Arms-Length Transactions"),
+  #h3("Arms-Length Transactions"),
+ 
+  #h3("Required Characteristics"),
+  h4("Location of Property"),
+  div('Property location is described by a FIPS county code, a standard Census Geographic Entity ID, a full property address (including house number and suffix, street name, direction and type, unit number, city, state, zip code and county, and parcel-level centroid geographical coordinates. See the data dictionary for details.'),
+  h4('Type of Property'),
+  div('The data set includes only single-family residences. This is equivalent to setting the "Property Indicator" equal to 10.'),
+  h4("Date of Sale"),
+  div('This is the date when the sale contract was signed in "YYYYMMDD" format.'),
+  h4("Price of Sale"),
+  div('The data set includes only the latest sale amount in dollars.'),
+  h4("Type of Transaction"),
   div("This data set represents transactions that are referred to as \"arms-length\". This is what we might call a \"typical\" transaction between two parties, not a special transaction between parties, such as a sale to a relative for a reduced amount. For this data, there are many transaction types, but type '9' is specified for transaction that are \"non-arms-length\", so the requirement that is used here is to not include transactions that are coded '9'."),
-  h3("Required Characteristics"),
-  div("Location of Property"),
-  div('Type of Property'),
-  div("Date of Sale"),
-  div("Price of Sale"),
-  div("Type of Transaction"),
-  div("Size of Residence"),
-  div("Size of Property"),
-  div("Age of Property"),
-  div("Number of Bedrooms"),
-  div("Number of Bathrooms"),
+  h4("Size of Residence"),
+  div('Size of residence is represented by either a building size in sq. ft or a size of the living area in sq. ft.'),
+  h4("Size of Property"),
+  div('Size of residence is represented by either a building size in sq. ft or a size of the living area in sq. ft.'),
+  h4("Age of Property"),
+  div('The construction year the original building or the year when the building was first assessed with current components is used to calculate the age of the property.'),
+  h4("Number of Bedrooms"),
+  div('This is the total number of bedrooms in all buildings.'),
+  h4("Number of Bathrooms"),
+  div('The “total_baths” variable provided was not always calculated, even when other bath columns had values, therefore we used the Fannie Mae and Freddie Mac Uniform Appraisal Dataset Specification to calculate “baths_appraised”. 3/4 baths count as full baths, 1/4 baths are dropped, half bath is .1 of full bath, so 1 x full bath & 1 x 3/4 bath & 1 x half bath = 2.1 baths (2 full baths, 1 half bath).'),
 
   # div(strong("Type of Property:"), HTML("<i>property_indicator</i>"), "EQUALS '10' (Single Family Residence / Townhouse)"),
   # div(strong("Type of Transaction:"), HTML("<i>transaction_type</i>"), "DOES NOT EQUAL '9' (Nominal - Non/Arms Length Sale)"),
@@ -107,11 +117,11 @@ ui <- fluidPage(
               #          div(
               #            reactableOutput("codes")
               #          )),
-              tabPanel("Tax Roll Columns",
+              tabPanel("Data Dictionary",
                        div(
                          reactableOutput("tax_cols")
                        )),
-              tabPanel("Tax Roll Codes",
+              tabPanel("Data Codebook",
                        div(
                          reactableOutput("tax_codes")
                        )),
@@ -258,7 +268,7 @@ server <- function(input, output, session) {
       bordered = TRUE,
       striped = TRUE,
       highlight = TRUE,
-      groupBy = "CATEGORY"
+      #groupBy = "CATEGORY"
     )
   })
 
@@ -285,7 +295,7 @@ server <- function(input, output, session) {
       bordered = TRUE,
       striped = TRUE,
       highlight = TRUE,
-      groupBy = "CdTbl"
+      groupBy = "Table"
     )
   })
 }
