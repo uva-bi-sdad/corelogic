@@ -23,7 +23,7 @@ credentials <- data.frame(
 
 # Load arms length sales with percent all vars file
 # dt <- setDT(readRDS("src/dashboard/cl_arms_length_sales_pct_all_vars.RDS"))
-dt <- setDT(readRDS("cl_arms_length_sales_pct_all_vars.RDS"))
+dt <- setDT(readRDS("cl_arms_length_sales_pct_all-7_30aug21.Rds"))
 
 # state_codes <- setDT(tigris::states()) %>%
 #   .[, c("GEOID", "NAME")] %>%
@@ -70,7 +70,7 @@ ui <- fluidPage(
   h4("Location of Property"),
   div('Property location is described by a FIPS county code, a standard Census Geographic Entity ID, a full property address (including house number and suffix, street name, direction and type, unit number, city, state, zip code and county, and parcel-level centroid geographical coordinates. See the data dictionary for details.'),
   h4('Type of Property'),
-  div('The data set includes only single-family residences. This is equivalent to setting the "Property Indicator" equal to 10.'),
+  div('The data set includes only single-family type of properties. This is equivalent to setting the "Property Indicator" equal to 10. Single family housing is comprised of single-family residences, townhouses, apartments, condo, coops, flats, multi-plexes, row, mobile, manufactured homes etc. See "Building Use Code" ("BLDG") for details.'),
   h4("Date of Sale"),
   div('This is the date when the sale contract was signed in "YYYYMMDD" format.'),
   h4("Price of Sale"),
@@ -110,7 +110,10 @@ ui <- fluidPage(
 
   tabsetPanel(type = "tabs",
               tabPanel("Counts",
-                       h4("Count of sales per county satisfying all conditions (in parentheses is percent of total count of sales that are Arms-Length and a Single Family Residence / Townhouse)"),
+                       h4("Count of sales per county that are arms-length and SFR (in parentheses is percent of count of sales that satisfy the required criteria.)"),
+                       div("The first entry is the total number of sales that are arms-length and a single-family residence. In parentheses is the percentage of sales that satisfy all ten of the criteria listed above.
+The second entry is the number of sales that satisfy any of the 9 out of 10 criteria (in paratheses in percent of all sales that are arms-length sales and a SFR). The third and fourth entries are count of sales which satisfy any of the 8 out of 10 and 7 out of 10 criteria correspondingly. 
+"),
                        reactableOutput("table")
                       ),
               # tabPanel("Deed Codes",
@@ -121,7 +124,7 @@ ui <- fluidPage(
                        div(
                          reactableOutput("tax_cols")
                        )),
-              tabPanel("Data Codebook",
+              tabPanel("Data Values",
                        div(
                          reactableOutput("tax_codes")
                        )),
